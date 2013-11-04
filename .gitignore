@@ -11,8 +11,19 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+log
 
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
+
+# compressed assets
+public/css
+public/js
+
+# sass cache
+.sass-cache/
+
+# macos tracking files
+.DS_Store
