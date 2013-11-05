@@ -1,7 +1,7 @@
 task :default => :tests
 
 desc 'Run all tests'
-task :tests => [:spec, :cucumber]
+task :tests => [:spec, 'jasmine:ci', :cucumber]
 
 # rspec
 require 'rspec/core/rake_task'
