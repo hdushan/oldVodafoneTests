@@ -10,6 +10,7 @@ gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'shotgun'
+  gem 'unicorn'
 
   gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 
