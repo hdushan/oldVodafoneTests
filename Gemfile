@@ -7,10 +7,11 @@ gem 'haml'
 gem 'sass'
 
 gem 'newrelic_rpm'
+gem 'unicorn'
 
 group :development, :test do
   gem 'shotgun'
-  gem 'unicorn'
+
 
   gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 
