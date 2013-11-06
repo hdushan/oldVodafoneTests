@@ -5,6 +5,6 @@ require 'haml'
 #require 'newrelic_rpm'
 require_relative 'sinatra_assets'
 
-get '/' do
+get '/tnt' do
   haml :main
 end

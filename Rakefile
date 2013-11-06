@@ -21,11 +21,11 @@ end
 task :cucumber => 'cucumber:default'
 
 # ci
-# task :ci do
-#   puts 'Running CI task.'
-#   Rake::Task['tests'].invoke
-#   puts 'Done.'
-# end
+task :ci do
+  puts 'Running CI task.'
+  Rake::Task['tests'].invoke
+  puts 'Done.'
+end
 
 # javascript compression
 APP_FILE = 'app.rb'
