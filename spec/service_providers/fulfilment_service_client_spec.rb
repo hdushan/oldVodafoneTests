@@ -16,7 +16,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
       .with( method: :get, path: '/order/123' )
       .will_respond_with(
         status: 200,
-        headers: { 'Content-Type' => 'application/json' },
+        headers: { 'Content-Type' => 'application/json;charset=utf-8' },
         body: {status: 'Credit check'}
       )
     end
