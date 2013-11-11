@@ -30,33 +30,15 @@ end
 desc "Start a server and run the JMeter driver against it."
 task :benchmark do
   puts "\nStarting server for benchmarking ...\n"
-  server_thread = start_server()
+  start_server()
   puts "\nServer started for benchmarking ...\n"
   Rake::Task['jmeter'].invoke
-  puts "\nWaiting for Server thread to join ...\n"
-  server_thread.kill
-  server_thread.join
-  puts "\nBenchmarking done. Server joined...\n"
+  puts "\nBenchmarking done ...\n"
 end
 
 def start_server()
-  server_start_cmd = 'shotgun app.rb -o 0.0.0.0'
-  server_thread = Thread.new { sh server_start_cmd }
-  count = 0
-  @server_pid = nil
-  loop do
-      sleep 1
-      puts `ps -el | grep ruby`
-      if `ps -el | grep ruby`.length>0
-        @server_pid = `ps -el | grep ruby`.split(" ")[3].to_i
-        break
-      end
-      count += 1
-      break if @server_pid || count > 6
-  end
-  fail "Server PID not found after #{count} seconds" unless @server_pid
+  @server_pid =Process.spawn('shotgun app.rb -o 0.0.0.0', out: "/dev/null", err: "/dev/null")
   puts "Server started, PID = #{@server_pid}"
-  server_thread
 end
 
 desc "Run JMeter test."
@@ -95,9 +77,8 @@ rescue LoadError
 end
 
 at_exit do
-  if @server_pid
+  if @server_pid && @server_pid!=0
     puts "Killing the server"
-    `ps -o pid= --ppid #{@server_pid} | xargs kill`
-    `kill #{@server_pid}`
+    Process.kill("KILL", @server_pid)
   end
 end
