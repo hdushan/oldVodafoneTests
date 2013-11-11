@@ -29,3 +29,7 @@ public/js
 
 # macos tracking files
 .DS_Store
+
+
+# packts 
+spec/pacts/

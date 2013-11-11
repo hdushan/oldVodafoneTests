@@ -1,3 +1,6 @@
+require 'pact/tasks'
+
+
 task :default => :tests
 
 desc 'Run all tests'

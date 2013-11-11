@@ -5,13 +5,14 @@ gem 'sinatra-contrib'
 gem 'rake'
 gem 'haml'
 gem 'sass'
+gem 'httparty'
 
 gem 'newrelic_rpm'
 gem 'unicorn'
 
 group :development, :test do
   gem 'shotgun'
-
+  gem 'pact'
 
   gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 
