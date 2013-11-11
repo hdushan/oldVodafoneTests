@@ -30,6 +30,11 @@ public/js
 # macos tracking files
 .DS_Store
 
-
 # packts 
 spec/pacts/
+
+# Jmeter artifacts
+build/
+jmeter.log
+*.jtl
+
