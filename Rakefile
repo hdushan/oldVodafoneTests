@@ -47,10 +47,11 @@ desc "Run JMeter test."
 task :jmeter => :install_jmeter do
   jmeter_test_script = "tnt.jmx"
   jmeter_test_results_file = "tnt.jtl"
+  results_format = "xml"
   puts "\nClearing old JMeter test result file ...\n"
   FileUtils.rm_f(jmeter_test_results_file)
   puts "\nRunning JMeter test ...\n"
-  sh "./build/apache-jmeter-2.10/bin/jmeter -n -t #{jmeter_test_script} -l #{jmeter_test_results_file}"
+  sh "./build/apache-jmeter-2.10/bin/jmeter -n -Jjmeter.save.saveservice.output_format=#{results_format} -t #{jmeter_test_script} -l #{jmeter_test_results_file}"
   puts "\nJMeter test done ...\n"
 end
 
