@@ -37,3 +37,5 @@ spec/pacts/
 build/
 jmeter.log
 *.jtl
+server_error
+server_log

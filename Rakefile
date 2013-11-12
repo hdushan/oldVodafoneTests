@@ -39,7 +39,7 @@ task :benchmark do
 end
 
 def start_server()
-  @server_pid =Process.spawn('rackup app.rb -p 9393', out: "/dev/null", err: "/dev/null")
+  @server_pid =Process.spawn('bundle exec rackup -p 9393', out: "server_log", err: "server_error")
   puts "Server started, PID = #{@server_pid}"
 end
 
