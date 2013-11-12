@@ -12,6 +12,8 @@ end
 # cucumber
 require 'cucumber/rake/task'
 
+require 'fileutils'
+
 namespace :cucumber do
   Cucumber::Rake::Task.new(:default) do |t|
     t.cucumber_opts = "features --format pretty"
@@ -56,6 +58,7 @@ task :install_jmeter => 'build/apache-jmeter-2.10/bin/jmeter'
 
 file 'build/apache-jmeter-2.10/bin/jmeter' do
   puts "\nInstalling JMeter ...\n"
+  FileUtils.mkdir_p 'build'
   Dir.chdir('build') do
     sh "curl http://apache.mirror.serversaustralia.com.au//jmeter/binaries/apache-jmeter-2.10.tgz | tar zxf -"
   end
