@@ -15,6 +15,8 @@ group :development, :test do
   gem 'pact'
 
   gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+  gem 'simplecov', :require => false
+  gem 'simplecov-rcov', :require => false
 
   gem 'rspec'
   gem 'rack-test'

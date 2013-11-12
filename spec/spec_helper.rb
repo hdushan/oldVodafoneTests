@@ -1,3 +1,9 @@
+require 'simplecov'
+require 'simplecov-rcov'
+SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
+SimpleCov.use_merging false
+SimpleCov.start
+
 # rspec
 require 'rspec'
 require 'rack/test'
