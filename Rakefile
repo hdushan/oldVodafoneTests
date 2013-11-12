@@ -48,7 +48,7 @@ task :jmeter => :install_jmeter do
   jmeter_test_script = "tnt.jmx"
   jmeter_test_results_file = "tnt.jtl"
   puts "\nClearing old JMeter test result file ...\n"
-  sh "rm #{jmeter_test_results_file}"
+  FileUtils.rm_f(jmeter_test_results_file)
   puts "\nRunning JMeter test ...\n"
   sh "./build/apache-jmeter-2.10/bin/jmeter -n -t #{jmeter_test_script} -l #{jmeter_test_results_file}"
   puts "\nJMeter test done ...\n"
