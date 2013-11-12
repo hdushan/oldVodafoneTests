@@ -39,7 +39,7 @@ task :benchmark do
 end
 
 def start_server()
-  @server_pid =Process.spawn('shotgun app.rb -o 0.0.0.0', out: "/dev/null", err: "/dev/null")
+  @server_pid =Process.spawn('rackup app.rb', out: "/dev/null", err: "/dev/null")
   puts "Server started, PID = #{@server_pid}"
 end
 
