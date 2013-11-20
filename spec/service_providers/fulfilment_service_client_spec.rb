@@ -11,18 +11,18 @@ describe FulfilmentServiceProviderClient, :pact => true do
   describe "get_order_status" do
     before do
       fulfilment_service_provider
-      .given("order with number 123 exists")
+      .given("order with number 123 don't exists")
       .upon_receiving("a request for orderd status")
       .with( method: :get, path: '/order/123' )
       .will_respond_with(
-        status: 200,
+        status: 404,
         headers: { 'Content-Type' => 'application/json;charset=utf-8' },
-        body: {status: 'Credit check'}
+        body: { :error => "ORDER_NOT_FOUND" }
       )
     end
 
     it "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status).to eq("Credit check")
+      expect(FulfilmentServiceProviderClient.new.get_order_status(123)).to eq("ORDER_NOT_FOUND")
     end
 
   end
