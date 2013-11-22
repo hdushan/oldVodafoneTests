@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', '~> 1.4.3'
 gem 'sinatra-contrib'
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 gem 'rake'
 gem 'haml'
 gem 'sass'
@@ -14,7 +15,6 @@ group :development, :test do
   gem 'shotgun'
   gem 'pact'
 
-  gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
   gem 'simplecov', :require => false
   gem 'simplecov-rcov', :require => false
 
