@@ -1,0 +1,116 @@
+// Issues:
+// Font doesn't have the correct weight available
+
+@font-face
+  font-family: 'VodafonePTYRgRegular'
+  src: url('http://www.vodafone.com.au/cs/static/fonts/vodafoneptyrg_digital-webfont.eot')
+  src: url('http://www.vodafone.com.au/cs/static/fonts/vodafoneptyrg_digital-webfont.eot?#iefix') format('embedded-opentype'), url('http://www.vodafone.com.au/cs/static/fonts/vodafoneptyrg_digital-webfont.woff') format('woff'), url('http://www.vodafone.com.au/cs/static/fonts/vodafoneptyrg_digital-webfont.ttf') format('truetype')
+
+body
+  margin: 0
+  padding: 0
+  font-family: Helvetica
+  font-size: 11px
+
+header
+  background: #F80000
+  background-image: linear-gradient(to bottom, #ff0027, #be0025)
+  height: 48px
+  padding: 2px
+  box-sizing: border-box
+
+article
+  padding: 10px
+
+section
+  margin-bottom: 10px
+  padding: 2px
+
+  p
+    margin: 0
+
+    &:first-child
+      font-weight: bold
+
+h1
+  color: #e60000
+  font-family: VodafonePTYRgRegular
+  font-size: 42px
+  font-weight: 300
+  margin: 0
+
+table, dl
+  width: 100%
+  display: table
+
+dl
+  border-spacing: 2px
+
+table
+  border-spacing: 0
+  border: 1px solid #8d8d8d
+
+dt
+  display: none
+
+dd, th
+  background: #cfc9c3
+  border: 1px solid #cfc9c3
+  display: table-cell
+  font-size: 11px
+  margin: 0
+  padding: 5px
+  text-transform: uppercase
+
+  &.incomplete
+    background: #fff
+
+th
+  border: 0
+  border-bottom: 1px solid #8d8d8d
+  font-weight: normal
+  text-align: left
+
+td
+  font-size: 11px
+  padding: 5px
+  vertical-align: top
+
+  &.current
+    font-weight: bold
+
+ul
+  background: #efefef
+  border-radius: 5px
+  border: 1px solid #dcdcdc
+  font-size: 12px
+  line-height: 1.5em
+  list-style: none
+  padding: 0
+
+  li
+    border-bottom: 1px solid #dcdcdc
+    padding: 10px 10px 10px 45px
+    background-repeat: no-repeat
+    background-position: 15px 50%
+
+    &:last-child
+      border-bottom: 0
+
+    &.details
+      // icon here
+      background-image: url(/details.png)
+
+    &.phone
+      // icon here
+      background-image: url(/phone.png)
+
+  a
+    display: block
+    color: #000
+    text-decoration: none
+    background: url(/chevron-right.png) no-repeat 100% 50%
+    padding-right: 20px
+
+  strong
+    display: block
