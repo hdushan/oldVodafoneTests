@@ -1,0 +1,51 @@
+!!!
+%html
+  %head
+    %title Trace your order
+    %link{rel: :stylesheet, href: '/trace.css'}
+  %body
+    %header
+      %img{src: '/vodafone.png'}
+    %article
+      %h1 Trace your order
+      %dl.progress
+        %dt Order progress
+        %dd.complete Ordered
+        %dd.now Processing
+        %dd.incomplete Delivery
+
+      %section
+        %p Order number: VF332304850
+        %p
+          Ordered at
+          %a{href: 'http://store.vodafone.com.au'} http://store.vodafone.com.au
+        %p Delivered by standard service
+
+      %table
+        %thead
+          %tr
+            %th Time
+            %th Status
+            %th Comment
+        %tbody
+          %tr
+            %td Nov 7, 2013 10:15 AM
+            %td.current Order Delayed
+            %td Items on back-order. Stock arrival estimated in 8 days.
+          %tr
+            %td Nov 7, 2013 8 AM
+            %td Approved
+            %td
+          %tr
+            %td Nov 4, 2013 3 PM
+            %td Order received - Pending approval
+            %td
+
+      %ul
+        %li.details
+          %a{href: '/more'}
+            %strong See order details
+            Detailed information about this order
+        %li.phone
+          %strong Call Vodafone phone support
+          We'll help you, any time of day or night
