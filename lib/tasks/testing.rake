@@ -37,7 +37,12 @@ safe_load('jmeter') do
 
   desc "Start a server and run the JMeter driver against it."
   task :benchmark do
-    testRunner = JmeterRunnerGem::Test.new("localhost", 9393, 'bundle exec rackup', \
+    server_protocol = "http"
+    server_address = "localhost"
+    server_port = "9393"
+    server_url = "tnt"
+    sh "curl #{server_protocol}://#{server_address}:#{server_port}/#{server_url}"
+    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, 'bundle exec rackup', \
   "server_log", "server_error", "tnt.jmx", "tnt.jtl", "xml")
     testRunner.start()
   end
