@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:VodafoneAustralia/jmeter-runner-gem.git
-  revision: 187d0219f414333aabb22480c1d2ee679d1503bd
+  revision: d50cd460610f680325660697931a37fac192c4db
   specs:
-    jmeter-runner-gem (0.0.6)
+    jmeter-runner-gem (0.0.7)
 
 GEM
   remote: https://rubygems.org/
