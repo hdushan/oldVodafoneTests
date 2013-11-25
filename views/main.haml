@@ -1,1 +1,9 @@
-.main{ :onclick => "myAlert()" } Text from haml
+
+
+.track-form
+  %form{ :action => "/track", :method => 'post' }
+    %fieldset
+      %label{:for => 'tracking_id'} Tracking number
+      %input#tracking_id{:type => 'text', :name => 'tracking_id', :placeholder => 'eg. 1234567890'}
+    %button{:type => 'submit'}
+      %string Track!

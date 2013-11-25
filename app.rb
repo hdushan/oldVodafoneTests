@@ -10,6 +10,6 @@ get '/tnt' do
   haml :main
 end
 
-get '/track/:track_id' do
-  FulfilmentServiceProviderClient.new.get_order_status(params[:track_id])
+post '/track' do
+  FulfilmentServiceProviderClient.new.get_order_status(params[:tracking_id])
 end
