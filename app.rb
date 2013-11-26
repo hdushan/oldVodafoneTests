@@ -12,8 +12,9 @@ get '/tnt' do
 end
 
 post '/track' do
-  tracking_id = params[:tracking_id]
-  if(!tracking_id.nil?)
+  tracking_id = (params[:tracking_id] || "").gsub(/\s+/, "")
+
+  if(!tracking_id.empty?)
     FulfilmentServiceProviderClient.new.get_order_status(tracking_id)
   else
     "you must provide tracking number"
