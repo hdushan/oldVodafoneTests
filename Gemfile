@@ -10,6 +10,7 @@ gem 'httparty'
 
 gem 'newrelic_rpm'
 gem 'unicorn'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'shotgun'

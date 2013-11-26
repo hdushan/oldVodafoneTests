@@ -1,6 +1,7 @@
 require 'sinatra'
 require "sinatra/namespace"
 require 'haml'
+
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
 
@@ -11,7 +12,12 @@ get '/tnt' do
 end
 
 post '/track' do
-  FulfilmentServiceProviderClient.new.get_order_status(params[:tracking_id])
+  tracking_id = params[:tracking_id]
+  if(!tracking_id.nil?)
+    FulfilmentServiceProviderClient.new.get_order_status(tracking_id)
+  else
+    "you must provide tracking number"
+  end
 end
 
 get '/trace' do

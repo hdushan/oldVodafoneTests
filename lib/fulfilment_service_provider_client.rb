@@ -3,7 +3,7 @@ require 'json'
 
 class FulfilmentServiceProviderClient
   include HTTParty
-  base_uri 'http://10.0.2.2:9394'
+  base_uri ENV['FULFILMENT_SERVICE']
 
   def get_order_status(order_id)
     responce_json = JSON.parse(self.class.get("/order/#{order_id}").body)

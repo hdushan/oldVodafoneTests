@@ -25,6 +25,9 @@ GEM
     daemons (1.1.9)
     diff-lcs (1.2.5)
     docile (1.1.0)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     eventmachine (1.0.3)
     find_a_port (1.0.1)
     gherkin (2.12.2)
@@ -127,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber
+  dotenv-rails
   haml
   httparty
   jasmine (= 2.0.0.rc4)
