@@ -1,0 +1,91 @@
+$vodafone-red: #E60000
+$white: #ffffff
+$global-border-radius: 4px
+$track_form_el_width: 85%
+$normal_font_size: 12px
+
+body
+  margin: 0
+  padding: 0
+  font-family: Helvetica
+  font-size: $normal_font_size
+
+article
+  padding: 10px
+
+form
+  padding: 10px
+
+fieldset
+  padding: 0px
+  margin: 0px
+  border: 0px 
+
+header
+  background: #F80000
+  background-image: linear-gradient(to bottom, #ff0027, #be0025)
+  height: 48px
+  padding: 2px
+  box-sizing: border-box
+
+h1
+  color: #e60000
+  font-family: VodafonePTYRgRegular
+  font-size: 42px
+  font-weight: 300
+  margin: 0
+
+label 
+  font-weight: bold
+  display: block
+
+  &.tracking_label
+    margin-top: 10px
+
+input 
+  width: $track_form_el_width
+  padding: 0.5em
+  margin-top: 0.5em
+
+button 
+  background-color: $vodafone-red
+  height: 2.5em
+  color: $white
+  text-transform: uppercase
+  border: none
+  border-radius: $global-border-radius
+  margin-top: 2em
+  
+  &.trace
+    width: $track_form_el_width
+
+strong
+  display: block
+
+ul
+  background: #efefef
+  border-radius: 5px
+  border: 1px solid #dcdcdc
+  line-height: 1.5em
+  list-style: none
+  padding: 0
+
+  &.info
+    margin-top: 3em
+
+  li
+    border-bottom: 1px solid #dcdcdc
+    padding: 10px 10px 10px 45px
+    background-repeat: no-repeat
+    background-position: 15px 50%
+
+    &:last-child
+      border-bottom: 0
+
+    &.details
+      // icon here
+      background-image: url(/details.png)
+
+    &.phone
+      // icon here
+      background-image: url(/phone.png)    

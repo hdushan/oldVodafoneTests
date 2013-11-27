@@ -1,7 +1,17 @@
-.track-form
-  %form{ :action => "/track", :method => 'post' }
-    %fieldset
-      %label{:for => 'tracking_id'} Tracking number
-      %input#tracking_id{:type => 'text', :name => 'tracking_id', :placeholder => 'eg. 1234567890'}
-    %button{:type => 'submit'}
-      %string Track!
+= haml :header
+
+%article
+  %h1 Trace your order
+  .track-form
+    %form{ :action => "/track", :method => 'post' }
+      %fieldset
+        %label.tracking_label{:for => 'tracking_id'} Tracking Number
+        %input#tracking_id{:type => 'text', :name => 'tracking_id' }
+        %label.tracking_label{:for => 'email'} Email address
+        %input#email{:type => 'text', :name => 'email'}
+      %button.trace{:type => 'submit'}
+        %string Trace your order
+  %ul.info
+    %li.phone
+      %strong Call Vodafone phone support
+      We'll help you, any time of day or night

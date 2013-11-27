@@ -15,11 +15,11 @@ assets {
   # The final parameter is an array of glob patterns defining the contents
   # of the package (as matched on the public URIs, not the filesystem)
   js :application, '/js/application.js', [
-     '/js/*.js'
+    '/js/*.js'
   ]
 
   css :application, '/css/application.css', [
-    '/css/*.css'
+    '/css/**/*.css'
   ]
 
   js_compression  :closure    # :jsmin | :closure | :uglify
