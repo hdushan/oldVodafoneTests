@@ -1,7 +1,9 @@
 require 'dotenv'
+Dotenv.load # read default settings from .env
 
-path = ".env" + ( ["development"].include?(ENV['RACK_ENV']) ? "" : ".#{ENV['RACK_ENV']}")
-Dotenv.load(path) if File.exists?(path)
+ENV['RACK_ENV'] = ENV['RAILS_ENV']
+path = ".env.#{ENV['RACK_ENV']}"
+Dotenv.load(path) if File.exists?(path) # override standard .env
 
 require 'sinatra'
 require File.expand_path '../app.rb', __FILE__
