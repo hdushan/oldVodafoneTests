@@ -1,5 +1,4 @@
 require 'dotenv'
-Dotenv.load # read default settings from .env
 
 ENV['RACK_ENV'] = ENV['RAILS_ENV']
 path = ".env.#{ENV['RACK_ENV']}"
