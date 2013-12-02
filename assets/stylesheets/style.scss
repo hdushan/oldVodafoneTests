@@ -1,0 +1,116 @@
+$vodafone-red: #E60000;
+
+$track_form_el_width: 85%;
+$normal_font_size: 12px;
+
+@import "assets/stylesheets/_variables";
+
+body{
+  margin: 0;
+  font-family: Helvetica;
+  font-size: $normal_font_size;
+}
+
+header {
+  background: #F80000;
+  background-image: linear-gradient(to bottom, #ff0027, #be0025);
+  height: 48px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+article{
+  padding: 10px;
+}
+
+h1 {
+  color: #e60000;
+  font-family: VodafonePTYRgRegular;
+  font-size: 42px;
+  font-weight: normal;
+  margin: 0;
+}
+
+form {
+
+  fieldset {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+
+    &.tracking_label {
+      margin-top: 10px;
+    }
+  }
+
+  input {
+    width: 100%;
+    font-size: inherit;
+    padding: $button-input-padding-vt .5em;
+    border: $global-border;
+    border-radius: $global-border-radius;
+    background-color: $white;
+    &:focus { border-color: $aqua-blue; }
+  }
+
+}
+
+button {
+  background-color: $vodafone-red;
+  height: 2.5em;
+  color: $white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: $global-border-radius;
+  margin-top: 2em;
+  
+  &.trace {
+      width: $track_form_el_width;
+  }
+}
+
+strong {
+  display: block;
+}
+
+ul {
+  background: $off-white;
+  border-radius: 5px;
+  border: 1px solid #dcdcdc;
+  line-height: 1.5em;
+  list-style: none;
+  padding: 0;
+
+  &.info {
+      margin-top: 3em;
+  }
+
+  li {
+      border-bottom: 1px solid #dcdcdc;
+      padding: 10px 10px 10px 45px;
+      background-repeat: no-repeat;
+      background-position: 15px 50%;
+  
+      &:last-child{
+        border-bottom: 0
+      }
+  
+      &.details{
+        // icon here
+        background-image: url(/details.png);
+      }
+      &.phone {
+        // icon here
+        background-image: url(/phone.png);
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+      }
+  }
+}
