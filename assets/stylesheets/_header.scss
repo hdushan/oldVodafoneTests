@@ -1,6 +1,10 @@
-.main-header {
-  margin: 0 auto $gutter-vertical;
+header.main-header {
+  background: $vodafone-red;
+  background-image: linear-gradient(to bottom, $header-gradient-stop-1, $header-gradient-stop-2);
   height: $nav-height;
-  background-color: $vodafone-red;
+  padding: 2px;
+  box-sizing: border-box;
+  margin: 0 auto $gutter-vertical;
   box-shadow: $global-box-shadow;
+  
 }
