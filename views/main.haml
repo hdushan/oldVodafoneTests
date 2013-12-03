@@ -1,19 +1,20 @@
 = haml :header
 
-%article
-  %h1 Trace your order
+.container
+  %article
+    %h1 Trace your order
 
-  %form.track-form{ :action => "/track", :method => 'post' }
-    %fieldset
-      %label.tracking_label{:for => 'tracking_id'} Tracking Number  
-      %img.help-icon{ src: 'images/help-icon.png' }
-      .input-wrapper
-        %input#tracking_id{:type => 'text', :name => 'tracking_id' }
-    
-    .input-wrapper 
-      %button.trace{:type => 'submit'} Trace your order
-  %ul.info
-    %li.phone
-      %a{href: "tel://15798270034"}
-        %strong Call Vodafone phone support
-        We'll help you, any time of day or night
+    %form.track-form{ :action => "/track", :method => 'post' }
+      %fieldset
+        %label.tracking_label{:for => 'tracking_id'} Tracking Number  
+        %img.help-icon{ src: 'images/help-icon.png' }
+        .input-wrapper
+          %input#tracking_id{:type => 'text', :name => 'tracking_id' }
+      
+      .input-wrapper 
+        %button.trace{:type => 'submit'} Trace your order
+    %ul.info
+      %li.phone
+        %a{href: "tel://15798270034"}
+          %strong Call Vodafone phone support
+          We'll help you, any time of day or night
