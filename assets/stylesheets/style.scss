@@ -4,6 +4,7 @@ $track_form_el_width: 85%;
 $normal_font_size: 12px;
 
 @import "assets/stylesheets/_variables";
+@import "assets/stylesheets/_form";
 
 body{
   margin: 0;
@@ -31,48 +32,7 @@ h1 {
   margin: 0;
 }
 
-form {
 
-  fieldset {
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-  }
-
-  label {
-    font-weight: bold;
-    display: block;
-
-    &.tracking_label {
-      margin-top: 10px;
-    }
-  }
-
-  input {
-    width: 100%;
-    font-size: inherit;
-    padding: $button-input-padding-vt .5em;
-    border: $global-border;
-    border-radius: $global-border-radius;
-    background-color: $white;
-    &:focus { border-color: $aqua-blue; }
-  }
-
-}
-
-button {
-  background-color: $vodafone-red;
-  height: 2.5em;
-  color: $white;
-  text-transform: uppercase;
-  border: none;
-  border-radius: $global-border-radius;
-  margin-top: 2em;
-  
-  &.trace {
-      width: $track_form_el_width;
-  }
-}
 
 strong {
   display: block;

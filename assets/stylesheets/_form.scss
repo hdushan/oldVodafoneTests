@@ -1,0 +1,51 @@
+form.track-form {
+
+  fieldset {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+
+    &.tracking_label {
+      margin-top: 10px;
+    }
+  }
+
+  input {
+    width: 100%;
+    font-size: inherit;
+    padding: $button-input-padding-vt .5em;
+    border: $global-border;
+    border-radius: $global-border-radius;
+    background-color: $white;
+    &:focus { border-color: $aqua-blue; }
+  }
+
+  .input-wrapper {
+    margin-right: 40px;
+  }
+
+  img.help-icon {
+    float: right;
+    width: 25px;
+    margin-top: 5px;
+  }
+}
+
+button {
+  background-color: $vodafone-red;
+  height: 2.5em;
+  color: $white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: $global-border-radius;
+  margin-top: 2em;
+  
+  &.trace {
+      width: $track_form_el_width;
+  }
+}
