@@ -60,11 +60,11 @@ ul {
   
       &.details{
         // icon here
-        background-image: url(/details.png);
+        background-image: url("/images/details.png");
       }
       &.phone {
         // icon here
-        background-image: url(/phone.png);
+        background-image: url("/images/phone.png");
         a {
           color: #000;
           text-decoration: none;
