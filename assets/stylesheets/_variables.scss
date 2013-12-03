@@ -1,4 +1,5 @@
 //primary color
+$vodafone-red: #E60000;
 $white: #ffffff;
 $off-white: #efefef;
 $light-grey: #c7c7c7;
@@ -8,5 +9,14 @@ $aqua-blue: #1ba6ce;
 
 $button-input-padding-vt: .75em;
 
-$global-border: 1px solid $light-grey;
+// Misc variables
+$em-base: 16px;
 $global-border-radius: 4px;
+$global-border: 1px solid $light-grey;
+$global-box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+
+//gutter
+$gutter-vertical: 10px;
+
+//nav
+$nav-height: $em-base*3;

@@ -1,10 +1,9 @@
-$vodafone-red: #E60000;
-
 $track_form_el_width: 85%;
 $normal_font_size: 12px;
 
 @import "assets/stylesheets/_variables";
 @import "assets/stylesheets/_form";
+@import "assets/stylesheets/_header";
 
 body{
   margin: 0;
