@@ -24,7 +24,3 @@ end
 get '/trace' do
   haml :trace
 end
-
-get '/trace.css' do
-  sass :trace
-end
