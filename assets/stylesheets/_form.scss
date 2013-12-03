@@ -25,9 +25,7 @@ form.track-form {
     &:focus { border-color: $aqua-blue; }
   }
 
-  .input-wrapper {
-    margin-right: 40px;
-  }
+
 
   img.help-icon {
     float: right;
@@ -36,16 +34,21 @@ form.track-form {
   }
 }
 
+.input-wrapper {
+  margin-right: 40px;
+}
+
 button {
   background-color: $vodafone-red;
-  height: 2.5em;
+  padding: $button-input-padding-vt .5em;
   color: $white;
   text-transform: uppercase;
   border: none;
   border-radius: $global-border-radius;
   margin-top: 2em;
+  font-size: inherit;
   
   &.trace {
-      width: $track_form_el_width;
+      width: 100%;
   }
 }
