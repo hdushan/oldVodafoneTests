@@ -8,7 +8,7 @@ register Sinatra::AssetPack
 assets {
   serve '/js',     from: 'assets/javascripts'        # Default
   serve '/css',    from: 'assets/stylesheets'       # Default
-  #serve '/images', from: 'app/images'    # Default
+  serve '/images', from: 'assets/images'    # Default
 
   # The second parameter defines where the compressed version will be served.
   # (Note: that parameter is optional, AssetPack will figure it out.)

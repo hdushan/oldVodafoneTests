@@ -2,13 +2,16 @@
 
 %article
   %h1 Trace your order
-  .track-form
-    %form{ :action => "/track", :method => 'post' }
-      %fieldset
-        %label.tracking_label{:for => 'tracking_id'} Tracking Number
+
+  %form.track-form{ :action => "/track", :method => 'post' }
+    %fieldset
+      %label.tracking_label{:for => 'tracking_id'} Tracking Number  
+      %img.help-icon{ src: 'images/help-icon.png' }
+      %div.input-wrapper
         %input#tracking_id{:type => 'text', :name => 'tracking_id' }
-      %button.trace{:type => 'submit'}
-        %string Trace your order
+      
+    %button.trace{:type => 'submit'}
+      %string Trace your order
   %ul.info
     %li.phone
       %a{href: "tel://15798270034"}
