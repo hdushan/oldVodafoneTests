@@ -4,36 +4,44 @@ table {
   border-spacing: 0;
   
   tr.latest {
-    background-color: $aqua-blue;  
+    background-color: $status-highlight;
   }
 
-  
-}
-
-th {
-  display: table-cell;
-  font-size: 11px;
-  margin: 0;
-  padding: 5px;
-  text-transform: uppercase;
-  border: 0;
-  
+  th {
+    display: table-cell;
+    font-size: 11px;
+    margin: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    border: 0;
     
-  font-weight: normal;
-  text-align: left;
+      
+    font-weight: normal;
+    text-align: left;
 
-  &.incomplete {
-    background: #fff;
+    &.time {
+      min-width: 70px;
+    }
   }
 
-  &.time {
-    min-width: 70px;
+  td {
+    font-size: 11px;
+    padding: 5px;
+    vertical-align: top;
+    border-top: 1px solid $light-grey;
   }
-}
-td {
-  font-size: 11px;
-  padding: 5px;
-  vertical-align: top;
-  border-top: 1px solid #8d8d8d;
   
 }
+
+.current-status {
+  text-align: center;
+  border: solid red 1px;
+
+  button {
+    padding-right: 35px;
+    padding-left: 35px;
+
+  }
+}
+
+

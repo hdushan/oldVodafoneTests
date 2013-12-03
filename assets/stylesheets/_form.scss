@@ -38,17 +38,7 @@ form.track-form {
   margin-right: 40px;
 }
 
-button {
+button.trace {
   background-color: $vodafone-red;
-  padding: $button-input-padding-vt .5em;
-  color: $white;
-  text-transform: uppercase;
-  border: none;
-  border-radius: $global-border-radius;
-  margin-top: 2em;
-  font-size: inherit;
-  
-  &.trace {
-      width: 100%;
-  }
+  width: 100%;
 }

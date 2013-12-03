@@ -29,8 +29,14 @@ h1 {
   margin: 0;
 }
 
-strong {
-  display: block;
+button {
+  padding: $button-input-padding-vt .5em;
+  color: $white;
+  text-transform: uppercase;
+  border: none;
+  border-radius: $global-border-radius;
+  margin-top: 2em;
+  font-size: inherit;
 }
 
 ul {
@@ -67,5 +73,10 @@ ul {
           text-decoration: none;
         }
       }
+
+      .action-title {
+        font-weight: bold;
+      }
   }
 }
+
