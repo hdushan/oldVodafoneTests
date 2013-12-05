@@ -1,15 +1,11 @@
 Feature: Landing page
 
-  Scenario: View landing page
-    When I navigate to '/tnt'
-    Then I can see the Track and Trace landing page
-
-  Scenario: Submit track order form with wrong input
+  Scenario: Submit track order form with non-existant order
     Given I navigate to '/tnt'
-    When I submit track form with wrong tracking id
+    When I view status of an order 'NON_EXISTING' that does not exist
     Then I should see the error message
 
-  Scenario: Submit track order form with correct input
+  Scenario: Submit track order form with an order id that exists
     Given I navigate to '/tnt'
-    When I submit track form with correct tracking id
-    Then I should see the tracking status
+    When I view status of an order 'FOUND_123' that exists
+    Then I should see the tracking status for the order 'FOUND_123'

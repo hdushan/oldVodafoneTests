@@ -6,6 +6,10 @@ $container-width: 400px;
 @import "assets/stylesheets/_header";
 @import "assets/stylesheets/_trace";
 
+.margin-wrapper {
+  margin-left: 40px;
+}
+
 body{
   margin: 0;
   font-family: Helvetica;
