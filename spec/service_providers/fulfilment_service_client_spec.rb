@@ -33,28 +33,11 @@ describe FulfilmentServiceProviderClient, :pact => true do
   describe "get_order_status for existing order id" do
 
     let(:response_body) {
-      { 'status' => "COMPLETED",
-        'orderDate' => '2013-07-31',
-        'shipping_details' =>
-        {'address_details' =>
-         { 'validationStatus' => 'Valid',
-           'type' => 'Street',
-           'lineOne' => '1656 FORTY ONE',
-           'floorType' => nil,
-           'floor' => nil,
-           'building' => nil,
-           'POBox' => nil,
-           'privateBag' => nil,
-           'privateBagName' => nil,
-           'streetType' => 'Road',
-           'cityName' => 'FLINTON',
-           'stateName' => 'QLD',
-           'countryName' => 'Australia',
-           'postalCode' => '4422',
-           'ruralDeliveryNumber' => nil
-           }
-         }
-        }
+      {
+        'orderDate'       => '2013-07-31',
+        'lastUpdatedDate' => '2013-07-31',
+        'status'          => 'Complete'
+      }
     }
 
     before do
