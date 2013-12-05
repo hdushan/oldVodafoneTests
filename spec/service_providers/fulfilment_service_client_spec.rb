@@ -20,7 +20,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
       .will_respond_with(
         status: 404,
         headers: { 'Content-Type' => 'application/json;charset=utf-8' },
-        body: response_body.to_json
+        body: response_body
       )
     end
 
@@ -36,25 +36,25 @@ describe FulfilmentServiceProviderClient, :pact => true do
       { 'status' => "COMPLETED",
         'orderDate' => '2013-07-31',
         'shipping_details' =>
-          {'address_details' =>
-            { 'validationStatus' => 'Valid',
-              'type' => 'Street',
-              'lineOne' => '1656 FORTY ONE',
-              'floorType' => nil,
-              'floor' => nil,
-              'building' => nil,
-              'POBox' => nil,
-              'privateBag' => nil,
-              'privateBagName' => nil,
-              'streetType' => 'Road',
-              'cityName' => 'FLINTON',
-              'stateName' => 'QLD',
-              'countryName' => 'Australia',
-              'postalCode' => '4422',
-              'ruralDeliveryNumber' => nil
-            }
-          }
-      }
+        {'address_details' =>
+         { 'validationStatus' => 'Valid',
+           'type' => 'Street',
+           'lineOne' => '1656 FORTY ONE',
+           'floorType' => nil,
+           'floor' => nil,
+           'building' => nil,
+           'POBox' => nil,
+           'privateBag' => nil,
+           'privateBagName' => nil,
+           'streetType' => 'Road',
+           'cityName' => 'FLINTON',
+           'stateName' => 'QLD',
+           'countryName' => 'Australia',
+           'postalCode' => '4422',
+           'ruralDeliveryNumber' => nil
+           }
+         }
+        }
     }
 
     before do
@@ -65,7 +65,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
       .will_respond_with(
         status: 200,
         headers: { 'Content-Type' => 'application/json;charset=utf-8' },
-        body: response_body.to_json
+        body: response_body
       )
     end
 
