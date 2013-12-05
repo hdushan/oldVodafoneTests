@@ -23,6 +23,8 @@ group :development, :test do
   gem 'rack-test'
   gem 'rspec-html-matchers'
 
+  gem 'pry'
+  gem 'pry-doc'
   gem 'cucumber'
   gem 'capybara'
 
