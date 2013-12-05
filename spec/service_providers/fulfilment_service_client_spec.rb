@@ -34,8 +34,8 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-        'orderDate'       => '2013-07-31',
-        'lastUpdatedDate' => '2013-07-31',
+        'order_date'       => '2013-07-31',
+        'last_updated_date' => '2013-07-31',
         'status'          => 'Complete'
       }
     }
