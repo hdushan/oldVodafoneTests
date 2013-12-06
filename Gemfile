@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'cucumber'
   gem 'capybara'
+  gem 'poltergeist'
 
   gem 'jasmine', '2.0.0.rc4'
   gem 'jmeter-runner-gem', :git => 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'

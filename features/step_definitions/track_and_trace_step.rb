@@ -20,7 +20,7 @@ When(/^I view status of an order '(.*)' that exists$/) do |order_id|
   unless ENV['RAILS_ENV'] == 'paas-qa'
     ff_client = double('ff_client')
     FulfilmentServiceProviderClient.stub(:new).and_return ff_client
-    ff_client.stub(:get_order_status).with(order_id) { "#{order_id} status: Complete" }
+    ff_client.stub(:get_order_status).with(order_id) { "status: Complete" }
   end
 
   within(".track-form") do
@@ -30,7 +30,6 @@ When(/^I view status of an order '(.*)' that exists$/) do |order_id|
 end
 
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
-  expect(page).to have_content(order_id)
   expect(page).to have_content('Complete')
 end
 
