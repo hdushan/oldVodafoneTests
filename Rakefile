@@ -8,6 +8,15 @@ task :tests => [:spec, 'jasmine:ci', :cucumber]
 # ci
 task :ci do
   puts '\nRunning CI task.'
+  ENV['RAILS_ENV'] = nil
+  Rake::Task['tests'].invoke
+  puts '\nDone.'
+end
+
+# qa
+task :qa do
+  puts '\nRunning QA task.'
+  ENV['RAILS_ENV'] = 'paas-qa'
   Rake::Task['tests'].invoke
   puts '\nDone.'
 end
