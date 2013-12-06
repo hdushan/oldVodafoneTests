@@ -18,6 +18,16 @@ task :qa do
   puts '\nRunning QA task.'
   ENV['RAILS_ENV'] = 'paas-qa'
   Rake::Task['cucumber'].invoke
+  ENV['RAILS_ENV'] = nil
+  puts '\nDone.'
+end
+
+# qa
+task :qabenchmark do
+  puts '\nRunning QA task.'
+  ENV['RAILS_ENV'] = 'paas-qa'
+  Rake::Task['benchmark'].invoke
+  ENV['RAILS_ENV'] = nil
   puts '\nDone.'
 end
 

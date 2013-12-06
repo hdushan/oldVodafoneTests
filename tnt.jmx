@@ -22,6 +22,16 @@
             <stringProp name="Argument.value">${__P(PROTOCOL,http)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="PROXY_SERVER" elementType="Argument">
+            <stringProp name="Argument.name">PROXY_SERVER</stringProp>
+            <stringProp name="Argument.value">${__P(PROXY_SERVER,10.0.2.2)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="PROXY_PORT" elementType="Argument">
+            <stringProp name="Argument.name">PROXY_PORT</stringProp>
+            <stringProp name="Argument.value">${__P(PROXY_PORT,9999)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -33,6 +43,8 @@
         </elementProp>
         <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
         <stringProp name="HTTPSampler.port">${PORT}</stringProp>
+        <stringProp name="HTTPSampler.proxyHost">${PROXY_SERVER}</stringProp>
+        <stringProp name="HTTPSampler.proxyPort">${PROXY_PORT}</stringProp>
         <stringProp name="HTTPSampler.connect_timeout"></stringProp>
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
         <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
@@ -226,7 +238,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/hansdushanthakumar/tnt.jtl</stringProp>
+        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
