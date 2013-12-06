@@ -18,7 +18,7 @@ body{
 
 .container {
   margin: 0 auto;
-  max-width: $container-width;    
+  max-width: $container-width;
 }
 
 article{
@@ -60,11 +60,11 @@ ul {
       padding: 10px 10px 10px 45px;
       background-repeat: no-repeat;
       background-position: 15px 50%;
-  
+
       &:last-child{
         border-bottom: 0
       }
-  
+
       &.details{
         // icon here
         background-image: url("/images/details.png");

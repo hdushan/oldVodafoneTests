@@ -2,7 +2,7 @@ table {
   width: 100%;
   display: table;
   border-spacing: 0;
-  
+
   tr.latest {
     background-color: $status-highlight;
   }
@@ -14,8 +14,8 @@ table {
     padding: 5px;
     text-transform: uppercase;
     border: 0;
-    
-      
+
+
     font-weight: normal;
     text-align: left;
 
@@ -30,7 +30,7 @@ table {
     vertical-align: top;
     border-top: 1px solid $light-grey;
   }
-  
+
 }
 
 .current-status {
