@@ -6,12 +6,12 @@
 
     %form.track-form{ :action => "/track", :method => 'post' }
       %fieldset
-        %label.tracking_label{:for => 'tracking_id'} Tracking Number  
+        %label.tracking_label{:for => 'tracking_id'} Tracking Number
         %img.help-icon{ src: 'images/help-icon.png' }
         .input-wrapper
           %input#tracking_id{:type => 'text', :name => 'tracking_id' }
-      
-      .input-wrapper 
+
+      .input-wrapper
         %button.trace{:type => 'submit'} Trace your order
     %ul.info
       %li.phone
