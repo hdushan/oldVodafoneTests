@@ -18,6 +18,7 @@ form.track-form {
   input {
     width: 100%;
     font-size: inherit;
+    box-sizing: border-box;
     padding: $button-input-padding-vt .5em;
     border: $global-border;
     border-radius: $global-border-radius;
