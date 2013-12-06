@@ -17,7 +17,7 @@ end
 task :qa do
   puts '\nRunning QA task.'
   ENV['RAILS_ENV'] = 'paas-qa'
-  Rake::Task['tests'].invoke
+  Rake::Task['cucumber'].invoke
   puts '\nDone.'
 end
 
