@@ -4,7 +4,7 @@
   %article
     %h1 Trace your order
 
-    %form.track-form{ :action => "/track", :method => 'post' }
+    %form#track-form.track-form{ :action => "/track", :method => 'post' }
       %fieldset
         %label.tracking_label{:for => 'tracking_id'} Tracking Number
         %img.help-icon{ src: 'images/help-icon.png' }
@@ -12,7 +12,11 @@
           %input#tracking_id{:type => 'text', :name => 'tracking_id' }
 
       .input-wrapper
-        %button.trace{:type => 'submit'} Trace your order
+        %button.trace#trace{:type => 'submit'} Trace your order
+
+    .hidden#loading_img
+      %img{:src => '/images/loading.gif', :alt => 'Loading...'}
+
     %ul.info
       %li.phone
         %a{href: "tel://15798270034"}
