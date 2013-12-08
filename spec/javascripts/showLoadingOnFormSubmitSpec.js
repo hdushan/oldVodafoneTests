@@ -3,15 +3,15 @@ describe("Show loading on form submit", function() {
   beforeEach( function(){
     var $container = affix('div');
     $container.affix('form#track-form button#trace');
-    $container.affix('#loading_img.hidden[style="display: none"]');
+    $container.affix('#loading.hidden[style="display: none"]');
   });
 
   it("should show loading image", function() {      
-    var loadingImageIsVisibleBefore = $('#loading_img').is(':visible');
+    var loadingImageIsVisibleBefore = $('#loading').is(':visible');
     expect(loadingImageIsVisibleBefore).toBe(false);
     
     showLoadingImage();
-    var loadingImageIsVisibleAfter = $('#loading_img').is(':visible');
+    var loadingImageIsVisibleAfter = $('#loading').is(':visible');
     expect(loadingImageIsVisibleAfter).toBe(true);
        
   });
