@@ -4,6 +4,9 @@
   %article
     %h1 Trace your order
 
+    - if @error
+      %p= @error
+
     %form#track-form.track-form{ :action => "/track", :method => 'post' }
       %fieldset
         %label.tracking_label{:for => 'tracking_id'} Tracking Number

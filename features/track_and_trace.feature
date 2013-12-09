@@ -9,3 +9,8 @@ Feature: View Order Status
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'FOUND_123'
     Then I should see the tracking status for the order 'FOUND_123'
+
+  Scenario: Show system error when connection timeout
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of an order with id 'TIMEOUT_123' that timed out
+    Then I should see an system error message on the form page

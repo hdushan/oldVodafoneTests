@@ -16,8 +16,15 @@ post '/track' do
 
   if(!tracking_id.empty?)
     status_details = FulfilmentServiceProviderClient.new.get_order_status(tracking_id)
-    haml :trace_without_styling,
-      :locals => { :details => status_details }
+
+    if(status_details.key? 'error')
+      @error = 'system timeout' if status_details['error'] == 'FUSION_TIMEOUT'
+      haml :main
+    else
+      haml :trace_without_styling,
+        :locals => { :details => status_details }
+    end
+
   else
     "you must provide tracking number"
   end
