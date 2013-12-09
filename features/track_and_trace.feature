@@ -1,11 +1,11 @@
-Feature: Landing page
+Feature: View Order Status
 
-  Scenario: Submit track order form with non-existant order
-    Given I navigate to '/tnt'
-    When I view status of an order 'NON_EXISTING' that does not exist
-    Then I should see the error message
+  Scenario: View status of an order that doesnt exist
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of an order with id 'NON_EXISTING' that does not exist
+    Then I should see an error message that the order could not be found
 
-  Scenario: Submit track order form with an order id that exists
-    Given I navigate to '/tnt'
-    When I view status of an order 'FOUND_123' that exists
+  Scenario: View status of an order
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id 'FOUND_123'
     Then I should see the tracking status for the order 'FOUND_123'

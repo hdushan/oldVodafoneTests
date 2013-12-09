@@ -39,3 +39,6 @@ jmeter.log
 *.jtl
 server_error
 server_log
+
+# cucumber artifacts
+cucumber.json*
