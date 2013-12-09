@@ -90,5 +90,10 @@ ul {
 
 #loading {
   text-align: center;
+  position: relative;
+
+  p.desc {
+    padding-top: 60px;
+  }
 }
 

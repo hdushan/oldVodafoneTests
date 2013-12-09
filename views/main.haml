@@ -1,3 +1,4 @@
+%link{ :rel => :stylesheet, :type => :"text/css", :href => "/stylesheets/loader"}
 = haml :header
 
 .container
@@ -15,8 +16,8 @@
         %button.trace#trace{:type => 'submit'} Trace your order
 
     .hidden#loading
-      %img{:src => '/images/loading.gif', :alt => 'Loading...'}
-      %p Processing...
+      .loader.loader-sml
+      %p.desc Processing...
 
     %ul.info
       %li.phone
