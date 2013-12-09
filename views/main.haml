@@ -1,4 +1,3 @@
-%link{ :rel => :stylesheet, :type => :"text/css", :href => "/stylesheets/loader"}
 = haml :header
 
 .container
@@ -17,6 +16,10 @@
 
     .hidden#loading
       .loader.loader-sml
+
+      <!--[if lte IE 9]>
+      %img{ src: 'images/loader.gif' }
+      <![endif]-->
       %p.desc Processing...
 
     %ul.info

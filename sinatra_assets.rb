@@ -20,7 +20,11 @@ assets {
   ]
 
   css :application, '/css/application.css', [
-    '/css/**/*.css'
+    '/css/*.css'
+  ]
+
+  css :ie, '/css/ie.css', [
+    '/css/ie/ie.css'
   ]
 
   js_compression  :closure    # :jsmin | :closure | :uglify
