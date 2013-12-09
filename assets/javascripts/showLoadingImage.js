@@ -1,6 +1,6 @@
 function showLoadingImage(){
   
-  $('#loading_img').show();
+  $('#loading').show();
   $('#track-form').hide();
 
 }
