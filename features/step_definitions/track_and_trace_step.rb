@@ -3,7 +3,7 @@ Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
 end
 
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
-  setup_fulfulment_service_stub(order_id, "ORDER_NOT_FOUND")
+  setup_fulfulment_service_stub(order_id, {'error' => "ORDER_NOT_FOUND"} )
   submit_track_form_with order_id
 end
 
@@ -22,11 +22,12 @@ Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
 end
 
 Then(/^I should see an error message that the order could not be found$/) do
-  expect(page).to have_content('ORDER_NOT_FOUND')
+  expect(page).to have_content('Order not found')
+  expect(page).to have_css('form#track-form')
 end
 
 Then(/^I should see an system error message on the form page$/) do
-  expect(page).to have_content('system timeout')
+  expect(page).to have_content('System timeout.')
   expect(page).to have_css('form#track-form')
 end
 

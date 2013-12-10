@@ -4,10 +4,13 @@
   %article
     %h1 Trace your order
 
-    - if @error
-      %p= @error
-
     %form#track-form.track-form{ :action => "/track", :method => 'post' }
+      - if @error
+        .alert
+          .icon
+            %img{src: 'images/alert_icon.png'}
+          %span.msg= @error
+
       %fieldset
         %label.tracking_label{:for => 'tracking_id'} Tracking Number
         %img.help-icon{ src: 'images/help-icon.png' }
@@ -27,6 +30,6 @@
 
     %ul.info
       %li.phone
-        %a{href: "tel://15798270034"}
+        %a{href: "tel://0430123456"}
           .action-title Call Customer Care
           We'll help you, any time of day or night

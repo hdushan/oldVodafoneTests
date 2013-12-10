@@ -4,6 +4,7 @@ require 'haml'
 
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
+require_relative 'lib/app_helper'
 
 set :public_folder, 'public'
 
@@ -18,7 +19,7 @@ post '/track' do
     status_details = FulfilmentServiceProviderClient.new.get_order_status(tracking_id)
 
     if(status_details.key? 'error')
-      @error = 'system timeout' if status_details['error'] == 'FUSION_TIMEOUT'
+      @error = error_message[status_details['error']]
       haml :main
     else
       haml :trace_without_styling,

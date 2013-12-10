@@ -31,6 +31,33 @@ form.track-form {
     width: 25px;
     margin-top: 5px;
   }
+
+  %alert {
+    background-color: $alert-background-color;
+    position: relative;
+    border-radius: $global-border-radius;
+  }
+
+  .alert {
+    @extend %alert;
+
+    padding: 10px 10px;
+
+    .icon {
+      float: left;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    span.msg {
+      display: block;
+      overflow: hidden;
+      padding-left: 0.5em;
+    }
+  }
 }
 
 .input-wrapper {
