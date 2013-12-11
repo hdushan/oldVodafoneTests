@@ -10,7 +10,7 @@ function showLoadingImage(){
 
 
 $(document).ready( function(){
-  
+
   $('#track-form').submit(showLoadingImage);
 
 });
