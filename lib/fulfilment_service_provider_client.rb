@@ -9,7 +9,11 @@ class FulfilmentServiceProviderClient
     if(order_id.empty?)
       { 'error' => 'ORDER_ID_EMPTY'}
     else
-      JSON.parse(self.class.get("/order/#{order_id}").body)
+      begin
+        JSON.parse(self.class.get("/order/#{order_id}").body)
+      rescue
+        { 'error' => 'INTERNAL_ERROR' }
+      end
     end
   end
 end
