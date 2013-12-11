@@ -6,6 +6,10 @@ class FulfilmentServiceProviderClient
   base_uri ENV['FULFILMENT_SERVICE']
 
   def get_order_status(order_id)
-    JSON.parse(self.class.get("/order/#{order_id}").body)
+    if(order_id.empty?)
+      { 'error' => 'ORDER_ID_EMPTY'}
+    else
+      JSON.parse(self.class.get("/order/#{order_id}").body)
+    end
   end
 end

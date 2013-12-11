@@ -13,22 +13,15 @@ get '/tnt' do
 end
 
 post '/track' do
-  tracking_id = (params[:tracking_id] || "").gsub(/\s+/, "")
+  status_details = FulfilmentServiceProviderClient.new.get_order_status(params[:tracking_id].strip)
 
-  if(!tracking_id.empty?)
-    status_details = FulfilmentServiceProviderClient.new.get_order_status(tracking_id)
-
-    if(status_details.key? 'error')
-      @error = error_message[status_details['error']]
-      haml :main
-    else
-      haml :trace_without_styling,
-        :locals => { :details => status_details }
-    end
-
+  if(status_details.key? 'error')
+    @error = error_message[status_details['error']]
+    haml :main
   else
-    "you must provide tracking number"
+    haml :trace_without_styling, :locals => { :details => status_details }
   end
+
 end
 
 get '/trace' do
