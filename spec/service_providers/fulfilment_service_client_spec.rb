@@ -26,7 +26,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status(123)).to eq(response_body)
+      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq(response_body)
     end
 
   end
@@ -35,9 +35,9 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-        'order_date'       => '2013-07-31',
+        'order_date'        => '2013-07-31',
         'last_updated_date' => '2013-07-31',
-        'status'          => 'Complete'
+        'status'            => 'Complete'
       }
     }
 
@@ -53,10 +53,8 @@ describe FulfilmentServiceProviderClient, :pact => true do
       )
     end
 
-    #TODO fix me, test not working on fulfilment service
-    xit "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status(456)).to eq(response_body)
-      order_status = FulfilmentServiceProviderClient.new.get_order_status(456)
+    it "returns a order status" do
+      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq(response_body)
     end
 
   end
