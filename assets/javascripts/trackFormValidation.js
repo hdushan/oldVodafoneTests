@@ -4,18 +4,19 @@ $(document).ready( function() {
 
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {
-    
+
     event.preventDefault();
 
     var order_id = $('#tracking_id').val();
 
     if(isValidOrderId(order_id)) {
       showLoadingImage();
-      $('#track-form').submit();
+      this.submit();
     }
     else {
       $( "#input-validation-msg" ).show();
       shakeForm();
+      return false;
     }  
   });
 }; 

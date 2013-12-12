@@ -49,7 +49,7 @@ describe('Validation order id input text', function() {
 
   });
 
-  describe('with VF prefix', function() {
+  describe('with correct prefix', function() {
 
     beforeEach( function(){
       var $container = affix('div');
@@ -59,10 +59,58 @@ describe('Validation order id input text', function() {
       validateTrackIdFormat();
     });
 
-    it("should hide validation error when correct format is entered", function() {
+    it("should hide validation error when correct 'VF' format is entered", function() {
       $('#tracking_id').val('VF1');
       $('#tracking_id').trigger('change');
       expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should hide validation error when correct 'UP' format is entered", function() {
+      $('#tracking_id').val('UP1');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+    
+    it("should hide validation error when correct 'SR1-' format is entered", function() {
+      $('#tracking_id').val('SR1-1');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+  
+    it("should hide validation error when correct '1-' format is entered", function() {
+      $('#tracking_id').val('1-1');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should accept case insensitive input", function() {
+      $('#tracking_id').val('vF123');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+    
+    it("should accept order id with only 1 numeric character after prefix", function() {
+      $('#tracking_id').val('1-zx3zxc');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should accept order id with maximum length of 15 characters (prefix included)", function() {
+      $('#tracking_id').val('VF3456789012345');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+  });
+
+  describe('with prefix but wrong format', function() {
+    
+    beforeEach( function(){
+      var $container = affix('div');
+      $container.affix('form#track-form input#tracking_id');
+      $container.affix('#input-validation-msg.hidden[style="display: block"]');
+
+      validateTrackIdFormat();
     });
 
     it("should show validation error when order id does not have at least one numeric digit", function() {
@@ -71,49 +119,8 @@ describe('Validation order id input text', function() {
       expect($('#input-validation-msg').is(':visible')).toBe(true);
     });
 
-    it("should accept not case sensitiv input", function() {
-      $('#tracking_id').val('vF123');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(false);
-    });
-
-    it("should show validation error when order id is to long", function() {
+    it("should show validation error when order id is too long (more than 15 characters prefix included)", function() {
       $('#tracking_id').val('VF34567890123456');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(true);
-    });
-  });
-
-describe('with SR1- prefix', function() {
-
-    beforeEach( function(){
-      var $container = affix('div');
-      $container.affix('form#track-form input#tracking_id');
-      $container.affix('#input-validation-msg.hidden[style="display: block"]');
-
-      validateTrackIdFormat();
-    });
-
-    it("should hide validation error when correct format is entered", function() {
-      $('#tracking_id').val('SR1-1');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(false);
-    });
-
-    it("should show validation error when order id does not have at least one numeric digit", function() {
-      $('#tracking_id').val('SR1-nodigits');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(true);
-    });
-
-    it("should accept not case sensitiv input", function() {
-      $('#tracking_id').val('Sr1-123');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(false);
-    });
-
-    it("should show validation error when order id is to long", function() {
-      $('#tracking_id').val('SR1-567890123456');
       $('#tracking_id').trigger('change');
       expect($('#input-validation-msg').is(':visible')).toBe(true);
     });
