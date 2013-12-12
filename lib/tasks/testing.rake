@@ -44,7 +44,7 @@ safe_load('jmeter') do
       server_port = "80"
       server_url = "tnt"
       warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
-      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "tnt.jmx", "tnt.jtl", "xml", warmup_url)
+      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "tnt.jmx", "tnt_new.jtl", "xml", warmup_url)
       testRunner.start()
     else
       puts "Running on LOCAL"
@@ -53,7 +53,7 @@ safe_load('jmeter') do
       server_port = "9393"
       server_url = "tnt"
       warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
-      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "tnt.jmx", "tnt.jtl", "xml", warmup_url,
+      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "tnt.jmx", "tnt_new.jtl", "xml", warmup_url,
       true, 'bundle exec rackup', "server_log", "server_error", )
       testRunner.start()
     end
