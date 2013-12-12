@@ -29,6 +29,8 @@ group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
 
+  gem 'jshintrb'
+
   gem 'jasmine', '2.0.0.rc4'
   gem 'jmeter-runner-gem', :git => 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'
 end

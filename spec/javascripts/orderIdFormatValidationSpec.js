@@ -15,7 +15,7 @@ describe('Validation order id input text', function() {
 
     it("when wrong format is entered", function() {
       $('#tracking_id').val('random');
-      $('#tracking_id').trigger('keyup');
+      $('#tracking_id').trigger('keyup'); 
 
       var validationMessageAfter = $('#input-validation-msg').is(':visible');
       expect(validationMessageAfter).toBe(true);
@@ -60,11 +60,63 @@ describe('Validation order id input text', function() {
     });
 
     it("should hide validation error when correct format is entered", function() {
-      $('#tracking_id').val('VF');
+      $('#tracking_id').val('VF1');
       $('#tracking_id').trigger('change');
       expect($('#input-validation-msg').is(':visible')).toBe(false);
     });
 
+    it("should show validation error when order id does not have at least one numeric digit", function() {
+      $('#tracking_id').val('VFnodigits');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(true);
+    });
+
+    it("should accept not case sensitiv input", function() {
+      $('#tracking_id').val('vF123');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should show validation error when order id is to long", function() {
+      $('#tracking_id').val('VF34567890123456');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(true);
+    });
+  });
+
+describe('with SR1- prefix', function() {
+
+    beforeEach( function(){
+      var $container = affix('div');
+      $container.affix('form#track-form input#tracking_id');
+      $container.affix('#input-validation-msg.hidden[style="display: block"]');
+
+      validateTrackIdFormat();
+    });
+
+    it("should hide validation error when correct format is entered", function() {
+      $('#tracking_id').val('SR1-1');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should show validation error when order id does not have at least one numeric digit", function() {
+      $('#tracking_id').val('SR1-nodigits');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(true);
+    });
+
+    it("should accept not case sensitiv input", function() {
+      $('#tracking_id').val('Sr1-123');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(false);
+    });
+
+    it("should show validation error when order id is to long", function() {
+      $('#tracking_id').val('SR1-567890123456');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(true);
+    });
   });
 
 });

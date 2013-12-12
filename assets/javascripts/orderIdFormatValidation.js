@@ -1,23 +1,26 @@
 function validateTrackIdFormat(){
 
-  $('#tracking_id').on('keyup change', function(){
-    var track_id = $('#tracking_id').val();
+  $('#tracking_id').on('keyup change', function() {
+    var order_id = $('#tracking_id').val();
 
-    if( track_id == '' ) {
+    if( order_id == '' ) {
       $('#input-validation-msg').hide();
     }
-    else
-    {
-      if( track_id.match(/^VF/) ) {
+    else {      
+      if( isValidOrderId(order_id)) {
         $('#input-validation-msg').hide();
       }
-      else
-      {
+      else {
         $('#input-validation-msg').show();
       }
     }
   });
 
+}
+
+function isValidOrderId(order_id) {
+  var order_id_format = /^(VF|UP|1-|SR1-)(?=.*\d)[a-zA-Z0-9]+$/i;
+  return order_id.length <= 15 && order_id.match(order_id_format);
 }
 
 $(document).ready( function(){
