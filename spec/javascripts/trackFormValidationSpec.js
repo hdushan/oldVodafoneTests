@@ -25,8 +25,6 @@ describe("Show loading on form submit", function() {
 
 });
 
-
-
 describe("form validation", function() {
 
   beforeEach( function() {      
@@ -48,8 +46,6 @@ describe("form validation", function() {
   });
 
   describe("When the order id is invalid and I click on submit", function() {
-
-    
 
     it ("should display the error message", function() {
       $('#tracking_id').val('invalid_id');

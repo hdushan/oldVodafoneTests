@@ -119,6 +119,12 @@ describe('Validation order id input text', function() {
       expect($('#input-validation-msg').is(':visible')).toBe(true);
     });
 
+    it("should show validation error when order id contains special characters", function() {
+      $('#tracking_id').val('VF123@$');
+      $('#tracking_id').trigger('change');
+      expect($('#input-validation-msg').is(':visible')).toBe(true);
+    });
+
     it("should show validation error when order id is too long (more than 15 characters prefix included)", function() {
       $('#tracking_id').val('VF34567890123456');
       $('#tracking_id').trigger('change');
