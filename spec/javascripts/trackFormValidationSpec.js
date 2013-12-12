@@ -56,19 +56,4 @@ describe("form validation", function() {
     });
 
   });
-
-  describe("When the order id is valid and I click on submit", function() {
-
-
-    xit ("should submit the form", function() {
-      $('#tracking_id').val('VF123');
-      $('#track-form').trigger('submit');    
-      var validationMessageAfter = $('#input-validation-msg').is(':visible');
-      expect(validationMessageAfter).toBe(false);
-    });
-
-  });
 });
-
-
-
