@@ -8,7 +8,7 @@ function validateTrackForm() {
 
     event.preventDefault();
 
-    var order_id = $('#tracking_id').val();
+    var order_id = order_id_entered();
 
     if(isValidOrderId(order_id)) {
       showLoadingImage();
