@@ -15,7 +15,7 @@
         %label.tracking_label{:for => 'tracking_id'} Tracking Number
         %img.help-icon{ src: 'images/help-icon.png' }
         .input-wrapper
-          %input#tracking_id{:type => 'text', :name => 'tracking_id' }
+          %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id}
         #input-validation-msg.hidden
           %p Wrong Track ID format.
 

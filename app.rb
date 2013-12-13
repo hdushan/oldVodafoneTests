@@ -13,7 +13,8 @@ get '/tnt' do
 end
 
 post '/track' do
-  status_details = FulfilmentServiceProviderClient.new.get_order_status(params[:tracking_id].strip)
+  @order_id = params[:tracking_id].strip
+  status_details = FulfilmentServiceProviderClient.new.get_order_status(@order_id)
 
   if(status_details.key? 'error')
     @error = error_message[status_details['error']]
