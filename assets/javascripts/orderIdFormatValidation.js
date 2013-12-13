@@ -1,6 +1,7 @@
 function validateTrackIdFormat(){
 
   $('#tracking_id').on('keyup change', function() {
+    $('#track-form .alert').hide();
     var order_id = order_id_entered();
 
     if( order_id == '' ) {
