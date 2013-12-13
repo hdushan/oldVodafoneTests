@@ -1,5 +1,4 @@
-$(document).ready( function(){
-
+function reloadWhenBackButtonPressOnSafari() {
   var isSafari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
 
   if(isSafari) {
@@ -9,5 +8,6 @@ $(document).ready( function(){
       }
     };
   }
+}
 
-});
+reloadWhenBackButtonPressOnSafari();
