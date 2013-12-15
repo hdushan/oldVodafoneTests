@@ -4,16 +4,11 @@ function validateTrackIdFormat(){
     $('#track-form .alert').hide();
     var order_id = order_id_entered();
 
-    if( order_id == '' ) {
+    if( order_id == '' || isValidOrderId(order_id) ) {
       $('#input-validation-msg').hide();
     }
-    else {      
-      if( isValidOrderId(order_id)) {
-        $('#input-validation-msg').hide();
-      }
-      else {
-        $('#input-validation-msg').show();
-      }
+    else {
+      $('#input-validation-msg').show();
     }
   });
 
