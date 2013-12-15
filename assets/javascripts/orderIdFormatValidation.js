@@ -25,7 +25,7 @@ function isValidOrderId(order_id) {
 }
 
 function order_id_entered() {
-  return $('#tracking_id').val().trim();
+  return $.trim( $("#tracking_id").val());
 }
 
 $(document).ready( function(){
