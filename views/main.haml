@@ -22,17 +22,6 @@
       .input-wrapper
         %button.trace#trace{:type => 'submit'} Trace your order
 
-    .hidden#loading
-      .loader.loader-sml
+    = haml :_loading_spinner
 
-      <!--[if lte IE 9]>
-      #ie-loader
-        %img{ src: 'images/loader.gif' }
-      <![endif]-->
-      %p.desc Processing...
-
-    %ul.info
-      %li.phone
-        %a{href: "tel://0430123456"}
-          .action-title Call Customer Care
-          We'll help you, any time of day or night
+    = haml :_info_links
