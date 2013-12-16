@@ -20,11 +20,21 @@ post '/track' do
     @error = error_message[status_details['error']]
     haml :main
   else
-    haml :trace_without_styling, :locals => { :details => status_details }
+    @auth_url = generate_auth_url status_details, @order_id
+    haml :trace, :locals => { :details => status_details }
   end
+end
 
+get '/auth' do
+  @order_id = params[:orderID]
+  redirect '/tnt' if @order_id.nil? || !['email', 'bday'].include?(params[:authType])
+
+  @auth_email = true if params[:authType] == 'email'
+  @auth_birthday = true if params[:authType] == 'bday'
+
+  haml :auth
 end
 
 get '/trace' do
-  haml :trace
+  haml :trace_styled_standalone
 end

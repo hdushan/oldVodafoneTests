@@ -1,0 +1,16 @@
+
+%form.auth-form{ :action => '/details', :method => 'post' }
+  %fieldset
+    %label.tracking_label{:for => 'tracking_id'} Tracking Number
+    .input-wrapper
+      %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id}
+    .input-wrapper
+      %input#email{:type => 'text', :name => 'email' }
+
+    .input-wrapper
+      %button.trace#trace{:type => 'submit'} Trace your order
+
+- if @auth_email
+  Email address:
+- elsif @auth_birthday
+  Date of birth:
