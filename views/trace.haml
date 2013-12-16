@@ -1,42 +1,6 @@
-
-
-= haml :header
-
-.container
-  %article
-    %h1 Trace your order
-
-    .current-status
-      %h2 It's on the truck, and on it's way to you right now!
-      %button 
-        %strong Check
-        Deliver Address
-
-    %table
-      %thead
-        %tr
-          %th.time Time
-          %th Status
-          %th Comment
-      %tbody
-        %tr.latest
-          %td= "Nov 7, 2013\n10:15 AM"
-          %td Order Delayed
-          %td Items on back-order. Stock arrival estimated in 8 days.
-        %tr
-          %td="Nov 7, 2013\n8 AM"
-          %td Approved
-          %td
-        %tr
-          %td="Nov 7, 2013\n6:45 AM"
-          %td Order received - Pending approval
-          %td
-
-    %ul
-      %li.details
-        %a{href: '/more'}
-          %strong See order details
-          Detailed information about this order
-      %li.phone
-        %strong Call Vodafone phone support
-        We'll help you, any time of day or night
+- locals[:details].each do |key, value|
+  -if value.class == Hash
+    %p= "#{key}"
+    .margin-wrapper=haml :trace_without_styling, :locals => { :details => value }
+  -else
+    %p= "#{key}: #{value}"

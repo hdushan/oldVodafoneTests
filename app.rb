@@ -21,7 +21,7 @@ post '/track' do
     haml :main
   else
     @auth_url = generate_auth_url status_details, @order_id
-    haml :trace_without_styling, :locals => { :details => status_details }
+    haml :trace, :locals => { :details => status_details }
   end
 end
 
@@ -36,5 +36,5 @@ get '/auth' do
 end
 
 get '/trace' do
-  haml :trace
+  haml :trace_styled_standalone
 end
