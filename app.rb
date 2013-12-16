@@ -20,6 +20,7 @@ post '/track' do
     @error = error_message[status_details['error']]
     haml :main
   else
+    @auth_url = generate_auth_url status_details, @order_id
     haml :trace_without_styling, :locals => { :details => status_details }
   end
 end
