@@ -26,7 +26,7 @@ end
 
 get '/auth' do
   @order_id = params[:orderID]
-  redirect '/tnt' if @order_id.nil?
+  redirect '/tnt' if @order_id.nil? || !['email', 'bday'].include?(params[:authType])
 
   @auth_email = true if params[:authType] == 'email'
   @auth_birthday = true if params[:authType] == 'bday'

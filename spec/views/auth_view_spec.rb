@@ -30,6 +30,10 @@ describe "Authentication form" do
       its(:body) { should match /Date of birth/i }
     end
 
+    context 'wrong auth type provided' do
+      let(:auth_type) { 'something' }
+      it { should be_redirect }
+    end
   end
 
 end
