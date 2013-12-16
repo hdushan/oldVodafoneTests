@@ -22,7 +22,16 @@ post '/track' do
   else
     haml :trace_without_styling, :locals => { :details => status_details }
   end
+end
 
+get '/auth' do
+  @order_id = params[:orderID]
+  redirect '/tnt' if @order_id.nil?
+
+  @auth_email = true if params[:authType] == 'email'
+  @auth_birthday = true if params[:authType] == 'bday'
+
+  haml :auth
 end
 
 get '/trace' do
