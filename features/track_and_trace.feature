@@ -3,7 +3,7 @@ Feature: View Order Status
   Scenario: View status of an order that doesnt exist
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1NON1EXISTING' that does not exist
-    Then I should see an error message that the order could not be found
+    Then I should see a 'not found' error message
   
   @javascript
   Scenario: View status of an order
@@ -15,4 +15,4 @@ Feature: View Order Status
   Scenario: Show system timeout when connection timeout
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1TIMEOUT123' that timed out
-    Then I should see an system error message on the form page
+    Then I should see a 'timeout' error message

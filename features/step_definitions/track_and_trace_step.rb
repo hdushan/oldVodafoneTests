@@ -21,14 +21,8 @@ Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
   expect(page).to have_content('Complete')
 end
 
-Then(/^I should see an error message that the order could not be found$/) do
-  expect(page).to have_content('Order not found')
-  expect(page).to have_css('form#track-form')
-end
-
-Then(/^I should see an system error message on the form page$/) do
-  expect(page).to have_content('System timeout.')
-  expect(page).to have_css('form#track-form')
+Then(/^I should see a '(.*)' error message$/) do |error_message|
+  expect(page).to have_content(error_message)
 end
 
 def setup_fulfulment_service_stub order_id, return_value
