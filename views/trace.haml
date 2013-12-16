@@ -4,3 +4,6 @@
     .margin-wrapper=haml :trace_without_styling, :locals => { :details => value }
   -else
     %p= "#{key}: #{value}"
+
+- if @auth_url
+  != "<a href=#{@auth_url}>Click here to see your order details</a>"

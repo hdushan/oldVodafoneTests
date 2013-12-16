@@ -8,13 +8,47 @@ describe "Track & Trace App" do
     last_response.should match /Tracking number/i
   end
 
-  it 'should response with timeout error' do
-    FulfilmentServiceProviderClient.any_instance.stub(:get_order_status).with('TIMEOUT') do |arg|
-      { 'error' => 'FUSION_TIMEOUT'}
+
+  describe "POST '/track'" do
+    let(:fulfilment_response) { {} }
+    let(:tracking_id) { 'vf123' }
+    before do
+      FulfilmentServiceProviderClient.any_instance.stub(:get_order_status).with(tracking_id) do |arg|
+        fulfilment_response
+      end
     end
 
-    post '/track', {tracking_id: 'TIMEOUT'}
+    subject do
+      post '/track', {tracking_id: tracking_id}
+      last_response
+    end
 
-    last_response.body.should match /system timeout/i
+    context 'timeout error' do
+      let(:fulfilment_response) { { 'error' => 'FUSION_TIMEOUT'} }
+      let(:tracking_id) { 'TIMEOUT' }
+
+      its(:body) { should match /system timeout/i }
+    end
+
+    context 'no error' do
+      context 'fulfilmeet response with email or date of birth' do
+        let(:fulfilment_response) { { 'email' => 'abc@example.com'} }
+
+        it 'should have authentication url' do
+          subject.body.should include('Click here to see your order details')
+          subject.body.should include("/auth?order_id=#{tracking_id}&authType=email")
+        end
+      end
+
+      context 'fulfilmeet response without email or date of birth' do
+        let(:fulfilment_response) { { 'email' => nil, 'date_of_birth' => nil} }
+
+        it 'should not have authentication url' do
+          subject.body.should_not include('Click here to see your order details')
+          subject.body.should_not include("/auth?order_id")
+        end
+      end
+
+    end
   end
 end
