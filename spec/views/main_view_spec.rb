@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'main.ham' do
+describe 'main.haml' do
   before { get '/tnt' }
 
   it 'should have input for tracking id' do
