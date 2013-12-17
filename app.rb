@@ -9,7 +9,7 @@ require_relative 'lib/app_helper'
 set :public_folder, 'public'
 
 get '/tnt' do
-  haml :main
+  haml :track_form
 end
 
 post '/track' do
@@ -18,10 +18,10 @@ post '/track' do
 
   if(status_details.key? 'error')
     @error = error_message[status_details['error']]
-    haml :main
+    haml :track_form
   else
     @auth_url = generate_auth_url status_details, @order_id
-    haml :trace, :locals => { :details => status_details }
+    haml :order_status, :locals => { :details => status_details }
   end
 end
 
@@ -32,9 +32,10 @@ get '/auth' do
   @auth_email = true if params[:authType] == 'email'
   @auth_birthday = true if params[:authType] == 'bday'
 
-  haml :auth
+  haml :auth_form
 end
 
+# TODO: temparary route to see the styled order status page
 get '/trace' do
   haml :trace_styled_standalone
 end
