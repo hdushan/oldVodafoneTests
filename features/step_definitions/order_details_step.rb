@@ -1,4 +1,4 @@
-Given(/^I am on the authentication with email page with order id '(.*)'$/) do |order_id|
+Given(/^I am on the email authentication page with order id '(.*)'$/) do |order_id|
   visit "/auth?order_id=#{order_id}&authType=email"
 end
 
