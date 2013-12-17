@@ -1,15 +1,24 @@
-%form.auth-form{ :action => '#', :method => 'post' }
-  %fieldset
-    %label.tracking_label{:for => 'tracking_id'} Tracking Number
-    .input-wrapper
-      %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id}
-    .input-wrapper
-      %input#email{:type => 'text', :name => 'email' }
+%article
+  %h1 Trace your order
 
-    .input-wrapper
-      %button.trace#trace{:type => 'submit'} Trace your order
+  %form#auth-form.form{ :action => '#', :method => 'post' }
+    %fieldset
+      %label.tracking_label{:for => 'tracking_id'} Tracking Number
+      .input-wrapper
+        %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id, :disabled => true}
 
-- if @auth_email
-  Email address:
-- elsif @auth_birthday
-  Date of birth:
+      - if @auth_email
+        %label.tracking_label{:for => 'validation_data'} Email address
+        .input-wrapper
+          %input#email{:type => 'text', :name => 'email' }
+      - elsif @auth_birthday
+        %label.tracking_label{:for => 'validation_data'} Date of birth
+        .input-wrapper
+          %input#date-of-birth{:type => 'text', :name => 'date_of_birth' }
+
+      .input-wrapper
+        %button.trace{:type => 'submit'} Trace your order
+
+  = haml :_loading_spinner
+
+  = haml :_info_links

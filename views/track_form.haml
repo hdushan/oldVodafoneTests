@@ -1,7 +1,7 @@
 %article
   %h1 Trace your order
 
-  %form#track-form.track-form{ :action => "/track", :method => 'post' }
+  %form#track-form.form{ :action => "/track", :method => 'post' }
     - if @error
       .alert
         .icon

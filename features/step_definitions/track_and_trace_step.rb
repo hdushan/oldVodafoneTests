@@ -30,7 +30,11 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
 end
 
 Then(/^I should see the authentication form$/) do
-  expect(page).to have_css("form.auth-form")
+  expect(page).to have_css("form#auth-form")
+end
+
+Then(/^the order id is not editable$/) do
+  find('form#auth-form input#tracking_id').disabled?.should be_true
 end
 
 def setup_fulfulment_service_stub order_id, return_value
@@ -42,7 +46,7 @@ def setup_fulfulment_service_stub order_id, return_value
 end
 
 def submit_track_form_with order_id
-  within(".track-form") do
+  within("#track-form") do
     fill_in 'tracking_id', :with => order_id
   end
   click_button 'Trace your order'
