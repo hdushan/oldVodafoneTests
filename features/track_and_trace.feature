@@ -14,7 +14,7 @@ Feature: View Order Status
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1NON1EXISTING' that does not exist
     Then I should see a 'not found' error message
-  
+
   @javascript
   Scenario: Show system timeout when connection timeout
     Given I am on the Track and Trace Home page '/tnt'

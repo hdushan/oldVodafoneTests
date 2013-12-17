@@ -18,9 +18,9 @@ function validateTrackForm() {
       $( "#input-validation-msg" ).show();
       shakeForm();
       return false;
-    }  
+    }
   });
-}; 
+};
 
 function showLoadingImage() {
   $('#loading').show();
@@ -32,8 +32,8 @@ function showLoadingImage() {
 
 // TODO make nice animation
 function shakeForm() {
-  var p = new Array(-15, 15, -15, 15, -15, 15, -15, 15);  
+  var p = new Array(-15, 15, -15, 15, -15, 15, -15, 15);
 
-  for( var i = 0; i < 8; i++ )   
-    $( "#input-validation-msg" ).animate( { 'margin-left': "+=" + p[i] + 'px' }, 50);  
+  for( var i = 0; i < 8; i++ )
+    $( "#input-validation-msg" ).animate( { 'margin-left': "+=" + p[i] + 'px' }, 50);
 };
