@@ -1,16 +1,19 @@
 Feature: View Order Status
   @javascript
+  Scenario: View status and details of an order
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id 'VF1FOUND123'
+    Then I should see the tracking status for the order 'VF1FOUND123'
+
+    When I click on the link to see order details
+    Then I should see the authentication form
+
+  @javascript
   Scenario: View status of an order that doesnt exist
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1NON1EXISTING' that does not exist
     Then I should see a 'not found' error message
   
-  @javascript
-  Scenario: View status of an order
-    Given I am on the Track and Trace Home page '/tnt'
-    When I search for the status of a valid order with id 'VF1FOUND123'
-    Then I should see the tracking status for the order 'VF1FOUND123'
-
   @javascript
   Scenario: Show system timeout when connection timeout
     Given I am on the Track and Trace Home page '/tnt'

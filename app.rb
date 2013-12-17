@@ -26,7 +26,7 @@ post '/track' do
 end
 
 get '/auth' do
-  @order_id = params[:orderID]
+  @order_id = params[:order_id]
   redirect '/tnt' if @order_id.nil? || !['email', 'bday'].include?(params[:authType])
 
   @auth_email = true if params[:authType] == 'email'

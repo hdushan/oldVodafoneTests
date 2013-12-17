@@ -8,7 +8,7 @@ When(/^I search for the status of an order with id '(.*)' that does not exist$/)
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfulment_service_stub(order_id, {'status' => "Complete"} )
+  setup_fulfulment_service_stub(order_id, {'status' => "Complete", 'email' => 'valid@example.com'} )
   submit_track_form_with order_id
 end
 
@@ -17,12 +17,20 @@ When(/^I search for the status of an order with id '(.*)' that timed out$/) do |
   submit_track_form_with order_id
 end
 
+When(/^I click on the link to see order details$/) do
+  click_link 'Click here to see your order details'
+end
+
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
   expect(page).to have_content('Complete')
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
   expect(page).to have_content(error_message)
+end
+
+Then(/^I should see the authentication form$/) do
+  expect(page).to have_css("form.auth-form")
 end
 
 def setup_fulfulment_service_stub order_id, return_value

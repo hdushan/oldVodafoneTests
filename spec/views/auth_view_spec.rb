@@ -15,7 +15,7 @@ describe "Authentication form" do
   context 'with order id provided' do
     let(:order_id) { 'vf123' }
     let(:auth_type) { 'email' }
-    let(:url) { "/auth?orderID=#{order_id}&authType=#{auth_type}" }
+    let(:url) { "/auth?order_id=#{order_id}&authType=#{auth_type}" }
 
     it { should be_ok }
     its(:body) { should match(order_id) }

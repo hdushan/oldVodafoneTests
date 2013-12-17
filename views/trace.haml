@@ -5,5 +5,4 @@
   -else
     %p= "#{key}: #{value}"
 
-- if @auth_url
-  != "<a href=#{@auth_url}>Click here to see your order details</a>"
+= haml :_info_links
