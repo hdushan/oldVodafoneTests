@@ -48,7 +48,8 @@ describe "Track & Trace App" do
           subject.body.should_not include("/auth?order_id")
         end
       end
-
     end
+
   end
+
 end

@@ -23,10 +23,12 @@ describe "Authentication form" do
     context 'email authentication' do
       let(:auth_type) { 'email' }
       its(:body) { should match /Email address/i }
+      its(:body) { should_not match /Date of birth/i }
     end
 
     context 'birthday authentication' do
-      let(:auth_type) { 'bday' }
+      let(:auth_type) { 'dob' }
+      its(:body) { should_not match /Email address/i }
       its(:body) { should match /Date of birth/i }
     end
 
