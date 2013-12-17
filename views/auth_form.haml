@@ -11,6 +11,8 @@
         %label.tracking_label{:for => 'validation_data'} Email address
         .input-wrapper
           %input#email{:type => 'text', :name => 'email' }
+        #email-format-validation.hidden
+          %p Wrong Email format.
       - elsif @auth_birthday
         %label.tracking_label{:for => 'validation_data'} Date of birth
         .input-wrapper
