@@ -97,8 +97,8 @@ describe('Validation order id input text', function() {
       expect($('#input-validation-msg').is(':visible')).toBe(false);
     });
     
-    it("should accept order id with only 1 numeric character after prefix", function() {
-      $('#tracking_id').val('1-zx3zxc');
+    it("should accept order id with only 1 alphanumerical character after prefix", function() {
+      $('#tracking_id').val('1-z');
       $('#tracking_id').trigger('change');
       expect($('#input-validation-msg').is(':visible')).toBe(false);
     });
@@ -119,12 +119,6 @@ describe('Validation order id input text', function() {
       $container.affix('#input-validation-msg.hidden[style="display: block"]');
 
       validateTrackIdFormat();
-    });
-
-    it("should show validation error when order id does not have at least one numeric digit", function() {
-      $('#tracking_id').val('VFnodigits');
-      $('#tracking_id').trigger('change');
-      expect($('#input-validation-msg').is(':visible')).toBe(true);
     });
 
     it("should show validation error when order id contains special characters", function() {

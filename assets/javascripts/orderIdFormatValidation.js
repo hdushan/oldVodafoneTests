@@ -15,7 +15,7 @@ function validateTrackIdFormat(){
 }
 
 function isValidOrderId(order_id) {
-  var order_id_format = /^(VF|UP|1-|SR1-)(?=.*\d)[a-zA-Z0-9]+$/i;
+  var order_id_format = /^(VF|UP|1-|SR1-)[a-zA-Z0-9]+$/i;
   return order_id.length <= 15 && order_id.match(order_id_format);
 }
 
