@@ -1,27 +1,24 @@
-= haml :_header
+%article
+  %h1 Trace your order
 
-.container
-  %article
-    %h1 Trace your order
+  %form#track-form.track-form{ :action => "/track", :method => 'post' }
+    - if @error
+      .alert
+        .icon
+          %img{src: 'images/alert_icon.png'}
+        %span.msg= @error
 
-    %form#track-form.track-form{ :action => "/track", :method => 'post' }
-      - if @error
-        .alert
-          .icon
-            %img{src: 'images/alert_icon.png'}
-          %span.msg= @error
-
-      %fieldset
-        %label.tracking_label{:for => 'tracking_id'} Tracking Number
-        %img.help-icon{ src: 'images/help-icon.png' }
-        .input-wrapper
-          %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id}
-        #input-validation-msg.hidden
-          %p Wrong Track ID format.
-
+    %fieldset
+      %label.tracking_label{:for => 'tracking_id'} Tracking Number
+      %img.help-icon{ src: 'images/help-icon.png' }
       .input-wrapper
-        %button.trace#trace{:type => 'submit'} Trace your order
+        %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id}
+      #input-validation-msg.hidden
+        %p Wrong Track ID format.
 
-    = haml :_loading_spinner
+    .input-wrapper
+      %button.trace#trace{:type => 'submit'} Trace your order
 
-    = haml :_info_links
+  = haml :_loading_spinner
+
+  = haml :_info_links

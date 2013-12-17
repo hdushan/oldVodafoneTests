@@ -14,4 +14,7 @@
     %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie.css"}
     <![endif]-->
   %body
-    = yield
+    = haml :_header
+
+    .container
+      = yield
