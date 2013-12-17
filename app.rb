@@ -29,8 +29,8 @@ get '/auth' do
   @order_id = params[:order_id]
   redirect '/tnt' if @order_id.nil? || !['email', 'dob'].include?(params[:authType])
 
-  @auth_email = true if params[:authType] == 'email'
-  @auth_birthday = true if params[:authType] == 'dob'
+  @auth_email = params[:authType] == 'email'
+  @auth_birthday = params[:authType] == 'dob'
 
   haml :auth_form
 end
