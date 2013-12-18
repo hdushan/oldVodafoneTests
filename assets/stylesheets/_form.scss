@@ -24,6 +24,7 @@ form.form {
     border-radius: $global-border-radius;
     background-color: $white;
     &:focus { border-color: $aqua-blue; }
+    &:disabled { border: none; }
   }
 
   img.help-icon {
