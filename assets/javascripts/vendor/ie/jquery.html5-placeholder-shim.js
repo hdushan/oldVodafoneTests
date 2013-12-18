@@ -64,7 +64,7 @@
               textAlign: 'left',
               color: config.color,
               cursor: 'text',
-              paddingTop: $this.css('padding-top'),
+              //paddingTop: $this.css('padding-top'),
               paddingRight: $this.css('padding-right'),
               paddingBottom: $this.css('padding-bottom'),
               paddingLeft: $this.css('padding-left'),
