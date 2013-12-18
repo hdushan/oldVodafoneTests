@@ -10,13 +10,13 @@
       - if @auth_email
         %label.tracking_label{:for => 'validation_data'} Email address
         .input-wrapper
-          %input#email{:type => 'text', :name => 'email', :autofocus => true, :placeholder => 'xxx@axample.com'}
+          %input#email{:type => 'text', :name => 'email', :placeholder => 'xxx@axample.com'}
         #email-format-validation.hidden
           %p Wrong Email format.
       - elsif @auth_birthday
         %label.tracking_label{:for => 'validation_data'} Date of birth
         .input-wrapper
-          %input#date-of-birth{:type => 'date', :name => 'date_of_birth', :autofocus => true}
+          %input#date-of-birth{:type => 'date', :name => 'date_of_birth', :placeholder => 'dd/mm/yyyy'}
 
       .input-wrapper
         %button.trace{:type => 'submit'} Trace your order
