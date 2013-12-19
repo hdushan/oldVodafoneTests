@@ -4,22 +4,21 @@
   %form#auth-form.form{ :action => '#', :method => 'post' }
     %fieldset
       %label.tracking_label{:for => 'tracking_id'} Tracking Number
-      .input-wrapper
-        %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id, :disabled => true}
+
+      %input#tracking_id{:type => 'text', :name => 'tracking_id', :value => @order_id, :disabled => true}
 
       - if @auth_email
         %label.tracking_label{:for => 'validation_data'} Email address
-        .input-wrapper
-          %input#email{:type => 'text', :name => 'email', :placeholder => 'xxx@axample.com'}
-        #email-format-validation.hidden
-          %p Wrong Email format.
+        %input#email{:type => 'text', :name => 'email', :placeholder => 'xxx@example.com'}
+        #auth-format-validation.hidden
+          %p Email is invalid.
       - elsif @auth_birthday
         %label.tracking_label{:for => 'validation_data'} Date of birth
-        .input-wrapper
-          %input#date-of-birth{:type => 'date', :name => 'date_of_birth', :placeholder => 'dd/mm/yyyy'}
+        %input#date-of-birth{:type => 'date', :name => 'date-of-birth', :placeholder => 'yyyy-mm-dd'}
+        #auth-format-validation.hidden
+          %p Date of birth is invalid.
 
-      .input-wrapper
-        %button.trace{:type => 'submit'} Trace your order
+      %button.trace{:type => 'submit'} Trace your order
 
   = haml :_loading_spinner
 

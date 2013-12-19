@@ -1,20 +1,33 @@
 $(document).ready( function() {
-  validateEmailFormat();
+  validateAuthDataFormat();
 });
 
-function validateEmailFormat(){
+function validateAuthDataFormat(){
 
   $('#auth-form').on('submit', function(event) {
     event.preventDefault();
 
-    if(isValidEmail(emailEntered())) {
+    if(validForm()) {
+      $('#auth-format-validation').hide();
       this.submit();
     }
     else {
-      $('#email-format-validation').show();
+      $('#auth-format-validation').show();
       return false;
     }
   });
+}
+
+function validForm() {
+  var emailId = 'form#auth-form input#email';
+  var dobId = 'form#auth-form input#date-of-birth';
+
+  if( $(emailId).val() === undefined) {
+    return isValidDOB(dataEntered(dobId));
+  }
+  else {
+    return isValidEmail(dataEntered(emailId));
+  }
 }
 
 function isValidEmail(string) {
@@ -22,6 +35,40 @@ function isValidEmail(string) {
   return emailFormat.test(string);
 }
 
-function emailEntered() {
-  return $.trim( $('form#auth-form input#email').val() );
+function dataEntered(idString) {
+  return $.trim( $(idString).val() );
 }
+
+function extractDate(dateString) {
+  var parts = dateString.split('-');
+  var year = parseInt(parts[0]);
+  var month = parseInt(parts[1]);
+  var day = parseInt(parts[2]);
+  return {year: year, month: month, day: day};
+};
+
+function parsedDate(dateHash) {
+  return new Date(dateHash.year, dateHash.month - 1, dateHash.day);
+}
+
+function isFuture(date) {
+  var now = new Date();
+  return parsedDate(date) > now;
+};
+
+function isInDateFormat(dateString) {
+  var dobFormat = /^\d{4}-\d{1,2}-\d{1,2}$/;
+  return dobFormat.test(dateString)
+};
+
+function isInCorrectRange(date) {
+  return date.day <= 31 && date.month <= 12 && date.year >= 1800;
+};
+
+function isValidDOB(dateString) {
+  var date = extractDate(dateString);
+  return isInDateFormat(dateString)
+      && !isFuture(date)
+      && isInCorrectRange(date);
+};
+
