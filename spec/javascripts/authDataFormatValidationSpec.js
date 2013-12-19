@@ -18,46 +18,46 @@ describe('validateAuthDataFormat', function () {
   });
 
   describe('isValidDOB', function () {
-    it('should not accept dates in wrong format', function () {
-      var validDOB = isValidDOB('2021-08-1d');
-      expect(validDOB).toBe(false);
-    });
-
-    it('should not accept future dates', function () {
-      var validDOB = isValidDOB('3001-08-11');
-      expect(validDOB).toBe(false);
-    });
-
-
-    it('should not accept dates when day is bigger ten 31', function () {
-      var validDOB = isValidDOB('1990-08-32');
-      expect(validDOB).toBe(false);
-    });
-
-    it('should not accept dates when month is bigger ten 12', function () {
-      var validDOB = isValidDOB('1990-13-31');
-      expect(validDOB).toBe(false);
-    });
-
-    it('should not accept years below 1800', function () {
-      var validDOB = isValidDOB('1799-08-31');
-      expect(validDOB).toBe(false);
-    });
-
-    it('should accept correct date', function () {
-      var validDOB = isValidDOB('1990-08-31');
-      expect(validDOB).toBe(true);
+    it('should accept both format of DD/MM/YYYY and YYYY-MM-DD', function () {
+      var aussieFormat = isValidDOB('30/12/1988');
+      var isoFormat = isValidDOB('1988-12-30');
+      var bothValid = aussieFormat && isoFormat;
+      expect(bothValid).toBe(true);
     });
 
     it('should accept date with single digit day or month', function () {
-      var validDOB = isValidDOB('1990-1-1');
-      expect(validDOB).toBe(true);
+      var aussieFormat = isValidDOB('1/9/1988');
+      var isoFormat = isValidDOB('1988-9-1');
+      var bothValid = aussieFormat && isoFormat;
+      expect(bothValid).toBe(true);
     });
 
-    it('should parse date correctly', function () {
-      var date = parsedDate({year: 1990, month: 11, day: 20});
-      var expectedDate = new Date('1990/11/20');
-      expect(date).toEqual(expectedDate);
+    it('should not accept dates in wrong format', function () {
+      var aussieFormat = isValidDOB('3d/12/1988');
+      var isoFormat = isValidDOB('1988-12-3d');
+      var eitherIsValid = aussieFormat || isoFormat;
+      expect(eitherIsValid).toBe(false);
+    });
+
+    it('should not accept future dates', function () {
+      var aussieFormat = isValidDOB('30/12/3988');
+      var isoFormat = isValidDOB('3988-12-30');
+      var eitherIsValid = aussieFormat || isoFormat;
+      expect(eitherIsValid).toBe(false);
+    });
+
+    it('should not accept dates when day is bigger ten 31', function () {
+      var aussieFormat = isValidDOB('32/12/1988');
+      var isoFormat = isValidDOB('1988-12-32');
+      var eitherIsValid = aussieFormat || isoFormat;
+      expect(eitherIsValid).toBe(false);
+    });
+
+    it('should not accept dates when month is bigger ten 12', function () {
+      var aussieFormat = isValidDOB('32/13/1988');
+      var isoFormat = isValidDOB('1988-13-32');
+      var eitherIsValid = aussieFormat || isoFormat;
+      expect(eitherIsValid).toBe(false);
     });
 
   });

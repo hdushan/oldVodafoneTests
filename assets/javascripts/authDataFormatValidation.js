@@ -39,36 +39,19 @@ function dataEntered(idString) {
   return $.trim( $(idString).val() );
 }
 
-function extractDate(dateString) {
-  var parts = dateString.split('-');
-  var year = parseInt(parts[0]);
-  var month = parseInt(parts[1]);
-  var day = parseInt(parts[2]);
-  return {year: year, month: month, day: day};
-};
-
-function parsedDate(dateHash) {
-  return new Date(dateHash.year, dateHash.month - 1, dateHash.day);
+function parsedDateString(dateString) {
+  return moment(dateString, ['DD/MM/YYYY', 'YYYY-MM-DD'], true);
 }
-
-function isFuture(date) {
-  var now = new Date();
-  return parsedDate(date) > now;
+function isFuture(dateString) {
+  return parsedDateString(dateString).isAfter();
 };
 
 function isInDateFormat(dateString) {
-  var dobFormat = /^\d{4}-\d{1,2}-\d{1,2}$/;
-  return dobFormat.test(dateString)
-};
-
-function isInCorrectRange(date) {
-  return date.day <= 31 && date.month <= 12 && date.year >= 1800;
+  return parsedDateString(dateString).isValid();
 };
 
 function isValidDOB(dateString) {
-  var date = extractDate(dateString);
   return isInDateFormat(dateString)
-      && !isFuture(date)
-      && isInCorrectRange(date);
+      && !isFuture(dateString);
 };
 
