@@ -31,7 +31,7 @@ function validForm() {
 }
 
 function isValidEmail(string) {
-  var emailFormat = /^\S+@\S+\.\S+$/i;
+  var emailFormat = /^[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}$/;
   return emailFormat.test(string);
 }
 
