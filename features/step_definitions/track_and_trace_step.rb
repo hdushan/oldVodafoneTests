@@ -37,6 +37,11 @@ Then(/^the order id is not editable$/) do
   find('form#auth-form input#tracking_id').disabled?.should be_true
 end
 
+Then(/^I am asked to authenticate by providing my email address$/) do
+  find('form#auth-form input#email').disabled?.should be_false
+  expect(page).to have_no_css("#date-of-birth")
+end
+
 def setup_fulfulment_service_stub order_id, return_value
   unless ENV['RAILS_ENV'] == 'paas-qa'
     ff_client = double('ff_client')

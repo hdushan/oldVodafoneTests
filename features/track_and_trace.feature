@@ -8,6 +8,7 @@ Feature: View Order Status
     When I click on the link to see order details
     Then I should see the authentication form
     And the order id is not editable
+	And I am asked to authenticate by providing my email address
 
   @javascript
   Scenario: View status of an order that doesnt exist
