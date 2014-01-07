@@ -42,6 +42,3 @@ server_log
 
 # cucumber artifacts
 cucumber.json*
-
-# bourbon
-assets/stylesheets/bourbon/
