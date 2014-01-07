@@ -1,0 +1,57 @@
+// re-assert style overriden by our resets
+
+.vca-layout-mobile {
+	font-size: 15px;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+.vca-layout-mobile .vha-vca-hd {
+	a {
+		display: inline;
+	}
+}
+
+#vha-vca .vca-layout-mobile .vha-vca-hd .search-bar .search-bar-inner input,
+.vca-layout-mobile .vha-vca-nav dl dt a {
+	box-sizing: content-box;
+}
+
+// re-assert the mobile menu CSS which otherwise gets overidden by the desktop maga
+// menu CSS
+
+#vha-vca .vha-vca-btn.vha-vca-btn-silver {
+	margin-right: 0;
+	margin-bottom: 0
+}
+
+// below is a hack to get the slide menu to work correctly for our site
+
+.search-application-container {
+	position: relative;
+	@include transition(left 0.2s ease-in-out);
+
+	&.search-application-mobile-nav-menu-displayed {
+		left: -263px;
+		@include transition(left 0.2s ease-in-out);
+
+		.vca-layout-mobile .mask {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			z-index: 100000;
+		}
+	}
+}
+
+#vha-vca .vca-layout-mobile .vha-vca-nav {
+	position: absolute;
+	height: 100%;
+}
+
+// below is a hack to get the search drop-down working
+
+.container #vha-vca .vca-layout-mobile {
+	overflow: visible;
+}

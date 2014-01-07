@@ -44,8 +44,7 @@ end
 
 def setup_fulfulment_service_stub order_id, return_value
   unless ENV['RAILS_ENV'] == 'paas-qa'
-    ff_client = double('ff_client')
-    FulfilmentServiceProviderClient.stub(:new).and_return ff_client
+    ff_client = Capybara.app.instance_variable_get("@instance").instance_variable_get("@fulfilment_client")
     ff_client.stub(:get_order_status).with(order_id) { return_value }
   end
 end

@@ -1,10 +1,14 @@
 $normal_font_size: 12px;
 $container-width: 400px;
 
+@import 'views/bourbon/bourbon';
 @import "assets/stylesheets/_variables";
 @import "assets/stylesheets/_form";
-@import "assets/stylesheets/_header";
 @import "assets/stylesheets/_trace";
+
+@import "assets/stylesheets/mobile/mobile_menu_customisation";
+@import "assets/stylesheets/_footer_customisation";
+@import "assets/stylesheets/_header_customisation";
 
 .margin-wrapper {
   margin-left: 40px;
@@ -14,6 +18,7 @@ body{
   margin: 0;
   font-family: Helvetica;
   font-size: $normal_font_size;
+  background-color: $white;
 }
 
 .container {
@@ -37,7 +42,7 @@ h1 {
   margin: 0;
 }
 
-button {
+button.tnt-button {
   padding: $button-input-padding-vt .5em;
   color: $white;
   text-transform: uppercase;
@@ -47,7 +52,7 @@ button {
   font-size: inherit;
 }
 
-ul {
+ul.info {
   background: $off-white;
   border-radius: 5px;
   border: 1px solid #dcdcdc;

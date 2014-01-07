@@ -7,10 +7,13 @@ gem 'rake'
 gem 'haml'
 gem 'sass'
 gem 'httparty'
+gem 'useragent'
 
 gem 'newrelic_rpm'
 gem 'unicorn'
 gem 'dotenv-rails'
+gem 'bourbon'
+
 
 group :development, :test do
   gem 'shotgun'
@@ -22,9 +25,11 @@ group :development, :test do
   gem 'rspec'
   gem 'rack-test'
   gem 'rspec-html-matchers'
+  gem 'webmock'
 
   gem 'pry'
   gem 'pry-doc'
+  gem 'pry-rescue'
   gem 'cucumber'
   gem 'capybara'
   gem 'poltergeist'

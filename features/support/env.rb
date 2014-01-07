@@ -5,19 +5,19 @@ SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.use_merging false
 SimpleCov.start
 
-require_relative "../../app"
-
-require "capybara/cucumber"
-require "rspec/expectations"
-require "cucumber/rspec/doubles"
-require "capybara/poltergeist"
+require 'sass'
+require 'capybara/cucumber'
+require 'capybara/poltergeist'
 require 'phantomjs'
+require 'rspec/mocks/standalone'
+
+require_relative '../../app'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path)
 end
 
-path = ".env" + ( ["development"].include?(ENV['RACK_ENV']) ? "" : ".#{ENV['RACK_ENV']}")
+path = '.env' + ( ['development'].include?(ENV['RACK_ENV']) ? '' : ".#{ENV['RACK_ENV']}")
 Dotenv.load(path) if File.exists?(path)
 
 if ENV['RAILS_ENV'] == 'paas-qa'
@@ -27,7 +27,7 @@ if ENV['RAILS_ENV'] == 'paas-qa'
   Capybara.run_server = false
 else
   puts 'In LOCAL'
-  Capybara.app = Sinatra::Application
+  Capybara.app = App.new(MegaMenuAPIClient.new, double('ff_client'))
 end
 
 Capybara.javascript_driver = :poltergeist

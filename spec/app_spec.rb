@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe "Track & Trace App" do
+  let(:fulfilment_client) { double(FulfilmentServiceProviderClient) }
+
+  let(:mega_menu_client) do
+    mega_menu_client = double(MegaMenuAPIClient)
+    allow(mega_menu_client).to receive(:get_menu).and_return(MegaMenuAPIClient.empty_response)
+    mega_menu_client
+  end
+
+  let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   it "should respond to GET" do
     get '/tnt'
@@ -13,7 +22,7 @@ describe "Track & Trace App" do
     let(:fulfilment_response) { {} }
     let(:tracking_id) { 'vf123' }
     before do
-      FulfilmentServiceProviderClient.any_instance.stub(:get_order_status).with(tracking_id) do |arg|
+      fulfilment_client.stub(:get_order_status).with(tracking_id) do |arg|
         fulfilment_response
       end
     end

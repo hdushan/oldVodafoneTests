@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe "Authentication form" do
+  let(:fulfilment_client) { double(FulfilmentServiceProviderClient) }
+  let(:mega_menu_client) { mega_menu_mock }
+  let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   subject do
     get url

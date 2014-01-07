@@ -1,22 +1,22 @@
 require_relative '../../lib/fulfilment_service_provider_client.rb'
 require_relative 'pact_helper.rb'
-
-
+require_relative '../test_helper'
 describe FulfilmentServiceProviderClient, :pact => true do
+  let(:mega_menu_client) { mega_menu_mock }
+  let(:fulfilment_client) { FulfilmentServiceProviderClient.new }
+  let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   before do
-    # Configure your client to point to the stub service on localhost using the port you have specified
     FulfilmentServiceProviderClient.base_uri 'localhost:1234'
   end
 
-  describe "get_order_status for non existing order id" do
-
+  describe 'get_order_status for non existing order id' do
     let(:response_body) { { 'error' => 'ORDER_NOT_FOUND' } }
 
     before do
       fulfilment_service_provider
       .given("order with number 123 don't exists")
-      .upon_receiving("a request for orderd status")
+      .upon_receiving('a request for orderd status')
       .with( method: :get, path: '/order/123' )
       .will_respond_with(
         status: 404,
@@ -31,7 +31,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
   end
 
-  describe "get_order_status for existing order id" do
+  describe 'get_order_status for existing order id' do
 
     let(:response_body) {
       {
@@ -43,8 +43,8 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     before do
       fulfilment_service_provider
-      .given("order with number 456 exists and completed")
-      .upon_receiving("a request for orderd status")
+      .given('order with number 456 exists and completed')
+      .upon_receiving('a request for order status')
       .with( method: :get, path: '/order/456' )
       .will_respond_with(
         status: 200,
@@ -53,7 +53,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
       )
     end
 
-    it "returns a order status" do
+    it 'returns a order status' do
       expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq(response_body)
     end
 

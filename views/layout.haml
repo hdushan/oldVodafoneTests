@@ -1,21 +1,29 @@
 !!!
-!= css :application
-!= js :application
-
 %html
   %head
     %title Track and trace
-    %meta{ name: "viewport", content: "width=device-width, user-scalable=no"}
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"}/
     <!--[if lt IE 9]>
     %script{ src: '/js/vendor/html5shiv.js' }
     <![endif]-->
 
     <!--[if lte IE 9]>
-    %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie.css"}
+    %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie.css"}/
     %script{ src: '/js/vendor/ie/jquery.html5-placeholder-shim.js' }
     <![endif]-->
-  %body
-    = haml :_header
+
+    -@mega_menu['css'].each do |css_url|
+      %link{ :rel => :stylesheet, :type => :"text/css", :href => "#{css_url}"}
+    !=css :application
+
+  %body.tnt-body
+    =haml :_header
 
     .container
       = yield
+
+    =haml :_footer
+
+  -@mega_menu['js'].each do |js_url|
+    %script{ :src => "#{js_url}"}
+  != js :application
