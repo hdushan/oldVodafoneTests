@@ -22,29 +22,39 @@ class MegaMenuAPIClient
 
   private
     def get_specific_menu(params)
-      menu = {}
-      %w(footer header).each do |name|
-        t = Thread.new do
-          menu[name] = get_menu_part(params, name)
-        end
-        t.join
-      end
-
-      menu['header'].merge(menu['footer']) { |key, old_val, new_val| old_val + new_val }
+      menu_sections = {}
+      pull_menu_sections(menu_sections, params)
+      merge_menu_sections(menu_sections)
     end
 
-    def get_menu_part(params, menu_part_name)
-      menu_part_params = params[menu_part_name]
+    def pull_menu_sections(menu_sections, params)
+      params.keys.each do |name|
+        Thread.new do
+          menu_sections[name] = get_menu_section(name, params)
+        end.join
+      end
+    end
+
+    def merge_menu_sections(menu)
+      menu.values.inject({}) { |result, element| result.merge!(element) { |key, old_val, new_val| old_val + new_val } }
+    end
+
+    def get_menu_section(menu_section_name, params)
+      menu_section_params = params[menu_section_name]
       begin
-        response_json = get_response_json(menu_part_params['url'])
-        {
-            "#{menu_part_name}_html" => extract_html(response_json),
-            'css' => menu_part_params['css_names'].flat_map { |css_file_name| collect_uri(extract_by_name(response_json, css_file_name))},
-            'js' => menu_part_params['js_names'].flat_map { |js_file_name| collect_uri(extract_by_name(response_json, js_file_name)) }
-        }
+        response_json = get_response_json(menu_section_params['url'])
+        extract_menu_section_from_response(menu_section_name, menu_section_params, response_json)
       rescue
         MegaMenuAPIClient.empty_response
       end
+    end
+
+    def extract_menu_section_from_response(menu_part_name, menu_part_params, response_json)
+      {
+          "#{menu_part_name}_html" => extract_html(response_json),
+          'css' => menu_part_params['css_names'].flat_map { |css_file_name| collect_uri(extract_by_name(response_json, css_file_name)) },
+          'js' => menu_part_params['js_names'].flat_map { |js_file_name| collect_uri(extract_by_name(response_json, js_file_name)) }
+      }
     end
 
     def get_response_json(url)
