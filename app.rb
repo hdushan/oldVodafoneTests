@@ -6,7 +6,7 @@ require 'user_agent'
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
 require_relative 'lib/app_helper'
-require_relative 'lib/mega_menu_api_client'
+require_relative 'lib/mega_menu/mega_menu_api_client'
 
 
 class App < Sinatra::Base

@@ -8,7 +8,6 @@ SimpleCov.start
 require 'rspec'
 require 'rack/test'
 require File.expand_path '../../app.rb', __FILE__
-require_relative '../lib/mega_menu_api_client'
 
 def app
   App.new nil, nil

@@ -12,6 +12,7 @@ require 'phantomjs'
 require 'rspec/mocks/standalone'
 
 require_relative '../../app'
+require_relative '../../lib/mega_menu/mega_menu_api_client'
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path)

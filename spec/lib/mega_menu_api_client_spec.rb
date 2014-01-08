@@ -2,7 +2,7 @@ require 'rspec'
 require 'webmock/rspec'
 require 'pry'
 
-require_relative '../../lib/mega_menu_api_client'
+require_relative '../../lib/mega_menu/mega_menu_api_client'
 
 describe 'Mega menu API client' do
   context 'user using desktop browser' do
