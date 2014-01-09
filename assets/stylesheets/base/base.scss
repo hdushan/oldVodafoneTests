@@ -1,0 +1,12 @@
+@import '../bourbon/bourbon';
+@import "_variables";
+@import "_form";
+@import "_trace";
+@import "style";
+
+// Make animations use 3d acceleration
+%smoother-animation {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}

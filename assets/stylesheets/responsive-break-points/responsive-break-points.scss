@@ -1,0 +1,15 @@
+$tablet-min-width: 760px;
+$tablet-max-width: 959px;
+$desktop-min-width: 960px;
+
+@media only screen and (min-width: $tablet-min-width) {
+  @import "../tablet-upwards/tablet-upwards";
+}
+
+@media only screen and (min-width: $tablet-min-width) and (max-width: $tablet-max-width) {
+  @import "../tablet-only/tablet-only";
+}
+
+@media only screen and (min-width: $desktop-min-width) {
+  @import "../desktop-upwards/desktop-upwards";
+}

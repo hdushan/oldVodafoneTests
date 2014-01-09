@@ -1,15 +1,6 @@
 $normal_font_size: 12px;
 $container-width: 400px;
 
-@import 'assets/stylesheets/bourbon/bourbon';
-@import "assets/stylesheets/_variables";
-@import "assets/stylesheets/_form";
-@import "assets/stylesheets/_trace";
-
-@import "assets/stylesheets/mobile/mobile_menu_customisation";
-@import "assets/stylesheets/_footer_customisation";
-@import "assets/stylesheets/_header_customisation";
-
 .margin-wrapper {
   margin-left: 40px;
 }
@@ -22,6 +13,10 @@ body{
 }
 
 .container {
+  margin: 0 auto;
+}
+
+.tnt-container {
   margin: 0 auto;
   max-width: $container-width;
 }

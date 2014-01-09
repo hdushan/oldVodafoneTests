@@ -17,12 +17,13 @@
     !=css :application
 
   %body.tnt-body
-    =haml :_header
-
     .container
-      = yield
+      =haml :_header
+      .tnt-container
+        =yield
+      =haml :_footer
 
-    =haml :_footer
+
 
   -@mega_menu['js'].each do |js_url|
     %script{ :src => "#{js_url}"}
