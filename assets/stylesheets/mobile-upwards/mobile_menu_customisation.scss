@@ -30,7 +30,7 @@
 	position: relative;
 	@include transition(left 0.2s ease-in-out);
 
-	&.search-application-mobile-nav-menu-displayed {
+	&.mobile-nav-menu-displayed {
 		left: -263px;
 		@include transition(left 0.2s ease-in-out);
 
