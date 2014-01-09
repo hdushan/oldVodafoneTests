@@ -35,8 +35,8 @@ class MegaMenuAPIClient
       end
     end
 
-    def merge_menu_sections(menu)
-      menu.values.inject({}) { |result, element| result.merge!(element) { |key, old_val, new_val| old_val + new_val } }
+    def merge_menu_sections(menu_sections)
+      menu_sections.values.inject({}) { |result, element| result.merge!(element) { |key, old_val, new_val| old_val + new_val } }
     end
 
     def get_menu_section(menu_section_name, params)
@@ -51,9 +51,9 @@ class MegaMenuAPIClient
 
     def extract_menu_section_from_response(menu_part_name, menu_part_params, response_json)
       {
-          "#{menu_part_name}_html" => extract_html(response_json),
-          'css' => menu_part_params['css_names'].flat_map { |css_file_name| collect_uri(extract_by_name(response_json, css_file_name)) },
-          'js' => menu_part_params['js_names'].flat_map { |js_file_name| collect_uri(extract_by_name(response_json, js_file_name)) }
+        "#{menu_part_name}_html" => extract_html(response_json),
+        'css' => menu_part_params['css_names'].flat_map { |css_file_name| collect_uri(extract_by_name(response_json, css_file_name)) },
+        'js' => menu_part_params['js_names'].flat_map { |js_file_name| collect_uri(extract_by_name(response_json, js_file_name)) }
       }
     end
 
@@ -70,6 +70,15 @@ class MegaMenuAPIClient
     end
 
     def extract_by_name(json, name)
-      json[0]['resource'].select { |res| res.key?('name') && res['name'] == name }
+      resource = json[0]['resource']
+      if resource.class == Array
+        resource.select { |res| res.key?('name') && res['name'] == name }
+      elsif resource.class == Hash
+        if resource['name'] == name
+          [resource]
+        else
+          []
+        end
+      end
     end
 end
