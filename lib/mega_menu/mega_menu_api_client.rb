@@ -5,6 +5,7 @@ require_relative 'mega_menu_params'
 class MegaMenuAPIClient
   include HTTParty
   base_uri 'https://www.vodafone.com.au/rest/SharedContent?name:contains='
+  default_timeout 10
 
   def get_menu(is_mobile_user)
     get_specific_menu(mega_menu_params[is_mobile_user ? 'mobile' : 'desktop'])
