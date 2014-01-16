@@ -35,7 +35,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-        'birth_date'        => '2013-07-31',
+        'date_of_birth'     => '2013-07-31',
         'status'            => 'Complete',
         'email'             => 'user@example.com'
       }
