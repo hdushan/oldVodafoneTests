@@ -33,14 +33,14 @@ describe "Track & Trace App" do
     end
 
     context 'invalid order id' do
-      let(:fulfilment_response) { { 'error' => 'INVALID_FORMAT'} }
+      let(:fulfilment_response) { { status: 400, 'error' => 'INVALID_FORMAT' } }
       let(:tracking_id) { 'INVALID' }
 
       its(:body) { should match /order id invalid/i }
     end
 
     context 'timeout error' do
-      let(:fulfilment_response) { { 'error' => 'FUSION_TIMEOUT'} }
+      let(:fulfilment_response) { { status: 400, 'error' => 'FUSION_TIMEOUT'} }
       let(:tracking_id) { 'TIMEOUT' }
 
       its(:body) { should match /system timeout/i }
@@ -48,7 +48,7 @@ describe "Track & Trace App" do
 
     context 'no error' do
       context 'fulfilment response with email or date of birth' do
-        let(:fulfilment_response) { { 'email' => 'abc@example.com'} }
+        let(:fulfilment_response) { { status: 400, body: {'email' => 'abc@example.com'} } }
 
         it 'should have authentication url' do
           subject.body.should include('Click here to see your order details')
@@ -57,7 +57,7 @@ describe "Track & Trace App" do
       end
 
       context 'fulfilment response without email or date of birth' do
-        let(:fulfilment_response) { { 'email' => nil, 'date_of_birth' => nil} }
+        let(:fulfilment_response) { { status: 400, body: {'email' => nil, 'date_of_birth' => nil} } }
 
         it 'should not have authentication url' do
           subject.body.should_not include('Click here to see your order details')

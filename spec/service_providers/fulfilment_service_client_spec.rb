@@ -26,7 +26,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq(response_body)
+      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq({status: 404, body: response_body})
     end
 
   end
@@ -54,9 +54,40 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it 'returns a order status' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq(response_body)
+      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq({ status: 200, body: response_body })
     end
 
+  end
+
+  describe 'get_order_status with empty order id' do
+
+    it 'returns a 400 error' do
+      expect(FulfilmentServiceProviderClient.new.get_order_status('')).to eq({ status: 400, 'error' => 'ORDER_ID_EMPTY' })
+    end
+  end
+
+  describe 'get_order_status exception handling' do
+    let(:unparseable_response_body) {
+      'Whoops, this is not JSON'
+    }
+
+    before do
+      fulfilment_service_provider
+      .given('an unexpected error in fusion')
+      .upon_receiving('a request for order status')
+      .with( method: :get, path: '/order/999' )
+      .will_respond_with(
+          status: 200,
+          headers: { 'Content-Type' => 'application/json;charset=utf-8' },
+          body: unparseable_response_body
+      )
+    end
+
+    it 'reports the exception message' do
+      expect(FulfilmentServiceProviderClient.new.get_order_status('999')).to eq(
+        { status: 500,
+          'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'" })
+    end
   end
 
 end

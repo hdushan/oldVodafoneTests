@@ -37,10 +37,14 @@ class App < Sinatra::Base
 
     if(status_details.key? 'error')
       @error = error_message[status_details['error']]
+      logger.error("Error: #{@error}")
+      logger.error("Status: #{status_details[:status]}")
+      logger.error("Message: #{status_details[:message]}") if status_details[:message]
+      logger.error("Body: #{status_details[:body]}") if status_details[:body]
       haml :track_form
     else
-      @auth_url = generate_auth_url status_details, @order_id
-      haml :order_status, :locals => { :details => status_details }
+      @auth_url = generate_auth_url status_details[:body], @order_id
+      haml :order_status, :locals => { :details => status_details[:body] }
     end
   end
 
@@ -54,7 +58,7 @@ class App < Sinatra::Base
     haml :auth_form
   end
 
-  # TODO: temparary route to see the styled order status page
+  # TODO: temporary route to see the styled order status page
   get '/trace' do
     haml :trace_styled_standalone
   end
