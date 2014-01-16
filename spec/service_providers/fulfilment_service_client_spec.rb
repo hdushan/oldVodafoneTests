@@ -15,7 +15,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     before do
       fulfilment_service_provider
-      .given("order with number 123 don't exists")
+      .given("order with number 123 doesn't exist")
       .upon_receiving('a request for order status')
       .with( method: :get, path: '/order/123' )
       .will_respond_with(
