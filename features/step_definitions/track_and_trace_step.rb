@@ -3,17 +3,17 @@ Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
 end
 
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
-  setup_fulfulment_service_stub(order_id, {'error' => "ORDER_NOT_FOUND"} )
+  setup_fulfilment_service_stub(order_id, {status: 500, 'error' => "ORDER_NOT_FOUND"} )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfulment_service_stub(order_id, {'status' => "Complete", 'email' => 'valid@example.com'} )
+  setup_fulfilment_service_stub(order_id, {status: 200, body: {'status' => "Complete", 'email' => 'valid@example.com'} } )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of an order with id '(.*)' that timed out$/) do |order_id|
-  setup_fulfulment_service_stub(order_id, {'error' => "FUSION_TIMEOUT"} )
+  setup_fulfilment_service_stub(order_id, {status: 500, 'error' => "FUSION_TIMEOUT"} )
   submit_track_form_with order_id
 end
 
@@ -42,7 +42,7 @@ Then(/^I am asked to authenticate by providing my email address$/) do
   expect(page).to have_no_css("#date-of-birth")
 end
 
-def setup_fulfulment_service_stub order_id, return_value
+def setup_fulfilment_service_stub order_id, return_value
   unless ENV['RAILS_ENV'] == 'paas-qa'
     ff_client = Capybara.app.instance_variable_get("@instance").instance_variable_get("@fulfilment_client")
     ff_client.stub(:get_order_status).with(order_id) { return_value }
