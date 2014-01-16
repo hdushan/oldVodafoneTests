@@ -16,7 +16,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     before do
       fulfilment_service_provider
       .given("order with number 123 don't exists")
-      .upon_receiving('a request for orderd status')
+      .upon_receiving('a request for order status')
       .with( method: :get, path: '/order/123' )
       .will_respond_with(
         status: 404,
@@ -35,9 +35,9 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-        'order_date'        => '2013-07-31',
-        'last_updated_date' => '2013-07-31',
-        'status'            => 'Complete'
+        'birth_date'        => '2013-07-31',
+        'status'            => 'Complete',
+        'email'             => 'user@example.com'
       }
     }
 
