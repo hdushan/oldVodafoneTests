@@ -46,6 +46,13 @@ describe "Track & Trace App" do
       its(:body) { should match /system timeout/i }
     end
 
+    context 'order not found' do
+      let(:fulfilment_response) { { status: 404, 'error' => 'ORDER_NOT_FOUND'} }
+      let(:tracking_id) { 'NOTFOUND' }
+
+      its(:body) { should match /order not found/i }
+    end
+
     context 'no error' do
       context 'fulfilment response with email or date of birth' do
         let(:fulfilment_response) { { status: 400, body: {'email' => 'abc@example.com'} } }

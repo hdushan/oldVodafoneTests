@@ -12,7 +12,12 @@ class FulfilmentServiceProviderClient
     else
       begin
         response = self.class.get("/order/#{order_id}")
-        { status: response.code, body: JSON.parse(response.body) }
+        body = response.body
+        reply = {status: response.code}
+        error_hash = body['error']
+        reply.store('error', error_hash['error']) if error_hash
+        reply.store(:body, JSON.parse(body))
+        reply
       rescue Exception => ex
         { status: 500, 'error' => 'INTERNAL_ERROR', message: ex.message }
       end
