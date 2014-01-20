@@ -57,18 +57,8 @@ describe "Track & Trace App" do
       context 'fulfilment response with email or date of birth' do
         let(:fulfilment_response) { { status: 400, body: {'email' => 'abc@example.com'} } }
 
-        it 'should have authentication url' do
-          subject.body.should include('Click here to see your order details')
-          subject.body.should include("/auth?order_id=#{tracking_id}&authType=email")
-        end
-      end
-
-      context 'fulfilment response without email or date of birth' do
-        let(:fulfilment_response) { { status: 400, body: {'email' => nil, 'date_of_birth' => nil} } }
-
-        it 'should not have authentication url' do
+        it 'should not have details text' do
           subject.body.should_not include('Click here to see your order details')
-          subject.body.should_not include("/auth?order_id")
         end
       end
     end

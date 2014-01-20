@@ -19,7 +19,7 @@ class App < Sinatra::Base
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
   end
 
-  before /^\/(tnt|track|auth)$/  do
+  before /^\/(tnt|track)$/  do
     logger.info('Getting the Mega Menu')
     @is_mobile_user = UserAgent.parse(request.user_agent).mobile?
     @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
@@ -43,24 +43,8 @@ class App < Sinatra::Base
       logger.error("Body: #{status_details[:body]}") if status_details[:body]
       haml :track_form
     else
-      @auth_url = generate_auth_url status_details[:body], @order_id
       haml :order_status, :locals => { :details => status_details[:body] }
     end
-  end
-
-  get '/auth' do
-    @order_id = params[:order_id]
-    redirect '/tnt' if @order_id.nil? || !['email', 'dob'].include?(params[:authType])
-
-    @auth_email = params[:authType] == 'email'
-    @auth_birthday = params[:authType] == 'dob'
-
-    haml :auth_form
-  end
-
-  # TODO: temporary route to see the styled order status page
-  get '/trace' do
-    haml :trace_styled_standalone
   end
 
   get '/env' do

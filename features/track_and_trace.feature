@@ -5,11 +5,6 @@ Feature: View Order Status
     When I search for the status of a valid order with id 'VF1FOUND123'
     Then I should see the tracking status for the order 'VF1FOUND123'
 
-    When I click on the link to see order details
-    Then I should see the authentication form
-    And the order id is not editable
-	And I am asked to authenticate by providing my email address
-
   @javascript
   Scenario: View status of an order that doesnt exist
     Given I am on the Track and Trace Home page '/tnt'

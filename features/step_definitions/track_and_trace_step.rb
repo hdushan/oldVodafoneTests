@@ -17,29 +17,12 @@ When(/^I search for the status of an order with id '(.*)' that timed out$/) do |
   submit_track_form_with order_id
 end
 
-When(/^I click on the link to see order details$/) do
-  click_link 'Click here to see your order details'
-end
-
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
   expect(page).to have_content('Complete')
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
   expect(page).to have_content(error_message)
-end
-
-Then(/^I should see the authentication form$/) do
-  expect(page).to have_css("form#auth-form")
-end
-
-Then(/^the order id is not editable$/) do
-  find('form#auth-form input#tracking_id').disabled?.should be_true
-end
-
-Then(/^I am asked to authenticate by providing my email address$/) do
-  find('form#auth-form input#email').disabled?.should be_false
-  expect(page).to have_no_css("#date-of-birth")
 end
 
 def setup_fulfilment_service_stub order_id, return_value
