@@ -8,7 +8,7 @@ When(/^I search for the status of an order with id '(.*)' that does not exist$/)
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, {status: 200, body: {'status' => "Complete", 'email' => 'valid@example.com'} } )
+  setup_fulfilment_service_stub(order_id, {status: 200, body: {'status' => "Submitted", 'email' => 'valid@example.com'} } )
   submit_track_form_with order_id
 end
 
@@ -22,7 +22,7 @@ When(/^I click on the link to see order details$/) do
 end
 
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
-  expect(page).to have_content('Complete')
+  expect(page).to have_content('Submitted')
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
