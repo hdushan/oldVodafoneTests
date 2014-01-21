@@ -40,7 +40,7 @@ safe_load('jmeter') do
     if ENV['RAILS_ENV'] == 'paas-qa'
       puts "Running on PAAS-QA"
       server_protocol = "http"
-      server_address = "trackandtrace-qa.np.syd.services.vodafone.com.au"
+      server_address = "trackandtrace.qa.np.syd.services.vodafone.com.au"
       server_port = "80"
       server_url = "tnt"
       warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
