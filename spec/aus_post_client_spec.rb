@@ -10,17 +10,14 @@ describe AusPostClient do
 
       it 'should return data from the auspost' do
         stub_request(:get, "https://anonymous%40auspost.com.au:password@devcentre.auspost.com.au/myapi/QueryTracking.xml?q=CZ299999784AU")
-        .with(:headers => {'Cookie'=>'OBBasicAuth=fromDialog'})
-        .to_return(:status => 200, :body => successful_response1,
-                   :headers => {"Content-Type" => "application/xml;version=1\r\n"})
+          .with(:headers => {'Cookie'=>'OBBasicAuth=fromDialog'})
+          .to_return(:status => 200, :body => successful_response1,
+                     :headers => {"Content-Type" => "application/xml;version=1\r\n"})
 
         response = client.track('CZ299999784AU')
 
-        expect(response[:body]["ArticleDetails"]["ProductName"]).to eq('International')
-        expect(response[:body]["ArticleDetails"]["EventNotification"]).to eq('00')
-        expect(response[:body]["ArticleDetails"]["EventCount"]).to eq('0')
+        expect(response['international']).to be_true
       end
-
     end
 
     context 'and domestic events are returned' do
@@ -34,11 +31,10 @@ describe AusPostClient do
 
         response = client.track('12345')
 
-        expect(response[:body]["ArticleDetails"]["Status"]).to eq('Delivered')
-        expect(
-            response[:body]["ArticleDetails"]["Events"]["Event"].map { |event| event["Location"] }
-          ).to eq(["224952 work centre","224952 work centre","PROP - PROPERTY DEVELOPMENTS"])
-        expect(response[:body]["ArticleDetails"]["EventCount"]).to eq('3')
+        expect(response['international']).to be_false
+        expect(response['status']).to eq('Delivered')
+        expect(response['events'].map { |event| event['description'] }).to eq(['Delivered','Delivered','Delivered'])
+        expect(response['events'].map { |event| event['location'] }).to eq(["224952 work centre","224952 work centre","PROP - PROPERTY DEVELOPMENTS"])
       end
     end
   end
@@ -50,10 +46,9 @@ describe AusPostClient do
           .to_return(:status => 401, :body => 'This request requires HTTP authentication (Bad credentials)',
                      :headers => {"Content-Type" => "text/html;charset=utf-8"})
 
-      response = client.track('CZ299999784AU')
-
-      expect(response[:status]).to eq(401)
-      expect(response[:error]).to eq('This request requires HTTP authentication (Bad credentials)')
+      expect {
+        client.track('CZ299999784AU')
+      }.to raise_error /This request requires HTTP authentication/
     end
   end
 
@@ -65,11 +60,9 @@ describe AusPostClient do
             .with(:headers => {'Cookie'=>'OBBasicAuth=fromDialog'})
             .to_return(:status => 200, :body => invalid_id_response,
                        :headers => {"Content-Type" => "application/xml;version=1\r\n"})
-
-      response = client.track('123')
-
-      expect(response[:status]).to eq("1401")
-      expect(response[:error]).to eq('Invalid tracking ID')
+      expect {
+        client.track('123')
+      }.to raise_error /Invalid tracking ID/
     end
   end
 
@@ -81,10 +74,9 @@ describe AusPostClient do
                     .to_return(:status => 503,
                                :headers => {"Content-Type" => "text/xml"})
 
-      response = client.track('CZ299991784AU')
-
-      expect(response[:status]).to eq(503)
-      expect(response[:error]).to eq('Service Unavailable or Consignment ID is not valid')
+      expect {
+        client.track('CZ299991784AU')
+      }.to raise_error /Service Unavailable or Consignment ID is not valid/
     end
 
   end
