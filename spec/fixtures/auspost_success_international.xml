@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryTrackEventsResponse xmlns="http://api.auspost.com.au/Tracking:v1">
+  <TrackingResult>
+    <TrackingID>CZ299999784AU</TrackingID>
+    <ArticleDetails>
+      <ArticleID>CZ299999784AU</ArticleID>
+      <EventNotification>00</EventNotification>
+      <ProductName>International</ProductName>
+      <EventCount>0</EventCount>
+    </ArticleDetails>
+  </TrackingResult>
+</QueryTrackEventsResponse>

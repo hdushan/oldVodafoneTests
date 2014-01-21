@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryTrackEventsResponse xmlns="http://api.auspost.com.au/Tracking:v1">
+  <TrackingResult>
+    <TrackingID>12345</TrackingID>
+    <ArticleDetails>
+      <ArticleID>12345</ArticleID>
+      <Status>Delivered</Status>
+      <EventCount>3</EventCount>
+      <Events>
+        <Event>
+          <EventDescription>Delivered</EventDescription>
+          <EventDateTime>2010-06-21T12:21:12+10:00</EventDateTime>
+          <Location>224952 work centre</Location>
+        </Event>
+        <Event>
+          <EventDescription>Delivered</EventDescription>
+          <EventDateTime>2010-06-21T12:12:12+10:00</EventDateTime>
+          <Location>224952 work centre</Location>
+        </Event>
+        <Event>
+          <EventDescription>Delivered</EventDescription>
+          <EventDateTime>2008-12-10T12:12:12+11:00</EventDateTime>
+          <Location>PROP - PROPERTY DEVELOPMENTS</Location>
+          <SignerName>A POST</SignerName>
+        </Event>
+      </Events>
+    </ArticleDetails>
+  </TrackingResult>
+</QueryTrackEventsResponse>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryTrackEventsResponse xmlns="http://api.auspost.com.au/Tracking:v1">
+  <TrackingResult>
+    <TrackingID>123</TrackingID>
+    <BusinessException>
+      <Code>1401</Code>
+      <Description>Invalid tracking ID</Description>
+    </BusinessException>
+  </TrackingResult>
+</QueryTrackEventsResponse>
