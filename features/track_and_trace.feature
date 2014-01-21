@@ -2,8 +2,8 @@ Feature: View Order Status
   @javascript
   Scenario: View status and details of an order
     Given I am on the Track and Trace Home page '/tnt'
-    When I search for the status of a valid order with id 'VF1FOUND123'
-    Then I should see the tracking status for the order 'VF1FOUND123'
+    When I search for the status of a valid order with id 'VF123FOUND'
+    Then I should see the tracking status for the order 'VF123FOUND'
 
   @javascript
   Scenario: View status of an order that doesnt exist
