@@ -131,7 +131,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="tracking_id" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">UP${__RandomString(3,abcdefghij1234567890)}FOUND</stringProp>
+                <stringProp name="Argument.value">UP${__RandomString(4,abcdefghij1234567890)}LOADFOUND</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">tracking_id</stringProp>
@@ -282,7 +282,7 @@
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="1334691203">Order not found</stringProp>
+              <stringProp name="-188109835">not found</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
