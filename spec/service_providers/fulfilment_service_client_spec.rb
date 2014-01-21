@@ -11,7 +11,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
   end
 
   describe 'get_order_status for non existing order id' do
-    let(:response_body) { { 'response_status' => 404, 'error' => { 'error' => 'ORDER_NOT_FOUND'} } }
+    let(:response_body) { { 'error' => 'ORDER_NOT_FOUND'} }
 
     before do
       fulfilment_service_provider
@@ -26,8 +26,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it "returns a order status" do
-      #TODO This should return 'error' => 'ORDER_NOT_FOUND'
-      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq({status: 404, 'error' => 'error', body: response_body})
+      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq({status: 404, 'error' => 'ORDER_NOT_FOUND'})
     end
 
   end
