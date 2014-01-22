@@ -1,0 +1,9 @@
+{"QueryTrackEventsResponse": {
+    "TrackingResult": {
+        "TrackingID": 123,
+        "BusinessException": {
+            "Code": 1401,
+            "Description": "Invalid tracking ID"
+        }
+    }
+}}

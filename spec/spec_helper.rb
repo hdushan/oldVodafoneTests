@@ -28,3 +28,8 @@ end
 def response
   @response
 end
+
+def httparty_response(filename)
+  parsed_response = HTTParty::Parser.call(File.read(filename), :json)
+  OpenStruct.new(parsed_response: parsed_response, code: 200)
+end

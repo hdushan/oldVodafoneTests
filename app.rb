@@ -5,6 +5,7 @@ require 'user_agent'
 
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
+require_relative 'lib/auspost/auspost_response'
 require_relative 'lib/aus_post_client'
 require_relative 'lib/app_helper'
 require_relative 'lib/mega_menu/mega_menu_api_client'

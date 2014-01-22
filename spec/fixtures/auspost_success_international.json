@@ -1,0 +1,11 @@
+{"QueryTrackEventsResponse": {
+    "TrackingResult": {
+        "TrackingID": "CZ299999784AU",
+        "ArticleDetails": {
+            "ArticleID": "CZ299999784AU",
+            "EventNotification": "00",
+            "ProductName": "International",
+            "EventCount": 0
+        }
+    }
+}}
