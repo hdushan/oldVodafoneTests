@@ -10,7 +10,6 @@ require_relative 'lib/aus_post_client'
 require_relative 'lib/app_helper'
 require_relative 'lib/mega_menu/mega_menu_api_client'
 
-
 class App < Sinatra::Base
   include Assets
   enable :logging
@@ -31,6 +30,12 @@ class App < Sinatra::Base
   get '/tnt' do
     logger.info('Tnt request received')
     haml :track_form
+  end
+
+  get '/tnt/:id' do
+    mega_menu
+    
+    halt 404, haml(:error)
   end
 
   post '/track' do

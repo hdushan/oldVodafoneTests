@@ -97,3 +97,24 @@ ul.info {
   }
 }
 
+.alert {
+  background-color: $alert-background-color;
+  border-radius: $global-border-radius;
+  padding: 10px 10px;
+  position: relative;
+
+  .icon {
+    float: left;
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  .msg {
+    display: block;
+    overflow: hidden;
+    padding-left: 0.5em;
+  }
+}
