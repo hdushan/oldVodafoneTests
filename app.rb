@@ -33,9 +33,15 @@ class App < Sinatra::Base
     haml :track_form
   end
 
+  post '/tnt' do
+    redirect "/tnt/#{params[:tracking_id].strip}"
+  end
+
   get '/tnt/:id' do
     mega_menu
 
+    # todo: needs more expressive errors coming out of this. I can't
+    # tell the difference between a not found and a timeout
     status_details = @fulfilment_client.get_order_status params[:id]
 
     if(status_details.key? 'error')

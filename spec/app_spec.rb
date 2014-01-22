@@ -20,6 +20,13 @@ describe "Track & Trace App" do
     it { should match /tracking number/i }
   end
 
+  describe 'POST /tnt' do
+    before { post '/tnt', tracking_id: 'abc' }
+
+    its(:status) { should eq 302 }
+    its(:location) { should end_with '/tnt/abc' }
+  end
+
   describe 'GET /tnt/:id' do
     before do
       fulfilment_client.stub(:get_order_status).with('abc') do |arg|
