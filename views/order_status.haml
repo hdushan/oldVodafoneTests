@@ -5,4 +5,7 @@
   -else
     %p= "#{key}: #{value}"
 
+
+= haml :_shipping_info, locals: { shipping_details: locals[:shipping_details]}
+
 = haml :_info_links

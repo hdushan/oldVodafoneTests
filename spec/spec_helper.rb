@@ -10,7 +10,7 @@ require 'rack/test'
 require File.expand_path '../../app.rb', __FILE__
 
 def app
-  App.new nil, nil
+  App.new nil, nil, nil
 end
 
 RSpec.configure do |config|

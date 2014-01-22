@@ -24,6 +24,7 @@ describe AusPostResponse do
         expect(auspost_response.status).to eq('Delivered')
         expect(auspost_response.events.map { |event| event['description'] }).to eq(['Delivered','Delivered','Delivered'])
         expect(auspost_response.events.map { |event| event['location'] }).to eq(["224952 work centre","224952 work centre","PROP - PROPERTY DEVELOPMENTS"])
+        expect(auspost_response.events.map { |event| event['date_time'] }).to eq(["21/06/2010 12:21PM", "21/06/2010 12:12PM", "10/12/2008 12:12PM"])
       end
     end
   end
