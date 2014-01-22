@@ -20,7 +20,7 @@ class App < Sinatra::Base
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
   end
 
-  before /^\/(tnt|track)$/  do
+  def mega_menu
     logger.info('Getting the Mega Menu')
     @is_mobile_user = UserAgent.parse(request.user_agent).mobile?
     @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
@@ -28,7 +28,8 @@ class App < Sinatra::Base
   end
 
   get '/tnt' do
-    logger.info('Tnt request received')
+    mega_menu
+
     haml :track_form
   end
 
@@ -39,6 +40,8 @@ class App < Sinatra::Base
   end
 
   post '/track' do
+    mega_menu
+
     @order_id = params[:tracking_id].strip
     status_details = @fulfilment_client.get_order_status(@order_id)
 
