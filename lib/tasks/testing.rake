@@ -25,7 +25,7 @@ safe_load('cucumber') do
 
   namespace :cucumber do
     Cucumber::Rake::Task.new(:default) do |t|
-      t.cucumber_opts = "features --format pretty --format json -o cucumber.json"
+      t.cucumber_opts = "features --tags ~@ignore --format pretty --format json -o cucumber.json"
     end
   end
 

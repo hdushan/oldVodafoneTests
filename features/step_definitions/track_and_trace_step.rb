@@ -1,5 +1,10 @@
 Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
   visit url
+  expect(page).to have_field('tracking_id')
+  steps %Q{
+    Then I should see the Megamenu header
+    Then I should see the Megamenu footer
+  }
 end
 
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
@@ -19,10 +24,26 @@ end
 
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
   expect(page).to have_content('Submitted')
+  steps %Q{
+    Then I should see the Megamenu header
+    Then I should see the Megamenu footer
+  }
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
   expect(page).to have_content(error_message)
+  steps %Q{
+    Then I should see the Megamenu header
+    Then I should see the Megamenu footer
+  }
+end
+
+Then(/^I should see the Megamenu header$/) do
+  expect(page).to have_content('Sign in to My Vodafone') #Megamenu Header
+end
+
+Then(/^I should see the Megamenu footer$/) do
+  expect(page).to have_content('About this site') #Megamenu footer
 end
 
 def setup_fulfilment_service_stub order_id, return_value
@@ -38,3 +59,5 @@ def submit_track_form_with order_id
   end
   click_button 'Trace your order'
 end
+
+
