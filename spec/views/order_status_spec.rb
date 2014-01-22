@@ -11,7 +11,7 @@ describe 'order_status.haml' do
     before { get '/tnt/abc' }
 
     its(:status) { should eq 404 }
-    its(:body) { should have_tag(:p, text: 'ARGH') }
+    its(:body) { should have_tag(:p, text: 'Order not found') }
   end
 
   context 'valid order id' do

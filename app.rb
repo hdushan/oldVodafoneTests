@@ -36,6 +36,7 @@ class App < Sinatra::Base
   get '/tnt/:id' do
     mega_menu
     
+    @error = 'Order not found'
     halt 404, haml(:error)
   end
 
