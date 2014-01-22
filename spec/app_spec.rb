@@ -11,58 +11,37 @@ describe "Track & Trace App" do
 
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
-  it "should respond to GET" do
-    get '/tnt'
-    last_response.should be_ok
-    last_response.should match /Tracking number/i
+  subject { last_response }
+
+  describe 'GET /tnt' do
+    before { get '/tnt' }
+
+    it { should be_ok }
+    it { should match /tracking number/i }
   end
 
-
-  describe "POST '/track'" do
-    let(:fulfilment_response) { {} }
-    let(:tracking_id) { 'vf123' }
+  describe 'GET /tnt/:id' do
     before do
-      fulfilment_client.stub(:get_order_status).with(tracking_id) do |arg|
+      fulfilment_client.stub(:get_order_status).with('abc') do |arg|
         fulfilment_response
       end
+
+      get '/tnt/abc'
     end
 
-    subject do
-      post '/track', {tracking_id: tracking_id}
-      last_response
-    end
-
-    context 'invalid order id' do
-      let(:fulfilment_response) { { status: 400, 'error' => 'INVALID_FORMAT' } }
-      let(:tracking_id) { 'INVALID' }
-
-      its(:body) { should match /order id invalid/i }
-    end
-
-    context 'timeout error' do
-      let(:fulfilment_response) { { status: 400, 'error' => 'FUSION_TIMEOUT'} }
-      let(:tracking_id) { 'TIMEOUT' }
-
-      its(:body) { should match /system timeout/i }
-    end
-
-    context 'order not found' do
+    context 'with a missing id' do
       let(:fulfilment_response) { { status: 404, 'error' => 'ORDER_NOT_FOUND'} }
-      let(:tracking_id) { 'NOTFOUND' }
 
-      its(:body) { should match /order not found/i }
+      its(:status) { should eq 404 }
+      its(:body) { should have_tag(:p, text: 'Order not found.') }
     end
 
-    context 'no error' do
-      context 'fulfilment response with email or date of birth' do
-        let(:fulfilment_response) { { status: 400, body: {'email' => 'abc@example.com'} } }
+    context 'with a valid id' do
+      let(:fulfilment_response) { { status: 200, body: { yes: 'no' } } }
 
-        it 'should not have details text' do
-          subject.body.should_not include('Click here to see your order details')
-        end
-      end
+      its(:status) { should eq 200 }
+      its(:body) { should match 'yes: no' }
     end
-
   end
 
 end

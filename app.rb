@@ -35,16 +35,8 @@ class App < Sinatra::Base
 
   get '/tnt/:id' do
     mega_menu
-    
-    @error = 'Order not found'
-    halt 404, haml(:error)
-  end
 
-  post '/track' do
-    mega_menu
-
-    @order_id = params[:tracking_id].strip
-    status_details = @fulfilment_client.get_order_status(@order_id)
+    status_details = @fulfilment_client.get_order_status params[:id]
 
     if(status_details.key? 'error')
       @error = error_message[status_details['error']]
@@ -52,7 +44,7 @@ class App < Sinatra::Base
       logger.error("Status: #{status_details[:status]}")
       logger.error("Message: #{status_details[:message]}") if status_details[:message]
       logger.error("Body: #{status_details[:body]}") if status_details[:body]
-      haml :track_form
+      halt 404, haml(:error)
     else
       haml :order_status, :locals => { :details => status_details[:body] }
     end
