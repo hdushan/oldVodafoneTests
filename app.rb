@@ -5,8 +5,6 @@ require 'user_agent'
 
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
-require_relative 'lib/auspost/auspost_response'
-require_relative 'lib/aus_post_client'
 require_relative 'lib/app_helper'
 require_relative 'lib/mega_menu/mega_menu_api_client'
 
@@ -14,11 +12,10 @@ class App < Sinatra::Base
   include Assets
   enable :logging
 
-  def initialize(mega_menu_client=nil, fulfilment_client=nil, auspost_client=nil)
+  def initialize(mega_menu_client=nil, fulfilment_client=nil)
     super()
     @fulfilment_client = fulfilment_client || FulfilmentServiceProviderClient.new
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
-    @auspost_client = auspost_client || AusPostClient.new
   end
 
   def mega_menu
@@ -53,12 +50,7 @@ class App < Sinatra::Base
       logger.error("Body: #{status_details[:body]}") if status_details[:body]
       halt 404, haml(:error)
     else
-      attrs = {:details => status_details[:body]}
-      if status_details[:body]['status'] == 'Submitted' # change this to the correct shipping status
-        attrs[:shipping_details] = @auspost_client.track(params[:tracking_id])
-      end
-
-      haml :order_status, :locals => attrs
+      haml :order_status, :locals => {:details => status_details[:body]}
     end
   end
 

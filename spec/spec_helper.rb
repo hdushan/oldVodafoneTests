@@ -10,7 +10,7 @@ require 'rack/test'
 require File.expand_path '../../app.rb', __FILE__
 
 def app
-  App.new nil, nil, nil
+  App.new nil, nil
 end
 
 RSpec.configure do |config|
@@ -27,9 +27,4 @@ end
 
 def response
   @response
-end
-
-def httparty_response(filename)
-  parsed_response = HTTParty::Parser.call(File.read(filename), :json)
-  OpenStruct.new(parsed_response: parsed_response, code: 200)
 end
