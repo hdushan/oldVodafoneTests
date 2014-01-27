@@ -32,3 +32,15 @@ else
 end
 
 Capybara.javascript_driver = :poltergeist
+
+#Before do
+#  page = Capybara::Session.new(:poltergeist)
+#end
+
+After('@mobile') do
+  puts "Clear browser driver after mobile scenario"
+  page.reset_session!
+  page.driver.cookies.each do |cookie_name, cookie_value|
+    page.driver.remove_cookie(name)
+  end
+end

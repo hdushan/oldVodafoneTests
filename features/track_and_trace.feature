@@ -17,3 +17,11 @@ Feature: View Order Status
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1TIMEOUT123' that timed out
     Then I should see a 'timeout' error message
+	
+  # This feature tests the mobile megamenu. This test needs to be the last test in the suite, as
+  # inspite of resetting http request headers after the test, subsequent requents are still identified as
+  # being from a mobile device.
+  @javascript @mobile
+  Scenario: View mobile-specific header and footer when visiting the page via a mobile device
+    Given I use a mobile device to visit the Track and Trace Home page '/tnt'
+	Then I should see the mobile version of header and footer

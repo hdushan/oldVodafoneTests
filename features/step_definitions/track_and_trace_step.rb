@@ -7,6 +7,22 @@ Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
   }
 end
 
+Given(/^I use a mobile device to visit the Track and Trace Home page '(.*)'$/) do |url|
+  puts "Original headers = " + page.driver.headers.inspect
+  agent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16"
+  page.driver.add_header("User-Agent", agent)
+  puts "Modified headers = " + page.driver.headers.inspect
+  visit url
+  expect(page).to have_field('tracking_id')
+end
+
+Then(/^I should see the mobile version of header and footer$/) do
+  steps %Q{
+    Then I should see the mobile Megamenu header
+    Then I should see the mobile Megamenu footer
+  }
+end
+
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
   setup_fulfilment_service_stub(order_id, {status: 500, 'error' => "ORDER_NOT_FOUND"} )
   submit_track_form_with order_id
@@ -44,6 +60,14 @@ end
 
 Then(/^I should see the Megamenu footer$/) do
   expect(page).to have_content('About this site') #Megamenu footer
+end
+
+Then(/^I should see the mobile Megamenu header$/) do
+  expect(page).to have_content('Our best offers') #Mobile Megamenu Header
+end
+
+Then(/^I should see the mobile Megamenu footer$/) do
+  expect(page).to have_content('Full site') #Mobile Megamenu footer
 end
 
 def setup_fulfilment_service_stub order_id, return_value
