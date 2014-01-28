@@ -11,17 +11,17 @@ describe FulfilmentServiceProviderClient, :pact => true do
   end
 
   describe 'get_order_status for non existing order id' do
-    let(:response_body) { { 'error' => 'ORDER_NOT_FOUND'} }
+    let(:response_body) { {'error' => 'ORDER_NOT_FOUND'} }
 
     before do
       fulfilment_service_provider
       .given("order with number 123 doesn't exist")
       .upon_receiving('a request for order status')
-      .with( method: :get, path: '/order/123' )
+      .with(method: :get, path: '/order/123')
       .will_respond_with(
-        status: 404,
-        headers: { 'Content-Type' => 'application/json;charset=utf-8' },
-        body: response_body
+          status: 404,
+          headers: {'Content-Type' => 'application/json;charset=utf-8'},
+          body: response_body
       )
     end
 
@@ -35,9 +35,19 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-        'date_of_birth'     => '2013-07-31',
-        'status'            => 'Complete',
-        'email'             => 'user@example.com'
+          'status' => 'Complete',
+          'ordered_date' => '2013-07-31',
+          'consignment_number' => 'cn123',
+          'items' => [
+              {
+                  'description' => 'phone'
+              },
+              {
+                  'description' => 'sim'
+              }
+          ]
+
+
       }
     }
 
@@ -45,16 +55,16 @@ describe FulfilmentServiceProviderClient, :pact => true do
       fulfilment_service_provider
       .given('order with number 456 exists and completed')
       .upon_receiving('a request for order status')
-      .with( method: :get, path: '/order/456' )
+      .with(method: :get, path: '/order/456')
       .will_respond_with(
-        status: 200,
-        headers: { 'Content-Type' => 'application/json;charset=utf-8' },
-        body: response_body
+          status: 200,
+          headers: {'Content-Type' => 'application/json;charset=utf-8'},
+          body: response_body
       )
     end
 
     it 'returns a order status' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq({ status: 200, body: response_body })
+      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq({status: 200, body: response_body})
     end
 
   end
@@ -62,7 +72,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
   describe 'get_order_status with empty order id' do
 
     it 'returns a 400 error' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('')).to eq({ status: 400, 'error' => 'ORDER_ID_EMPTY' })
+      expect(FulfilmentServiceProviderClient.new.get_order_status('')).to eq({status: 400, 'error' => 'ORDER_ID_EMPTY'})
     end
   end
 
@@ -75,18 +85,18 @@ describe FulfilmentServiceProviderClient, :pact => true do
       fulfilment_service_provider
       .given('an unexpected error in fusion')
       .upon_receiving('a request for order status')
-      .with( method: :get, path: '/order/999' )
+      .with(method: :get, path: '/order/999')
       .will_respond_with(
           status: 200,
-          headers: { 'Content-Type' => 'application/json;charset=utf-8' },
+          headers: {'Content-Type' => 'application/json;charset=utf-8'},
           body: unparseable_response_body
       )
     end
 
     it 'reports the exception message' do
       expect(FulfilmentServiceProviderClient.new.get_order_status('999')).to eq(
-        { status: 500,
-          'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'" })
+                                                                                 {status: 500,
+                                                                                  'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'"})
     end
   end
 
