@@ -13,7 +13,7 @@ def stub_root_resource(fulfilment_service_provider, given)
       body: {
         _links: {
           order: {
-            href: 'http://localhost:1234/v1/v1/order/{id}',
+            href: 'http://localhost:1234/v1/order/{id}',
             templated: true
           }
         }
