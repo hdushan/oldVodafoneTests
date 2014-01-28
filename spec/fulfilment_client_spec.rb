@@ -1,3 +1,5 @@
+require 'hyperclient'
+require 'rspec/mocks'
 require 'spec_helper'
 
 describe FulfilmentClient do
@@ -14,10 +16,7 @@ describe FulfilmentClient do
   context 'when order id is not empty' do
     context 'and response has an error' do
       it 'should return error' do
-        FulfilmentClient.should_receive(:get)
-                                        .with('/order/1234')
-                                        .and_return(OpenStruct.new(code: 404,
-                                                                   body: '{ "error": "ORDER_NOT_FOUND"}'))
+        fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 404, body: { "error" => "ORDER_NOT_FOUND" }) }
 
         response = fulfilment_client.get_order_status('1234')
 
@@ -27,12 +26,7 @@ describe FulfilmentClient do
 
     context 'and response has a valid data' do
       it 'should return the data from the response' do
-        FulfilmentClient.should_receive(:get)
-                                        .with('/order/1234')
-                                        .and_return(OpenStruct.new(code: 200,
-                                                                   body: '{ "date_of_birth": "2013-07-31",
-                                                                            "status": "Complete",
-                                                                            "email": "user@example.com" }'))
+        fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 200, body: { "date_of_birth" => "2013-07-31", "status" => "Complete", "email" => "user@example.com" }) }
 
         response = fulfilment_client.get_order_status('1234')
 
@@ -44,9 +38,7 @@ describe FulfilmentClient do
 
     context 'and there was a failure' do
       it 'should return error' do
-        FulfilmentClient.should_receive(:get)
-                                          .with('/order/1234')
-                                          .and_raise('epic failure!')
+        fulfilment_client.stub(:request_order_status).and_raise('epic failure!')
 
         response = fulfilment_client.get_order_status('1234')
 
