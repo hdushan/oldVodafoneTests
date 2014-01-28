@@ -1,3 +1,5 @@
+$: << './lib'
+
 require 'sinatra'
 
 require 'dotenv'
