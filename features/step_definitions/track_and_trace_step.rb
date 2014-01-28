@@ -1,5 +1,4 @@
 Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
-  puts "Current headers = " + page.driver.headers.inspect
   visit url
   expect(page).to have_field('tracking_id')
   steps %Q{
@@ -9,7 +8,6 @@ Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
 end
 
 Given(/^I use a mobile device to visit the Track and Trace Home page '(.*)'$/) do |url|
-  puts "Current headers = " + page.driver.headers.inspect
   visit url
   expect(page).to have_field('tracking_id')
 end
