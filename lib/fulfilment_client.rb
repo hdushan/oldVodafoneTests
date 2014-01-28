@@ -18,7 +18,7 @@ class FulfilmentClient
       reply.store(:body, response_json)
     end
     reply
-  rescue Exception => ex
+  rescue => ex
     { status: 500, 'error' => 'INTERNAL_ERROR', message: ex.message }
   end
 end
