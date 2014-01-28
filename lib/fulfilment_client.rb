@@ -1,6 +1,4 @@
 require 'hyperclient'
-require 'json'
-require 'logger'
 
 class FulfilmentClient
   def initialize(root = nil)
@@ -11,13 +9,14 @@ class FulfilmentClient
     return { status: 400, 'error' => 'ORDER_ID_EMPTY' } if order_id.empty?
 
     response = request_order_status order_id
-    reply = {status: response.status}
-    response_json = response.body
-    if response_json['error']
-      reply.store('error', response_json['error'])
+    reply = { status: response.status }
+
+    if response.body['error']
+      reply['error'] = response.body['error']
     else
-      reply.store(:body, response_json)
+      reply[:body] = response.body
     end
+
     reply
   rescue => ex
     { status: 500, 'error' => 'INTERNAL_ERROR', message: ex.message }
