@@ -8,12 +8,11 @@ gem 'haml'
 gem 'sass'
 gem 'httparty'
 gem 'useragent'
-
+gem 'hyperclient'
 gem 'newrelic_rpm'
 gem 'unicorn'
 gem 'dotenv-rails'
 gem 'bourbon'
-
 
 group :development, :test do
   gem 'shotgun'
