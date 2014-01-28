@@ -1,40 +1,35 @@
 source 'https://rubygems.org'
 
-gem 'sinatra', '~> 1.4.3'
-gem 'sinatra-contrib'
-gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
-gem 'rake'
+gem 'bourbon'
+gem 'dotenv-rails'
 gem 'haml'
-gem 'sass'
 gem 'httparty'
-gem 'useragent'
 gem 'hyperclient'
 gem 'newrelic_rpm'
+gem 'rake'
+gem 'sass'
+gem 'sinatra', '~> 1.4.3'
+gem 'sinatra-assetpack', require: 'sinatra/assetpack'
+gem 'sinatra-contrib'
 gem 'unicorn'
-gem 'dotenv-rails'
-gem 'bourbon'
+gem 'useragent'
 
 group :development, :test do
-  gem 'shotgun'
+  gem 'capybara'
+  gem 'cucumber'
+  gem 'jasmine', '2.0.0.rc4'
+  gem 'jmeter-runner-gem', git: 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'
+  gem 'jshintrb'
   gem 'pact'
-
-  gem 'simplecov', :require => false
-  gem 'simplecov-rcov', :require => false
-
-  gem 'rspec'
-  gem 'rack-test'
-  gem 'rspec-html-matchers'
-  gem 'webmock'
-
+  gem 'poltergeist'
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-rescue'
-  gem 'cucumber'
-  gem 'capybara'
-  gem 'poltergeist'
-
-  gem 'jshintrb'
-
-  gem 'jasmine', '2.0.0.rc4'
-  gem 'jmeter-runner-gem', :git => 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'rspec-html-matchers'
+  gem 'shotgun'
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov', require: false
+  gem 'webmock'
 end
