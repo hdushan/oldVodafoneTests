@@ -33,39 +33,35 @@ describe FulfilmentClient, :pact => true do
       stub_root_resource fulfilment_service_provider, "order with number 123 doesn't exist"
 
       fulfilment_service_provider
-      .given("order with number 123 doesn't exist")
-      .upon_receiving('a request for order status')
-      .with(method: :get, path: '/order/123')
-      .will_respond_with(
-          status: 404,
-          headers: {'Content-Type' => 'application/json;charset=utf-8'},
-          body: response_body
-      )
+        .given("order with number 123 doesn't exist")
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/order/123')
+        .will_respond_with(
+            status: 404,
+            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            body: response_body
+        )
     end
 
     it "returns a order status" do
       expect(fulfilment_client.get_order_status('123')).to eq({status: 404, 'error' => 'ORDER_NOT_FOUND'})
     end
-
   end
 
   describe 'get_order_status for existing order id' do
-
     let(:response_body) {
       {
-          'status' => 'Complete',
-          'ordered_date' => '2013-07-31',
-          'consignment_number' => 'cn123',
-          'items' => [
-              {
-                  'description' => 'phone'
-              },
-              {
-                  'description' => 'sim'
-              }
-          ]
-
-
+        'status' => 'Complete',
+        'ordered_date' => '2013-07-31',
+        'consignment_number' => 'cn123',
+        'items' => [
+            {
+                'description' => 'phone'
+            },
+            {
+                'description' => 'sim'
+            }
+        ]
       }
     }
 
@@ -73,24 +69,22 @@ describe FulfilmentClient, :pact => true do
       stub_root_resource fulfilment_service_provider, 'order with number 456 exists and completed'
 
       fulfilment_service_provider
-      .given('order with number 456 exists and completed')
-      .upon_receiving('a request for order status')
-      .with(method: :get, path: '/order/456')
-      .will_respond_with(
-          status: 200,
-          headers: {'Content-Type' => 'application/json;charset=utf-8'},
-          body: response_body
-      )
+        .given('order with number 456 exists and completed')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/order/456')
+        .will_respond_with(
+            status: 200,
+            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            body: response_body
+        )
     end
 
     it 'returns a order status' do
       expect(fulfilment_client.get_order_status('456')).to eq({status: 200, body: response_body})
     end
-
   end
 
   describe 'get_order_status with empty order id' do
-
     it 'returns a 400 error' do
       expect(fulfilment_client.get_order_status('')).to eq({status: 400, 'error' => 'ORDER_ID_EMPTY'})
     end
@@ -105,20 +99,18 @@ describe FulfilmentClient, :pact => true do
       stub_root_resource fulfilment_service_provider, 'an unexpected error in fusion'
       
       fulfilment_service_provider
-      .given('an unexpected error in fusion')
-      .upon_receiving('a request for order status')
-      .with(method: :get, path: '/order/999')
-      .will_respond_with(
-          status: 200,
-          headers: {'Content-Type' => 'application/json;charset=utf-8'},
-          body: unparseable_response_body
-      )
+        .given('an unexpected error in fusion')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/order/999')
+        .will_respond_with(
+            status: 200,
+            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            body: unparseable_response_body
+        )
     end
 
     it 'reports the exception message' do
-      expect(fulfilment_client.get_order_status('999')).to eq(
-                                                                                 {status: 500,
-                                                                                  'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'"})
+      expect(fulfilment_client.get_order_status('999')).to eq({status: 500, 'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'"})
     end
   end
 
