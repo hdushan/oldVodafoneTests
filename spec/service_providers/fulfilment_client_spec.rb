@@ -13,7 +13,7 @@ def stub_root_resource(fulfilment_service_provider, given)
       body: {
         _links: {
           order: {
-            href: 'http://localhost:1234/order/{id}',
+            href: 'http://localhost:1234/v1/v1/order/{id}',
             templated: true
           }
         }
@@ -35,7 +35,7 @@ describe FulfilmentClient, :pact => true do
       fulfilment_service_provider
         .given("order with number 123 doesn't exist")
         .upon_receiving('a request for order status')
-        .with(method: :get, path: '/order/123')
+        .with(method: :get, path: '/v1/order/123')
         .will_respond_with(
             status: 404,
             headers: {'Content-Type' => 'application/json;charset=utf-8'},
@@ -71,7 +71,7 @@ describe FulfilmentClient, :pact => true do
       fulfilment_service_provider
         .given('order with number 456 exists and completed')
         .upon_receiving('a request for order status')
-        .with(method: :get, path: '/order/456')
+        .with(method: :get, path: '/v1/order/456')
         .will_respond_with(
             status: 200,
             headers: {'Content-Type' => 'application/json;charset=utf-8'},
@@ -101,7 +101,7 @@ describe FulfilmentClient, :pact => true do
       fulfilment_service_provider
         .given('an unexpected error in fusion')
         .upon_receiving('a request for order status')
-        .with(method: :get, path: '/order/999')
+        .with(method: :get, path: '/v1/order/999')
         .will_respond_with(
             status: 200,
             headers: {'Content-Type' => 'application/json;charset=utf-8'},
