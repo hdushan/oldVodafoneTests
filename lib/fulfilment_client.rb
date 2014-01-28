@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 require 'logger'
 
-class FulfilmentServiceProviderClient
+class FulfilmentClient
   include HTTParty
   base_uri ENV['FULFILMENT_SERVICE']
 

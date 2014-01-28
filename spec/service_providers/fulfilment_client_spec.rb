@@ -1,13 +1,14 @@
-require_relative '../../lib/fulfilment_service_provider_client.rb'
-require_relative 'pact_helper.rb'
+require 'fulfilment_client'
 require_relative '../test_helper'
-describe FulfilmentServiceProviderClient, :pact => true do
+require_relative 'pact_helper'
+
+describe FulfilmentClient, :pact => true do
   let(:mega_menu_client) { mega_menu_mock }
-  let(:fulfilment_client) { FulfilmentServiceProviderClient.new }
+  let(:fulfilment_client) { FulfilmentClient.new }
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   before do
-    FulfilmentServiceProviderClient.base_uri 'localhost:1234'
+    FulfilmentClient.base_uri 'localhost:1234'
   end
 
   describe 'get_order_status for non existing order id' do
@@ -26,7 +27,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq({status: 404, 'error' => 'ORDER_NOT_FOUND'})
+      expect(FulfilmentClient.new.get_order_status('123')).to eq({status: 404, 'error' => 'ORDER_NOT_FOUND'})
     end
 
   end
@@ -64,7 +65,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it 'returns a order status' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq({status: 200, body: response_body})
+      expect(FulfilmentClient.new.get_order_status('456')).to eq({status: 200, body: response_body})
     end
 
   end
@@ -72,7 +73,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
   describe 'get_order_status with empty order id' do
 
     it 'returns a 400 error' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('')).to eq({status: 400, 'error' => 'ORDER_ID_EMPTY'})
+      expect(FulfilmentClient.new.get_order_status('')).to eq({status: 400, 'error' => 'ORDER_ID_EMPTY'})
     end
   end
 
@@ -94,7 +95,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
     end
 
     it 'reports the exception message' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('999')).to eq(
+      expect(FulfilmentClient.new.get_order_status('999')).to eq(
                                                                                  {status: 500,
                                                                                   'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'"})
     end

@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'fulfilment_client'
 
 describe "Track & Trace App" do
-  let(:fulfilment_client) { double(FulfilmentServiceProviderClient) }
+  let(:fulfilment_client) { double(FulfilmentClient) }
 
   let(:mega_menu_client) do
     mega_menu_client = double(MegaMenuAPIClient)

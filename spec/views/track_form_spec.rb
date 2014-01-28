@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'fulfilment_client'
 
 describe 'track_form.haml' do
-  let(:fulfilment_client) { double(FulfilmentServiceProviderClient) }
+  let(:fulfilment_client) { double(FulfilmentClient) }
   let(:mega_menu_client) { mega_menu_mock }
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
