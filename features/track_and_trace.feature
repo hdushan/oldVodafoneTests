@@ -25,3 +25,5 @@ Feature: View Order Status
   Scenario: View mobile-specific header and footer when visiting the page via a mobile device
     Given I use a mobile device to visit the Track and Trace Home page '/tnt'
 	Then I should see the mobile version of header and footer
+	
+

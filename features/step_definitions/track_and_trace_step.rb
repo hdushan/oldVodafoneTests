@@ -1,4 +1,5 @@
 Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
+  puts "Current headers = " + page.driver.headers.inspect
   visit url
   expect(page).to have_field('tracking_id')
   steps %Q{
@@ -8,10 +9,7 @@ Given(/^I am on the Track and Trace Home page '(.*)'$/) do |url|
 end
 
 Given(/^I use a mobile device to visit the Track and Trace Home page '(.*)'$/) do |url|
-  puts "Original headers = " + page.driver.headers.inspect
-  agent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16"
-  page.driver.add_header("User-Agent", agent)
-  puts "Modified headers = " + page.driver.headers.inspect
+  puts "Current headers = " + page.driver.headers.inspect
   visit url
   expect(page).to have_field('tracking_id')
 end

@@ -21,6 +21,7 @@ class App < Sinatra::Base
   def mega_menu
     logger.info('Getting the Mega Menu')
     @is_mobile_user = UserAgent.parse(request.user_agent).mobile?
+    puts UserAgent.parse(request.user_agent).inspect
     @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
     logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
   end
