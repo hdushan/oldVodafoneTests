@@ -6,7 +6,6 @@ class FulfilmentResponse
     @code = response_code
     @body = response_body
     @message_mapper = MessageMapper.new
-    @parsed_response = JSON.parse(@body, :symbolize_names => true) unless has_error?
   end
 
   def has_error?
@@ -18,7 +17,7 @@ class FulfilmentResponse
   end
 
   def status
-    @message_mapper.get_status_message(@parsed_response[:status])
+    @message_mapper.get_status_message(@body["status"])
   end
 
   def to_s

@@ -1,3 +1,5 @@
+require 'hyperclient'
+require 'rspec/mocks'
 require 'spec_helper'
 
 describe FulfilmentClient do
@@ -12,8 +14,8 @@ describe FulfilmentClient do
   context 'when order id is not empty' do
     context 'and response has an error' do
       it 'should return error' do
-        fulfilment_client.stub(:request_order_status) { OpenStruct.new(code: 404,
-                                                                   body: '{ "error": "ORDER_NOT_FOUND"}')}
+        fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 404,
+                                                                   body: { "error" => "ORDER_NOT_FOUND"})}
 
         response = fulfilment_client.get_order_details('1234')
 
@@ -24,8 +26,8 @@ describe FulfilmentClient do
 
     context 'and response has a valid data' do
       it 'should return the data from the response' do
-        fulfilment_client.stub(:request_order_status) { OpenStruct.new(code: 200,
-                                                                   body: '{ "status": "BOOKED"}')}
+        fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 200,
+                                                                   body: { "status" => "BOOKED"})}
 
         response = fulfilment_client.get_order_details('1234')
 

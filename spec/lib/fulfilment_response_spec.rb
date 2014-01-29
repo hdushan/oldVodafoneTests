@@ -4,12 +4,12 @@ describe FulfilmentResponse do
 
   describe '#has_error?' do
     it 'should return true if response code is not 200' do
-      response = FulfilmentResponse.new(987, '{}')
+      response = FulfilmentResponse.new(987, {})
       response.has_error?.should be_true
     end
 
     it 'should return false if response is 200' do
-      response = FulfilmentResponse.new(200, '{}')
+      response = FulfilmentResponse.new(200, {})
       response.has_error?.should be_false
     end
   end
@@ -21,22 +21,15 @@ describe FulfilmentResponse do
     end
 
     it 'should return nil if no error occurred' do
-      response = FulfilmentResponse.new(200, '{"status":"BOOKED"}')
+      response = FulfilmentResponse.new(200, {"status" => "BOOKED"})
       response.error_message.should be_nil
-    end
-
-    it 'should raise a runtime exception if json is not parseable' do
-      expect {FulfilmentResponse.new(200, 'this is not a json') }.to raise_error
     end
   end
 
   describe '#status' do
     it 'should map the status to a user friendly value' do
-      response = FulfilmentResponse.new(200, '{"status": "BOOKED"}')
+      response = FulfilmentResponse.new(200, {"status" => "BOOKED"})
       response.status.should == 'Your order has been booked'
     end
   end
-
-
-
 end

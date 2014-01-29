@@ -20,17 +20,17 @@ Then(/^I should see the mobile version of header and footer$/) do
 end
 
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, '{whatever}') )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, {}) )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, '{"status":"CANCELLED"}' ) )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, {"status" =>"CANCELLED"} ) )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of an order with id '(.*)' that timed out$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, '{whatever}') )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, {}) )
   submit_track_form_with order_id
 end
 
