@@ -20,7 +20,7 @@ group :development, :test do
   gem 'jasmine', '2.0.0.rc4'
   gem 'jmeter-runner-gem', git: 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'
   gem 'jshintrb'
-  gem 'pact'
+  gem 'pact', git: 'git@github.com:realestate-com-au/pact.git'
   gem 'poltergeist'
   gem 'pry'
   gem 'pry-doc'
