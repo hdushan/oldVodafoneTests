@@ -6,7 +6,6 @@ module Assets
     base.instance_eval do
       register Sinatra::AssetPack
       set :public_folder, 'public'
-      set :root, File.dirname(__FILE__)
 
       assets {
         serve '/js',     from: 'assets/javascripts'        # Default

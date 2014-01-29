@@ -1,23 +1,21 @@
-require 'sinatra'
-require "sinatra/namespace"
+require 'sinatra/namespace'
+require 'app_helper'
+require 'fulfilment_client'
 require 'haml'
+require 'mega_menu/mega_menu_api_client'
+require 'sinatra'
+require 'sinatra_assets'
 require 'user_agent'
-
-require_relative 'sinatra_assets'
-require_relative 'lib/fulfilment_service_provider_client'
-require_relative 'lib/fulfilment_response'
-require_relative 'lib/message_mapper'
-require_relative 'lib/app_helper'
-require_relative 'lib/mega_menu/mega_menu_api_client'
+require 'fulfilment_response'
+require 'message_mapper'
 
 class App < Sinatra::Base
-
   include Assets
   enable :logging
 
   def initialize(mega_menu_client=nil, fulfilment_client=nil)
     super()
-    @fulfilment_client = fulfilment_client || FulfilmentServiceProviderClient.new
+    @fulfilment_client = fulfilment_client || FulfilmentClient.new
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
   end
 
@@ -61,5 +59,4 @@ class App < Sinatra::Base
   get '/env' do
     ENV.inspect
   end
-
 end

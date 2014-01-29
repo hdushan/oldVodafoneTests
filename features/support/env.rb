@@ -15,6 +15,10 @@ require_relative '../../app'
 require_relative '../../lib/mega_menu/mega_menu_api_client'
 
 Capybara.register_driver :poltergeist do |app|
+  options = {
+          :js_errors => true,
+          :phantomjs_options => ['--load-images=no', '--disk-cache=false', '--local-storage-quota=0', '--max-disk-cache-size=0', '--local-storage-path=""'],
+      }
   Capybara::Poltergeist::Driver.new(app, :phantomjs => Phantomjs.path, :timeout => 40)
 end
 
@@ -33,14 +37,17 @@ end
 
 Capybara.javascript_driver = :poltergeist
 
-#Before do
-#  page = Capybara::Session.new(:poltergeist)
-#end
+Before do
+  agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"
+  page.driver.add_header("User-Agent", agent)  
+end
+
+Before('@mobile') do
+  agent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16"
+  page.driver.add_header("User-Agent", agent)
+end
 
 After('@mobile') do
   puts "Clear browser driver after mobile scenario"
   page.reset_session!
-  page.driver.cookies.each do |cookie_name, cookie_value|
-    page.driver.remove_cookie(name)
-  end
 end
