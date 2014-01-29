@@ -1,4 +1,5 @@
 require 'fulfilment_client'
+require 'pry'
 require_relative '../test_helper'
 require_relative 'pact_helper'
 
@@ -38,7 +39,7 @@ describe FulfilmentClient, :pact => true do
         .with(method: :get, path: '/v1/order/123')
         .will_respond_with(
             status: 404,
-            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            headers: { 'Content-Type' => 'application/hal+json' },
             body: response_body
         )
     end
@@ -74,7 +75,7 @@ describe FulfilmentClient, :pact => true do
         .with(method: :get, path: '/v1/order/456')
         .will_respond_with(
             status: 200,
-            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            headers: { 'Content-Type' => 'application/hal+json' },
             body: response_body
         )
     end
@@ -104,7 +105,7 @@ describe FulfilmentClient, :pact => true do
         .with(method: :get, path: '/v1/order/999')
         .will_respond_with(
             status: 200,
-            headers: {'Content-Type' => 'application/json;charset=utf-8'},
+            headers: { 'Content-Type' => 'application/hal+json' },
             body: unparseable_response_body
         )
     end
