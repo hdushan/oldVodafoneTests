@@ -13,6 +13,10 @@ class App < Sinatra::Base
   include Assets
   enable :logging
 
+  configure do
+    set :show_exceptions => false
+  end
+
   def initialize(mega_menu_client=nil, fulfilment_client=nil)
     super()
     @fulfilment_client = fulfilment_client || FulfilmentClient.new
@@ -37,23 +41,24 @@ class App < Sinatra::Base
   end
 
   get '/tnt/:id' do
-    begin
-      mega_menu
-      fulfilment_response = @fulfilment_client.get_order_details params[:id]
+    mega_menu
+    fulfilment_response = @fulfilment_client.get_order_details params[:id]
 
-      if fulfilment_response.has_error?
-        logger.error("Fulfilment Response: #{fulfilment_response}")
-        @error = fulfilment_response.error_message
-        halt fulfilment_response.code, haml(:error)
-      else
-        haml :order_status, :locals => {:details => fulfilment_response}
-      end
-    rescue Exception => exception
-      logger.error(exception.message)
-      logger.error(exception.backtrace.join("\n"))
-      @error = MessageMapper::DEFAULT_ERROR_MESSAGE
-      haml(:error)
+    if fulfilment_response.has_error?
+      logger.error("Fulfilment Response: #{fulfilment_response}")
+      @error = fulfilment_response.error_message
+      halt fulfilment_response.code, haml(:error)
+    else
+      haml :order_status, :locals => {:details => fulfilment_response}
     end
+  end
+
+  error do
+    exception = env['sinatra.error']
+    logger.error(exception.message)
+    logger.error(exception.backtrace.join("\n"))
+    @error = MessageMapper::DEFAULT_ERROR_MESSAGE
+    haml(:error)
   end
 
   get '/env' do
