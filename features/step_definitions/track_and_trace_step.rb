@@ -24,22 +24,22 @@ Then(/^I should see the mobile version of header and footer$/) do
 end
 
 When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, {status: 500, 'error' => "ORDER_NOT_FOUND"} )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, '{whatever}') )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, {status: 200, body: {'status' => "Submitted", 'email' => 'valid@example.com'} } )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, '{"status":"CANCELLED"}' ) )
   submit_track_form_with order_id
 end
 
 When(/^I search for the status of an order with id '(.*)' that timed out$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, {status: 500, 'error' => "FUSION_TIMEOUT"} )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, '{whatever}') )
   submit_track_form_with order_id
 end
 
 Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
-  expect(page).to have_content('Submitted')
+  expect(page).to have_content('Your order has been cancelled')
   steps %Q{
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
@@ -73,7 +73,7 @@ end
 def setup_fulfilment_service_stub order_id, return_value
   unless ENV['RAILS_ENV'] == 'paas-qa'
     ff_client = Capybara.app.instance_variable_get("@instance").instance_variable_get("@fulfilment_client")
-    ff_client.stub(:get_order_status).with(order_id) { return_value }
+    ff_client.stub(:get_order_details).with(order_id) { return_value }
   end
 end
 

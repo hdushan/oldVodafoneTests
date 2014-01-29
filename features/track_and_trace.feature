@@ -10,14 +10,14 @@ Feature: View Order Status
   Scenario: View status of an order that doesnt exist
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1NON1EXISTING' that does not exist
-    Then I should see a 'not found' error message
+    Then I should see a 'That order ID was not found. Please, check that you typed it correctly.' error message
 
   @javascript
   Scenario: Show system timeout when connection timeout
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of an order with id 'VF1TIMEOUT123' that timed out
-    Then I should see a 'timeout' error message
-	
+    Then I should see a 'Service Unavailable. Please, try again later.' error message
+
   # This feature tests the mobile megamenu. This test needs to be the last test in the suite, as
   # inspite of resetting http request headers after the test, subsequent requents are still identified as
   # being from a mobile device.

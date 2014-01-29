@@ -29,7 +29,7 @@ describe "Track & Trace App" do
 
   describe 'GET /tnt/:id' do
     before do
-      fulfilment_client.stub(:get_order_status).with('abc') do |arg|
+      fulfilment_client.stub(:get_order_details).with('abc') do |arg|
         fulfilment_response
       end
 
@@ -37,17 +37,17 @@ describe "Track & Trace App" do
     end
 
     context 'with a missing id' do
-      let(:fulfilment_response) { { status: 404, 'error' => 'ORDER_NOT_FOUND'} }
+      let(:fulfilment_response) { FulfilmentResponse.new(404, "We don't care") }
 
       its(:status) { should eq 404 }
-      its(:body) { should have_tag(:p, text: 'Order not found.') }
+      its(:body) { should have_tag(:p, text: 'That order ID was not found. Please, check that you typed it correctly.') }
     end
 
     context 'with a valid id' do
-      let(:fulfilment_response) { { status: 200, body: { yes: 'no' } } }
+      let(:fulfilment_response) { FulfilmentResponse.new(200, '{ "status": "TERMINATED"}') }
 
       its(:status) { should eq 200 }
-      its(:body) { should match 'yes: no' }
+      its(:body) { should match /terminated/ }
     end
   end
 

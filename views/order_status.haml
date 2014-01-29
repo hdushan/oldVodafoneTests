@@ -1,11 +1,5 @@
-- locals[:details].reject { |key, value| ['tracking'].include?(key) }.each do |key, value|
-  -if value.class == Hash
-    %p= "#{key}"
-    .margin-wrapper=haml :trace_without_styling, :locals => { :details => value }
-  -else
-    %p= "#{key}: #{value}"
+%p= "Status: #{locals[:details].status}"
 
-
-= haml :_shipping_info, locals: locals[:details]['tracking'] if locals[:details]['tracking']
+-#= haml :_shipping_info, locals: locals[:details].tracking if locals[:details].tracking
 
 = haml :_info_links

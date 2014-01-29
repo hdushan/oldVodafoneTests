@@ -1,6 +1,7 @@
 require_relative '../../lib/fulfilment_service_provider_client.rb'
 require_relative 'pact_helper.rb'
 require_relative '../test_helper'
+
 describe FulfilmentServiceProviderClient, :pact => true do
   let(:mega_menu_client) { mega_menu_mock }
   let(:fulfilment_client) { FulfilmentServiceProviderClient.new }
@@ -11,7 +12,6 @@ describe FulfilmentServiceProviderClient, :pact => true do
   end
 
   describe 'get_order_status for non existing order id' do
-    let(:response_body) { {'error' => 'ORDER_NOT_FOUND'} }
 
     before do
       fulfilment_service_provider
@@ -21,12 +21,15 @@ describe FulfilmentServiceProviderClient, :pact => true do
       .will_respond_with(
           status: 404,
           headers: {'Content-Type' => 'application/json;charset=utf-8'},
-          body: response_body
+          body: "{}"
       )
     end
 
-    it "returns a order status" do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('123')).to eq({status: 404, 'error' => 'ORDER_NOT_FOUND'})
+    it 'should have an error message' do
+      response = FulfilmentServiceProviderClient.new.get_order_details('123')
+
+      expect(response.has_error?).to be_true
+      expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
     end
 
   end
@@ -35,7 +38,7 @@ describe FulfilmentServiceProviderClient, :pact => true do
 
     let(:response_body) {
       {
-          'status' => 'Complete',
+          'status' => 'BOOKED',
           'ordered_date' => '2013-07-31',
           'consignment_number' => 'cn123',
           'items' => [
@@ -63,23 +66,16 @@ describe FulfilmentServiceProviderClient, :pact => true do
       )
     end
 
-    it 'returns a order status' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('456')).to eq({status: 200, body: response_body})
+    it 'should return an order status' do
+      response = FulfilmentServiceProviderClient.new.get_order_details('456')
+      expect(response.has_error?).to be_false
+      expect(response.status).to match /booked/
     end
 
   end
 
-  describe 'get_order_status with empty order id' do
-
-    it 'returns a 400 error' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('')).to eq({status: 400, 'error' => 'ORDER_ID_EMPTY'})
-    end
-  end
-
-  describe 'get_order_status exception handling' do
-    let(:unparseable_response_body) {
-      'Whoops, this is not JSON'
-    }
+  describe 'when fusion is not available' do
+    let(:error_response_body) { 'This could be anything' }
 
     before do
       fulfilment_service_provider
@@ -87,16 +83,16 @@ describe FulfilmentServiceProviderClient, :pact => true do
       .upon_receiving('a request for order status')
       .with(method: :get, path: '/order/999')
       .will_respond_with(
-          status: 200,
+          status: 503,
           headers: {'Content-Type' => 'application/json;charset=utf-8'},
-          body: unparseable_response_body
+          body: error_response_body
       )
     end
 
-    it 'reports the exception message' do
-      expect(FulfilmentServiceProviderClient.new.get_order_status('999')).to eq(
-                                                                                 {status: 500,
-                                                                                  'error' => 'INTERNAL_ERROR', message: "757: unexpected token at 'Whoops, this is not JSON'"})
+    it 'should return a generic error message' do
+      response = FulfilmentServiceProviderClient.new.get_order_details('999')
+      expect(response.has_error?).to be_true
+      expect(response.error_message).to match /Service Unavailable/
     end
   end
 

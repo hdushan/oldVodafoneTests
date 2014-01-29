@@ -5,10 +5,13 @@ require 'user_agent'
 
 require_relative 'sinatra_assets'
 require_relative 'lib/fulfilment_service_provider_client'
+require_relative 'lib/fulfilment_response'
+require_relative 'lib/message_mapper'
 require_relative 'lib/app_helper'
 require_relative 'lib/mega_menu/mega_menu_api_client'
 
 class App < Sinatra::Base
+
   include Assets
   enable :logging
 
@@ -36,25 +39,27 @@ class App < Sinatra::Base
   end
 
   get '/tnt/:id' do
-    mega_menu
+    begin
+      mega_menu
+      fulfilment_response = @fulfilment_client.get_order_details params[:id]
 
-    # todo: needs more expressive errors coming out of this. I can't
-    # tell the difference between a not found and a timeout
-    status_details = @fulfilment_client.get_order_status params[:id]
-
-    if(status_details.key? 'error')
-      @error = error_message[status_details['error']]
-      logger.error("Error: #{@error}")
-      logger.error("Status: #{status_details[:status]}")
-      logger.error("Message: #{status_details[:message]}") if status_details[:message]
-      logger.error("Body: #{status_details[:body]}") if status_details[:body]
-      halt 404, haml(:error)
-    else
-      haml :order_status, :locals => {:details => status_details[:body]}
+      if fulfilment_response.has_error?
+        logger.error("Fulfilment Response: #{fulfilment_response}")
+        @error = fulfilment_response.error_message
+        halt fulfilment_response.code, haml(:error)
+      else
+        haml :order_status, :locals => {:details => fulfilment_response}
+      end
+    rescue Exception => exception
+      logger.error(exception.message)
+      logger.error(exception.backtrace.join("\n"))
+      @error = MessageMapper::DEFAULT_ERROR_MESSAGE
+      haml(:error)
     end
   end
 
   get '/env' do
     ENV.inspect
   end
+
 end
