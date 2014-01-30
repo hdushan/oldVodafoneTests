@@ -37,8 +37,7 @@ describe FulfilmentClient, :pact => true do
         .with(method: :get, path: '/v1/order/123')
         .will_respond_with(
             status: 404,
-            headers: { 'Content-Type' => 'application/hal+json' },
-            body: "{}"
+            headers: { 'Content-Type' => 'application/hal+json' }
         )
     end
 
@@ -90,7 +89,6 @@ describe FulfilmentClient, :pact => true do
   end
 
   describe 'when fusion is not available' do
-    let(:error_response_body) { {'error' => 'some error'} }
 
     before do
       stub_root_resource fulfilment_service_provider, 'an unexpected error in fusion'
@@ -98,16 +96,15 @@ describe FulfilmentClient, :pact => true do
       fulfilment_service_provider
         .given('an unexpected error in fusion')
         .upon_receiving('a request for order status')
-        .with(method: :get, path: '/v1/order/999')
+        .with(method: :get, path: '/v1/order/503')
         .will_respond_with(
             status: 503,
-            headers: { 'Content-Type' => 'application/hal+json' },
-            body: error_response_body
+            headers: { 'Content-Type' => 'application/hal+json' }
         )
     end
 
     it 'should return a generic error message' do
-      response = fulfilment_client.get_order_details('999')
+      response = fulfilment_client.get_order_details('503')
 
       expect(response.has_error?).to be_true
       expect(response.error_message).to match /Service Unavailable/
