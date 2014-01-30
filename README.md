@@ -9,7 +9,7 @@ Track and Trace standalone site
 Simply run `rake`
 
 ###Starting a development server
-Development mode: `shotgun app.rb -o 0.0.0.0`
+Development mode: `shotgun -o 0.0.0.0`
 
 Notes:
 * need to start the server of Fulfilment service first
