@@ -1,9 +1,10 @@
 Dir.glob('lib/tasks/*.rake').each { |file| load file }
+$: << './lib'
 
 task :default => :tests
 
 desc 'Run all tests'
-task :tests => [:spec, 'jasmine:ci', :cucumber]
+task :tests => [:spec, 'assetpack:build', 'jasmine:ci', :cucumber]
 
 # ci
 task :ci do
