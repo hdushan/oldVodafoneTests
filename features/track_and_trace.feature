@@ -1,24 +1,36 @@
 Feature: View Order Status
+	
+  @javascript
+  Scenario Outline: View appropriate status of orders in various valid statuses
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id '<order_id>'
+    Then I should see the tracking status '<status>' for the order
+
+    Examples:
+      |  order_id          |  status           |
+      |  VF123FOUND        |  cancelled        |
+#      |  VF123STAGED       |  In Progress      |
+#      |  1-123PICKCONF     |  In Progress      |
+#      |  SR1-123READY      |  In Progress      |
+#      |  UP123BACKORDER    |  On Backorder     |
+#      |  1-123CANCELLED    |  Order Cancelled  |
+#      |  SR1-123CLOSED     |  Order Shipped    |
+#      |  VF123TERMINATED   |  Order Cancelled  |
+#      |  1-123INPROGRESS   |  In Progress      |
 
   @javascript
-  Scenario: View status and details of an order
+  Scenario Outline: View appropriate error messages of orders in various errors states
     Given I am on the Track and Trace Home page '/tnt'
-    When I search for the status of a valid order with id 'VF123FOUND'
-    Then I should see the tracking status for the order 'VF123FOUND'
+	When I search for the status of an order with id '<order_id>' that '<order_state_description>'
+	Then I should see a '<error_message_description>' error message
 
-  @javascript
-  Scenario: View status of an order that doesnt exist
-    Given I am on the Track and Trace Home page '/tnt'
-    When I search for the status of an order with id 'VF1NON1EXISTING' that does not exist
-    Then I should see a 'That order ID was not found. Please, check that you typed it correctly.' error message
+    Examples:
+      |  order_state_description |  order_id          |  error_message_description   |
+      |  doesnt exist            |  VF1NON1EXISTING   |  order ID was not found      |
+      |  timed out from fusion   |  VF1TIMEOUT123     |  Service Unavailable         |
+      #|  had unexpected status   |  1-BADSTATUS123    |  Blah Blah                   |
 
-  @javascript
-  Scenario: Show system timeout when connection timeout
-    Given I am on the Track and Trace Home page '/tnt'
-    When I search for the status of an order with id 'VF1TIMEOUT123' that timed out
-    Then I should see a 'Service Unavailable. Please, try again later.' error message
-
-  # This feature tests the mobile megamenu. This test needs to be the last test in the suite, as
+  # This scanario tests the mobile megamenu. This test needs to be the last test in the suite, as
   # inspite of resetting http request headers after the test, subsequent requents are still identified as
   # being from a mobile device.
   @javascript @mobile

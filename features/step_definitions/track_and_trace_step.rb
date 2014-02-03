@@ -19,8 +19,15 @@ Then(/^I should see the mobile version of header and footer$/) do
   }
 end
 
-When(/^I search for the status of an order with id '(.*)' that does not exist$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, {}) )
+When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |order_id, error_state_description|
+  case error_state_description
+  when "doesnt exist"
+    setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, {}) )
+  when "timed out from fusion"
+    setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, {}) )
+  else
+    raise 'Unknown Error Scenario'
+  end
   submit_track_form_with order_id
 end
 
@@ -29,13 +36,8 @@ When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
   submit_track_form_with order_id
 end
 
-When(/^I search for the status of an order with id '(.*)' that timed out$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, {}) )
-  submit_track_form_with order_id
-end
-
-Then(/^I should see the tracking status for the order '(.*)'$/) do |order_id|
-  expect(page).to have_content('Your order has been cancelled')
+Then(/^I should see the tracking status '(.*)' for the order$/) do |status_message|
+  expect(page).to have_content(status_message)
   steps %Q{
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
