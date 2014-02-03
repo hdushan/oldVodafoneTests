@@ -25,7 +25,7 @@ When(/^I search for the status of an order with id '(.*)' that does not exist$/)
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, {"status" =>"CANCELLED"} ) )
+  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, {"tracking_status" =>"CANCELLED"} ) )
   submit_track_form_with order_id
 end
 

@@ -21,14 +21,14 @@ describe FulfilmentResponse do
     end
 
     it 'should return nil if no error occurred' do
-      response = FulfilmentResponse.new(200, {"status" => "BOOKED"})
+      response = FulfilmentResponse.new(200, {"tracking_status" => "BOOKED"})
       response.error_message.should be_nil
     end
   end
 
   describe '#status' do
     it 'should map the status to a user friendly value' do
-      response = FulfilmentResponse.new(200, {"status" => "BOOKED"})
+      response = FulfilmentResponse.new(200, {"tracking_status" => "BOOKED"})
       response.status.should == 'Your order has been booked'
     end
   end

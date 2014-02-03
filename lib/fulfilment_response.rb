@@ -17,7 +17,7 @@ class FulfilmentResponse
   end
 
   def status
-    @message_mapper.get_status_message(@body["status"])
+    @message_mapper.get_status_message(@body["tracking_status"])
   end
 
   def to_s

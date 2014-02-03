@@ -27,12 +27,12 @@ describe FulfilmentClient do
     context 'and response has a valid data' do
       it 'should return the data from the response' do
         fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 200,
-                                                                   body: { "status" => "BOOKED"})}
+                                                                   body: { 'tracking_status' => 'IN PROGRESS'})}
 
         response = fulfilment_client.get_order_details('1234')
 
         expect(response.has_error?).to eq(false)
-        expect(response.status).to match(/booked/)
+        expect(response.status).to match(/in progress/)
       end
     end
 
