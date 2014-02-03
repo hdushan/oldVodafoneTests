@@ -4,6 +4,7 @@ $(document).ready( function() {
 
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {
+    $('#input-validation-msg').hide();
     $('#track-form .alert').hide();
 
     event.preventDefault();
