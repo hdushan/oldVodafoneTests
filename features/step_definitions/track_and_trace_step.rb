@@ -36,12 +36,16 @@ When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
   submit_track_form_with order_id
 end
 
-Then(/^I should see the tracking status '(.*)' for the order$/) do |status_message|
-  expect(page).to have_content(status_message)
+Then(/^I should see the tracking status '(.*)' for the order$/) do |status_header|
+  expect(page.find('.status-heading')).to have_content(status_header)
   steps %Q{
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
   }
+end
+
+And(/^I should see the message '(.*)'$/) do |message|
+  expect(page.find('.status-message')).to have_content(message)
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|

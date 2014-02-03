@@ -4,11 +4,12 @@ Feature: View Order Status
   Scenario Outline: View appropriate status of orders in various valid statuses
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id '<order_id>'
-    Then I should see the tracking status '<status>' for the order
+    Then I should see the tracking status '<heading>' for the order
+    And I should see the message '<message>'
 
     Examples:
-      |  order_id          |  status           |
-      |  VF123FOUND        |  cancelled        |
+      |  order_id          |  heading          | message   |
+      |  VF123FOUND        |  Order Cancelled  | cancelled |
 #      |  VF123STAGED       |  In Progress      |
 #      |  1-123PICKCONF     |  In Progress      |
 #      |  SR1-123READY      |  In Progress      |

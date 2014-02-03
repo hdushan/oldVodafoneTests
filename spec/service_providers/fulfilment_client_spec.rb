@@ -84,7 +84,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('456')
 
       expect(response.has_error?).to be_false
-      expect(response.status).to match /in progress/
+      expect(response.status_message).to match /in progress/
     end
   end
 

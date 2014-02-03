@@ -26,10 +26,17 @@ describe FulfilmentResponse do
     end
   end
 
-  describe '#status' do
-    it 'should map the status to a user friendly value' do
+  describe '#status_message' do
+    it 'should map the status to a user friendly message' do
       response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
-      response.status.should == 'Your order is in progress'
+      response.status_message.should == 'Your order is in progress'
+    end
+  end
+
+  describe '#status_heading' do
+    it 'should map the status to a user friendly header' do
+      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response.status_heading.should == 'In Progress'
     end
   end
 end

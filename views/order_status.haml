@@ -1,4 +1,5 @@
-%p= "Status: #{locals[:details].status}"
+%p.status-heading= locals[:details].status_heading
+%p.status-message= locals[:details].status_message
 
 -#= haml :_shipping_info, locals: locals[:details].tracking if locals[:details].tracking
 

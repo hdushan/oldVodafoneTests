@@ -32,7 +32,7 @@ describe FulfilmentClient do
         response = fulfilment_client.get_order_details('1234')
 
         expect(response.has_error?).to eq(false)
-        expect(response.status).to match(/in progress/)
+        expect(response.status_message).to match(/in progress/)
       end
     end
 
