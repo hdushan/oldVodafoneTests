@@ -203,7 +203,7 @@
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Found" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="1334691203">Order not found</stringProp>
+              <stringProp name="-1002341429">order ID was not found</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
@@ -357,7 +357,7 @@
         <hashTree>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="1334691203">Order not found</stringProp>
+              <stringProp name="-1002341429">order ID was not found</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
             <boolProp name="Assertion.assume_success">true</boolProp>
@@ -395,7 +395,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt.jtl</stringProp>
+        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt_new.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
