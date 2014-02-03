@@ -1,9 +1,8 @@
 class MessageMapper
   STATUS_MESSAGE_MAP = {
-      'BOOKED' => 'Your order has been booked',
+      'BACKORDERED' => 'Your order is on backorder',
       'CANCELLED' => 'Your order has been cancelled',
-      'CLOSED' => 'Your order is successfully processed',
-      'TERMINATED' => 'Your order is terminated',
+      'SHIPPED' => 'Your order has been shipped',
       'IN PROGRESS' => 'Your order is in progress'
   }
 

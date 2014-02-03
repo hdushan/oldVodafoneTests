@@ -18,8 +18,10 @@ describe MessageMapper do
   describe '#get_status_message' do
     it 'should map known statuses' do
       mapper = MessageMapper.new
-      mapper.get_status_message('BOOKED').should == 'Your order has been booked'
-      mapper.get_status_message('CLOSED').should == 'Your order is successfully processed'
+      mapper.get_status_message('CANCELLED').should == 'Your order has been cancelled'
+      mapper.get_status_message('IN PROGRESS').should == 'Your order is in progress'
+      mapper.get_status_message('BACKORDERED').should == 'Your order is on backorder'
+      mapper.get_status_message('SHIPPED').should == 'Your order has been shipped'
     end
 
     it 'should raise error if status is not known' do
