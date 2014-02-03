@@ -8,7 +8,7 @@ Feature: View Order Status
 
     Examples:
       |  order_id          |  status           |
-      |  VF123FOUND        |  cancelled        |
+      |  VF123FOUND        |  shipped          |
 #      |  VF123STAGED       |  In Progress      |
 #      |  1-123PICKCONF     |  In Progress      |
 #      |  SR1-123READY      |  In Progress      |
