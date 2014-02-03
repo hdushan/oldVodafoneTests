@@ -13,11 +13,15 @@ class FulfilmentResponse
   end
 
   def error_message
-    @message_mapper.get_error_message(@code) if has_error?
+    @message_mapper.error_message(@code) if has_error?
   end
 
-  def status
-    @message_mapper.get_status_message(@body["tracking_status"])
+  def status_message
+    @message_mapper.status_message(@body["tracking_status"])
+  end
+
+  def status_heading
+    @message_mapper.status_heading(@body["tracking_status"])
   end
 
   def to_s
