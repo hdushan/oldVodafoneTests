@@ -14,6 +14,8 @@ require 'rspec/mocks/standalone'
 require_relative '../../app'
 require_relative '../../lib/mega_menu/mega_menu_api_client'
 
+FULFILMENT_ROOT = 'http://fake-fulfilment.com.au/v1'
+
 Capybara.register_driver :poltergeist do |app|
   options = {
           :js_errors => true,
@@ -32,19 +34,21 @@ if ENV['RAILS_ENV'] == 'paas-qa'
   Capybara.run_server = false
 else
   puts 'In LOCAL'
-  Capybara.app = App.new(MegaMenuAPIClient.new, double('ff_client'))
+  Capybara.app = App.new(MegaMenuAPIClient.new, FulfilmentClient.new(FULFILMENT_ROOT))
 end
 
 Capybara.javascript_driver = :poltergeist
 
 Before do
   agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36"
-  page.driver.add_header("User-Agent", agent)  
+  page.driver.add_header("User-Agent", agent)
+  stub_desktop_mega_menu
 end
 
 Before('@mobile') do
   agent = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16"
   page.driver.add_header("User-Agent", agent)
+  stub_mobile_mega_menu
 end
 
 After('@mobile') do
