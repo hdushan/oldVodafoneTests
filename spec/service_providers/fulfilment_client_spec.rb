@@ -44,7 +44,7 @@ describe FulfilmentClient, :pact => true do
     it 'should have an error message' do
       response = fulfilment_client.get_order_details('VF123NOTFOUND')
 
-      expect(response.has_error?).to be_true
+      expect(response).to have_error
       expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
     end
   end
@@ -83,7 +83,7 @@ describe FulfilmentClient, :pact => true do
     it 'should return an order status' do
       response = fulfilment_client.get_order_details('VF456')
 
-      expect(response.has_error?).to be_false
+      expect(response).to_not have_error
       expect(response.status_message).to match /in progress/
     end
   end
@@ -125,7 +125,7 @@ describe FulfilmentClient, :pact => true do
     it 'should return a generic error message' do
       response = fulfilment_client.get_order_details('VF503')
 
-      expect(response.has_error?).to be_true
+      expect(response).to have_error
       expect(response.error_message).to match /Service Unavailable/
     end
   end
