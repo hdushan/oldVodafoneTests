@@ -1,4 +1,4 @@
-describe("Show loading on form submit", function() {
+describe('#showLoadingImage', function() {
 
   beforeEach( function(){
     var $container = affix('div');
@@ -25,19 +25,19 @@ describe("Show loading on form submit", function() {
 
 });
 
-describe("form validation", function() {
+describe("form validation on submit", function() {
 
-  beforeEach( function() {      
+  beforeEach( function() {
     var $container = affix('div');
     $container.affix('form#track-form[action="/track"] input#tracking_id');
     $container.affix('#input-validation-msg.hidden[style="display: none"]');
     validateTrackForm();
   });
 
-  describe("When the order id is empty and I click on submit", function() {
+  describe('with empty track id', function() {
 
-    it ("should display the error message", function() {
-      $('#track-form').trigger('submit');    
+    it ('should display the error message', function() {
+      $('#track-form').trigger('submit');
 
       var validationMessageAfter = $('#input-validation-msg').is(':visible');
       expect(validationMessageAfter).toBe(true);
@@ -45,11 +45,11 @@ describe("form validation", function() {
 
   });
 
-  describe("When the order id is invalid and I click on submit", function() {
+  describe('with invalid track id', function() {
 
-    it ("should display the error message", function() {
+    it ('should display the error message', function() {
       $('#tracking_id').val('invalid_id');
-      $('#track-form').trigger('submit');    
+      $('#track-form').trigger('submit');
 
       var validationMessageAfter = $('#input-validation-msg').is(':visible');
       expect(validationMessageAfter).toBe(true);

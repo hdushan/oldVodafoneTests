@@ -4,11 +4,12 @@ $(document).ready( function() {
 
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {
+    $('#input-validation-msg').hide();
     $('#track-form .alert').hide();
 
     event.preventDefault();
 
-    var order_id = order_id_entered();
+    var order_id = orderIdEntered();
 
     if(isValidOrderId(order_id)) {
       showLoadingImage();
