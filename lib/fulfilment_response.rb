@@ -24,6 +24,13 @@ class FulfilmentResponse
     @message_mapper.status_heading(@body["tracking_status"])
   end
 
+  def items
+    return [] unless @body["items"]
+    @body["items"].inject([]) do |items, item|
+      items << {:item_quantity => item["item_quantity"], :description => item["description"]}
+    end
+  end
+
   def to_s
      "HTTP response code: #{@code}\n
       Body: '#{@body}\n

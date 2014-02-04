@@ -39,4 +39,20 @@ describe FulfilmentResponse do
       response.status_heading.should == 'In Progress'
     end
   end
+
+  describe '#items' do
+    it 'should map the shipping line items if present' do
+      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS", "items" => [
+          {"description" => "iPhone", "item_quantity" => "1"},
+          {"description" => "sim", "item_quantity" => "2"}
+      ]})
+      response.items.first.should == {item_quantity: "1", description: "iPhone"}
+      response.items.last.should == {item_quantity: "2", description: "sim"}
+    end
+
+    it 'should return empty array if there are no shipping line items' do
+      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response.items.should == []
+    end
+  end
 end

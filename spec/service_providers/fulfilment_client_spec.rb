@@ -44,7 +44,7 @@ describe FulfilmentClient, :pact => true do
     it 'should have an error message' do
       response = fulfilment_client.get_order_details('VF123NOTFOUND')
 
-      expect(response.has_error?).to be_true
+      expect(response).to have_error
       expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
     end
   end
@@ -83,13 +83,31 @@ describe FulfilmentClient, :pact => true do
     it 'should return an order status' do
       response = fulfilment_client.get_order_details('VF456')
 
-      expect(response.has_error?).to be_false
+      expect(response).to_not have_error
       expect(response.status_message).to match /in progress/
     end
   end
 
-  describe 'when fusion is not available' do
+  describe 'get_order_details for invalid order id' do
+    before do
+      stub_root_resource fulfilment_service_provider, 'invalid order id'
 
+      fulfilment_service_provider
+        .given('invalid order id')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/v1/order/invalid')
+        .will_respond_with(status: 403)
+    end
+
+    it 'should return an order status' do
+      response = fulfilment_client.get_order_details('invalid')
+
+      expect(response).to have_error
+      expect(response.error_message).to match /invalid order id/i
+    end
+  end
+
+  describe 'when fusion is not available' do
     before do
       stub_root_resource fulfilment_service_provider, 'an unexpected error in fusion'
 
@@ -97,18 +115,33 @@ describe FulfilmentClient, :pact => true do
         .given('an unexpected error in fusion')
         .upon_receiving('a request for order status')
         .with(method: :get, path: '/v1/order/VF503')
-        .will_respond_with(
-          status: 503,
-          headers: {'Content-Type' => 'application/hal+json'}
-        )
+        .will_respond_with(status: 503)
     end
 
     it 'should return a generic error message' do
       response = fulfilment_client.get_order_details('VF503')
 
-      expect(response.has_error?).to be_true
+      expect(response).to have_error
       expect(response.error_message).to match /Service Unavailable/
     end
   end
 
+  describe 'when fulfilment is broken' do
+    before do
+      stub_root_resource fulfilment_service_provider, 'fulfilment is broken'
+
+      fulfilment_service_provider
+        .given('fulfilment is broken')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/v1/order/VF503')
+        .will_respond_with(status: 500)
+    end
+
+    it 'should return a generic error message' do
+      response = fulfilment_client.get_order_details('VF503')
+
+      expect(response).to have_error
+      expect(response.error_message).to eq 'There was a problem retrieving your order.'
+    end
+  end
 end

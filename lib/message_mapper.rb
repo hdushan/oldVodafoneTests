@@ -3,12 +3,13 @@ class MessageMapper
       'BACKORDERED' => ['On Backorder', 'Your order is on backorder'],
       'CANCELLED' => ['Order Cancelled', 'Your order has been cancelled'],
       'SHIPPED' => ['Order Shipped', 'Your order has been shipped'],
-      'IN PROGRESS' => ['In Progress', 'Your order is in progress']
+      'IN PROGRESS' => ['In Progress', 'Your order is in progress'],
   }
 
   ERROR_MESSAGE_MAP = {
       503 => 'Service Unavailable. Please, try again later.',
-      404 => 'That order ID was not found. Please, check that you typed it correctly.'
+      403 => 'Invalid order ID, check that you typed it correctly.',
+      404 => 'That order ID was not found. Please, check that you typed it correctly.',
   }
 
   DEFAULT_ERROR_MESSAGE = 'There was a problem retrieving your order.'
