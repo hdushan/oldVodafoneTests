@@ -37,19 +37,27 @@ describe "Track & Trace App" do
       get '/tnt/abc'
     end
 
-    context 'with a missing id' do
-      let(:fulfilment_response) { FulfilmentResponse.new(404, "We don't care") }
+    context 'when Fulfilment Service is available' do
+      context 'with a missing id' do
+        let(:fulfilment_response) { FulfilmentResponse.new(404, "We don't care") }
 
-      its(:status) { should eq 404 }
-      its(:body) { should have_tag(:p, text: 'That order ID was not found. Please, check that you typed it correctly.') }
+        its(:status) { should eq 404 }
+        its(:body) { should have_tag(:p, text: 'That order ID was not found. Please, check that you typed it correctly.') }
+      end
+
+      context 'with a valid id' do
+        let(:fulfilment_response) { FulfilmentResponse.new(200, { 'tracking_status'=> 'CANCELLED'}) }
+
+        its(:status) { should eq 200 }
+        its(:body) { should match /cancelled/ }
+      end
     end
 
-    context 'with a valid id' do
-      let(:fulfilment_response) { FulfilmentResponse.new(200, { 'tracking_status'=> 'CANCELLED'}) }
+    context 'when Fulfilment Service is not availablle' do
+      let(:fulfilment_response) { raise 'Faraday::Error::ConnectionFailed - Connection refused - connect(2)' }
 
-      its(:status) { should eq 200 }
-      its(:body) { should match /cancelled/ }
+      its(:status) { should eq 500 }
+      its(:body) { should have_tag(:p, text: 'There was a problem retrieving your order.') }
     end
   end
-
 end
