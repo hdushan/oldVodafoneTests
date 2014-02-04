@@ -9,14 +9,14 @@ Feature: View Order Status
 
     Examples:
       |  order_id          |  heading          | message            |
-#      |  VF123STAGED       |  In Progress      | in progress        |
-#      |  1-123PICKCONF     |  In Progress      | in progress        |
-#      |  SR1-123READY      |  In Progress      | in progress        |
-#      |  UP123BACKORDER    |  On Backorder     | on backorder       |
-#      |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
-#      |  SR1-123CLOSED     |  Order Shipped    | has been shipped   |
-#      |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
-#      |  1-123INPROGRESS   |  In Progress      | in progress        |
+      |  VF123STAGED       |  In Progress      | in progress        |
+      |  1-123PICKCONF     |  In Progress      | in progress        |
+      |  SR1-123READY      |  In Progress      | in progress        |
+      |  UP123BACKORDER    |  On Backorder     | on backorder       |
+      |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
+      |  SR1-123CLOSED     |  Order Shipped    | has been shipped   |
+      |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
+      |  1-123INPROGRESS   |  In Progress      | in progress        |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states

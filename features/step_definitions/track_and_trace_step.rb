@@ -22,9 +22,9 @@ end
 When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |order_id, error_state_description|
   case error_state_description
   when "doesnt exist"
-    setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(404, {}) )
+    setup_fulfilment_service_stub_error(order_id, 404)
   when "timed out from fusion"
-    setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(503, {}) )
+    setup_fulfilment_service_stub_error(order_id, 503)
   else
     raise 'Unknown Error Scenario'
   end
@@ -32,7 +32,7 @@ When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |ord
 end
 
 When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id, FulfilmentResponse.new(200, {"tracking_status" =>"SHIPPED"} ) )
+  setup_fulfilment_service_stub(order_id)
   submit_track_form_with order_id
 end
 
@@ -70,13 +70,6 @@ end
 
 Then(/^I should see the mobile Megamenu footer$/) do
   expect(page).to have_content('Full site') #Mobile Megamenu footer
-end
-
-def setup_fulfilment_service_stub order_id, return_value
-  unless ENV['RAILS_ENV'] == 'paas-qa'
-    ff_client = Capybara.app.instance_variable_get("@instance").instance_variable_get("@fulfilment_client")
-    ff_client.stub(:get_order_details).with(order_id) { return_value }
-  end
 end
 
 def submit_track_form_with order_id
