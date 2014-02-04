@@ -108,7 +108,6 @@ describe FulfilmentClient, :pact => true do
   end
 
   describe 'when fusion is not available' do
-
     before do
       stub_root_resource fulfilment_service_provider, 'an unexpected error in fusion'
 
@@ -116,10 +115,7 @@ describe FulfilmentClient, :pact => true do
         .given('an unexpected error in fusion')
         .upon_receiving('a request for order status')
         .with(method: :get, path: '/v1/order/VF503')
-        .will_respond_with(
-          status: 503,
-          headers: {'Content-Type' => 'application/hal+json'}
-        )
+        .will_respond_with(status: 503)
     end
 
     it 'should return a generic error message' do
@@ -130,4 +126,22 @@ describe FulfilmentClient, :pact => true do
     end
   end
 
+  describe 'when fulfilment is broken' do
+    before do
+      stub_root_resource fulfilment_service_provider, 'fulfilment is broken'
+
+      fulfilment_service_provider
+        .given('fulfilment is broken')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/v1/order/VF503')
+        .will_respond_with(status: 500)
+    end
+
+    it 'should return a generic error message' do
+      response = fulfilment_client.get_order_details('VF503')
+
+      expect(response).to have_error
+      expect(response.error_message).to eq 'There was a problem retrieving your order.'
+    end
+  end
 end
