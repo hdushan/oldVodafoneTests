@@ -11,6 +11,9 @@ require 'rspec'
 require 'rack/test'
 require File.expand_path '../../app.rb', __FILE__
 
+#matchers
+require 'capybara'
+
 def app
   App.new nil, nil
 end
@@ -24,9 +27,15 @@ require 'rspec-html-matchers'
 def render(template, local_variables={})
   template = File.read(".#{template}")
   engine = Haml::Engine.new(template)
-  @response = engine.render(Object.new, local_variables)
+  @response = engine.render(double(Object.new, :haml => nil), local_variables)
 end
 
 def response
   @response
 end
+
+def page
+  Capybara::Node::Simple.new(@response)
+end
+
+
