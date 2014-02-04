@@ -7,8 +7,8 @@ describe 'order_status.haml' do
       @details = double(FulfilmentResponse,
                         status_heading: 'In Progress', status_message: 'Your order is in progress.',
                         items: [
-                            {item_quantity: 1, description: 'Samsung Galaxy'},
-                            {item_quantity: 2, description: 'iPhone 5C'}
+                            {item_quantity: "1", description: 'Samsung Galaxy'},
+                            {item_quantity: "2", description: 'iPhone 5C'}
                         ])
       render("/views/order_status.haml", :details => @details)
       #puts response
