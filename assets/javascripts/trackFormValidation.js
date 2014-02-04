@@ -9,7 +9,7 @@ function validateTrackForm() {
 
     event.preventDefault();
 
-    var order_id = order_id_entered();
+    var order_id = orderIdEntered();
 
     if(isValidOrderId(order_id)) {
       showLoadingImage();

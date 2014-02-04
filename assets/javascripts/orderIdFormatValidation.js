@@ -3,6 +3,6 @@ function isValidOrderId(order_id) {
   return order_id.length <= 15 && order_id_format.test(order_id);
 }
 
-function order_id_entered() {
+function orderIdEntered() {
   return $.trim( $("#tracking_id").val());
 }

@@ -1,10 +1,10 @@
 describe('Validation order id input text', function() {
 
-  describe('#order_id_entered', function() {
+  describe('#orderIdEntered', function() {
 
     it('should trim leading and trailing whitespace', function() {
       affix('input#tracking_id[value="     kitty     "]');
-      var order_id = order_id_entered();
+      var order_id = orderIdEntered();
       expect(order_id).toBe('kitty');
     });
 
