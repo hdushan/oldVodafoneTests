@@ -88,6 +88,25 @@ describe FulfilmentClient, :pact => true do
     end
   end
 
+  describe 'get_order_details for invalid order id' do
+    before do
+      stub_root_resource fulfilment_service_provider, 'invalid order id'
+
+      fulfilment_service_provider
+        .given('invalid order id')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/v1/order/invalid')
+        .will_respond_with(status: 403)
+    end
+
+    it 'should return an order status' do
+      response = fulfilment_client.get_order_details('invalid')
+
+      expect(response).to have_error
+      expect(response.error_message).to match /invalid order id/i
+    end
+  end
+
   describe 'when fusion is not available' do
 
     before do
