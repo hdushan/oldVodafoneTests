@@ -31,6 +31,10 @@ class FulfilmentResponse
     end
   end
 
+  def order_number
+    @body['order_number'] || ''
+  end
+
   def to_s
      "HTTP response code: #{@code}\n
       Body: '#{@body}\n

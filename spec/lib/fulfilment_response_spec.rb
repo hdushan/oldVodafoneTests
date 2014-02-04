@@ -21,38 +21,50 @@ describe FulfilmentResponse do
     end
 
     it 'should return nil if no error occurred' do
-      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
       response.error_message.should be_nil
     end
   end
 
   describe '#status_message' do
     it 'should map the status to a user friendly message' do
-      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
       response.status_message.should == 'Your order is in progress'
     end
   end
 
   describe '#status_heading' do
     it 'should map the status to a user friendly header' do
-      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
       response.status_heading.should == 'In Progress'
     end
   end
 
   describe '#items' do
     it 'should map the shipping line items if present' do
-      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS", "items" => [
-          {"description" => "iPhone", "item_quantity" => "1"},
-          {"description" => "sim", "item_quantity" => "2"}
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS', 'items' => [
+          {'description' => 'iPhone', 'item_quantity' => '1'},
+          {'description' => 'sim', 'item_quantity' => '2'}
       ]})
-      response.items.first.should == {item_quantity: "1", description: "iPhone"}
-      response.items.last.should == {item_quantity: "2", description: "sim"}
+      response.items.first.should == {item_quantity: '1', description: 'iPhone'}
+      response.items.last.should == {item_quantity: '2', description: 'sim'}
     end
 
     it 'should return empty array if there are no shipping line items' do
-      response = FulfilmentResponse.new(200, {"tracking_status" => "IN PROGRESS"})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
       response.items.should == []
+    end
+  end
+
+  describe '#order_number' do
+    it 'should map the order number' do
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response.order_number.should == 'VF123FOUND'
+    end
+
+    it 'should return empty string if order_number is missing' do
+      response = FulfilmentResponse.new(200, {'tracking_status' => 'IN PROGRESS'})
+      response.order_number.should == ''
     end
   end
 end

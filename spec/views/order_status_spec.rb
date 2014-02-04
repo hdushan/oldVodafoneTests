@@ -5,13 +5,18 @@ describe 'order_status.haml' do
 
     before do
       @details = double(FulfilmentResponse,
-                        status_heading: 'In Progress', status_message: 'Your order is in progress.',
+                        order_number: 'VF123MULTILINES', status_heading: 'In Progress', status_message: 'Your order is in progress.',
                         items: [
                             {item_quantity: "1", description: 'Samsung Galaxy'},
                             {item_quantity: "2", description: 'iPhone 5C'}
                         ])
       render("/views/order_status.haml", :details => @details)
       #puts response
+    end
+
+    it 'should include the order number' do
+      expect(page.find('.order-number-label')).to have_content('Order Status:')
+      expect(page.find('.order-number')).to have_content('VF123MULTILINES')
     end
 
     it 'should have order status fields' do
@@ -26,16 +31,27 @@ describe 'order_status.haml' do
       expect(items.last).to have_content('2 x iPhone 5C')
       expect(page.find('.order-details-heading')).to have_content('Order Details')
     end
+
   end
 
   context 'an In Progress order with no items' do
 
     before do
       @details = double(FulfilmentResponse,
-                        status_heading: 'In Progress', status_message: 'Your order is in progress.',
+                        order_number: '1-123INPROGRESS', status_heading: 'In Progress', status_message: 'Your order is in progress.',
                         items: [])
       render("/views/order_status.haml", :details => @details)
       #puts response
+    end
+
+    it 'should include the order number' do
+      expect(page.find('.order-number-label')).to have_content('Order Status:')
+      expect(page.find('.order-number')).to have_content('1-123INPROGRESS')
+    end
+
+    it 'should have order status fields' do
+      expect(page.find('.status-heading')).to have_content('In Progress')
+      expect(page.find('.status-message')).to have_content('Your order is in progress.')
     end
 
     it 'should have no order details and no order detail heading' do
