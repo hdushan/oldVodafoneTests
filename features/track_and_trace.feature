@@ -25,10 +25,10 @@ Feature: View Order Status
 	Then I should see a '<error_message_description>' error message
 
     Examples:
-      |  order_state_description |  order_id          |  error_message_description   |
-      |  doesnt exist            |  VF1NON1EXISTING   |  order ID was not found      |
-      |  timed out from fusion   |  VF1TIMEOUT123     |  Service Unavailable         |
-      #|  had unexpected status   |  1-BADSTATUS123    |  Blah Blah                   |
+      |  order_state_description   |  order_id          |  error_message_description      |
+      |  doesnt exist              |  VF1NON1EXISTING   |  order ID was not found         |
+      |  timed out from fusion     |  VF1TIMEOUT123     |  Service Unavailable            |
+      |  has an unexpected status  |  1-1BADSTATUS      |  problem retrieving your order  |
 
   # This scanario tests the mobile megamenu. This test needs to be the last test in the suite, as
   # inspite of resetting http request headers after the test, subsequent requents are still identified as
