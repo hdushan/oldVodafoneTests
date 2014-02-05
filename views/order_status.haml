@@ -1,6 +1,6 @@
 %h1 Trace Your Order
 %p
-  %span.order-number-label Order Status:
+  %span.order-number-label Order Status for order number:
   %span.order-number= locals[:details].order_number
 %h2.status-heading= locals[:details].status_heading
 %p.status-message= locals[:details].status_message
@@ -9,7 +9,7 @@
   %h3.order-details-heading Order Details
   .order-details
     -locals[:details].items.each do |item|
-      %p.item= "#{item[:item_quantity]} x #{item[:description]}"
+      %p.item&= "#{item[:item_quantity]} x #{item[:description]}"
 
 -#= haml :_shipping_info, locals: locals[:details].tracking if locals[:details].tracking
 
