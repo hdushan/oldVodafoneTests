@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'test_helper'
 require 'fulfilment_client'
 
 describe 'track_form.haml' do

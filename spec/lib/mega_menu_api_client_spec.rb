@@ -1,5 +1,4 @@
 require 'rspec'
-require 'webmock/rspec'
 
 require_relative '../../lib/mega_menu/mega_menu_api_client'
 

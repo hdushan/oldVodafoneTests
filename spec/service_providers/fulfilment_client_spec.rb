@@ -1,6 +1,4 @@
-require 'fulfilment_client'
-require 'pry'
-require_relative '../test_helper'
+require 'spec_helper'
 require_relative 'pact_helper'
 
 def stub_root_resource(fulfilment_service_provider, given)

@@ -9,6 +9,7 @@ SimpleCov.start
 # rspec
 require 'rspec'
 require 'rack/test'
+require 'webmock/rspec'
 require File.expand_path '../../app.rb', __FILE__
 
 #matchers
