@@ -25,6 +25,8 @@ When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |ord
     setup_fulfilment_service_stub_error(order_id, 404)
   when "timed out from fusion"
     setup_fulfilment_service_stub_error(order_id, 503)
+  when "has an unexpected status"
+    setup_fulfilment_service_stub_error(order_id, 500)
   else
     raise 'Unknown Error Scenario'
   end
