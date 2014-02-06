@@ -1,5 +1,5 @@
 require 'hyperclient'
-require 'faraday_monkeypatch' if File.exists? '/etc/trackandtrace_do_monkeypatching'
+require 'faraday_monkeypatch' if File.exists? '/etc/trackandtrace_do_monkeypatch'
 
 class FulfilmentClient
   def initialize(root = nil)
