@@ -19,7 +19,7 @@ Feature: View Order Status
       |  1-123INPROGRESS   |  In Progress      | in progress        |
 
   @javascript @ignore
-  Scenario: View correct details of the order
+  Scenario: View correct details of the order that has multiple items, some of which are backordered
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'VF123BOMULTI'
     Then I should see the tracking status 'On Backorder' for the order
