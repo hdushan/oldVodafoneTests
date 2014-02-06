@@ -46,6 +46,16 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
   }
 end
 
+Then(/^I should see the right count and description for each item$/) do
+  expected = ['1 x iPhone 5C 32GB magenta',
+              '1 x Microsim \"G23123\"',
+              'iPhone 5C 16GB Gold',
+              "Microsim 'F2313'",
+              "Soft leather case & screen protector <h1>&1234;_!|\\/#"]
+  not_found = page.all('.order-details > .item').reject { |elem| expected.include?(elem.text) }
+  expect(not_found).to be_empty
+end
+
 And(/^I should see the message '(.*)'$/) do |message|
   expect(page.find('.status-message')).to have_content(message)
 end
