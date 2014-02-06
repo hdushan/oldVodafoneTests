@@ -30,6 +30,10 @@ class App < Sinatra::Base
     logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
   end
 
+  get '/tnt/' do
+    redirect '/tnt'
+  end
+
   get '/tnt' do
     mega_menu
 
