@@ -18,6 +18,15 @@ Feature: View Order Status
       |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
       |  1-123INPROGRESS   |  In Progress      | in progress        |
 
+  @javascript @ignore
+  Scenario: View correct details of the order
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id 'VF123BOMULTI'
+    Then I should see the tracking status 'On Backorder' for the order
+    And I should see the message 'on backorder'
+	And I should see the right count and description for each item in the order
+	And I should see the estimated shipping date for the order
+
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
     Given I am on the Track and Trace Home page '/tnt'
