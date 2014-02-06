@@ -35,6 +35,18 @@ class FulfilmentResponse
     @body['order_number'] || ''
   end
 
+  def is_on_backorder?
+    @body["tracking_status"] == 'BACKORDERED'
+  end
+
+  def estimated_shipping_date
+    Date.parse(@body["estimated_shipping_date"]).strftime('%d %B %Y') if @body["estimated_shipping_date"]
+  end
+
+  def shipping_estimate_message
+    MessageMapper::SHIPPING_ESTIMATE_MESSAGE if is_on_backorder? && !estimated_shipping_date
+  end
+
   def to_s
      "HTTP response code: #{@code}\n
       Body: '#{@body}\n

@@ -14,6 +14,8 @@ class MessageMapper
 
   DEFAULT_ERROR_MESSAGE = 'There was a problem retrieving your order.'
 
+  SHIPPING_ESTIMATE_MESSAGE = 'Your order will arrive soon';
+
   def error_message(error_code)
     ERROR_MESSAGE_MAP[error_code] || DEFAULT_ERROR_MESSAGE
   end

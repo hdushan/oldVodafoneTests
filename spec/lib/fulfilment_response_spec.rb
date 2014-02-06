@@ -67,4 +67,45 @@ describe FulfilmentResponse do
       response.order_number.should == ''
     end
   end
+
+  describe 'backorders' do
+    context 'when the estimated shipping date is present' do
+      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
+        'estimated_shipping_date' => '2014-07-13',
+        'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
+      }
+
+      it 'should be on backorder' do
+        response.is_on_backorder?.should be_true
+      end
+
+      it 'should format the date' do
+        response.estimated_shipping_date.should eq('13 July 2014')
+      end
+
+      it 'should not show a shipping estimate message' do
+        response.shipping_estimate_message.should be_nil
+      end
+
+    end
+
+    context 'when the estimated shipping date is missing' do
+      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
+                                                    'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
+      }
+
+      it 'should be on backorder' do
+        response.is_on_backorder?.should be_true
+      end
+
+      it 'should not have a date' do
+        response.estimated_shipping_date.should be_nil
+      end
+
+      it 'should show a shipping estimate message' do
+        response.shipping_estimate_message.should eq('Your order will arrive soon')
+      end
+    end
+
+  end
 end
