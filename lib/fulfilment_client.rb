@@ -6,7 +6,7 @@ class FulfilmentClient
   end
 
   def get_order_details(order_id)
-    raise 'Order ID empty' if order_id.empty?
+    raise ArgumentError, 'order_id empty' if order_id.empty?
 
     http_response = request_order_status(order_id)
     FulfilmentResponse.new(http_response.status, http_response.body)
