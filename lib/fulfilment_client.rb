@@ -1,4 +1,5 @@
 require 'hyperclient'
+require 'faraday_monkey_patch' if !ENV['RAILS_ENV']
 
 class FulfilmentClient
   def initialize(root = nil)
