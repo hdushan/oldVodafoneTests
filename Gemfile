@@ -13,6 +13,7 @@ gem 'sinatra-assetpack', require: 'sinatra/assetpack'
 gem 'sinatra-contrib'
 gem 'unicorn'
 gem 'useragent'
+gem 'rack-timeout'
 
 group :development, :test do
   gem 'capybara'

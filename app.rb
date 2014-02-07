@@ -70,7 +70,7 @@ class App < Sinatra::Base
 
   error do
     exception = env['sinatra.error']
-    logger.error(exception.message)
+    logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
     @error = MessageMapper::DEFAULT_ERROR_MESSAGE
     haml(:error)
