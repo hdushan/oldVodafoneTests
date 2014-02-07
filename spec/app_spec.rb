@@ -4,11 +4,7 @@ require 'fulfilment_client'
 describe "Track & Trace App" do
   let(:fulfilment_client) { double(FulfilmentClient) }
 
-  let(:mega_menu_client) do
-    mega_menu_client = double(MegaMenuAPIClient)
-    allow(mega_menu_client).to receive(:get_menu).and_return(MegaMenuAPIClient.empty_response)
-    mega_menu_client
-  end
+  let(:mega_menu_client) { double(MegaMenuAPIClient, :get_menu => MegaMenuAPIClient.empty_response) }
 
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
@@ -26,6 +22,13 @@ describe "Track & Trace App" do
 
     its(:status) { should eq 302 }
     its(:location) { should end_with '/tnt/abc' }
+  end
+
+  describe 'fix broken mega menu mobile footer' do
+    before { get '/cs/static/img/mobile/image.png' }
+
+    it { should be_redirect }
+    its(:location) { should eq('http://www.vodafone.com.au/cs/static/img/mobile/image.png') }
   end
 
   describe 'GET /tnt/:id' do
@@ -46,7 +49,7 @@ describe "Track & Trace App" do
       end
 
       context 'with a valid id' do
-        let(:fulfilment_response) { FulfilmentResponse.new(200, { 'tracking_status'=> 'CANCELLED'}) }
+        let(:fulfilment_response) { FulfilmentResponse.new(200, {'tracking_status' => 'CANCELLED'}) }
 
         its(:status) { should eq 200 }
         its(:body) { should match /cancelled/ }
@@ -59,5 +62,46 @@ describe "Track & Trace App" do
       its(:status) { should eq 500 }
       its(:body) { should have_tag(:p, text: 'There was a problem retrieving your order.') }
     end
+  end
+
+  describe 'GET /tnt/:id?channel=:channel' do
+    context 'the user is on desktop' do
+
+      it 'should use the mobile mega menu if mobile channel is requested' do
+        get '/tnt/abc?channel=mobile', {}, { "HTTP_USER_AGENT" => "Desktop" }
+        expect(mega_menu_client).to have_received(:get_menu).with(true)
+      end
+
+      it 'should use the desktop mega menu if desktop channel is requested' do
+        get '/tnt/abc?channel=desktop', {}, { "HTTP_USER_AGENT" => "Desktop" }
+        expect(mega_menu_client).to have_received(:get_menu).with(false)
+      end
+
+      it 'should use the desktop mega menu if no channel is requested' do
+        get '/tnt/abc', {}, { "HTTP_USER_AGENT" => "Desktop" }
+        expect(mega_menu_client).to have_received(:get_menu).with(false)
+      end
+
+    end
+
+    context 'the user is on mobile' do
+
+      it 'should use the mobile mega menu if mobile channel is requested' do
+        get '/tnt/abc?channel=mobile', {}, { "HTTP_USER_AGENT" => "Mobile" }
+        expect(mega_menu_client).to have_received(:get_menu).with(true)
+      end
+
+      it 'should use the desktop mega menu if desktop channel is requested' do
+        get '/tnt/abc?channel=desktop', {}, { "HTTP_USER_AGENT" => "Mobile" }
+        expect(mega_menu_client).to have_received(:get_menu).with(false)
+      end
+
+      it 'should use the mobile mega menu if no channel is requested' do
+        get '/tnt/abc', {}, { "HTTP_USER_AGENT" => "Mobile" }
+        expect(mega_menu_client).to have_received(:get_menu).with(true)
+      end
+
+    end
+
   end
 end

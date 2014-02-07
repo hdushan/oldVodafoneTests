@@ -25,15 +25,26 @@ class App < Sinatra::Base
 
   def mega_menu
     logger.info('Getting the Mega Menu')
-    @is_mobile_user = UserAgent.parse(request.user_agent).mobile?
+    @is_mobile_user = use_mobile_channel
     @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
     logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
+  end
+
+
+  def use_mobile_channel
+    return true if params[:channel] == 'mobile'
+    return false if params[:channel] == 'desktop'
+    UserAgent.parse(request.user_agent).mobile?
   end
 
   get '/tnt' do
     mega_menu
 
     haml :track_form
+  end
+
+  get '/cs/static/img/mobile/:img_file' do
+    redirect "http://www.vodafone.com.au/cs/static/img/mobile/#{params[:img_file]}"
   end
 
   post '/tnt' do
