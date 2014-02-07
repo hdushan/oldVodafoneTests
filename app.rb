@@ -37,6 +37,10 @@ class App < Sinatra::Base
     UserAgent.parse(request.user_agent).mobile?
   end
 
+  get '/tnt/' do
+    redirect '/tnt'
+  end
+
   get '/tnt' do
     mega_menu
 

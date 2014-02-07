@@ -46,6 +46,20 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
   }
 end
 
+Then(/^I should see the right count and description for each item$/) do
+  expected = ['1 x iPhone 5C 32GB magenta',
+              '1 x Microsim "G23123"',
+              '1 x iPhone 5C 16GB Gold',
+              "1 x Microsim 'F2313'",
+              "2 x Soft leather case & screen protector <h1>&1234;_!|\\/#"]
+  actual = page.all('.order-details > .item').map { |elem| elem.text }
+  expect(actual).to match_array expected
+end
+
+Then(/^I should see the estimated shipping date for the order$/) do
+  expect(page.find('.ship-date')).to have_content('31 December 2014')
+end
+
 And(/^I should see the message '(.*)'$/) do |message|
   expect(page.find('.status-message')).to have_content(message)
 end
