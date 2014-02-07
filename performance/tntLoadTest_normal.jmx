@@ -14,7 +14,7 @@
           </elementProp>
           <elementProp name="SERVER" elementType="Argument">
             <stringProp name="Argument.name">SERVER</stringProp>
-            <stringProp name="Argument.value">${__P(SERVER,trackandtrace-qa.np.syd.services.vodafone.com.au)}</stringProp>
+            <stringProp name="Argument.value">${__P(SERVER,trackandtrace.load-test.np.syd.services.vodafone.com.au)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="PROTOCOL" elementType="Argument">
