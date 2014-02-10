@@ -4,7 +4,7 @@ describe '_tracking_info.haml' do
 
   let(:tracking_info) { {} }
   before do
-    render("/views/_shipping_info.haml", :tracking => tracking_info)
+    render("/views/_tracking_info.haml", :tracking => tracking_info)
   end
 
   context 'has no error in getting tracking information' do
