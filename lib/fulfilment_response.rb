@@ -57,7 +57,4 @@ class FulfilmentResponse
     @body['tracking']
   end
 
-  def has_tracking_error?
-    !tracking['error'].nil?
-  end
 end
