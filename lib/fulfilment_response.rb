@@ -52,4 +52,12 @@ class FulfilmentResponse
       Body: '#{@body}\n
       #{has_error? ? error_message : ''}"
   end
+
+  def tracking
+    @body['tracking']
+  end
+
+  def has_tracking_error?
+    !tracking['error'].nil?
+  end
 end

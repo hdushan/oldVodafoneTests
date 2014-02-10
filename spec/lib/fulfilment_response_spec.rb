@@ -108,4 +108,24 @@ describe FulfilmentResponse do
     end
 
   end
+
+  describe '#tracking' do
+    it 'return the tracking details' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'foo' => 'bar'} })
+      response.tracking.should eq({'foo' => 'bar'})
+    end
+  end
+
+  describe '#has_tracking_error?' do
+    it 'should return true if tracking details has error' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'error' => 'kittens'} })
+      response.has_tracking_error?.should be_true
+    end
+
+    it 'should return false if tracking details has no error' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'foo' => 'bar'} })
+      response.has_tracking_error?.should be_false
+    end
+  end
+
 end
