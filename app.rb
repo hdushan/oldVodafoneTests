@@ -37,6 +37,10 @@ class App < Sinatra::Base
     UserAgent.parse(request.user_agent).mobile?
   end
 
+  def client_ip
+    @env['HTTP_X_FORWARDED_FOR'] || request.ip
+  end
+
   get '/tnt/' do
     redirect '/tnt'
   end
@@ -57,7 +61,7 @@ class App < Sinatra::Base
 
   get '/tnt/:id' do
     mega_menu
-    fulfilment_response = @fulfilment_client.get_order_details params[:id]
+    fulfilment_response = @fulfilment_client.get_order_details params[:id], client_ip
 
     if fulfilment_response.has_error?
       logger.error("Fulfilment Response: #{fulfilment_response}")
