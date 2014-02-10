@@ -1,21 +1,20 @@
+%h2.tracking-info-heading Shipping Details
 
-%h2 Shipping details
--if locals['error']
-  .alert
-    .icon
-      %img{src: 'images/alert_icon.png'}
-    %span.msg= "There was an error while tracking your order: #{locals['error']}"
+-if tracking['error']
+  %p.tracking-info-generic-msg Your order has been shipped.
 - else
-  %p= "Status: #{locals['status']}"
-  %table
-    %tr
-      %th Location
-      %th Description
-      %th Date/Time
-      %th Signed by
-    - locals['events'].each do |event|
+  %p TODO: display tracking infor here
+-#
+    %p= "Status: #{locals['status']}"
+    %table
       %tr
-        %td= "#{event['location']}"
-        %td= "#{event['description']}"
-        %td= "#{event['date_time']}"
-        %td= "#{event['signer']}"
+        %th Location
+        %th Description
+        %th Date/Time
+        %th Signed by
+      - locals['events'].each do |event|
+        %tr
+          %td= "#{event['location']}"
+          %td= "#{event['description']}"
+          %td= "#{event['date_time']}"
+          %td= "#{event['signer']}"
