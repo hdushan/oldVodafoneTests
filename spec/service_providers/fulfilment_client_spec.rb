@@ -40,7 +40,7 @@ describe FulfilmentClient, :pact => true do
     end
 
     it 'should have an error message' do
-      response = fulfilment_client.get_order_details('VF123NOTFOUND')
+      response = fulfilment_client.get_order_details('VF123NOTFOUND', '1.2.3.4')
 
       expect(response).to have_error
       expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
@@ -82,7 +82,7 @@ describe FulfilmentClient, :pact => true do
       end
 
       it 'should return an order status' do
-        response = fulfilment_client.get_order_details('VF456')
+        response = fulfilment_client.get_order_details('VF456', '1.2.3.4')
 
         expect(response).to_not have_error
         expect(response.status_message).to match /in progress/
@@ -107,7 +107,7 @@ describe FulfilmentClient, :pact => true do
       end
 
       it 'should return an order status with error in tracking information' do
-        response = fulfilment_client.get_order_details('VF789')
+        response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
         expect(response.status_message).to match /in progress/
@@ -128,7 +128,7 @@ describe FulfilmentClient, :pact => true do
     end
 
     it 'should return an order status' do
-      response = fulfilment_client.get_order_details('invalid')
+      response = fulfilment_client.get_order_details('invalid', '1.2.3.4')
 
       expect(response).to have_error
       expect(response.error_message).to match /invalid order id/i
@@ -147,7 +147,7 @@ describe FulfilmentClient, :pact => true do
     end
 
     it 'should return a generic error message' do
-      response = fulfilment_client.get_order_details('VF503')
+      response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
       expect(response.error_message).to match /Service Unavailable/
@@ -166,7 +166,7 @@ describe FulfilmentClient, :pact => true do
     end
 
     it 'should return a generic error message' do
-      response = fulfilment_client.get_order_details('VF503')
+      response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
       expect(response.error_message).to eq 'There was a problem retrieving your order.'
