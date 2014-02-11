@@ -48,6 +48,7 @@ describe FulfilmentClient, :pact => true do
   end
 
   describe 'get_order_details for existing order id' do
+    let(:tracking_info) { {} }
     let(:response_body) {
       {
         'tracking_status' => 'IN PROGRESS',
@@ -60,29 +61,58 @@ describe FulfilmentClient, :pact => true do
           {
             'description' => 'sim'
           }
-        ]
+        ],
+        'tracking' => tracking_info
       }
     }
 
-    before do
-      stub_root_resource fulfilment_service_provider, 'order exists and completed'
+    context 'no error in tracking information' do
+      before do
+        stub_root_resource fulfilment_service_provider, 'order exists and completed'
 
-      fulfilment_service_provider
-        .given('order exists and completed')
-        .upon_receiving('a request for order status')
-        .with(method: :get, path: '/v1/order/VF456')
-        .will_respond_with(
-          status: 200,
-          headers: {'Content-Type' => 'application/hal+json'},
-          body: response_body
-        )
+        fulfilment_service_provider
+          .given('order exists and completed')
+          .upon_receiving('a request for order status')
+          .with(method: :get, path: '/v1/order/VF456')
+          .will_respond_with(
+            status: 200,
+            headers: {'Content-Type' => 'application/hal+json'},
+            body: response_body
+          )
+      end
+
+      it 'should return an order status' do
+        response = fulfilment_client.get_order_details('VF456')
+
+        expect(response).to_not have_error
+        expect(response.status_message).to match /in progress/
+      end
     end
 
-    it 'should return an order status' do
-      response = fulfilment_client.get_order_details('VF456')
+    context 'has error in tracking information' do
+      let(:tracking_info) { {'error' => 'Request to AusPost timed out'} }
 
-      expect(response).to_not have_error
-      expect(response.status_message).to match /in progress/
+      before do
+        stub_root_resource fulfilment_service_provider, 'an error in getting tracking info'
+
+        fulfilment_service_provider
+          .given('an error in getting tracking info')
+          .upon_receiving('a request for order status')
+          .with(method: :get, path: '/v1/order/VF789')
+          .will_respond_with(
+            status: 200,
+            headers: {'Content-Type' => 'application/hal+json'},
+            body: response_body
+          )
+      end
+
+      it 'should return an order status with error in tracking information' do
+        response = fulfilment_client.get_order_details('VF789')
+
+        expect(response).to_not have_error
+        expect(response.status_message).to match /in progress/
+        expect(response.tracking).to eql(tracking_info)
+      end
     end
   end
 
