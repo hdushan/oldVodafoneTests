@@ -17,16 +17,16 @@ class FulfilmentResponse
   end
 
   def status_message
-    return MessageMapper::AUSPOST_STATUS_MESSAGE if should_use_auspost_status
+    return MessageMapper::AUSPOST_STATUS_MESSAGE if use_auspost_status?
     @message_mapper.status_message(@body["tracking_status"])
   end
 
   def status_heading
-    return tracking['status'] if should_use_auspost_status
+    return tracking['status'] if use_auspost_status?
     @message_mapper.status_heading(@body["tracking_status"])
   end
 
-  def should_use_auspost_status
+  def use_auspost_status?
     tracking && tracking['status']
   end
 
@@ -64,7 +64,7 @@ class FulfilmentResponse
   end
 
   def show_tracking_events?
-    tracking && tracking['events']
+    tracking && tracking['events'] && tracking['events'].any?
   end
 
 end

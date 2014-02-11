@@ -8,9 +8,6 @@
         "item_quantity": "1"
     }
     ],
-    "tracking": {
-        "error": "Invalid tracking ID"
-    },
     "_links": {
         "self": {
             "href": "http://10.0.2.2:9394/v1/order/1-123PICKCONF"

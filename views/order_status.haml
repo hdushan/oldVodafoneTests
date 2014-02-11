@@ -12,12 +12,12 @@
   -else
     %p.ship-message= locals[:details].shipping_estimate_message
 
+= haml :_tracking_info, locals: { tracking: locals[:details].tracking } if locals[:details].show_tracking_events?
+
 -unless locals[:details].items.empty?
   %h3.order-details-heading Order Details
   .order-details
     -locals[:details].items.each do |item|
       %p.item&= "#{item[:item_quantity]} x #{item[:description]}"
-
-= haml :_tracking_info, locals: { tracking: locals[:details].tracking } if locals[:details].show_tracking_events?
 
 = haml :_info_links

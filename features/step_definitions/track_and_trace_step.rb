@@ -33,12 +33,7 @@ When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |ord
   submit_track_form_with order_id
 end
 
-When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
-  setup_fulfilment_service_stub(order_id)
-  submit_track_form_with order_id
-end
-
-When(/^I search for the status of a valid order with id '(.*)' that has tracking info error$/) do |order_id|
+When(/^I search for the status of a valid order with id '(.*)'/) do |order_id|
   setup_fulfilment_service_stub(order_id)
   submit_track_form_with order_id
 end
@@ -78,8 +73,15 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
 end
 
 Then(/^I should not see any shipping details$/) do
-  expect(page).to have_no_selector('.tracking-info-heading')
-  expect(page).to_not have_content('Shipping Details')
+  expect(page).to have_no_selector('.tracking-info')
+  expect(page).to_not have_content('Date/Time')
+end
+
+
+And(/^I should see shipping details including '(.*)' and '(.*)'$/) do |date, status|
+  expect(page).to have_selector('.tracking-info')
+  expect(page.all('.event-date').map { |elem| elem.text}).to include(date)
+  expect(page.all('.event-status').map { |elem| elem.text}).to include(status)
 end
 
 Then(/^I should see the Megamenu header$/) do
@@ -104,5 +106,4 @@ def submit_track_form_with order_id
   end
   click_button 'Trace your order'
 end
-
 

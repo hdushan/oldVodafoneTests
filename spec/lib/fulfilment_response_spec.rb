@@ -128,6 +128,7 @@ describe FulfilmentResponse do
         response.tracking['international'].should be_false
         response.tracking['status'].should eq('Delivered')
         response.tracking['events'].size.should be(3)
+        response.tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
       end
 
       it 'should use the AusPost tracking status if present' do
@@ -167,6 +168,11 @@ describe FulfilmentResponse do
 
     it 'should return false if no tracking events' do
       response = FulfilmentResponse.new(200, {'tracking' => {} })
+      response.show_tracking_events?.should be_false
+    end
+
+    it 'should return false if tracking events are empty' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'events' => []} })
       response.show_tracking_events?.should be_false
     end
 

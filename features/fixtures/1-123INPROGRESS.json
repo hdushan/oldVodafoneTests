@@ -3,9 +3,7 @@
         "description": "iPhone 5C 16GB White",
         "item_quantity": "1"
     }
-], "tracking": {
-    "error": "Invalid tracking ID"
-}, "_links": {
+], "_links": {
     "self": {
         "href": "http://10.0.2.2:9394/v1/order/1-123INPROGRESS"
     }
