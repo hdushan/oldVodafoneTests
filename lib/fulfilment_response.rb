@@ -63,4 +63,8 @@ class FulfilmentResponse
     @body['tracking']
   end
 
+  def show_tracking_events?
+    tracking && tracking['events']
+  end
+
 end

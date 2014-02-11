@@ -12,7 +12,7 @@ describe 'order_status.haml' do
                             {item_quantity: "2", description: 'iPhone 5C'},
                             {item_quantity: "3", description: %q{Hooray for special characters! ./?/<h1>!@#$%^&*(;:)_+''=-,\"`}}
                         ],
-                        tracking: nil
+                        show_tracking_events?: nil
                        )
       render("/views/order_status.haml", :details => @details)
       #puts response
@@ -49,7 +49,7 @@ describe 'order_status.haml' do
                         order_number: '1-123INPROGRESS', status_heading: 'In Progress', status_message: 'Your order is in progress.',
                         estimated_shipping_date: nil, is_on_backorder?: false,
                         items: [],
-                        tracking: nil
+                        show_tracking_events?: nil
                        )
       render("/views/order_status.haml", :details => @details)
       #puts response
@@ -77,7 +77,7 @@ describe 'order_status.haml' do
                         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
                         estimated_shipping_date: '19 March 2014', is_on_backorder?: true, shipping_estimate_message: nil,
                         items: [{item_quantity: '1', description: 'phone'}],
-                        tracking: nil
+                        show_tracking_events?: nil
                        )
       render("/views/order_status.haml", :details => @details)
       puts response
@@ -97,7 +97,7 @@ describe 'order_status.haml' do
                         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
                         estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Your order should arrive soon',
                         items: [{item_quantity: '1', description: 'phone'}],
-                        tracking: nil
+                        show_tracking_events?: nil
                        )
       render("/views/order_status.haml", :details => @details)
       puts response

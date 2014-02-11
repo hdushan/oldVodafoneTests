@@ -158,4 +158,22 @@ describe FulfilmentResponse do
     end
   end
 
+  describe '#show_tracking_events?' do
+
+    it 'should return true if has tracking events' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'events' => ['kittens']} })
+      response.show_tracking_events?.should be_true
+    end
+
+    it 'should return false if no tracking events' do
+      response = FulfilmentResponse.new(200, {'tracking' => {} })
+      response.show_tracking_events?.should be_false
+    end
+
+    it 'should return false if tracking is nil' do
+      response = FulfilmentResponse.new(200, {})
+      response.show_tracking_events?.should be_false
+    end
+
+  end
 end

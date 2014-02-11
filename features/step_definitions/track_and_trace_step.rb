@@ -77,12 +77,9 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
   }
 end
 
-Then(/^I should only see the generic '(.*)' tracking information message '(.*)'$/) do |status_heading, status_message|
+Then(/^I should not see any shipping details$/) do
   expect(page).to have_no_selector('.tracking-info-heading')
   expect(page).to_not have_content('Shipping Details')
-
-  expect(page.find('.status-heading')).to have_content(status_heading)
-  expect(page.find('.status-message')).to have_content(status_message)
 end
 
 Then(/^I should see the Megamenu header$/) do
