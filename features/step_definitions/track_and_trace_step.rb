@@ -38,6 +38,11 @@ When(/^I search for the status of a valid order with id '(.*)'$/) do |order_id|
   submit_track_form_with order_id
 end
 
+When(/^I search for the status of a valid order with id '(.*)' that has tracking info error$/) do |order_id|
+  setup_fulfilment_service_stub(order_id)
+  submit_track_form_with order_id
+end
+
 Then(/^I should see the tracking status '(.*)' for the order$/) do |status_header|
   expect(page.find('.status-heading')).to have_content(status_header)
   steps %Q{
@@ -70,6 +75,11 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
   }
+end
+
+Then(/^I should not see any shipping details$/) do
+  expect(page).to have_no_selector('.tracking-info-heading')
+  expect(page).to_not have_content('Shipping Details')
 end
 
 Then(/^I should see the Megamenu header$/) do

@@ -116,6 +116,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rack-timeout (0.1.0beta3)
     raindrops (0.12.0)
     rake (10.1.1)
     randexp (0.1.7)
@@ -200,6 +201,7 @@ DEPENDENCIES
   pry-doc
   pry-rescue
   rack-test
+  rack-timeout (= 0.1.0beta3)
   rake
   rspec
   rspec-html-matchers

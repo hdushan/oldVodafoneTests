@@ -18,6 +18,6 @@
     -locals[:details].items.each do |item|
       %p.item&= "#{item[:item_quantity]} x #{item[:description]}"
 
--#= haml :_shipping_info, locals: locals[:details].tracking if locals[:details].tracking
+= haml :_tracking_info, locals: { tracking: locals[:details].tracking } if locals[:details].show_tracking_events?
 
 = haml :_info_links

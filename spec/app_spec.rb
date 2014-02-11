@@ -33,7 +33,7 @@ describe "Track & Trace App" do
 
   describe 'GET /tnt/:id' do
     before do
-      fulfilment_client.stub(:get_order_details).with('abc') do |arg|
+      fulfilment_client.stub(:get_order_details).with('abc', '127.0.0.1') do |arg|
         fulfilment_response
       end
 
