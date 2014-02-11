@@ -1,20 +1,17 @@
 %h3.tracking-info-heading Shipping Details
 
--if locals[:tracking]['error']
-  %p.tracking-info-generic-msg Your order has been shipped.
-- else
-  %p TODO: display tracking infor here
+%p TODO: display tracking event here
 -#
-    %p= "Status: #{locals['status']}"
-    %table
+  %p= "Status: #{locals['status']}"
+  %table
+    %tr
+      %th Location
+      %th Description
+      %th Date/Time
+      %th Signed by
+    - locals['events'].each do |event|
       %tr
-        %th Location
-        %th Description
-        %th Date/Time
-        %th Signed by
-      - locals['events'].each do |event|
-        %tr
-          %td= "#{event['location']}"
-          %td= "#{event['description']}"
-          %td= "#{event['date_time']}"
-          %td= "#{event['signer']}"
+        %td= "#{event['location']}"
+        %td= "#{event['description']}"
+        %td= "#{event['date_time']}"
+        %td= "#{event['signer']}"
