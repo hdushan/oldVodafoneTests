@@ -71,8 +71,8 @@ describe FulfilmentResponse do
   describe 'backorders' do
     context 'when the estimated shipping date is present' do
       let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
-        'estimated_shipping_date' => '2014-07-13',
-        'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
+          'estimated_shipping_date' => '2014-07-13',
+          'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
       }
 
       it 'should be on backorder' do
@@ -91,7 +91,7 @@ describe FulfilmentResponse do
 
     context 'when the estimated shipping date is missing' do
       let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
-                                                    'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
+          'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
       }
 
       it 'should be on backorder' do
@@ -110,9 +110,51 @@ describe FulfilmentResponse do
   end
 
   describe '#tracking' do
-    it 'return the tracking details' do
-      response = FulfilmentResponse.new(200, {'tracking' => {'foo' => 'bar'} })
-      response.tracking.should eq({'foo' => 'bar'})
+
+    context 'when tracking data is complete and valid' do
+      let(:response) { FulfilmentResponse.new(200,
+          {'order_number' => 'VF123FOUND', 'tracking_status' => 'SHIPPED', 'consignment_number' => 'AP123FOUND',
+              'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
+              'ordered_date' => '2013-11-20',
+              'tracking' => {'international' => false, 'status' => 'Delivered',
+                  'events' => [
+                      {'date_time' => '21/06/2010 12=>21PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
+                      {'date_time' => '21/06/2010 12=>12PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
+                      {'date_time' => '10/12/2008 12=>12PM', 'location' => 'PROP - PROPERTY DEVELOPMENTS', 'description' => 'Delivered', 'signer' => 'A POST'}
+                  ]}, '_links' => {'self' => {'href' => 'http=>//192.168.1.102=>9393/v1/order/VF123FOUND'}}}
+      ) }
+
+      it 'should return the tracking details' do
+        response.tracking['international'].should be_false
+        response.tracking['status'].should eq('Delivered')
+        response.tracking['events'].size.should be(3)
+      end
+
+      it 'should use the AusPost tracking status if present' do
+        response.status_heading.should eq('Delivered')
+      end
+
+      it 'should use the AusPost tracking status message if present' do
+        response.status_message.should eq("See below for further information about your order's travels")
+      end
+    end
+
+    context 'when tracking data is in error' do
+      let(:response) { FulfilmentResponse.new(200,
+          {'order_number' => 'VF123FOUND', 'tracking_status' => 'SHIPPED', 'consignment_number' => 'AP123FOUND',
+              'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
+              'ordered_date' => '2013-11-20',
+              'tracking' => {'error' => 'Failed to get data from AusPost'},
+              '_links' => {'self' => {'href' => 'http=>//192.168.1.102=>9393/v1/order/VF123FOUND'}}}
+      ) }
+
+      it 'should use the vodafone status' do
+        response.status_heading.should eq('Order Shipped')
+      end
+
+      it 'should use the vodafone status message' do
+        response.status_message.should eq('Your order has been shipped')
+      end
     end
   end
 
