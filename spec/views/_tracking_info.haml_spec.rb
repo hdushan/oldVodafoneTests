@@ -19,7 +19,7 @@ describe '_tracking_info.haml' do
   context 'has error in getting tracking information' do
     let(:tracking_info) { {'error' => 'kitten'} }
 
-    it 'should display tracking information' do
+    it 'should display generic tracking message' do
       expect(page.find('.tracking-info-heading')).to have_content('Shipping Details')
       expect(page.find('.tracking-info-generic-msg')).to have_content('Your order has been shipped.')
     end

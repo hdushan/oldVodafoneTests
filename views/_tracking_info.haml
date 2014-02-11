@@ -1,6 +1,6 @@
-%h2.tracking-info-heading Shipping Details
+%h3.tracking-info-heading Shipping Details
 
--if tracking['error']
+-if locals[:tracking]['error']
   %p.tracking-info-generic-msg Your order has been shipped.
 - else
   %p TODO: display tracking infor here
