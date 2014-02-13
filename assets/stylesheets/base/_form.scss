@@ -20,6 +20,7 @@ form.form {
     font-size: inherit;
     box-sizing: border-box;
     padding: $button-input-padding-vt .5em;
+    margin: $button-input-margin;
     border: $global-border;
     border-radius: $global-border-radius;
     background-color: $white;
