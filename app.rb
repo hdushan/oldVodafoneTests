@@ -23,6 +23,10 @@ class App < Sinatra::Base
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
   end
 
+  before do
+    logger.level = Logger.const_get(ENV['LOG_LEVEL'] || 'WARN')
+  end
+
   def mega_menu
     logger.info('Getting the Mega Menu')
     @is_mobile_user = use_mobile_channel
