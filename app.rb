@@ -11,11 +11,9 @@ require 'message_mapper'
 
 class App < Sinatra::Base
   include Assets
-  enable :logging
 
-  configure do
-    set :show_exceptions => false
-  end
+  enable :logging
+  disable :show_exceptions
 
   def initialize(mega_menu_client=nil, fulfilment_client=nil)
     super()
