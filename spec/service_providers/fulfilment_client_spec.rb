@@ -51,7 +51,7 @@ describe FulfilmentClient, :pact => true do
     let(:tracking_info) { {} }
     let(:response_body) {
       {
-        'tracking_status' => 'IN PROGRESS',
+        'tracking_status' => 'SHIPPED',
         'ordered_date' => '2013-07-31',
         'consignment_number' => 'cn123',
         'items' => [
@@ -85,7 +85,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF456', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /in progress/
+        expect(response.status_message).to match /shipped/
       end
     end
 
@@ -110,7 +110,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /in progress/
+        expect(response.status_message).to match /shipped/
         expect(response.tracking).to eql(tracking_info)
       end
     end
