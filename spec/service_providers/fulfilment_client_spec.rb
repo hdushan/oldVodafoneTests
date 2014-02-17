@@ -1,6 +1,8 @@
 require 'spec_helper'
 require_relative 'pact_helper'
 
+include StatusStrings
+
 def stub_root_resource(fulfilment_service_provider, given)
   fulfilment_service_provider
   .given(given)
@@ -51,7 +53,7 @@ describe FulfilmentClient, :pact => true do
     let(:tracking_info) { {} }
     let(:response_body) {
       {
-        'tracking_status' => 'SHIPPED',
+        'tracking_status' => TS_SHIPPED,
         'ordered_date' => '2013-07-31',
         'consignment_number' => 'cn123',
         'items' => [

@@ -3,6 +3,8 @@ require 'rspec/mocks'
 require 'spec_helper'
 require 'webmock'
 
+include StatusStrings
+
 describe FulfilmentClient do
   let(:fulfilment_client) { FulfilmentClient.new('http://someserver.org') }
 
@@ -50,7 +52,7 @@ describe FulfilmentClient do
     context 'and response has a valid data' do
       it 'should return the data from the response' do
         fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 200,
-                                                                   body: { 'tracking_status' => 'IN PROGRESS'})}
+                                                                   body: { 'tracking_status' => TS_PROGRESS})}
 
         response = fulfilment_client.get_order_details('1234', '1.2.3.4')
 

@@ -49,7 +49,7 @@ describe "Track & Trace App" do
       end
 
       context 'with a valid id' do
-        let(:fulfilment_response) { FulfilmentResponse.new(200, {'tracking_status' => 'CANCELLED'}) }
+        let(:fulfilment_response) { FulfilmentResponse.new(200, {'tracking_status' => TS_CANCELLED}) }
 
         its(:status) { should eq 200 }
         its(:body) { should match /cancelled/ }

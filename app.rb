@@ -1,6 +1,7 @@
 require 'sinatra/namespace'
 require 'app_helper'
 require 'fulfilment_client'
+require 'status_strings'
 require 'haml'
 require 'mega_menu/mega_menu_api_client'
 require 'sinatra'

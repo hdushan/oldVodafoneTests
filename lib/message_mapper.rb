@@ -1,9 +1,12 @@
 class MessageMapper
+
+  include StatusStrings
+
   STATUS_MESSAGE_MAP = {
-      'BACKORDERED' => ['On Backorder', 'Your order is on backorder'],
-      'CANCELLED' => ['Order Cancelled', 'Your order has been cancelled'],
-      'SHIPPED' => ['Order Shipped', 'Your order has been shipped'],
-      'IN PROGRESS' => ['In Progress', 'Your order is in progress'],
+      TS_BACKORDERED => ['On Backorder', 'Your order is on backorder'],
+      TS_CANCELLED => ['Order Cancelled', 'Your order has been cancelled'],
+      TS_SHIPPED => ['Order Shipped', 'Your order has been shipped'],
+      TS_PROGRESS => ['In Progress', 'Your order is in progress'],
   }
 
   ERROR_MESSAGE_MAP = {

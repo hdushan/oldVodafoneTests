@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+include StatusStrings
+
 describe FulfilmentResponse do
 
   describe '#has_error?' do
@@ -21,28 +23,28 @@ describe FulfilmentResponse do
     end
 
     it 'should return nil if no error occurred' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS})
       response.error_message.should be_nil
     end
   end
 
   describe '#status_message' do
     it 'should map the status to a user friendly message' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS})
       response.status_message.should == 'Your order is in progress'
     end
   end
 
   describe '#status_heading' do
     it 'should map the status to a user friendly header' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS})
       response.status_heading.should == 'In Progress'
     end
   end
 
   describe '#items' do
     it 'should map the shipping line items if present' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS', 'items' => [
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS, 'items' => [
           {'description' => 'iPhone', 'item_quantity' => '1'},
           {'description' => 'sim', 'item_quantity' => '2'}
       ]})
@@ -51,26 +53,26 @@ describe FulfilmentResponse do
     end
 
     it 'should return empty array if there are no shipping line items' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS})
       response.items.should == []
     end
   end
 
   describe '#order_number' do
     it 'should map the order number' do
-      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS})
       response.order_number.should == 'VF123FOUND'
     end
 
     it 'should return empty string if order_number is missing' do
-      response = FulfilmentResponse.new(200, {'tracking_status' => 'IN PROGRESS'})
+      response = FulfilmentResponse.new(200, {'tracking_status' => TS_PROGRESS})
       response.order_number.should == ''
     end
   end
 
   describe 'backorders' do
     context 'when the estimated shipping date is present' do
-      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
+      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_BACKORDERED,
           'estimated_shipping_date' => '2014-07-13',
           'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
       }
@@ -90,7 +92,7 @@ describe FulfilmentResponse do
     end
 
     context 'when the estimated shipping date is missing' do
-      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => 'BACKORDERED',
+      let(:response) { FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_BACKORDERED,
           'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
       }
 
@@ -113,7 +115,7 @@ describe FulfilmentResponse do
 
     context 'when tracking data is complete and valid' do
       let(:response) { FulfilmentResponse.new(200,
-          {'order_number' => 'VF123FOUND', 'tracking_status' => 'SHIPPED', 'consignment_number' => 'AP123FOUND',
+          {'order_number' => 'VF123FOUND', 'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
               'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
               'ordered_date' => '2013-11-20',
               'tracking' => {'international' => false, 'status' => 'Delivered',
@@ -142,7 +144,7 @@ describe FulfilmentResponse do
 
     context 'when tracking data is in error' do
       let(:response) { FulfilmentResponse.new(200,
-          {'order_number' => 'VF123FOUND', 'tracking_status' => 'SHIPPED', 'consignment_number' => 'AP123FOUND',
+          {'order_number' => 'VF123FOUND', 'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
               'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
               'ordered_date' => '2013-11-20',
               'tracking' => {'error' => 'Failed to get data from AusPost'},

@@ -2,6 +2,8 @@ class FulfilmentResponse
 
   attr_reader :code
 
+  include StatusStrings
+
   def initialize(response_code, response_body)
     @code = response_code
     @body = response_body
@@ -42,7 +44,7 @@ class FulfilmentResponse
   end
 
   def is_on_backorder?
-    @body["tracking_status"] == 'BACKORDERED'
+    @body["tracking_status"] == TS_BACKORDERED
   end
 
   def estimated_shipping_date
