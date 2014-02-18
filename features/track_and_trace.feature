@@ -38,6 +38,7 @@ Feature: View Order Status
     |  order_id          |  heading                 | message                    |
     |  1-APMULTICAN      |  Order Shipped           | has been shipped           |
     |  1-APMULTICANB     |  Order Partially Shipped | has been partially shipped |
+    |  SR1-CANBO         |  On Backorder            | on backorder               |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
