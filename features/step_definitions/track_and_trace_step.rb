@@ -47,13 +47,16 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
 end
 
 Then(/^I should see the right count and description for each item$/) do
-  expected = ['1 x iPhone 5C 32GB magenta',
-              '1 x Microsim "G23123"',
-              '1 x iPhone 5C 16GB Gold',
-              "1 x Microsim 'F2313'",
-              "2 x Soft leather case & screen protector <h1>&1234;_!|\\/#"]
-  actual = page.all('.order-details > .item').map { |elem| elem.text }
-  expect(actual).to match_array expected
+  expected_descriptions = ['iPhone 5C 32GB magenta',
+              'Microsim "G23123"',
+              'iPhone 5C 16GB Gold',
+              "Microsim 'F2313'",
+              "Soft leather case & screen protector <h1>&1234;_!|\\/#"]
+  actual = page.all('.item').map { |elem| elem.text }
+  expect(actual).to match_array expected_descriptions
+  expected_counts = ['1 x', '1 x', '1 x', "1 x", "2 x"]
+  actual_counts = page.all('.item-quantity').map { |elem| elem.text }
+  expect(actual_counts).to match_array expected_counts
 end
 
 Then(/^I should see the estimated shipping date for the order$/) do

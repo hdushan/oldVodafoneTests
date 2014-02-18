@@ -27,16 +27,17 @@ Feature: View Order Status
 	And I should see the right count and description for each item
 	And I should see the estimated shipping date for the order
 
-  @javascript @ignore
-  Scenario Outline: View correct status of orders that have items in different stauses
+  @javascript
+  Scenario Outline: View correct status of orders that have items in different statuses
     Given I am on the Track and Trace Home page '/tnt'
-	When I search for the status of an order with id '<order_id>' that '<order_state_description>'
-	Then I should see the tracking status 'status' for the order
+    When I search for the status of a valid order with id '<order_id>'
+    Then I should see the tracking status '<heading>' for the order
+    And I should see the message '<message>'
 
-    Examples:
-      |  order_state_description                       |  order_id          |  status                     |
-      |  has 1 cancelled item and 1 shipped item       |  1-APMULTICAN      |  has been shipped           |
-      |  has 1 shipped item and 1 in backorder status  |  1-APMULTICANB     |  has been partially shipped |
+  Examples:
+    |  order_id          |  heading                 | message                    |
+    |  1-APMULTICAN      |  Order Shipped           | has been shipped           |
+    |  1-APMULTICANB     |  Order Partially Shipped | has been partially shipped |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states

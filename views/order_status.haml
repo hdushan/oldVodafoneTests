@@ -16,8 +16,11 @@
 
 -unless locals[:details].items.empty?
   %h3.order-details-heading Order Details
-  .order-details
+  %table.order-details
     -locals[:details].items.each do |item|
-      %p.item&= "#{item[:item_quantity]} x #{item[:description]}"
+      %tr
+        %td.item-quantity= "#{item[:item_quantity]} x"
+        %td.item&= item[:description]
+        %td.item-status= item[:status]
 
 = haml :_info_links

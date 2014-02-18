@@ -24,6 +24,7 @@ describe MessageMapper do
       mapper.status_message(TS_PROGRESS).should == 'Your order is in progress'
       mapper.status_message(TS_BACKORDERED).should == 'Your order is on backorder'
       mapper.status_message(TS_SHIPPED).should == 'Your order has been shipped'
+      mapper.status_message(TS_PARTIALLY_SHIPPED).should == 'Your order has been partially shipped'
     end
 
     it 'should raise error if status is not known' do
@@ -39,6 +40,7 @@ describe MessageMapper do
       mapper.status_heading(TS_PROGRESS).should == 'In Progress'
       mapper.status_heading(TS_BACKORDERED).should == 'On Backorder'
       mapper.status_heading(TS_SHIPPED).should == 'Order Shipped'
+      mapper.status_heading(TS_PARTIALLY_SHIPPED).should == 'Order Partially Shipped'
     end
 
     it 'should raise error if status is not known' do
