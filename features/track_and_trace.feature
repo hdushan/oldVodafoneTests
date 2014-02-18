@@ -35,10 +35,14 @@ Feature: View Order Status
     And I should see the message '<message>'
 
   Examples:
-    |  order_id          |  heading                 | message                    |
-    |  1-APMULTICAN      |  Order Shipped           | has been shipped           |
-    |  1-APMULTICANB     |  Order Partially Shipped | has been partially shipped |
-    |  SR1-CANBO         |  On Backorder            | on backorder               |
+    | order_state_description               |  order_id          |  heading                 | message                    |
+    | 1 shipped, 1 cancelled                |  1-MULTICANS       |  Shipped                 | has been shipped           |
+    | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Transferring            | See below                  |
+    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Transferring            | See below                  |
+    | 1 shipped, 1 cancelled, 1 BO          |  1-MULTICANBS      |  Order Partially Shipped | has been partially shipped |
+    | 1 cancelled, 1 BO                     |  SR1-CANBO         |  On Backorder            | on backorder               |
+    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Transferring            | See below                  |
+    | 1 shipped, 1 BO                       |  SR1-BS            |  Order Partially Shipped | has been partially shipped |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
