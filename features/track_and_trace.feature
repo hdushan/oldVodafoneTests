@@ -34,9 +34,10 @@ Feature: View Order Status
 	Then I should see the tracking status 'status' for the order
 
     Examples:
-      |  order_state_description                       |  order_id          |  status                     |
-      |  has 1 cancelled item and 1 shipped item       |  1-APMULTICAN      |  has been shipped           |
-      |  has 1 shipped item and 1 in backorder status  |  1-APMULTICANB     |  has been partially shipped |
+      |  order_state_description                         |  order_id      |  status                     |
+      |  has 1 cancelled item and 1 shipped item         |  1-APMULTICAN  |  has been shipped           |
+      |  has 1 shipped item and 1 in backorder status    |  1-APMULTICANB |  has been partially shipped |
+      |  has 1 cancelled item and 1 in backorder status  |  SR1-CANBO     |  on backorder               |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
