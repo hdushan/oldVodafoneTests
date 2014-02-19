@@ -24,7 +24,7 @@ end
 
 describe FulfilmentClient, :pact => true do
   let(:mega_menu_client) { mega_menu_mock }
-  let(:fulfilment_client) { FulfilmentClient.new('http://localhost:1234/v1') }
+  let(:fulfilment_client) { FulfilmentClient.new(PutsLogger.new, 'http://localhost:1234/v1') }
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   describe 'get_order_details for non existing order id' do

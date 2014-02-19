@@ -11,6 +11,7 @@ require 'capybara/poltergeist'
 require 'phantomjs'
 require 'rspec/mocks/standalone'
 
+require_relative '../../spec/puts_logger'
 require_relative '../../app'
 require_relative '../../lib/mega_menu/mega_menu_api_client'
 
@@ -34,7 +35,7 @@ if ENV['RAILS_ENV'] == 'paas-qa'
   Capybara.run_server = false
 else
   puts 'In LOCAL'
-  Capybara.app = App.new(MegaMenuAPIClient.new, FulfilmentClient.new(FULFILMENT_ROOT))
+  Capybara.app = App.new(MegaMenuAPIClient.new, FulfilmentClient.new(PutsLogger.new, FULFILMENT_ROOT))
 end
 
 Capybara.javascript_driver = :poltergeist
