@@ -10,6 +10,13 @@ class MessageMapper
     TS_PARTIALLY_SHIPPED => ['Order Partially Shipped', 'Your order has been partially shipped'],
   }
 
+  ITEM_STATUS_MESSAGE_MAP = {
+    IS_BACKORDERED => 'On Backorder',
+    IS_CANCELLED => 'Cancelled',
+    IS_SHIPPED => 'Shipped',
+    IS_PROGRESS => 'In Progress',
+  }
+
   ERROR_MESSAGE_MAP = {
     503 => 'Service Unavailable. Please, try again later.',
     403 => 'Invalid order ID, check that you typed it correctly.',
@@ -32,6 +39,10 @@ class MessageMapper
   def status_heading(status)
     validate_status(status)
     STATUS_MESSAGE_MAP[status].first
+  end
+
+  def item_status(status)
+    ITEM_STATUS_MESSAGE_MAP[status] || ''
   end
 
   private

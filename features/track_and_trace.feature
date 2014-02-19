@@ -27,7 +27,7 @@ Feature: View Order Status
 	And I should see the right count and description for each item
 	And I should see the estimated shipping date for the order
 	
-  @javascript @ignore
+  @javascript
   Scenario: View individual status of items in a partially shipped order that has multiple items
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'VFMANYSTATUS'

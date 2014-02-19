@@ -35,7 +35,7 @@ class FulfilmentResponse
   def items
     return [] unless @body["items"]
     @body["items"].inject([]) do |items, item|
-      items << {:item_quantity => item["item_quantity"], :description => item["description"]}
+      items << {:item_quantity => item["item_quantity"], :description => item["description"], :status => @message_mapper.item_status(item["status"])}
     end
   end
 

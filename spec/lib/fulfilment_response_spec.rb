@@ -45,11 +45,11 @@ describe FulfilmentResponse do
   describe '#items' do
     it 'should map the shipping line items if present' do
       response = FulfilmentResponse.new(200, {'order_number' => 'VF123FOUND', 'tracking_status' => TS_PROGRESS, 'items' => [
-          {'description' => 'iPhone', 'item_quantity' => '1'},
-          {'description' => 'sim', 'item_quantity' => '2'}
+          {'description' => 'iPhone', 'item_quantity' => '1', 'status' => IS_SHIPPED},
+          {'description' => 'sim', 'item_quantity' => '2', 'status' => IS_CANCELLED}
       ]})
-      response.items.first.should == {item_quantity: '1', description: 'iPhone'}
-      response.items.last.should == {item_quantity: '2', description: 'sim'}
+      response.items.first.should == {item_quantity: '1', description: 'iPhone', status: 'Shipped'}
+      response.items.last.should == {item_quantity: '2', description: 'sim', status: 'Cancelled'}
     end
 
     it 'should return empty array if there are no shipping line items' do
