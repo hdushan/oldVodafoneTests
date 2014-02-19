@@ -59,6 +59,26 @@ Then(/^I should see the right count and description for each item$/) do
   expect(actual_counts).to match_array expected_counts
 end
 
+Then(/^I should see the right count, description and status for each item$/) do
+  expected_descriptions = ['iPhone 5C 16GB Blue',
+              'iPhone 5C 16GB Gold',
+              'iPhone 5C 16GB Silver',
+              "iPhone 5C 16GB Grey",
+              "iPhone 5C 16GB Black"]
+  actual = page.all('.item').map { |elem| elem.text }
+  expect(actual).to match_array expected_descriptions
+  expected_counts = ['1 x', '2 x', '3 x', "4 x", "5 x"]
+  actual_counts = page.all('.item-quantity').map { |elem| elem.text }
+  expect(actual_counts).to match_array expected_counts
+  expected_statuses = ['Cancelled', 
+             'Shipped', 
+             'Cancelled', 
+             "Shipped", 
+             "On Backorder"]
+  actual_statuses = page.all('.item-status').map { |elem| elem.text }
+  expect(actual_statuses).to match_array expected_statuses
+end
+
 Then(/^I should see the estimated shipping date for the order$/) do
   expect(page.find('.ship-date')).to have_content('31 December 2014')
 end
