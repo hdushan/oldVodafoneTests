@@ -58,22 +58,22 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
-            <stringProp name="Argument.value">19</stringProp>
+            <stringProp name="Argument.value">190</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="THROUGHPUT_FAILED_SEARCH" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_FAILED_SEARCH</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">10</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="MAXLOAD_SUCCESSFUL" elementType="Argument">
             <stringProp name="Argument.name">MAXLOAD_SUCCESSFUL</stringProp>
-            <stringProp name="Argument.value">20</stringProp>
+            <stringProp name="Argument.value">200</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="MAXLOAD_ORDER_NOT_FOUND" elementType="Argument">
             <stringProp name="Argument.name">MAXLOAD_ORDER_NOT_FOUND</stringProp>
-            <stringProp name="Argument.value">5</stringProp>
+            <stringProp name="Argument.value">50</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="DURATION" elementType="Argument">
@@ -460,7 +460,7 @@
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <boolProp name="ResultCollector.error_logging">true</boolProp>
         <objProp>
           <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
