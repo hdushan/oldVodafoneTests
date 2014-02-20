@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rescue'
   gem 'rack-test'
+  gem 'rb-fsevent'
   gem 'rspec'
   gem 'rspec-html-matchers'
   gem 'shotgun'

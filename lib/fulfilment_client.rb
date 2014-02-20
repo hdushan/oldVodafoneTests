@@ -1,9 +1,11 @@
 require 'hyperclient'
+require 'rack/timeout'
 require 'faraday_monkeypatch' if File.exists? '/etc/trackandtrace_do_monkeypatch'
 
 class FulfilmentClient
-  def initialize(root = nil)
+  def initialize(logger, root = nil)
     @client = Hyperclient.new(root || ENV['FULFILMENT_SERVICE'])
+    @logger = logger
   end
 
   def get_order_details(order_id, ip_address)
@@ -15,7 +17,14 @@ class FulfilmentClient
 
   private
   def request_order_status(tracking_number, ip_address)
+    @logger.debug "Looking for links at #{@client.inspect}"
     @client.connection.headers['X-Forwarded-For'] = ip_address
     @client.links.order.expand(id: tracking_number).get
+  rescue Rack::Timeout::RequestTimeoutError => ex
+    @logger.error "Request to #{@client.inspect} timed out"
+    raise ex
+  rescue => ex
+    @logger.error "No links found in response #{@client.get.body}"
+    raise ex
   end
 end

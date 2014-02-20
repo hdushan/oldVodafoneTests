@@ -1,6 +1,8 @@
 require 'spec_helper'
 require_relative 'pact_helper'
 
+include StatusStrings
+
 def stub_root_resource(fulfilment_service_provider, given)
   fulfilment_service_provider
   .given(given)
@@ -22,7 +24,7 @@ end
 
 describe FulfilmentClient, :pact => true do
   let(:mega_menu_client) { mega_menu_mock }
-  let(:fulfilment_client) { FulfilmentClient.new('http://localhost:1234/v1') }
+  let(:fulfilment_client) { FulfilmentClient.new(PutsLogger.new, 'http://localhost:1234/v1') }
   let(:app) { App.new(mega_menu_client, fulfilment_client) }
 
   describe 'get_order_details for non existing order id' do
@@ -51,7 +53,7 @@ describe FulfilmentClient, :pact => true do
     let(:tracking_info) { {} }
     let(:response_body) {
       {
-        'tracking_status' => 'IN PROGRESS',
+        'tracking_status' => TS_SHIPPED,
         'ordered_date' => '2013-07-31',
         'consignment_number' => 'cn123',
         'items' => [
@@ -85,7 +87,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF456', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /in progress/
+        expect(response.status_message).to match /shipped/
       end
     end
 
@@ -110,7 +112,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /in progress/
+        expect(response.status_message).to match /shipped/
         expect(response.tracking).to eql(tracking_info)
       end
     end

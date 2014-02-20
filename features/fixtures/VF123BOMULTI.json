@@ -24,9 +24,7 @@
         "description": "Soft leather case & screen protector <h1>&1234;_!|\\/#",
         "item_quantity": "2"
     }
-], "estimated_shipping_date": "2014-12-31", "tracking": {
-    "error": "Invalid tracking ID"
-}, "_links": {
+], "estimated_shipping_date": "2014-12-31", "_links": {
     "self": {
         "href": "http://192.168.1.102:9393/v1/order/VF123BOMULTI"
     }

@@ -1,15 +1,26 @@
 class MessageMapper
+
+  include StatusStrings
+
   STATUS_MESSAGE_MAP = {
-      'BACKORDERED' => ['On Backorder', 'Your order is on backorder'],
-      'CANCELLED' => ['Order Cancelled', 'Your order has been cancelled'],
-      'SHIPPED' => ['Order Shipped', 'Your order has been shipped'],
-      'IN PROGRESS' => ['In Progress', 'Your order is in progress'],
+    TS_BACKORDERED => ['On Backorder', 'Your order is on backorder'],
+    TS_CANCELLED => ['Order Cancelled', 'Your order has been cancelled'],
+    TS_SHIPPED => ['Order Shipped', 'Your order has been shipped'],
+    TS_PROGRESS => ['In Progress', 'Your order is in progress'],
+    TS_PARTIALLY_SHIPPED => ['Order Partially Shipped', 'Your order has been partially shipped'],
+  }
+
+  ITEM_STATUS_MESSAGE_MAP = {
+    IS_BACKORDERED => 'On Backorder',
+    IS_CANCELLED => 'Cancelled',
+    IS_SHIPPED => 'Shipped',
+    IS_PROGRESS => 'In Progress',
   }
 
   ERROR_MESSAGE_MAP = {
-      503 => 'Service Unavailable. Please, try again later.',
-      403 => 'Invalid order ID, check that you typed it correctly.',
-      404 => 'That order ID was not found. Please, check that you typed it correctly.',
+    503 => 'Service Unavailable. Please, try again later.',
+    403 => 'Invalid order ID, check that you typed it correctly.',
+    404 => 'That order ID was not found. Please, check that you typed it correctly.',
   }
 
   DEFAULT_ERROR_MESSAGE = 'There was a problem retrieving your order.'
@@ -30,7 +41,11 @@ class MessageMapper
     STATUS_MESSAGE_MAP[status].first
   end
 
-private
+  def item_status(status)
+    ITEM_STATUS_MESSAGE_MAP[status] || ''
+  end
+
+  private
   def validate_status(status)
     raise "Invalid Order Status returned from Fusion: #{status}" unless STATUS_MESSAGE_MAP[status]
   end

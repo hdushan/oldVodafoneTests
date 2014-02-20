@@ -1,19 +1,20 @@
 {
+    "order_number": "UPAPTIME",
     "tracking_status": "SHIPPED",
-    "ordered_date": "2013-11-20",
-    "consignment_number": "123456",
+    "consignment_number": "AP123TIMEOUT",
     "items": [
         {
             "description": "iPhone 5C 16GB White",
             "item_quantity": "1"
         }
     ],
+    "ordered_date": "2013-11-20",
     "tracking": {
         "error": "Request to AusPost timed out"
     },
     "_links": {
         "self": {
-            "href": "http://10.0.2.2:9394/v1/order/VF123TRACKERR"
+            "href": "http://192.168.1.102:9393/v1/order/UPAPTIME"
         }
     }
 }

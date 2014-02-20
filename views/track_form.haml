@@ -14,7 +14,9 @@
       .input-wrapper
         %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id}
       #input-validation-msg.hidden
-        %p Wrong Track ID format.
+        %p
+          The Order Number you have entered is not in a valid format.
+          Please check the number on your confirmation email and enter it as it appears on the email.
 
     .input-wrapper
       %button.trace.tnt-button#trace{:type => 'submit'} Trace your order

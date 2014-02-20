@@ -1,6 +1,7 @@
 require 'sinatra/namespace'
 require 'app_helper'
 require 'fulfilment_client'
+require 'status_strings'
 require 'haml'
 require 'mega_menu/mega_menu_api_client'
 require 'sinatra'
@@ -8,26 +9,32 @@ require 'sinatra_assets'
 require 'user_agent'
 require 'fulfilment_response'
 require 'message_mapper'
+require 'logger'
 
 class App < Sinatra::Base
   include Assets
-  enable :logging
 
-  configure do
-    set :show_exceptions => false
-  end
+  enable :logging
+  set :logging, Logger::DEBUG
+  disable :show_exceptions
 
   def initialize(mega_menu_client=nil, fulfilment_client=nil)
     super()
-    @fulfilment_client = fulfilment_client || FulfilmentClient.new
+    @fulfilment_client = fulfilment_client
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
   end
 
+  before do
+    logger.level = Logger.const_get(ENV['LOG_LEVEL'] || 'WARN')
+  end
+
   def mega_menu
-    logger.info('Getting the Mega Menu')
-    @is_mobile_user = use_mobile_channel
-    @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
-    logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
+    unless ENV['MEGA_MENU'] == 'OFF'
+      logger.info('Getting the Mega Menu')
+      @is_mobile_user = use_mobile_channel
+      @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
+      logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
+    end
   end
 
 
@@ -61,7 +68,7 @@ class App < Sinatra::Base
 
   get '/tnt/:id' do
     mega_menu
-    fulfilment_response = @fulfilment_client.get_order_details params[:id], client_ip
+    fulfilment_response = fulfilment.get_order_details params[:id], client_ip
 
     if fulfilment_response.has_error?
       logger.error("Fulfilment Response: #{fulfilment_response}")
@@ -82,5 +89,11 @@ class App < Sinatra::Base
 
   get '/env' do
     ENV.inspect
+  end
+
+  private
+
+  def fulfilment
+    @fulfilment_client ||= FulfilmentClient.new(logger)
   end
 end

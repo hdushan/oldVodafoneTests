@@ -2,6 +2,7 @@ $: << './lib'
 
 require 'simplecov'
 require 'simplecov-rcov'
+require 'puts_logger'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.use_merging false
 SimpleCov.start

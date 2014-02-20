@@ -1,17 +1,10 @@
-%h3.tracking-info-heading Shipping Details
-
-%p TODO: display tracking event here
--#
-  %p= "Status: #{locals['status']}"
-  %table
-    %tr
-      %th Location
-      %th Description
-      %th Date/Time
-      %th Signed by
-    - locals['events'].each do |event|
+-if locals[:tracking]['events']
+  .tracking-info
+    %table
       %tr
-        %td= "#{event['location']}"
-        %td= "#{event['description']}"
-        %td= "#{event['date_time']}"
-        %td= "#{event['signer']}"
+        %th Date/Time
+        %th Status
+      - locals[:tracking]['events'].each do |event|
+        %tr
+          %td.event-date= "#{event['date_time']}"
+          %td.event-status= "#{event['description']}"

@@ -13,8 +13,9 @@
     %script{ src: '/js/vendor/ie/jquery.html5-placeholder-shim.js' }
     <![endif]-->
 
-    -@mega_menu['css'].each do |css_url|
-      %link{ :rel => :stylesheet, :type => :"text/css", :href => "#{css_url}"}
+    -if @mega_menu
+      -@mega_menu['css'].each do |css_url|
+        %link{ :rel => :stylesheet, :type => :"text/css", :href => "#{css_url}"}
     !=css :application
 
   %body.tnt-body
@@ -25,7 +26,7 @@
       =haml :_footer
 
 
-
-  -@mega_menu['js'].each do |js_url|
-    %script{ :src => "#{js_url}"}
+  -if @mega_menu
+    -@mega_menu['js'].each do |js_url|
+      %script{ :src => "#{js_url}"}
   != js :application

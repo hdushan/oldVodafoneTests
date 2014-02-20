@@ -2,6 +2,8 @@ class FulfilmentResponse
 
   attr_reader :code
 
+  include StatusStrings
+
   def initialize(response_code, response_body)
     @code = response_code
     @body = response_body
@@ -17,23 +19,23 @@ class FulfilmentResponse
   end
 
   def status_message
-    return MessageMapper::AUSPOST_STATUS_MESSAGE if should_use_auspost_status
+    return MessageMapper::AUSPOST_STATUS_MESSAGE if use_auspost_status?
     @message_mapper.status_message(@body["tracking_status"])
   end
 
   def status_heading
-    return tracking['status'] if should_use_auspost_status
+    return tracking['status'] if use_auspost_status?
     @message_mapper.status_heading(@body["tracking_status"])
   end
 
-  def should_use_auspost_status
+  def use_auspost_status?
     tracking && tracking['status']
   end
 
   def items
     return [] unless @body["items"]
     @body["items"].inject([]) do |items, item|
-      items << {:item_quantity => item["item_quantity"], :description => item["description"]}
+      items << {:item_quantity => item["item_quantity"], :description => item["description"], :status => @message_mapper.item_status(item["status"])}
     end
   end
 
@@ -42,7 +44,7 @@ class FulfilmentResponse
   end
 
   def is_on_backorder?
-    @body["tracking_status"] == 'BACKORDERED'
+    @body["tracking_status"] == TS_BACKORDERED
   end
 
   def estimated_shipping_date
@@ -64,7 +66,7 @@ class FulfilmentResponse
   end
 
   def show_tracking_events?
-    tracking && tracking['events']
+    tracking && tracking['events'] && tracking['events'].any?
   end
 
 end

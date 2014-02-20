@@ -1,0 +1,21 @@
+{
+    "order_number": "UPAPINTER",
+    "tracking_status": "SHIPPED",
+    "consignment_number": "AP123INTER",
+    "items": [
+        {
+            "description": "iPhone 5C 16GB White",
+            "item_quantity": "1"
+        }
+    ],
+    "ordered_date": "2013-11-20", "tracking": {
+    "international": true,
+    "status": null,
+    "events": []
+},
+    "_links": {
+        "self": {
+            "href": "http://192.168.1.102:9393/v1/order/UPAPINTER"
+        }
+    }
+}
