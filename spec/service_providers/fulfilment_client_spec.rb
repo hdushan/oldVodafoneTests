@@ -54,7 +54,7 @@ describe FulfilmentClient, :pact => true do
     let(:response_body) {
       {
         'tracking_status' => TS_SHIPPED,
-        'ordered_date' => '2013-07-31 17:02:30',
+        'ordered_date' => '2013-07-31',
         'consignment_number' => 'cn123',
         'items' => [
           {
