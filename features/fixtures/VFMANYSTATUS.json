@@ -18,11 +18,6 @@
         "description": "iPhone 5C 16GB Grey",
         "item_quantity": "4",
         "status": "SHIPPED"
-    },
-    {
-        "description": "iPhone 5C 16GB Black",
-        "item_quantity": "5",
-        "status": "BACKORDERED"
     }
 ], "ordered_date": "2013-11-20", "estimated_shipping_date": "2014-12-12", "tracking": {
     "international": false,
