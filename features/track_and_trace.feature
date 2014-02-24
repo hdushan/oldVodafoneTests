@@ -8,15 +8,23 @@ Feature: View Order Status
     And I should see the message '<message>'
 
     Examples:
-      |  order_id          |  heading          | message            |
-      |  VF123STAGED       |  In Progress      | in progress        |
-      |  1-123PICKCONF     |  In Progress      | in progress        |
-      |  SR1-123READY      |  In Progress      | in progress        |
-      |  UP123BACKORDER    |  On Backorder     | on backorder       |
-      |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
-      |  SR1-123CLOSED     |  Order Shipped    | has been shipped   |
-      |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
-      |  1-123INPROGRESS   |  In Progress      | in progress        |
+      |  status_mix                                        |  order_id          |  heading          | message            |
+	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  In Progress      | in progress        |
+      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  In Progress      | in progress        |
+      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  In Progress      | in progress        |
+      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  In Progress      | in progress        |
+      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On Backorder     | on backorder       |
+	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order Shipped    | has been shipped   |
+	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order Shipped    | has been shipped   |
+	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order Shipped    | has been shipped   |
+	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order Shipped    | has been shipped   |
+	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order Cancelled  | has been cancelled |
+	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order Cancelled  | has been cancelled |
+      |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
+	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order Cancelled  | has been cancelled |
+	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order Cancelled  | has been cancelled |
+      |  TERMINATED                                        |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
+      |  IN PROGRESS                                       |  1-123INPROGRESS   |  In Progress      | in progress        |
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered

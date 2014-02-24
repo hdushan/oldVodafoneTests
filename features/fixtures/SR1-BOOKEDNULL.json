@@ -5,6 +5,6 @@
     }
 ], "_links": {
     "self": {
-        "href": "http://10.0.2.2:9394/v1/order/SR1-123READY"
+        "href": "http://10.0.2.2:9394/v1/order/SR1-BOOKEDNULL"
     }
 }}

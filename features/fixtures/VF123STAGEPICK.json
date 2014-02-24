@@ -3,14 +3,14 @@
     "ordered_date": "2013-11-20",
     "consignment_number": null,
     "items": [
-    {
-        "description": "iPhone 5C 16GB White",
-        "item_quantity": "1"
-    }
+        {
+            "description": "iPhone 5C 16GB White",
+            "item_quantity": "1"
+        }
     ],
     "_links": {
         "self": {
-            "href": "http://10.0.2.2:9394/v1/order/1-123PICKCONF"
+            "href": "http://10.0.2.2:9394/v1/order/VF123STAGEPICK"
         }
     }
 }
