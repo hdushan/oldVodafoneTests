@@ -66,7 +66,7 @@ Then(/^I should see the right count, description and status for each item$/) do
               "iPhone 5C 16GB Grey"]
   actual = page.all('.item').map { |elem| elem.text }
   expect(actual).to match_array expected_descriptions
-  expected_counts = ['1 x', '2 x', '3 x', "4 x", "5 x"]
+  expected_counts = ['1 x', '2 x', '3 x', "4 x"]
   actual_counts = page.all('.item-quantity').map { |elem| elem.text }
   expect(actual_counts).to match_array expected_counts
   expected_statuses = ['Cancelled', 
