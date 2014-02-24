@@ -50,7 +50,7 @@
         <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
         <stringProp name="HTTPSampler.path"></stringProp>
-        <stringProp name="HTTPSampler.implementation">HttpClient3.1</stringProp>
+        <stringProp name="HTTPSampler.implementation">Java</stringProp>
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
