@@ -50,7 +50,6 @@
         <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
         <stringProp name="HTTPSampler.path"></stringProp>
-        <stringProp name="HTTPSampler.implementation">HttpClient3.1</stringProp>
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
@@ -356,8 +355,8 @@
                 <stringProp name="-263073885">TRACKING_ID</stringProp>
               </collectionProp>
               <collectionProp name="UserParameters.thread_values">
-                <collectionProp name="1295093889">
-                  <stringProp name="693435566">1-${__RandomString(3,abcdefghij1234567890)}</stringProp>
+                <collectionProp name="626428844">
+                  <stringProp name="626428813">1-${__RandomString(4,abcdefghij1234567890)}</stringProp>
                 </collectionProp>
               </collectionProp>
               <boolProp name="UserParameters.per_iteration">false</boolProp>
