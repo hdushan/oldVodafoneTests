@@ -60,6 +60,18 @@ Feature: View Order Status
     | 1 shipped, 1 BO                       |  SR1-BS            |  Order Partially Shipped | has been partially shipped |
 
   @javascript
+  Scenario Outline: View correct status of orders that have multiple order line item details in different statuses
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id '<order_id>'
+    Then I should see the tracking status '<heading>' for the order
+    And I should see the message '<message>'
+
+  Examples:
+    | order_state_description               |  order_id          |  heading                 | message                |
+    | Each with a single shipping line      |  1-MULTIORDER      |  On Backorder            | on backorder           |
+    | 1 with multiple shipping lines        |  1-MULTIORDERSH    |  On Backorder            | on backorder           |
+
+  @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
     Given I am on the Track and Trace Home page '/tnt'
 	When I search for the status of an order with id '<order_id>' that '<order_state_description>'
