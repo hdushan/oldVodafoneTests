@@ -91,6 +91,32 @@ describe FulfilmentClient, :pact => true do
       end
     end
 
+    context 'has business exception in tracking information' do
+      let(:tracking_info) { {'business_exception' => 'Invalid tracking ID'} }
+
+      before do
+        stub_root_resource fulfilment_service_provider, 'a business exception in tracking info'
+
+        fulfilment_service_provider
+        .given('a business exception in tracking info')
+        .upon_receiving('a request for order status')
+        .with(method: :get, path: '/v1/order/VF789')
+        .will_respond_with(
+          status: 200,
+          headers: {'Content-Type' => 'application/hal+json'},
+          body: response_body
+        )
+      end
+
+      it 'should return an order status with error in tracking information' do
+        response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
+
+        expect(response).to_not have_error
+        expect(response.auspost_business_exception?).to be_true
+        expect(response.tracking).to eql(tracking_info)
+      end
+    end
+
     context 'has error in tracking information' do
       let(:tracking_info) { {'error' => 'Request to AusPost timed out'} }
 
@@ -112,7 +138,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /shipped/
+        expect(response.auspost_error?).to be_true
         expect(response.tracking).to eql(tracking_info)
       end
     end

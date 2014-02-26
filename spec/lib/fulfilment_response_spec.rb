@@ -140,6 +140,11 @@ describe FulfilmentResponse do
       it 'should use the AusPost tracking status message if present' do
         response.status_message.should eq("See below for further information about your order's travels")
       end
+
+      it 'should flag no AusPost issues' do
+        response.auspost_error?.should be_false
+        response.auspost_business_exception?.should be_false
+      end
     end
 
     context 'when tracking data is in error' do
@@ -158,29 +163,67 @@ describe FulfilmentResponse do
       it 'should use the vodafone status message' do
         response.status_message.should eq('Your order has been shipped')
       end
+
+      it 'should flag an AusPost error' do
+        response.auspost_error?.should be_true
+        response.auspost_business_exception?.should be_false
+      end
+    end
+
+    context 'when tracking data has a business exception' do
+      let(:response) { FulfilmentResponse.new(200,
+          {'order_number' => 'VF123FOUND', 'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
+              'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
+              'ordered_date' => '2013-11-20',
+              'tracking' => {'business_exception' => 'Product is not trackable'},
+              '_links' => {'self' => {'href' => 'http=>//192.168.1.102=>9393/v1/order/VF123FOUND'}}}
+      ) }
+
+      it 'should use the vodafone status' do
+        response.status_heading.should eq('Order Shipped')
+      end
+
+      it 'should use the vodafone status message' do
+        response.status_message.should eq('Your order has been shipped')
+      end
+
+      it 'should flag an AusPost business exception' do
+        response.auspost_error?.should be_false
+        response.auspost_business_exception?.should be_true
+      end
     end
   end
 
-  describe '#show_tracking_events?' do
+  describe '#show_tracking_info?' do
 
     it 'should return true if has tracking events' do
       response = FulfilmentResponse.new(200, {'tracking' => {'events' => ['kittens']} })
-      response.show_tracking_events?.should be_true
+      response.show_tracking_info?.should be_true
+    end
+
+    it 'should return true if has an AusPost error' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'error' => 'puppies'} })
+      response.show_tracking_info?.should be_true
+    end
+
+    it 'should return true if has an AusPost business exception' do
+      response = FulfilmentResponse.new(200, {'tracking' => {'business_exception' => 'guppies'} })
+      response.show_tracking_info?.should be_true
     end
 
     it 'should return false if no tracking events' do
       response = FulfilmentResponse.new(200, {'tracking' => {} })
-      response.show_tracking_events?.should be_false
+      response.show_tracking_info?.should be_false
     end
 
     it 'should return false if tracking events are empty' do
       response = FulfilmentResponse.new(200, {'tracking' => {'events' => []} })
-      response.show_tracking_events?.should be_false
+      response.show_tracking_info?.should be_false
     end
 
     it 'should return false if tracking is nil' do
       response = FulfilmentResponse.new(200, {})
-      response.show_tracking_events?.should be_false
+      response.show_tracking_info?.should be_false
     end
 
   end

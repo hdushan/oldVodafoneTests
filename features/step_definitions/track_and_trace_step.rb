@@ -85,6 +85,10 @@ And(/^I should see the message '(.*)'$/) do |message|
   expect(page.find('.status-message')).to have_content(message)
 end
 
+And(/^I should see the AusPost status message '(.*)'$/) do |message|
+  expect(page.find('.auspost-status-message')).to have_content(message)
+end
+
 Then(/^I should see a '(.*)' error message$/) do |error_message|
   expect(page).to have_content(error_message)
   steps %Q{
@@ -93,8 +97,8 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
   }
 end
 
-Then(/^I should not see any shipping details$/) do
-  expect(page).to have_no_selector('.tracking-info')
+Then(/^I should not see any shipping events$/) do
+  expect(page).to have_no_selector('.events')
   expect(page).to_not have_content('Date/Time')
 end
 

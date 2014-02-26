@@ -12,7 +12,9 @@
   -else
     %p.ship-message= locals[:details].shipping_estimate_message
 
-= haml :_tracking_info, locals: { tracking: locals[:details].tracking } if locals[:details].show_tracking_events?
+= haml :_tracking_info, locals: { |
+  tracking: locals[:details].tracking, auspost_error: locals[:details].auspost_error?, auspost_business_exception: locals[:details].auspost_business_exception? |
+  }  if locals[:details].show_tracking_info?  |
 
 -unless locals[:details].items.empty?
   %h3.order-details-heading Order Details

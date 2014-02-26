@@ -32,6 +32,14 @@ class FulfilmentResponse
     tracking && tracking['status']
   end
 
+  def auspost_error?
+    !tracking['error'].nil?
+  end
+
+  def auspost_business_exception?
+    !tracking['business_exception'].nil?
+  end
+
   def items
     return [] unless @body["items"]
     @body["items"].inject([]) do |items, item|
@@ -65,8 +73,16 @@ class FulfilmentResponse
     @body['tracking']
   end
 
-  def show_tracking_events?
-    tracking && tracking['events'] && tracking['events'].any?
+  def show_tracking_info?
+    tracking && (has_tracking_events? || has_auspost_issue?)
+  end
+
+  def has_auspost_issue?
+    auspost_business_exception? || auspost_error?
+  end
+
+  def has_tracking_events?
+    tracking['events'] && tracking['events'].any?
   end
 
 end

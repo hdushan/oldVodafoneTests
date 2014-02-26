@@ -1,6 +1,14 @@
--if locals[:tracking]['events']
-  .tracking-info
-    %table
+.tracking-info
+  -if locals[:auspost_error]
+    %p.auspost-status-message
+      There is an issue with the Australia Post server and we can’t currently retrieve the information. Please check back here later.
+  -elsif locals[:auspost_business_exception]
+    %p.auspost-status-message
+      Your delivery details can't be retrieved. For your delivery info, call us for free from your Vodafone mobile on 1555 (when in Australia) or 1300 650 410 from any other phone.
+      %a {href: 'http://www.vodafone.com.au/help/contactus'}Click to view our contact centre opening hours
+      and estimated waiting times.
+  -elsif locals[:tracking] && locals[:tracking]['events']
+    %table.events
       %tr
         %th Date/Time
         %th Status

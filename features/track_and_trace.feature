@@ -84,7 +84,7 @@ Feature: View Order Status
       |  has an unexpected status  |  1-1BADSTATUS      |  problem retrieving your order  |
 
   # This scanario tests the mobile megamenu. This test needs to be the last test in the suite, as
-  # inspite of resetting http request headers after the test, subsequent requents are still identified as
+  # in spite of resetting http request headers after the test, subsequent requests are still identified as
   # being from a mobile device.
   @javascript @mobile
   Scenario: View mobile-specific header and footer when visiting the page via a mobile device
