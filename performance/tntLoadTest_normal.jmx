@@ -50,6 +50,7 @@
         <stringProp name="HTTPSampler.protocol">${PROTOCOL}</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
         <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.implementation">Java</stringProp>
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
@@ -522,7 +523,7 @@
         <stringProp name="filename">/Users/user/Vodafone/trackandtrace/build/apache-jmeter-2.11/bin/results.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="false">
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -551,7 +552,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">tnt_load.jtl</stringProp>
+        <stringProp name="filename">tnt_load_normal.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
