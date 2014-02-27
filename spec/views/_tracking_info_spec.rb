@@ -37,7 +37,7 @@ describe '_tracking_info.haml' do
 
     it 'should display AusPost status message' do
       page.should have_selector('.auspost-status-message')
-      puts response
+      #puts response
       page.find('.auspost-status-message').should have_content("Your delivery details can't be retrieved")
     end
   end
