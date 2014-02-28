@@ -1,11 +1,18 @@
-{"tracking_status": "SHIPPED", "consignment_number": "APERROR", "items": [
+{"order_number": "UPAPERROR", "orders": [
     {
-        "description": "iPhone 5C 16GB White",
-        "item_quantity": "1"
+        "tracking_status": "SHIPPED",
+        "consignment_number": "APERROR",
+        "items": [
+            {
+                "description": "iPhone 5C 16GB White",
+                "item_quantity": "1"
+            }
+        ],
+        "tracking": {
+            "business_exception": "Invalid tracking ID"
+        }
     }
-], "ordered_date": "2013-11-20", "tracking": {
-    "business_exception": "Invalid tracking ID"
-}, "order_number": "UPAPERROR", "_links": {
+], "_links": {
     "self": {
         "href": "http://localhost:9394/v1/order/UPAPERROR"
     }

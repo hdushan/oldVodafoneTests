@@ -8,6 +8,7 @@ require 'sinatra'
 require 'sinatra_assets'
 require 'user_agent'
 require 'fulfilment_response'
+require 'fulfilment_order'
 require 'message_mapper'
 require 'logger'
 

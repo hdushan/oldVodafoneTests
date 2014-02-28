@@ -1,31 +1,35 @@
-{
-    "order_number": "VF123BOMULTI",
-    "tracking_status": "BACKORDERED",
-    "ordered_date": "2013-11-20",
-    "consignment_number": null,
-    "items": [
+{"order_number": "VF123BOMULTI", "orders": [
     {
-        "description": "iPhone 5C 32GB magenta",
-        "item_quantity": "1"
-    },
-    {
-        "description": "Microsim \"G23123\"",
-        "item_quantity": "1"
-    },
-    {
-        "description": "iPhone 5C 16GB Gold",
-        "item_quantity": "1"
-    },
-    {
-        "description": "Microsim 'F2313'",
-        "item_quantity": "1"
-    },
-    {
-        "description": "Soft leather case & screen protector <h1>&1234;_!|\\/#",
-        "item_quantity": "2"
+        "tracking_status": "BACKORDERED",
+        "ordered_date": "2013-11-20",
+        "consignment_number": null,
+        "items": [
+            {
+                "description": "iPhone 5C 32GB magenta",
+                "item_quantity": "1"
+            },
+            {
+                "description": "Microsim \"G23123\"",
+                "item_quantity": "1"
+            },
+            {
+                "description": "iPhone 5C 16GB Gold",
+                "item_quantity": "1"
+            },
+            {
+                "description": "Microsim 'F2313'",
+                "item_quantity": "1"
+            },
+            {
+                "description": "Soft leather case & screen protector <h1>&1234;_!|\\/#",
+                "item_quantity": "2"
+            }
+        ],
+        "estimated_shipping_date": "2014-12-31"
+    }],
+        "_links": {
+            "self": {
+                "href": "http://192.168.1.102:9393/v1/order/VF123BOMULTI"
+            }
+        }
     }
-], "estimated_shipping_date": "2014-12-31", "_links": {
-    "self": {
-        "href": "http://192.168.1.102:9393/v1/order/VF123BOMULTI"
-    }
-}}

@@ -1,7 +1,10 @@
 require 'spec_helper'
 require 'fulfilment_client'
 
+include StatusStrings
+
 describe "Track & Trace App" do
+
   let(:fulfilment_client) { double(FulfilmentClient) }
 
   let(:mega_menu_client) { double(MegaMenuAPIClient, :get_menu => MegaMenuAPIClient.empty_response) }
@@ -49,7 +52,7 @@ describe "Track & Trace App" do
       end
 
       context 'with a valid id' do
-        let(:fulfilment_response) { FulfilmentResponse.new(200, {'tracking_status' => TS_CANCELLED}) }
+        let(:fulfilment_response) { FulfilmentResponse.new(200, {'orders' => [{'tracking_status' => TS_CANCELLED}]}) }
 
         its(:status) { should eq 200 }
         its(:body) { should match /cancelled/ }

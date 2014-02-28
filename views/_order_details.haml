@@ -1,0 +1,22 @@
+%h2.status-heading= locals[:details].status_heading
+%p.status-message= locals[:details].status_message
+
+-if locals[:details].is_on_backorder?
+  %h3.ship-date-heading Expected Shipping Date
+  -if locals[:details].estimated_shipping_date
+    %p.ship-date= locals[:details].estimated_shipping_date
+  -else
+    %p.ship-message= locals[:details].shipping_estimate_message
+
+= haml :_tracking_info, locals: { |
+  tracking: locals[:details].tracking, auspost_error: locals[:details].auspost_error?, auspost_business_exception: locals[:details].auspost_business_exception? |
+  }  if locals[:details].show_tracking_info?  |
+
+-unless locals[:details].items.empty?
+  %h3.order-details-heading Order Details
+  %table.order-details
+    -locals[:details].items.each do |item|
+      %tr
+        %td.item-quantity= "#{item[:item_quantity]} x"
+        %td.item&= item[:description]
+        %td.item-status= item[:status]
