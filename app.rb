@@ -52,6 +52,10 @@ class App < Sinatra::Base
     redirect '/tnt'
   end
 
+  get '/health_check' do
+    'OK'
+  end
+
   get '/tnt' do
     mega_menu
 
