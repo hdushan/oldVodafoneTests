@@ -12,35 +12,36 @@
                 "description": "iPhone 5C 16GB Silver",
                 "item_quantity": "1",
                 "status": "CANCELLED"
-            },
-            {
-                "estimated_shipping_date": "2014-12-12",
-                "tracking": {
-                    "international": false,
-                    "status": "Transferring",
-                    "events": [
-                        {
-                            "date_time": "21/06/2010 12:21PM",
-                            "location": "224952 work centre",
-                            "description": "Delivered",
-                            "signer": null
-                        },
-                        {
-                            "date_time": "21/06/2010 12:12PM",
-                            "location": "224952 work centre",
-                            "description": "Delivered",
-                            "signer": null
-                        },
-                        {
-                            "date_time": "10/12/2008 12:12PM",
-                            "location": "PROP - PROPERTY DEVELOPMENTS",
-                            "description": "Transferring",
-                            "signer": null
-                        }
-                    ]
-                }
             }
-        ]
+        ],
+
+        "estimated_shipping_date": "2014-12-12",
+        "tracking": {
+            "international": false,
+            "status": "Transferring",
+            "events": [
+                {
+                    "date_time": "21/06/2010 12:21PM",
+                    "location": "224952 work centre",
+                    "description": "Delivered",
+                    "signer": null
+                },
+                {
+                    "date_time": "21/06/2010 12:12PM",
+                    "location": "224952 work centre",
+                    "description": "Delivered",
+                    "signer": null
+                },
+                {
+                    "date_time": "10/12/2008 12:12PM",
+                    "location": "PROP - PROPERTY DEVELOPMENTS",
+                    "description": "Transferring",
+                    "signer": null
+                }
+            ]
+        }
+
+
     }
 ],
     "_links": {

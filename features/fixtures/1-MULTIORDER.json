@@ -1,4 +1,4 @@
-{"order_number": "1-MULTIORDER", "orders": [
+{"orders": [
     {
         "tracking_status": "BACKORDERED",
         "consignment_number": null,
@@ -7,9 +7,21 @@
                 "description": "iPhone 5C 16GB White",
                 "item_quantity": "1"
             }
-        ]
+        ],
+        "ordered_date": "2013-11-20"
+    },
+    {
+        "tracking_status": "CANCELLED",
+        "consignment_number": null,
+        "items": [
+            {
+                "description": "iPhone 5C 16GB White",
+                "item_quantity": "1"
+            }
+        ],
+        "ordered_date": "2013-11-20"
     }
-], "_links": {
+], "order_number": "1-MULTIORDER", "_links": {
     "self": {
         "href": "http://localhost:9394/v1/order/1-MULTIORDER"
     }

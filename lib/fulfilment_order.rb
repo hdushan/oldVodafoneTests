@@ -1,5 +1,7 @@
 class FulfilmentOrder
 
+  include StatusStrings
+
   def initialize(fulfilment_response_order)
     @body = fulfilment_response_order
     @message_mapper = MessageMapper.new

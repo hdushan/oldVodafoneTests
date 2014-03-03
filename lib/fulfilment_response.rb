@@ -3,8 +3,6 @@ class FulfilmentResponse
   attr_reader :code
   attr_reader :orders
 
-  include StatusStrings
-
   def initialize(response_code, response_body)
     @code = response_code
     @body = response_body
@@ -17,6 +15,7 @@ class FulfilmentResponse
   end
 
   def initialise_orders
+    return [] unless @body
     order_list = @body['orders'] || []
     order_list.inject([]) do
       |orders, order_response|

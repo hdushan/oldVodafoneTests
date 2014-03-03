@@ -32,7 +32,7 @@ describe FulfilmentClient do
         'Content-Type' => 'application/json',
         'User-Agent' => 'Faraday v0.8.9',
         'X-Forwarded-For' => '1.2.3.4'}).
-        to_return(:status => 200, :body => "", :headers => {})
+        to_return(:status => 200, :body => {}, :headers => {})
 
       fulfilment_client.get_order_details('1234', '1.2.3.4')
     end
@@ -52,12 +52,12 @@ describe FulfilmentClient do
     context 'and response has a valid data' do
       it 'should return the data from the response' do
         fulfilment_client.stub(:request_order_status) { OpenStruct.new(status: 200,
-          body: {'tracking_status' => TS_PROGRESS}) }
+          body: {'orders'=>[{'tracking_status' => TS_PROGRESS}]}) }
 
         response = fulfilment_client.get_order_details('1234', '1.2.3.4')
 
         expect(response.has_error?).to eq(false)
-        expect(response.status_message).to match(/in progress/)
+        expect(response.orders.first.status_message).to match(/in progress/)
       end
     end
 

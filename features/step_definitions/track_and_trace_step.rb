@@ -46,6 +46,13 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
   }
 end
 
+Then(/^I should see tracking statuses '(.*)' and '(.*) for the order$/) do |status1, status2|
+  status_headings = page.all('.status-heading')
+  expect(status_headings.count).to be(2)
+  expect(status_headings.first.text).to eq(status1)
+  expect(status_headings.last.text).to eq(status2)
+end
+
 Then(/^I should see the right count and description for each item$/) do
   expected_descriptions = ['iPhone 5C 32GB magenta',
               'Microsim "G23123"',
@@ -130,4 +137,3 @@ def submit_track_form_with order_id
   end
   click_button 'Trace your order'
 end
-

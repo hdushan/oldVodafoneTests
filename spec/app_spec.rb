@@ -59,7 +59,7 @@ describe "Track & Trace App" do
       end
     end
 
-    context 'when Fulfilment Service is not availablle' do
+    context 'when Fulfilment Service is not available' do
       let(:fulfilment_response) { raise 'Faraday::Error::ConnectionFailed - Connection refused - connect(2)' }
 
       its(:status) { should eq 500 }

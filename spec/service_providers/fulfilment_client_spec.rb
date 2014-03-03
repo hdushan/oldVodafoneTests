@@ -52,7 +52,7 @@ describe FulfilmentClient, :pact => true do
   describe 'get_order_details for existing order id' do
     let(:tracking_info) { {} }
     let(:response_body) {
-      {
+      {'orders' => [{
         'tracking_status' => TS_SHIPPED,
         'ordered_date' => '2013-07-31',
         'consignment_number' => 'cn123',
@@ -65,7 +65,7 @@ describe FulfilmentClient, :pact => true do
           }
         ],
         'tracking' => tracking_info
-      }
+      }]}
     }
 
     context 'no error in tracking information' do
@@ -87,7 +87,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF456', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.status_message).to match /shipped/
+        expect(response.orders.first.status_message).to match /shipped/
       end
     end
 
@@ -112,8 +112,8 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.auspost_business_exception?).to be_true
-        expect(response.tracking).to eql(tracking_info)
+        expect(response.orders.first.auspost_business_exception?).to be_true
+        expect(response.orders.first.tracking).to eql(tracking_info)
       end
     end
 
@@ -138,8 +138,8 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.auspost_error?).to be_true
-        expect(response.tracking).to eql(tracking_info)
+        expect(response.orders.first.auspost_error?).to be_true
+        expect(response.orders.first.tracking).to eql(tracking_info)
       end
     end
   end

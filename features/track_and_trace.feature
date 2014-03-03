@@ -63,13 +63,12 @@ Feature: View Order Status
   Scenario Outline: View correct status of orders that have multiple order line item details in different statuses
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id '<order_id>'
-    Then I should see the tracking status '<heading>' for the order
-    And I should see the message '<message>'
+    Then I should see tracking statuses '<status1>' and '<status2> for the order
 
   Examples:
-    | order_state_description               |  order_id          |  heading                 | message                |
-    | Each with a single shipping line      |  1-MULTIORDER      |  On Backorder            | on backorder           |
-    | 1 with multiple shipping lines        |  1-MULTIORDERSH    |  On Backorder            | on backorder           |
+    | order_state_description               |  order_id          |  status1                 | status2                |
+    | Each with a single shipping line      |  1-MULTIORDER      |  On Backorder            | Order Cancelled        |
+    | 1 with multiple shipping lines        |  1-MULTIORDERSH    |  On Backorder            | Order Cancelled        |
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states

@@ -2,9 +2,9 @@
 %p
   %span.order-number-label Order Status for order number:
   %span.order-number= locals[:order].order_number
-  =locals[:order].orders
 
 - if !locals[:order].orders.empty?
-  = haml :_order_details, locals: {details: locals[:order].orders[0]}
+  - locals[:order].orders.each do |order|
+    = haml :_order_details, locals: {details: order}
 
 = haml :_info_links
