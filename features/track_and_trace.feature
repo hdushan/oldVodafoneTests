@@ -71,6 +71,20 @@ Feature: View Order Status
     | 1 with multiple shipping lines        |  1-MULTIORDERSH    |  On Backorder            | Order Cancelled        |
 
   @javascript
+  Scenario Outline: View correct quantities of orders that have multiple order line item details with the same description
+    Given I am on the Track and Trace Home page '/tnt'
+    When I search for the status of a valid order with id '<order_id>'
+    Then I should see an item with '<num>' and '<item_status>' for the order
+    And I should see an item with '<num2>' and '<item_status2>' for the order
+    And I should see an item with '<num3>' and '<item_status3>' for the order
+
+  Examples:
+    | order_state_description                           | order_id    | num | item_status | num2 | item_status2 | num3 | item_status3  |
+    | 6 and 2 in progress, one order                    | 1-MULTIAGG1 | 8 x |             | na   | na           | na   | na            |
+    | as above plus 1 and 3 cancelled                   | 1-MULTIAGG2 | 8 x | In Progress | 4 x  | Cancelled    | na   | na            |
+    | as above plus 1 and 2 in progress, separate order | 1-MULTIAGG3 | 8 x | In Progress | 4 x  | Cancelled    | 3 x  |               |
+
+  @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
     Given I am on the Track and Trace Home page '/tnt'
 	When I search for the status of an order with id '<order_id>' that '<order_state_description>'

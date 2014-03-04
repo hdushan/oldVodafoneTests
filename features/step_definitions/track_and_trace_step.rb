@@ -21,14 +21,14 @@ end
 
 When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |order_id, error_state_description|
   case error_state_description
-  when "doesnt exist"
-    setup_fulfilment_service_stub_error(order_id, 404)
-  when "timed out from fusion"
-    setup_fulfilment_service_stub_error(order_id, 503)
-  when "has an unexpected status"
-    setup_fulfilment_service_stub_error(order_id, 500)
-  else
-    raise 'Unknown Error Scenario'
+    when "doesnt exist"
+      setup_fulfilment_service_stub_error(order_id, 404)
+    when "timed out from fusion"
+      setup_fulfilment_service_stub_error(order_id, 503)
+    when "has an unexpected status"
+      setup_fulfilment_service_stub_error(order_id, 500)
+    else
+      raise 'Unknown Error Scenario'
   end
   submit_track_form_with order_id
 end
@@ -55,10 +55,10 @@ end
 
 Then(/^I should see the right count and description for each item$/) do
   expected_descriptions = ['iPhone 5C 32GB magenta',
-              'Microsim "G23123"',
-              'iPhone 5C 16GB Gold',
-              "Microsim 'F2313'",
-              "Soft leather case & screen protector <h1>&1234;_!|\\/#"]
+    'Microsim "G23123"',
+    'iPhone 5C 16GB Gold',
+    "Microsim 'F2313'",
+    "Soft leather case & screen protector <h1>&1234;_!|\\/#"]
   actual = page.all('.item').map { |elem| elem.text }
   expect(actual).to match_array expected_descriptions
   expected_counts = ['1 x', '1 x', '1 x', "1 x", "2 x"]
@@ -68,20 +68,32 @@ end
 
 Then(/^I should see the right count, description and status for each item$/) do
   expected_descriptions = ['iPhone 5C 16GB Blue',
-              'iPhone 5C 16GB Gold',
-              'iPhone 5C 16GB Silver',
-              "iPhone 5C 16GB Grey"]
+    'iPhone 5C 16GB Gold',
+    'iPhone 5C 16GB Silver',
+    "iPhone 5C 16GB Grey"]
   actual = page.all('.item').map { |elem| elem.text }
   expect(actual).to match_array expected_descriptions
   expected_counts = ['1 x', '2 x', '3 x', "4 x"]
   actual_counts = page.all('.item-quantity').map { |elem| elem.text }
   expect(actual_counts).to match_array expected_counts
-  expected_statuses = ['Cancelled', 
-             'Shipped', 
-             'Cancelled', 
-             "Shipped"]
+  expected_statuses = ['Cancelled',
+    'Shipped',
+    'Cancelled',
+    "Shipped"]
   actual_statuses = page.all('.item-status').map { |elem| elem.text }
   expect(actual_statuses).to match_array expected_statuses
+end
+
+
+Then(/^I should see an item with '(.*)' and '(.*)' for the order$/) do |num, item_status|
+  unless num == 'na' && item_status == 'na'
+    all_items = page.all('.item-row')
+    found = all_items.inject(false) do |item_found, item_row|
+      item_found = item_found || item_row.find('.item-quantity').text == num && item_row.find('.item-status').text == item_status
+      item_found
+    end
+    expect(found).to be_true
+  end
 end
 
 Then(/^I should see the estimated shipping date for the order$/) do
@@ -111,8 +123,8 @@ end
 
 And(/^I should see the shipping events from AusPost$/) do
   expect(page).to have_selector('.tracking-info')
-  expect(page.all('.event-date').map { |elem| elem.text}).to eq(['21/06/2010 12:21PM', '21/06/2010 12:12PM', '10/12/2008 12:12PM'])
-  expect(page.all('.event-status').map { |elem| elem.text}).to eq(['Delivered', 'Redirected', 'Signed'])
+  expect(page.all('.event-date').map { |elem| elem.text }).to eq(['21/06/2010 12:21PM', '21/06/2010 12:12PM', '10/12/2008 12:12PM'])
+  expect(page.all('.event-status').map { |elem| elem.text }).to eq(['Delivered', 'Redirected', 'Signed'])
 end
 
 Then(/^I should see the Megamenu header$/) do

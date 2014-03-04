@@ -1,0 +1,34 @@
+{"orders": [
+    {
+        "tracking_status": "IN PROGRESS",
+        "consignment_number": null,
+        "items": [
+            {
+                "description": "iPhone 5C 16GB White",
+                "item_quantity": "8",
+                "status": "IN PROGRESS"
+            },
+            {
+                "description": "iPhone 5C 16GB White",
+                "item_quantity": "4",
+                "status": "CANCELLED"
+            }
+        ],
+        "ordered_date": "2013-11-20"
+    },
+    {
+        "tracking_status": "IN PROGRESS",
+        "consignment_number": null,
+        "items": [
+            {
+                "description": "iPhone 5C 16GB White",
+                "item_quantity": "3"
+            }
+        ],
+        "ordered_date": "2013-11-20"
+    }
+], "order_number": "1-MULTIAGG3", "_links": {
+    "self": {
+        "href": "http://localhost:9394/v1/order/1-MULTIAGG3"
+    }
+}}
