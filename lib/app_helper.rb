@@ -12,3 +12,20 @@ end
 def nil_or_empty? string
   string.nil? || string.empty?
 end
+
+class Rack::CommonLogger
+  alias_method :call_real, :call
+
+  def call(env)
+    if logging_required?(env)
+      call_real(env)
+    else
+      @app.call(env)
+    end
+  end
+
+  # return true if request should be logged
+  def logging_required?(env)
+    !LOGGING_BLACKLIST.include?(env['PATH_INFO'])
+  end
+end

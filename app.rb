@@ -12,6 +12,8 @@ require 'fulfilment_order'
 require 'message_mapper'
 require 'logger'
 
+LOGGING_BLACKLIST = %w(/health_check)
+
 class App < Sinatra::Base
   include Assets
 
@@ -90,10 +92,6 @@ class App < Sinatra::Base
     logger.error(exception.backtrace.join("\n"))
     @error = MessageMapper::DEFAULT_ERROR_MESSAGE
     haml(:error)
-  end
-
-  get '/env' do
-    ENV.inspect
   end
 
   private
