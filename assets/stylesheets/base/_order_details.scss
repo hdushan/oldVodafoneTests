@@ -1,0 +1,83 @@
+@mixin grey-text-box {
+  padding: $text-spacing-vt $text-spacing-hz;
+  background-color: $palest-grey;
+  color: $text-grey;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.order-number-reminder {
+  @include grey-text-box;
+  margin: $text-spacing-vt 0;
+}
+
+.order_line_item_details {
+  border: $global-border;
+  border-radius: $global-border-radius;
+  color: $text-grey;
+  margin-top: $text-spacing-vt;
+
+  .glyph {
+    width: $glyph-height;
+    height: $glyph-width;
+    margin: $text-spacing-vt $text-spacing-hz;
+    padding-right: $text-spacing-hz;
+    border-right: $global-border;
+    float: left;
+  }
+
+  .tick {
+    background:url(../images/tnt-icons-sprite.png) 0 0 no-repeat;
+  }
+
+  .info {
+    background:url(../images/tnt-icons-sprite.png) 0 -28px no-repeat;
+  }
+
+  .warning {
+    background:url(../images/tnt-icons-sprite.png) 0 -55px no-repeat;
+  }
+
+  .truck {
+    background:url(../images/tnt-icons-sprite.png) 0 -82px no-repeat;
+  }
+
+  .status-heading {
+    color: black;
+    border-bottom: $global-border;
+    padding: 17px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
+    margin: 0 $text-spacing-hz;
+  }
+
+  .order-details-heading, .ship-date-heading {
+    @include grey-text-box;
+  }
+
+  .status-message, .ship-message, .ship-date {
+    padding: $text-spacing-vt $text-spacing-hz;
+    line-height: 1.3em;
+  }
+
+  th {
+    @include grey-text-box;
+    text-transform: none;
+  }
+
+  td {
+    padding: $text-spacing-vt $text-spacing-hz;
+    color: $text-grey;
+    border: none;
+    font-size: 1em;
+  }
+
+  .item-quantity {
+    padding-right: 0.6em;
+    width: 1%;
+    white-space: nowrap;
+  }
+
+  .item {
+    padding-left: 0;
+  }
+
+}

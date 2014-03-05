@@ -18,11 +18,14 @@
         %link{ :rel => :stylesheet, :type => :"text/css", :href => "#{css_url}"}
     !=css :application
 
-  %body.tnt-body
+  %body#vha-vca.tnt-body
     .container
       =haml :_header
       .tnt-container
-        =yield
+        .tnt-bg-holder
+        .tnt-frame
+          .tnt-content
+            =yield
       =haml :_footer
 
 

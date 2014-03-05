@@ -9,22 +9,22 @@ Feature: View Order Status
 
     Examples:
       |  status_mix                                        |  order_id          |  heading          | message            |
-	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  In Progress      | in progress        |
-      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  In Progress      | in progress        |
-      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  In Progress      | in progress        |
-      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  In Progress      | in progress        |
-      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On Backorder     | on backorder       |
-	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order Shipped    | has been shipped   |
-	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order Shipped    | has been shipped   |
-	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order Shipped    | has been shipped   |
-	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order Shipped    | has been shipped   |
+	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  In Progress      |                    |
+      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  In Progress      |                    |
+      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  In Progress      |                    |
+      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  In Progress      |                    |
+      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On Backorder     |                    |
+	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order Shipped    |                    |
+	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order Shipped    |                    |
+	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order Shipped    |                    |
+	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order Shipped    |                    |
 	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order Cancelled  | has been cancelled |
 	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order Cancelled  | has been cancelled |
       |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
 	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order Cancelled  | has been cancelled |
 	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order Cancelled  | has been cancelled |
       |  TERMINATED                                        |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
-      |  IN PROGRESS                                       |  1-123INPROGRESS   |  In Progress      | in progress        |
+      |  IN PROGRESS                                       |  1-123INPROGRESS   |  In Progress      |                    |
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered
@@ -51,12 +51,12 @@ Feature: View Order Status
 
   Examples:
     | order_state_description               |  order_id          |  heading                 | message                    |
-    | 1 shipped, 1 cancelled                |  1-MULTICANS       |  Shipped                 | has been shipped           |
-    | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Transferring            | See below                  |
-    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Transferring            | See below                  |
+    | 1 shipped, 1 cancelled                |  1-MULTICANS       |  Shipped                 |                            |
+    | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Transferring            |                            |
+    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Transferring            |                            |
     | 1 shipped, 1 cancelled, 1 BO          |  1-MULTICANBS      |  Order Partially Shipped | has been partially shipped |
     | 1 cancelled, 1 BO                     |  SR1-CANBO         |  On Backorder            | on backorder               |
-    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Transferring            | See below                  |
+    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Transferring            |                            |
     | 1 shipped, 1 BO                       |  SR1-BS            |  Order Partially Shipped | has been partially shipped |
 
   @javascript

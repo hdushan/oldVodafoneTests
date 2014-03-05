@@ -9,7 +9,7 @@
       and estimated waiting times.
   -elsif locals[:tracking] && locals[:tracking]['events']
     %table.events
-      %tr
+      %tr.heading
         %th Date/Time
         %th Status
       - locals[:tracking]['events'].each do |event|

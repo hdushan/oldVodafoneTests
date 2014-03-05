@@ -5,7 +5,6 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'UPAPFOUND' that has tracking events
     Then I should see the tracking status 'Delivered' for the order
-    And I should see the message 'See below for further information about your order's travels'
     And I should see the shipping events from AusPost
 
   @javascript
@@ -13,7 +12,6 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'UPAPERROR'
     Then I should see the tracking status 'Order Shipped' for the order
-    And I should see the message 'Your order has been shipped'
     And I should see the AusPost status message 'Your delivery details can't be retrieved.'
 
   @javascript
@@ -21,7 +19,6 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'UPAPTIME'
     Then I should see the tracking status 'Order Shipped' for the order
-    And I should see the message 'Your order has been shipped'
     And I should see the AusPost status message 'There is an issue with the Australia Post server'
 
   @javascript
@@ -29,7 +26,6 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'UPAPTIME' that has tracking info error
     Then I should see the tracking status 'Order Shipped' for the order
-    And I should see the message 'Your order has been shipped'
     And I should not see any shipping events
 
   @javascript
@@ -37,5 +33,4 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'UPAPINTER' that has no AusPost status
     Then I should see the tracking status 'Order Shipped' for the order
-    And I should see the message 'Your order has been shipped'
     And I should not see any shipping events

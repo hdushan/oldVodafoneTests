@@ -6,8 +6,8 @@ describe FulfilmentOrder do
 
   describe '#status_message' do
     it 'should map the status to a user friendly message' do
-      response = FulfilmentOrder.new({'tracking_status' => TS_PROGRESS})
-      response.status_message.should == 'Your order is in progress'
+      response = FulfilmentOrder.new({'tracking_status' => TS_CANCELLED})
+      response.status_message.should match /Your order has been cancelled/
     end
   end
 
@@ -102,10 +102,6 @@ describe FulfilmentOrder do
         response.status_heading.should eq('Delivered')
       end
 
-      it 'should use the AusPost tracking status message if present' do
-        response.status_message.should eq("See below for further information about your order's travels")
-      end
-
       it 'should flag no AusPost issues' do
         response.auspost_error?.should be_false
         response.auspost_business_exception?.should be_false
@@ -114,7 +110,7 @@ describe FulfilmentOrder do
 
     context 'when tracking data is in error' do
       let(:response) { FulfilmentOrder.new(
-        {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
+        {'tracking_status' => TS_CANCELLED, 'consignment_number' => 'AP123FOUND',
           'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
           'ordered_date' => '2013-11-20',
           'tracking' => {'error' => 'Failed to get data from AusPost'},
@@ -122,11 +118,11 @@ describe FulfilmentOrder do
       ) }
 
       it 'should use the vodafone status' do
-        response.status_heading.should eq('Order Shipped')
+        response.status_heading.should match /Order cancelled/i
       end
 
       it 'should use the vodafone status message' do
-        response.status_message.should eq('Your order has been shipped')
+        response.status_message.should match /Your order has been cancelled/i
       end
 
       it 'should flag an AusPost error' do
@@ -137,7 +133,7 @@ describe FulfilmentOrder do
 
     context 'when tracking data has a business exception' do
       let(:response) { FulfilmentOrder.new(
-        {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
+        {'tracking_status' => TS_CANCELLED, 'consignment_number' => 'AP123FOUND',
           'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
           'ordered_date' => '2013-11-20',
           'tracking' => {'business_exception' => 'Product is not trackable'},
@@ -145,11 +141,11 @@ describe FulfilmentOrder do
       ) }
 
       it 'should use the vodafone status' do
-        response.status_heading.should eq('Order Shipped')
+        response.status_heading.should match /Order cancelled/i
       end
 
       it 'should use the vodafone status message' do
-        response.status_message.should eq('Your order has been shipped')
+        response.status_message.should match /Your order has been cancelled/i
       end
 
       it 'should flag an AusPost business exception' do

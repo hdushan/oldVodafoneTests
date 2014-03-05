@@ -87,7 +87,7 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF456', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.orders.first.status_message).to match /shipped/
+        expect(response.orders.first.status_heading).to match /shipped/i
       end
     end
 

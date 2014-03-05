@@ -7,25 +7,38 @@ form.form {
   }
 
   label {
-    font-weight: bold;
+    font-weight: normal;
     display: block;
+    color: $text-grey;
 
     &.tracking_label {
-      margin-top: 10px;
+      margin: 25px 0 10px 0;
     }
   }
 
   input {
     width: 100%;
-    font-size: inherit;
     box-sizing: border-box;
-    padding: $button-input-padding-vt .5em;
+    box-shadow: inset 0px 1px 3px $input-box-shadow;
+    padding: .75em 1em;
+    color: $text-grey;
     margin: $button-input-margin;
     border: $global-border;
     border-radius: $global-border-radius;
     background-color: $white;
-    &:focus { border-color: $aqua-blue; }
+    &:focus { border-color: $input-box-focus-border; }
     &:disabled { border: none; }
+  }
+
+
+  #input-validation-msg {
+    margin-top: 6px;
+    padding: 10px 30px 10px 40px;
+    border: 1px solid $vodafone-red;
+    border-radius: $global-border-radius;
+    background-color: $warning-bkgnd;
+    color: $text-grey;
+    line-height: 1.5em;
   }
 
   img.help-icon {
@@ -33,13 +46,11 @@ form.form {
     width: 25px;
     margin-top: 5px;
   }
-}
 
-.input-wrapper {
-  margin-right: 40px;
-}
+  button.trace {
+    background-color: $vodafone-red;
+    box-shadow: 0px 1px 3px black;
+  }
 
-button.trace {
-  background-color: $vodafone-red;
-  width: 100%;
+
 }

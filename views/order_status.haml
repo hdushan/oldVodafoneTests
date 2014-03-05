@@ -1,10 +1,8 @@
-%h1 Trace Your Order
-%p
-  %span.order-number-label Order Status for order number:
+%h1 Trace your order.
+%p.order-number-reminder
+  %span.order-number-label Order number:
   %span.order-number= locals[:order].order_number
 
 - if !locals[:order].orders.empty?
   - locals[:order].orders.each do |order|
     = haml :_order_details, locals: {details: order}
-
-= haml :_info_links

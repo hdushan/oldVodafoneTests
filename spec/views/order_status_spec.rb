@@ -12,7 +12,7 @@ describe 'order_status.haml' do
     end
 
     it 'should include the order number' do
-      expect(page.find('.order-number-label')).to have_content('Order Status for order number:')
+      expect(page.find('.order-number-label')).to have_content('Order number:')
       expect(page.find('.order-number')).to have_content('VF123MULTILINES')
     end
 

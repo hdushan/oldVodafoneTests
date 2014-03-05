@@ -1,5 +1,5 @@
 %article
-  %h1 Trace your order
+  %h1 Trace your order.
 
   %form#track-form.form{ action: '/tnt', method: 'post' }
     - if @error
@@ -9,18 +9,18 @@
         %span.msg= @error
 
     %fieldset
-      %label.tracking_label{:for => 'tracking_id'} Tracking Number
-      %img.help-icon{ src: 'images/help-icon.png' }
+      %label.tracking_label{:for => 'tracking_id'} Tracking number
       .input-wrapper
-        %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id}
+        %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id, :placeholder => 'e.g. 123-456ABCDEF'}
       #input-validation-msg.hidden
         %p
           The Order Number you have entered is not in a valid format.
           Please check the number on your confirmation email and enter it as it appears on the email.
 
     .input-wrapper
-      %button.trace.tnt-button#trace{:type => 'submit'} Trace your order
+      %button.trace.tnt-button#trace{:type => 'submit'}
+        %span.strong
+          Trace
+        your order
 
   = haml :_loading_spinner
-
-  = haml :_info_links

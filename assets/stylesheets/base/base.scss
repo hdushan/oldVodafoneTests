@@ -2,9 +2,10 @@
 @import '../bourbon/bourbon';
 @import "_variables";
 @import "_form";
+@import "_order_details";
 @import "_trace";
-@import "style";
-@import "vodafone_font";
+@import "_style";
+@import "_vodafone_font";
 
 // Make animations use 3d acceleration
 %smoother-animation {

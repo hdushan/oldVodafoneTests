@@ -1,24 +1,64 @@
-$normal_font_size: 12px;
-$container-width: 400px;
+$container-width: 954px;
+$content-width: 420px;
+$container-height: 600px;
 
 .margin-wrapper {
   margin-left: 40px;
 }
 
+html {
+  font-size: $em-base;
+}
+
 body{
   margin: 0;
   font-family: Helvetica;
-  font-size: $normal_font_size;
-  background-color: $white;
+  background-color: $palest-grey;
 }
 
 .container {
   margin: 0 auto;
+  background-color: white;
+}
+
+.strong {
+  font-weight: bold;
 }
 
 .tnt-container {
   margin: 0 auto;
-  max-width: $container-width;
+  position: relative;
+  background-color: $white;
+  min-height: $container-height;
+}
+
+.tnt-bg-holder {
+  background-image: url(../images/background.jpg);
+  background-color: $white;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-size: auto 100%;
+
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  max-height: 900px;
+  width: 100%;
+  z-index: 10;
+}
+
+.tnt-frame {
+  position: relative;
+  z-index: 100;
+  width: $container-width;
+  margin: 0 auto;
+  padding: 60px 0 60px 0;
+}
+
+.tnt-content {
+  width: $content-width;
+  background-color: $white;
+  padding: 20px;
 }
 
 .hidden {
@@ -26,7 +66,7 @@ body{
 }
 
 article{
-  padding: 10px;
+  padding: 25px;
 }
 
 h1 {
@@ -46,7 +86,7 @@ h2 {
 }
 
 button.tnt-button {
-  padding: $button-input-padding-vt .5em;
+  padding: 0.4em 0.7em;
   color: $white;
   text-transform: uppercase;
   border: none;
@@ -57,8 +97,8 @@ button.tnt-button {
 
 ul.info {
   background: $off-white;
-  border-radius: 5px;
-  border: 1px solid #dcdcdc;
+  border-radius: $global-border-radius;
+  border: 1px solid $pale-grey;
   line-height: 1.5em;
   list-style: none;
   padding: 0;
@@ -68,7 +108,7 @@ ul.info {
   }
 
   li {
-      border-bottom: 1px solid #dcdcdc;
+      border-bottom: 1px solid $pale-grey;
       padding: 10px 10px 10px 45px;
       background-repeat: no-repeat;
       background-position: 15px 50%;
