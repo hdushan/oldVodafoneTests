@@ -8,23 +8,23 @@ Feature: View Order Status
     And I should see the message '<message>'
 
     Examples:
-      |  status_mix                                        |  order_id          |  heading          | message            |
-	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  In Progress      |                    |
-      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  In Progress      |                    |
-      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  In Progress      |                    |
-      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  In Progress      |                    |
-      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On Backorder     |                    |
-	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order Shipped    |                    |
-	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order Shipped    |                    |
-	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order Shipped    |                    |
-	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order Shipped    |                    |
-	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order Cancelled  | has been cancelled |
-	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order Cancelled  | has been cancelled |
-      |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order Cancelled  | has been cancelled |
-	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order Cancelled  | has been cancelled |
-	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order Cancelled  | has been cancelled |
-      |  TERMINATED                                        |  VF123TERMINATED   |  Order Cancelled  | has been cancelled |
-      |  IN PROGRESS                                       |  1-123INPROGRESS   |  In Progress      |                    |
+      |  status_mix                                        |  order_id          |  heading          | message                      |
+	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  In Progress      |                              |
+      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  In Progress      |                              |
+      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  In Progress      |                              |
+      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  In Progress      |                              |
+      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On Backorder     | has been placed on backorder |
+	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order Shipped    |                              |
+	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order Shipped    |                              |
+	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order Shipped    |                              |
+	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order Shipped    |                              |
+	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order Cancelled  | has been cancelled           |
+	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order Cancelled  | has been cancelled           |
+      |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order Cancelled  | has been cancelled           |
+	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order Cancelled  | has been cancelled           |
+	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order Cancelled  | has been cancelled           |
+      |  TERMINATED                                        |  VF123TERMINATED   |  Order Cancelled  | has been cancelled           |
+      |  IN PROGRESS                                       |  1-123INPROGRESS   |  In Progress      |                              |
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered
@@ -39,7 +39,8 @@ Feature: View Order Status
   Scenario: View individual status of items in a partially shipped order that has multiple items
     Given I am on the Track and Trace Home page '/tnt'
     When I search for the status of a valid order with id 'VFMANYSTATUS'
-    Then I should see the tracking status 'Transferring' for the order
+    Then I should see the tracking status 'Shipped' for the order
+    Then I should see the AusPost status 'Transferring' for the order
 	And I should see the right count, description and status for each item
 
   @javascript
@@ -52,11 +53,11 @@ Feature: View Order Status
   Examples:
     | order_state_description               |  order_id          |  heading                 | message                    |
     | 1 shipped, 1 cancelled                |  1-MULTICANS       |  Shipped                 |                            |
-    | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Transferring            |                            |
-    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Transferring            |                            |
+    | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Shipped                 |                            |
+    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Order Partially Shipped | has been partially shipped |
     | 1 shipped, 1 cancelled, 1 BO          |  1-MULTICANBS      |  Order Partially Shipped | has been partially shipped |
     | 1 cancelled, 1 BO                     |  SR1-CANBO         |  On Backorder            | on backorder               |
-    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Transferring            |                            |
+    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Order Partially Shipped | has been partially shipped |
     | 1 shipped, 1 BO                       |  SR1-BS            |  Order Partially Shipped | has been partially shipped |
 
   @javascript

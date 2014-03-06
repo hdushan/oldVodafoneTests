@@ -44,9 +44,13 @@
 
   .status-heading {
     color: black;
-    border-bottom: $global-border;
     padding: 17px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
     margin: 0 $text-spacing-hz;
+  }
+
+  #auspost-status {
+    border-top: $global-border;
+    padding-top: $text-spacing-vt;
   }
 
   .order-details-heading, .ship-date-heading {
@@ -54,8 +58,13 @@
   }
 
   .status-message, .ship-message, .ship-date {
-    padding: $text-spacing-vt $text-spacing-hz;
-    line-height: 1.3em;
+    padding: $text-spacing-vt 0;
+    margin: 0 $text-spacing-hz;
+    line-height: $global-line-height;
+  }
+
+  .status-message {
+    border-top: $global-border;
   }
 
   th {

@@ -21,9 +21,9 @@ describe MessageMapper do
     it 'should map known statuses' do
       mapper = MessageMapper.new
       mapper.status_message(TS_CANCELLED).should =~ /cancelled/i
-      mapper.status_message(TS_PROGRESS).should be_empty
+      mapper.status_message(TS_PROGRESS).should be_nil
       mapper.status_message(TS_BACKORDERED).should =~ /backorder/i
-      mapper.status_message(TS_SHIPPED).should  be_empty
+      mapper.status_message(TS_SHIPPED).should  be_nil
       mapper.status_message(TS_PARTIALLY_SHIPPED).should =~ /partially shipped/i
     end
 

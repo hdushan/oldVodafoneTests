@@ -39,7 +39,7 @@ When(/^I search for the status of a valid order with id '(.*)'/) do |order_id|
 end
 
 Then(/^I should see the tracking status '(.*)' for the order$/) do |status_header|
-  expect(page.find('.status-heading')).to have_content(status_header)
+  expect(page.find('#vodafone-status')).to have_content(status_header)
   steps %Q{
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
@@ -47,7 +47,7 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
 end
 
 Then(/^I should see tracking statuses '(.*)' and '(.*) for the order$/) do |status1, status2|
-  status_headings = page.all('.status-heading')
+  status_headings = page.all('#vodafone-status')
   expect(status_headings.count).to be(2)
   expect(status_headings.first.text).to eq(status1)
   expect(status_headings.last.text).to eq(status2)
@@ -101,11 +101,11 @@ Then(/^I should see the estimated shipping date for the order$/) do
 end
 
 And(/^I should see the message '(.*)'$/) do |message|
-  expect(page.find('.status-message')).to have_content(message)
-end
-
-And(/^I should see the AusPost status message '(.*)'$/) do |message|
-  expect(page.find('.auspost-status-message')).to have_content(message)
+  if message.empty?
+    expect(page).to have_no_selector('.status-message')
+  else
+    expect(page.find('.status-message')).to have_content(message)
+  end
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
@@ -114,6 +114,18 @@ Then(/^I should see a '(.*)' error message$/) do |error_message|
     Then I should see the Megamenu header
     Then I should see the Megamenu footer
   }
+end
+
+Then(/^I should see the AusPost status '(.*)' for the order$/) do |status_header|
+  expect(page.find('#auspost-status')).to have_content(status_header)
+end
+
+And(/^I should see the AusPost status message '(.*)'$/) do |message|
+  expect(page.find('.auspost-status-message')).to have_content(message)
+end
+
+Then(/^I should see no AusPost status for the order$/) do
+  expect(page).to have_no_selector('#auspost-status')
 end
 
 Then(/^I should not see any shipping events$/) do

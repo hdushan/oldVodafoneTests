@@ -38,7 +38,7 @@ form.form {
     border-radius: $global-border-radius;
     background-color: $warning-bkgnd;
     color: $text-grey;
-    line-height: 1.5em;
+    line-height: $global-line-height;
   }
 
   img.help-icon {

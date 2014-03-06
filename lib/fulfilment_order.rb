@@ -8,7 +8,6 @@ class FulfilmentOrder
   end
 
   def status_message
-    return MessageMapper::AUSPOST_STATUS_MESSAGE if use_auspost_status?
     @message_mapper.status_message(tracking_status)
   end
 
@@ -17,12 +16,11 @@ class FulfilmentOrder
   end
 
   def status_heading
-    return tracking['status'] if use_auspost_status?
     @message_mapper.status_heading(tracking_status)
   end
 
-  def use_auspost_status?
-    tracking && tracking['status']
+  def auspost_status_heading
+    tracking ? tracking['status'] : nil
   end
 
   def tracking
