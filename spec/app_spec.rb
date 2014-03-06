@@ -63,7 +63,7 @@ describe "Track & Trace App" do
       let(:fulfilment_response) { raise 'Faraday::Error::ConnectionFailed - Connection refused - connect(2)' }
 
       its(:status) { should eq 500 }
-      its(:body) { should have_tag(:p, text: 'There was a problem retrieving your order.') }
+      its(:body) { should have_tag(:span, text: 'There was a problem retrieving your order.') }
     end
   end
 

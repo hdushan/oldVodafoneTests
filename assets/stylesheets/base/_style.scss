@@ -176,11 +176,15 @@ ul.info {
 .glyph {
   width: $glyph-height;
   height: $glyph-width;
-  margin: $text-spacing-vt $text-spacing-hz;
   padding-right: $text-spacing-hz;
-  border-right: $global-border;
   float: left;
   clear: left;
+}
+
+.glyph-heading {
+  @extend .glyph;
+  border-right: $global-border;
+  margin: $text-spacing-vt $text-spacing-hz;
 }
 
 .tick {

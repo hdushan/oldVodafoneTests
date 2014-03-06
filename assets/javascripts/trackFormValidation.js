@@ -12,17 +12,17 @@ function hideServerErrorMsg() {
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {
     $('#input-validation-msg').hide();
+    $('#server-error-msg').hide();
     $('#track-form .alert').hide();
 
     event.preventDefault();
 
     var order_id = orderIdEntered();
 
-    if(isValidOrderId(order_id)) {
+    if (isValidOrderId(order_id)) {
       showLoadingImage();
       this.submit();
-    }
-    else {
+    } else {
       $( "#input-validation-msg" ).show();
       shakeForm();
       return false;

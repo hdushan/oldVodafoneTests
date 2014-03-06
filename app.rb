@@ -55,6 +55,10 @@ class App < Sinatra::Base
     redirect '/tnt'
   end
 
+  get '/tnt/:id/' do
+    redirect "/tnt/#{params[:id]}"
+  end
+
   get '/health_check' do
     'OK'
   end
@@ -91,7 +95,7 @@ class App < Sinatra::Base
     logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
     @error = MessageMapper::DEFAULT_ERROR_MESSAGE
-    haml(:error)
+    haml(:track_form)
   end
 
   private
