@@ -33,7 +33,7 @@ form.form {
 
   .error-msg-block {
     margin-top: 6px;
-    padding: 10px 30px 10px 40px;
+    padding: 10px 30px 10px 10px;
     border: 1px solid $vodafone-red;
     border-radius: $global-border-radius;
     background-color: $warning-bkgnd;
@@ -52,5 +52,17 @@ form.form {
     box-shadow: 0px 1px 3px black;
   }
 
+  table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+    tr {
+      td {
+        font-size: $em-base;
+        border-top: 0;
+      }
+    }
+
+  }
 
 }
