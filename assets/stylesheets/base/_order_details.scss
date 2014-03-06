@@ -3,6 +3,7 @@
   background-color: $palest-grey;
   color: $text-grey;
   font-size: 1em;
+  font-family: $global-font-family;
   font-weight: bold;
 }
 
@@ -18,14 +19,13 @@
   margin-top: $text-spacing-vt;
 
   .status-heading {
-    color: black;
-    padding: 17px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
+    color: $text-grey;
+    padding: 18px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
     margin: 0 $text-spacing-hz;
   }
 
   #auspost-status {
     border-top: $global-border;
-    padding-top: $text-spacing-vt;
   }
 
   .order-details-heading, .ship-date-heading {

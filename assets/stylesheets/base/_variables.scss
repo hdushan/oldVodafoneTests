@@ -4,24 +4,25 @@ $white: #ffffff;
 $palest-grey: #f4f4f4;
 $off-white: #efefef;
 $pale-grey: #dcdcdc;
-$light-grey: #c7c7c7;
+$light-grey: #ccc;
 $text-grey: #333;
 $input-box-shadow: #4D4D4D;
 $black: #000000;
 $input-box-focus-border: #1ba6ce;
-$warning-bkgnd: #fef0ef;
+$alert-background-color: #fef0f0;
 
 $button-input-margin: 0.3em 0 0.5em 0;
 
-// Misc variables
+// Text variables
 $em-base: 14px;
 $text-spacing-vt: 14px;
 $text-spacing-hz: 11px;
 $global-line-height: 1.3em;
-$global-border-radius: 4px;
-$global-border: 1px solid $light-grey;
-$global-box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+$global-font-family: "Arial Regular", Arial, sans-serif;
 
+//Boxes and lines
+$global-border-radius: 3px;
+$global-border: 1px solid $light-grey;
 $glyph-height: 25px;
 $glyph-width: 25px;
 
@@ -34,6 +35,3 @@ $header-gradient-stop-1: #ff0027;
 $header-gradient-stop-2: #be0025;
 
 $status-highlight: #d4e5e7;
-
-//alert
-$alert-background-color: $off-white;

@@ -19,7 +19,7 @@ form.form {
   input {
     width: 100%;
     box-sizing: border-box;
-    box-shadow: inset 0px 1px 3px $input-box-shadow;
+    @include input-box-shadow;
     padding: .75em 1em;
     color: $text-grey;
     margin: $button-input-margin;
@@ -36,7 +36,7 @@ form.form {
     padding: 10px 30px 10px 40px;
     border: 1px solid $vodafone-red;
     border-radius: $global-border-radius;
-    background-color: $warning-bkgnd;
+    background-color: $alert-background-color;
     color: $text-grey;
     line-height: $global-line-height;
   }
