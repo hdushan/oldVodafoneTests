@@ -55,6 +55,10 @@ class App < Sinatra::Base
     redirect '/tnt'
   end
 
+  get '/tnt/:id/' do
+    redirect "/tnt/#{params[:id]}"
+  end
+
   get '/health_check' do
     'OK'
   end
