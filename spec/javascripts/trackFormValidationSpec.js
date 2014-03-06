@@ -52,6 +52,7 @@ describe("form validation on submit", function() {
     var $container = affix('div');
     $container.affix('form#track-form[action="/track"] input#tracking_id');
     $container.affix('#input-validation-msg.hidden[style="display: none"]');
+    $container.affix('#server-error-msg[style="display: block"]');
     validateTrackForm();
   });
 
@@ -76,5 +77,12 @@ describe("form validation on submit", function() {
       expect(validationMessageAfter).toBe(true);
     });
 
+  });
+
+  it('should hide the server error', function() {
+    $('#track-form').trigger('submit');
+
+    var validationMessageAfter = $('#server-error-msg').is(':visible');
+    expect(validationMessageAfter).toBe(false);
   });
 });
