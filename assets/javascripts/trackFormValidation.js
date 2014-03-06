@@ -1,6 +1,13 @@
 $(document).ready( function() {
   validateTrackForm();
+  hideServerErrorMsg();
 });
+
+function hideServerErrorMsg() {
+    $('#tracking_id').on('keyup', function() {
+        $('#server-error-msg').hide();
+    });
+};
 
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {

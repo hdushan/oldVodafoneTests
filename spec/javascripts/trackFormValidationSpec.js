@@ -25,6 +25,27 @@ describe('#showLoadingImage', function() {
 
 });
 
+describe('server error message', function() {
+
+    beforeEach( function() {
+        var $container = affix('div');
+        $container.affix('form#track-form input#tracking_id');
+        $container.affix('#server-error-msg[style="display: block"]');
+
+        var validationMessageBefore = $('#server-error-msg').is(':visible');
+        expect(validationMessageBefore).toBe(true);
+
+        hideServerErrorMsg();
+    });
+
+    it('should be hidden when user start typing in the track id', function() {
+        $('#tracking_id').trigger('keyup');
+
+        var validationMessageAfter = $('#server-error-msg').is(':visible');
+        expect(validationMessageAfter).toBe(false);
+    });
+});
+
 describe("form validation on submit", function() {
 
   beforeEach( function() {

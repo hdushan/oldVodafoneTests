@@ -2,17 +2,17 @@
   %h1 Trace your order.
 
   %form#track-form.form{ action: '/tnt', method: 'post' }
-    - if @error
-      .alert
-        .icon
-          %img{src: 'images/alert_icon.png'}
-        %span.msg= @error
-
     %fieldset
       %label.tracking_label{:for => 'tracking_id'} Tracking number
       .input-wrapper
         %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id, :placeholder => 'e.g. 123-456ABCDEF'}
-      #input-validation-msg.hidden
+
+      - if @error
+        #server-error-msg.error-msg-block
+          %img.glyph.warning{src: '../images/empty.png'}
+          %span= @error
+
+      #input-validation-msg.error-msg-block.hidden
         %p
           The Order Number you have entered is not in a valid format.
           Please check the number on your confirmation email and enter it as it appears on the email.
