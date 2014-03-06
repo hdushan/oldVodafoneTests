@@ -1,12 +1,12 @@
 .order_line_item_details
 
-  %img.glyph.info{src: '../images/empty.png'}
+  %img.glyph-heading.info{src: '../images/empty.png'}
   %h2#vodafone-status.status-heading= locals[:details].status_heading
   -if locals[:details].status_message
     %p.status-message= locals[:details].status_message
 
   -if locals[:details].auspost_status_heading
-    %img.glyph.truck{src: '../images/empty.png'}
+    %img.glyph-heading.truck{src: '../images/empty.png'}
     %h2#auspost-status.status-heading= locals[:details].auspost_status_heading
 
   -if locals[:details].is_on_backorder?

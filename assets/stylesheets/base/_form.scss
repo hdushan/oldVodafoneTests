@@ -60,6 +60,10 @@ form.form {
       td {
         font-size: $em-base;
         border-top: 0;
+        .glyph {
+          margin-top: 6px;
+          margin-bottom: 6px
+        }
       }
     }
 
