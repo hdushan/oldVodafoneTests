@@ -17,31 +17,6 @@
   color: $text-grey;
   margin-top: $text-spacing-vt;
 
-  .glyph {
-    width: $glyph-height;
-    height: $glyph-width;
-    margin: $text-spacing-vt $text-spacing-hz;
-    padding-right: $text-spacing-hz;
-    border-right: $global-border;
-    float: left;
-  }
-
-  .tick {
-    background:url(../images/tnt-icons-sprite.png) 0 0 no-repeat;
-  }
-
-  .info {
-    background:url(../images/tnt-icons-sprite.png) 0 -28px no-repeat;
-  }
-
-  .warning {
-    background:url(../images/tnt-icons-sprite.png) 0 -55px no-repeat;
-  }
-
-  .truck {
-    background:url(../images/tnt-icons-sprite.png) 0 -82px no-repeat;
-  }
-
   .status-heading {
     color: black;
     padding: 17px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;

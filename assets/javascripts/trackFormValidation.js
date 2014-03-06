@@ -1,13 +1,12 @@
 $(document).ready( function() {
-  hideInputValidationMsg();
   validateTrackForm();
+  hideServerErrorMsg();
 });
 
-function hideInputValidationMsg() {
-  $('#tracking_id').on('keyup', function() {
-    $('#track-form .alert').hide();
-    $('#input-validation-msg').hide();
-  });
+function hideServerErrorMsg() {
+    $('#tracking_id').on('keyup', function() {
+        $('#server-error-msg').hide();
+    });
 };
 
 function validateTrackForm() {

@@ -48,7 +48,7 @@ describe "Track & Trace App" do
         let(:fulfilment_response) { FulfilmentResponse.new(404, "We don't care") }
 
         its(:status) { should eq 404 }
-        its(:body) { should have_tag(:p, text: 'That order ID was not found. Please, check that you typed it correctly.') }
+        its(:body) { should have_tag(:span, text: 'That order ID was not found. Please, check that you typed it correctly.') }
       end
 
       context 'with a valid id' do

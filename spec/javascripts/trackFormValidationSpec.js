@@ -25,25 +25,25 @@ describe('#showLoadingImage', function() {
 
 });
 
-describe('input validation message', function() {
+describe('server error message', function() {
 
-  beforeEach( function() {
-    var $container = affix('div');
-    $container.affix('form#track-form input#tracking_id');
-    $container.affix('#input-validation-msg[style="display: block"]');
+    beforeEach( function() {
+        var $container = affix('div');
+        $container.affix('form#track-form input#tracking_id');
+        $container.affix('#server-error-msg[style="display: block"]');
 
-    var validationMessageBefore = $('#input-validation-msg').is(':visible');
-    expect(validationMessageBefore).toBe(true);
+        var validationMessageBefore = $('#server-error-msg').is(':visible');
+        expect(validationMessageBefore).toBe(true);
 
-    hideInputValidationMsg();
-  });
+        hideServerErrorMsg();
+    });
 
-  it('should be hidden when user start typing in the track id', function() {
-    $('#tracking_id').trigger('keyup');
+    it('should be hidden when user start typing in the track id', function() {
+        $('#tracking_id').trigger('keyup');
 
-    var validationMessageAfter = $('#input-validation-msg').is(':visible');
-    expect(validationMessageAfter).toBe(false);
-  });
+        var validationMessageAfter = $('#server-error-msg').is(':visible');
+        expect(validationMessageAfter).toBe(false);
+    });
 });
 
 describe("form validation on submit", function() {
