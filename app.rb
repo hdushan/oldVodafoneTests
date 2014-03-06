@@ -95,7 +95,7 @@ class App < Sinatra::Base
     logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
     @error = MessageMapper::DEFAULT_ERROR_MESSAGE
-    haml(:error)
+    haml(:track_form)
   end
 
   private
