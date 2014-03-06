@@ -1,14 +1,6 @@
 $(document).ready( function() {
-  hideInputValidationMsg();
   validateTrackForm();
 });
-
-function hideInputValidationMsg() {
-  $('#tracking_id').on('keyup', function() {
-    $('#track-form .alert').hide();
-    $('#input-validation-msg').hide();
-  });
-};
 
 function validateTrackForm() {
   $('#track-form').on('submit', function(event) {

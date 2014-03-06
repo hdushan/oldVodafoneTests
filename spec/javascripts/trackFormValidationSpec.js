@@ -25,27 +25,6 @@ describe('#showLoadingImage', function() {
 
 });
 
-describe('input validation message', function() {
-
-  beforeEach( function() {
-    var $container = affix('div');
-    $container.affix('form#track-form input#tracking_id');
-    $container.affix('#input-validation-msg[style="display: block"]');
-
-    var validationMessageBefore = $('#input-validation-msg').is(':visible');
-    expect(validationMessageBefore).toBe(true);
-
-    hideInputValidationMsg();
-  });
-
-  it('should be hidden when user start typing in the track id', function() {
-    $('#tracking_id').trigger('keyup');
-
-    var validationMessageAfter = $('#input-validation-msg').is(':visible');
-    expect(validationMessageAfter).toBe(false);
-  });
-});
-
 describe("form validation on submit", function() {
 
   beforeEach( function() {
