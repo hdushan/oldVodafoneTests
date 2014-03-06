@@ -1,2 +1,18 @@
 @import "_header_customisation";
 @import "_footer_customisation";
+@import "_style";
+
+.tnt-bg-holder {
+  background-image: url(../images/background.jpg);
+  background-color: $white;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-size: auto 100%;
+
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  max-height: 900px;
+  width: 100%;
+  z-index: 10;
+}
