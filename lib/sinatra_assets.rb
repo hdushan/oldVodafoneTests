@@ -8,6 +8,7 @@ module Assets
       set :public_folder, 'public'
 
       assets {
+        serve '/fonts',  from: 'assets/fonts'
         serve '/js',     from: 'assets/javascripts'        # Default
         serve '/css',    from: 'assets/stylesheets'       # Default
         serve '/images', from: 'assets/images'    # Default

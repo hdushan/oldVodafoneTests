@@ -17,7 +17,7 @@ html {
 
 body{
   margin: 0;
-  font-family: $global-font-family;
+  font-family: $arial;
   background-color: $palest-grey;
 }
 
@@ -61,7 +61,7 @@ article{
 
 h1 {
   color: #e60000;
-  font-family: VodafonePTYRgRegular;
+  font-family: $vodatype;
   font-size: 36px;
   font-weight: normal;
   margin: 0;
@@ -69,16 +69,16 @@ h1 {
 
 h2 {
   color: $black;
-  font-family: VodafonePTYRgRegular;
+  font-family: $vodatype-bold;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: normal;
   margin: 0;
 }
 
 button.tnt-button {
   padding: 0.4em 0.7em;
   color: $white;
-  font-family: $global-font-family;
+  font-family: $arial;
   text-transform: uppercase;
   border: none;
   border-radius: $global-border-radius;
