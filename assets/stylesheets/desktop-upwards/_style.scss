@@ -1,6 +1,6 @@
 $container-width: 954px;
 $content-width: 420px;
-$container-height: 600px;
+$white: #ffffff;
 
 .tnt-container {
   margin: 0 auto;
@@ -21,4 +21,19 @@ $container-height: 600px;
   width: $content-width;
   background-color: $white;
   padding: 20px;
+}
+
+.tnt-bg-holder {
+  background-image: url(../images/background.jpg);
+  background-color: $white;
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  background-size: auto 100%;
+
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  max-height: 900px;
+  width: 100%;
+  z-index: 10;
 }
