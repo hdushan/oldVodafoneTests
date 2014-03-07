@@ -5,7 +5,7 @@
     %fieldset
       %label.tracking_label{:for => 'tracking_id'} Tracking number
       .input-wrapper
-        %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id, :placeholder => 'e.g. 123-456ABCDEF'}
+        %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id}
 
       - if @error
         %table#server-error-msg.error-msg-block
@@ -31,3 +31,5 @@
         your order
 
   = haml :_loading_spinner
+
+=haml :_terms_link

@@ -77,6 +77,10 @@ class App < Sinatra::Base
     redirect "/tnt/#{params[:tracking_id].strip}"
   end
 
+  get '/tnt/trackingtermsconditions' do
+    haml :trackingtermsconditions
+  end
+
   get '/tnt/:id' do
     mega_menu
     fulfilment_response = fulfilment.get_order_details params[:id], client_ip

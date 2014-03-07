@@ -6,3 +6,5 @@
 - if !locals[:order].orders.empty?
   - locals[:order].orders.each do |order|
     = haml :_order_details, locals: {details: order}
+
+=haml :_terms_link

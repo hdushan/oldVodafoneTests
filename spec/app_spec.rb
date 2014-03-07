@@ -34,6 +34,13 @@ describe "Track & Trace App" do
     its(:location) { should eq('http://www.vodafone.com.au/cs/static/img/mobile/image.png') }
   end
 
+  describe 'GET /tnt/trackingtermsconditions' do
+    before { get '/tnt/trackingtermsconditions'}
+
+    its(:status) { should be 200 }
+    its(:body) { should match /terms and conditions/i}
+  end
+
   describe 'GET /tnt/:id' do
     before do
       fulfilment_client.stub(:get_order_details).with('abc', '127.0.0.1') do |arg|
