@@ -31,18 +31,57 @@ describe('server error message', function() {
         var $container = affix('div');
         $container.affix('form#track-form input#tracking_id');
         $container.affix('#server-error-msg[style="display: block"]');
+        setupHideErrorMessagesFunction();
 
-        var validationMessageBefore = $('#server-error-msg').is(':visible');
-        expect(validationMessageBefore).toBe(true);
-
-        hideErrorMessages();
+        var serverErrorMessageBefore = $('#server-error-msg').is(':visible');
+        expect(serverErrorMessageBefore).toBe(true);
     });
 
-    it('should be hidden when user start typing in the track id', function() {
-        $('#tracking_id').trigger('keyup');
+    it('should be hidden when user starts typing in the track id', function() {
+        var e = jQuery.Event( 'keypress', { which: 65 } );
+        $('#tracking_id').trigger(e);
 
-        var validationMessageAfter = $('#server-error-msg').is(':visible');
+        var serverErrorMessageAfter = $('#server-error-msg').is(':visible');
+        expect(serverErrorMessageAfter).toBe(false);
+    });
+
+    it('should not be hidden when user presses enter in the track id', function() {
+        var e = jQuery.Event( 'keypress', { which: 13 } );
+        $('#tracking_id').trigger(e);
+
+        var serverErrorMessageAfter = $('#server-error-msg').is(':visible');
+        expect(serverErrorMessageAfter).toBe(true);
+    });
+
+
+});
+
+describe('validation error message', function() {
+
+    beforeEach( function() {
+        var $container = affix('div');
+        $container.affix('form#track-form input#tracking_id');
+        $container.affix('#input-validation-msg[style="display: block"]');
+        setupHideErrorMessagesFunction();
+
+        var validationMessageBefore = $('#input-validation-msg').is(':visible');
+        expect(validationMessageBefore).toBe(true);
+    });
+
+    it('should be hidden when user starts typing in the track id', function() {
+        var e = jQuery.Event( 'keypress', { which: 65 } );
+        $('#tracking_id').trigger(e);
+
+        var validationMessageAfter = $('#input-validation-msg').is(':visible');
         expect(validationMessageAfter).toBe(false);
+    });
+
+    it('should not be hidden when user presses enter in the track id', function() {
+        var e = jQuery.Event( 'keypress', { which: 13 } );
+        $('#tracking_id').trigger(e);
+
+        var validationMessageAfter = $('#input-validation-msg').is(':visible');
+        expect(validationMessageAfter).toBe(true);
     });
 });
 
@@ -53,7 +92,7 @@ describe("form validation on submit", function() {
     $container.affix('form#track-form[action="/track"] input#tracking_id');
     $container.affix('#input-validation-msg.hidden[style="display: none"]');
     $container.affix('#server-error-msg[style="display: block"]');
-    validateTrackForm();
+    setupValidateTrackFormFunction();
   });
 
   describe('with empty track id', function() {

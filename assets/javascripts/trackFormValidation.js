@@ -1,18 +1,19 @@
 $(document).ready(function () {
-    validateTrackForm();
-    hideErrorMessages();
+    setupValidateTrackFormFunction();
+    setupHideErrorMessagesFunction();
 });
 
-function hideErrorMessages() {
+function setupHideErrorMessagesFunction() {
     $('#tracking_id').on('keypress', function (key) {
-        if (key.which !== 0) {
-            $('#server-error-msg').hide();
-            $('#input-validation-msg').hide();
+            if (key.which !== 13) {
+                $('#server-error-msg').hide();
+                $('#input-validation-msg').hide();
+            }
         }
-    });
-};
+    );
+}
 
-function validateTrackForm() {
+function setupValidateTrackFormFunction() {
     $('#track-form').on('submit', function (event) {
         $('#input-validation-msg').hide();
         $('#server-error-msg').hide();
@@ -30,7 +31,7 @@ function validateTrackForm() {
             return false;
         }
     });
-};
+}
 
 function showLoadingImage() {
     $('#loading').show();
@@ -38,5 +39,5 @@ function showLoadingImage() {
 
     //needed for gif to animate in ie8 and ie9
     $('#ie-loader').html($('#ie-loader').html());
-};
+}
 
