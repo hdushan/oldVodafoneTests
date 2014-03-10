@@ -12,6 +12,7 @@
 .terms-and-conditions-page {
   ol {
     line-height: $global-line-height;
+    color: $text-grey;
     li {
       margin: $text-spacing-vt 0 $text-spacing-vt 25px;
       list-style-type: decimal;

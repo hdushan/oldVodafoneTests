@@ -35,7 +35,7 @@ describe('server error message', function() {
         var validationMessageBefore = $('#server-error-msg').is(':visible');
         expect(validationMessageBefore).toBe(true);
 
-        hideServerErrorMsg();
+        hideErrorMessages();
     });
 
     it('should be hidden when user start typing in the track id', function() {

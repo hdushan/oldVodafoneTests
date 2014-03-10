@@ -146,7 +146,6 @@ ul.info {
 .glyph {
   width: $glyph-height;
   height: $glyph-width;
-  padding-right: $text-spacing-hz;
   float: left;
   clear: left;
 }
@@ -155,6 +154,7 @@ ul.info {
   @extend .glyph;
   border-right: $global-border;
   margin: $text-spacing-vt $text-spacing-hz;
+  padding-right: $text-spacing-hz;
 }
 
 .tick {
