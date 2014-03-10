@@ -10,7 +10,7 @@ describe 'Mega menu API client' do
 
     let(:header_body) { File.read('spec/fixtures/mega_header') }
     let(:footer_body) { File.read('spec/fixtures/mega_footer') }
-    let(:client) { MegaMenuAPIClient.new }
+    let(:client) { MegaMenuAPIClient.new() }
 
     before(:each) do
       stub_request(:get, url_header).to_return(body: header_body)

@@ -1,14 +1,10 @@
--if @is_mobile_user
-  .tnt-mobile-menu
-    #vha-vca
-      .vca-layout-mobile
-        -if @mega_menu
-          =@mega_menu['header_html']
--else
-  #vha-vca.vha-theme-1.bg-repeat-none.vha-vca-main-headerless
-    #vha-vca.vha-theme-2
-      #vha-vca.visible-desktop
-        .vha-vca-hd
-          .vha-vca-hd-topnav
-            -if @mega_menu
-              =@mega_menu['header_html']
+.tnt-mobile-menu
+  #vha-vca
+    .vca-layout-mobile
+      =@mega_menu['mobile']['header_html'] if @mega_menu
+#vha-vca.vha-theme-1.bg-repeat-none.vha-vca-main-headerless.vca-responsive-desktop
+  #vha-vca.vha-theme-2
+    #vha-vca.visible-desktop
+      .vha-vca-hd
+        .vha-vca-hd-topnav
+          =@mega_menu['desktop']['header_html'] if @mega_menu

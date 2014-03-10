@@ -4,3 +4,11 @@
 $container-height: 600px;
 
 @import "_style";
+
+.vca-layout-mobile {
+  display: none;
+}
+
+.vca-responsive-desktop {
+  display: block;
+}

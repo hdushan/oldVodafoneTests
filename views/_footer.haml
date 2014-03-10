@@ -1,8 +1,6 @@
 #vha-vca
   -if @mega_menu
-    -if @is_mobile_user
-      .vca-layout-mobile
-        =@mega_menu['footer_html']
-    -else
-      #page-footer-container.vha-vca-footer-lh
-        =@mega_menu['footer_html']
+    .vca-layout-mobile
+      =@mega_menu['mobile']['footer_html']
+    #page-footer-container.vha-vca-footer-lh.vca-responsive-desktop
+      =@mega_menu['desktop']['footer_html']

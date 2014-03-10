@@ -1,3 +1,11 @@
 
 $container-height: 200px;
 @import "../desktop-upwards/_style";
+
+.vca-layout-mobile {
+  display: none;
+}
+
+.vca-responsive-desktop {
+  display: block;
+}

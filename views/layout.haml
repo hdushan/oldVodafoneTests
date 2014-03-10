@@ -14,8 +14,10 @@
     <![endif]-->
 
     -if @mega_menu
-      -@mega_menu['css'].each do |css_url|
-        %link{ :rel => :stylesheet, :type => :"text/css", :href => "#{css_url}"}
+      -@mega_menu['desktop']['css'].each do |css_url|
+        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (min-width: 760px)')
+      -@mega_menu['mobile']['css'].each do |css_url|
+        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (max-width: 759px)')
     !=css :application
 
   %body#vha-vca.tnt-body
@@ -30,6 +32,8 @@
 
 
   -if @mega_menu
-    -@mega_menu['js'].each do |js_url|
-      %script{ :src => "#{js_url}"}
+    -@mega_menu['desktop']['js'].each do |js_url|
+      %script(src=js_url)
+    -@mega_menu['mobile']['js'].each do |js_url|
+      %script(src=js_url)
   != js :application

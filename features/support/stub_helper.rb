@@ -31,14 +31,11 @@ def setup_fulfilment_service_stub_error order_id, status_code
   end
 end
 
-def stub_desktop_mega_menu
+def stub_mega_menu
   stub_request(:get, "https://www.vodafone.com.au/rest/SharedContent?name:contains=Mega_MenuV2").
       to_return(:status => 200, :body => File.read('spec/fixtures/mega_header'), :headers => {})
   stub_request(:get, "https://www.vodafone.com.au/rest/SharedContent?name:contains=Footer").
       to_return(:status => 200, :body => File.read('spec/fixtures/mega_footer'), :headers => {})
-
-end
-def stub_mobile_mega_menu
   stub_request(:get, "https://www.vodafone.com.au/rest/SharedContent?name:contains=MobileMenu").
       to_return(:status => 200, :body =>  File.read('spec/fixtures/mobile_header'), :headers => {})
   stub_request(:get, "https://www.vodafone.com.au/rest/SharedContent?name:contains=MobileFooter").

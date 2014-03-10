@@ -34,17 +34,10 @@ class App < Sinatra::Base
   def mega_menu
     unless ENV['MEGA_MENU'] == 'OFF'
       logger.info('Getting the Mega Menu')
-      @is_mobile_user = use_mobile_channel
-      @mega_menu = @mega_menu_client.get_menu(@is_mobile_user)
-      logger.info("MegaMenu fetched for #{ @is_mobile_user ? 'mobile' : 'desktop' }")
+      @mega_menu = {}
+      @mega_menu['mobile'] = @mega_menu_client.get_menu(true)
+      @mega_menu['desktop'] = @mega_menu_client.get_menu(false)
     end
-  end
-
-
-  def use_mobile_channel
-    return true if params[:channel] == 'mobile'
-    return false if params[:channel] == 'desktop'
-    UserAgent.parse(request.user_agent).mobile?
   end
 
   def client_ip
