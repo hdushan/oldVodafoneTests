@@ -71,6 +71,7 @@ class App < Sinatra::Base
   end
 
   get '/tnt/trackingtermsconditions' do
+    mega_menu
     haml :trackingtermsconditions
   end
 

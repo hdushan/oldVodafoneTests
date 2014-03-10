@@ -10,17 +10,14 @@ $white: #ffffff;
 }
 
 .tnt-frame {
-  position: relative;
-  z-index: 100;
-  width: $container-width;
-  margin: 0 auto;
-  padding: 60px 0 60px 0;
+  padding: 60px 0;
 }
 
 .tnt-content {
   width: $content-width;
   background-color: $white;
-  padding: 20px;
+  padding: 30px;
+  border-radius: $global-border-radius;
 }
 
 .tnt-bg-holder {

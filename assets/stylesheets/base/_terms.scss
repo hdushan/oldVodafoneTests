@@ -1,0 +1,20 @@
+.terms-and-conditions-link {
+  color: $text-grey;
+  margin-top: $text-spacing-vt;
+  font-size: 0.86em;
+  font-family: $arial;
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.terms-and-conditions-page {
+  ol {
+    line-height: $global-line-height;
+    li {
+      margin: $text-spacing-vt 0 $text-spacing-vt 25px;
+      list-style-type: decimal;
+    }
+  }
+}

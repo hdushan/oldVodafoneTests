@@ -1,5 +1,6 @@
 
 $container-height: 200px;
+@import "_footer_customisation.scss";
 @import "../desktop-upwards/_style";
 
 .vca-layout-mobile {
@@ -8,4 +9,8 @@ $container-height: 200px;
 
 .vca-responsive-desktop {
   display: block;
+}
+
+.tnt-frame {
+  width: $container-width;
 }
