@@ -147,7 +147,7 @@ ul.info {
   width: $glyph-height;
   height: $glyph-width;
   float: left;
-  clear: left;
+  @include clearfix;
 }
 
 .glyph-heading {

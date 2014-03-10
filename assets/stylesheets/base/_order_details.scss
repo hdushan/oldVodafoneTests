@@ -20,8 +20,9 @@
 
   .status-heading {
     color: $text-grey;
-    padding: 18px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
+    padding: 18px 0 0 $glyph-width + $text-spacing-hz;
     margin: 0 $text-spacing-hz;
+    @include clearfix;
   }
 
   #auspost-status {
@@ -32,13 +33,13 @@
     @include grey-text-box;
   }
 
-  .status-message, .ship-message, .ship-date {
+  .status-message, .auspost-status-message, .ship-message, .ship-date {
     padding: $text-spacing-vt 0;
     margin: 0 $text-spacing-hz;
     line-height: $global-line-height;
   }
 
-  .status-message {
+  .status-message, .auspost-status-message {
     border-top: $global-border;
   }
 
