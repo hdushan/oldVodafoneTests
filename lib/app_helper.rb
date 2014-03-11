@@ -9,6 +9,14 @@ def error_message
   error_message
 end
 
+def cached_result(key, &block)
+  if settings.cache
+    settings.cache.fetch("#{ENV['RAILS_ENV']}-#{key}", { expire_in: ENV['CACHE_EXPIRE_TIME_SECONDS'] || 60 }, &block)
+  else
+    yield
+  end
+end
+
 def nil_or_empty? string
   string.nil? || string.empty?
 end

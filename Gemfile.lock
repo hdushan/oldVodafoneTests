@@ -121,6 +121,12 @@ GEM
     rake (10.1.1)
     randexp (0.1.7)
     rb-fsevent (0.9.3)
+    redis (3.0.7)
+    redis-sinatra (1.4.0)
+      redis-store (~> 1.1.0)
+      sinatra (~> 1.4.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -205,6 +211,7 @@ DEPENDENCIES
   rack-timeout (= 0.1.0beta3)
   rake
   rb-fsevent
+  redis-sinatra
   rspec
   rspec-html-matchers
   sass
