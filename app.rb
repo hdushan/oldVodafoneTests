@@ -34,7 +34,6 @@ class App < Sinatra::Base
 
   def mega_menu
     unless ENV['MEGA_MENU'] == 'OFF'
-      logger.info('Getting the Mega Menu')
       @mega_menu = cached_result("mega-menu") {
         logger.info('Fetching MegaMenu')
         @mega_menu_client.get_menu
