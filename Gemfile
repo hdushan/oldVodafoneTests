@@ -14,6 +14,7 @@ gem 'sinatra-contrib'
 gem 'unicorn'
 gem 'useragent'
 gem 'rack-timeout', '=0.1.0beta3'
+gem 'redis-sinatra'
 
 group :development, :test do
   gem 'capybara'

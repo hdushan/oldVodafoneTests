@@ -1,4 +1,5 @@
 require 'sinatra/namespace'
+require 'redis-sinatra'
 require 'app_helper'
 require 'fulfilment_client'
 require 'status_strings'
