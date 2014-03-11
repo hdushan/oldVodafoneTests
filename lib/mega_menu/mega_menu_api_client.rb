@@ -7,9 +7,11 @@ class MegaMenuAPIClient
   base_uri 'https://www.vodafone.com.au/rest/SharedContent?name:contains='
   default_timeout 10
 
-  def get_menu(is_mobile_user)
-    get_specific_menu(mega_menu_params[is_mobile_user ? 'mobile' : 'desktop'])
-    #@logger.info("MegaMenu fetched for #{ is_mobile_user ? 'mobile' : 'desktop' }")
+  def get_menu
+    mega_menu = {}
+    mega_menu['mobile'] = get_specific_menu(mega_menu_params['mobile'])
+    mega_menu['desktop'] = get_specific_menu(mega_menu_params['desktop'])
+    mega_menu
   end
 
   def self.empty_response

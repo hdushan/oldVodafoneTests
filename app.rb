@@ -19,6 +19,7 @@ class App < Sinatra::Base
 
   enable :logging
   set :logging, Logger::DEBUG
+  set :cache, ENV['REDIS_URL'] ? Sinatra::Cache::RedisStore.new(ENV['REDIS_URL']) : nil
   disable :show_exceptions
 
   def initialize(mega_menu_client=nil, fulfilment_client=nil)
@@ -34,9 +35,10 @@ class App < Sinatra::Base
   def mega_menu
     unless ENV['MEGA_MENU'] == 'OFF'
       logger.info('Getting the Mega Menu')
-      @mega_menu = {}
-      @mega_menu['mobile'] = @mega_menu_client.get_menu(true)
-      @mega_menu['desktop'] = @mega_menu_client.get_menu(false)
+      @mega_menu = cached_result("mega-menu") {
+        logger.info('Fetching MegaMenu')
+        @mega_menu_client.get_menu
+      }
     end
   end
 
