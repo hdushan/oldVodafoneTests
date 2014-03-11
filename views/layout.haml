@@ -7,18 +7,25 @@
     %script{ src: '/js/vendor/html5shiv.js' }
     <![endif]-->
 
-    <!--[if lte IE 9]>
-    %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie.css"}/
-    %script{ src: '/js/vendor/jquery-1.10.2.min.js' }
-    %script{ src: '/js/vendor/ie/jquery.html5-placeholder-shim.js' }
-    <![endif]-->
-
+    <!--[if gte IE 9]>
+    <!-- This code is visible to IE9 and above and all non-IE browsers. -->
     -if @mega_menu
       -@mega_menu['desktop']['css'].each do |css_url|
         %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (min-width: 760px)')
       -@mega_menu['mobile']['css'].each do |css_url|
         %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (max-width: 759px)')
+    <![endif]-->
+
     !=css :application
+
+    <!--[if lte IE 9]>
+    -if @mega_menu
+      -@mega_menu['desktop']['css'].each do |css_url|
+        %link(rel='stylesheet' type="text/css" href="#{css_url}")
+    %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie/ie.css"}/
+    %script{ src: '/js/vendor/jquery-1.10.2.min.js' }
+    %script{ src: '/js/vendor/ie/jquery.html5-placeholder-shim.js' }
+    <![endif]-->
 
   %body#vha-vca.tnt-body
     .container

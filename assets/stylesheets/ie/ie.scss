@@ -1,3 +1,13 @@
+/*
+* Internet Explorer stylesheet
+*/
+
+@import "base/base";
+
+// Import "un-mediaqueried" stylesheets relevant to achieve desktop appearance
+@import "tablet-upwards/tablet-upwards";
+@import "desktop-upwards/desktop-upwards";
+
 #loading {
 
   .loader.loader-sml {

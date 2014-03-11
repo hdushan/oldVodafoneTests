@@ -33,12 +33,16 @@ form.form {
 
   .error-msg-block {
     margin-top: 6px;
-    padding: 10px 30px 10px 10px;
     border: 1px solid $vodafone-red;
     border-radius: $global-border-radius;
     background-color: $alert-background-color;
     color: $text-grey;
     line-height: $global-line-height;
+  }
+
+  .error-msg {
+    padding: $text-spacing-vt $text-spacing-hz $text-spacing-vt $glyph-width + $text-spacing-hz;
+    @include clearfix;
   }
 
   img.help-icon {

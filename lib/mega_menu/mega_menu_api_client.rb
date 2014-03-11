@@ -9,7 +9,6 @@ class MegaMenuAPIClient
 
   def get_menu(is_mobile_user)
     get_specific_menu(mega_menu_params[is_mobile_user ? 'mobile' : 'desktop'])
-    #@logger.info("MegaMenu fetched for #{ is_mobile_user ? 'mobile' : 'desktop' }")
   end
 
   def self.empty_response

@@ -55,7 +55,7 @@ describe "Track & Trace App" do
         let(:fulfilment_response) { FulfilmentResponse.new(404, "We don't care") }
 
         its(:status) { should eq 404 }
-        its(:body) { should have_tag(:span, text: 'That order ID was not found. Please, check that you typed it correctly.') }
+        its(:body) { should have_tag('div.error-msg', value: 'That order ID was not found. Please, check that you typed it correctly.') }
       end
 
       context 'with a valid id' do
@@ -70,7 +70,7 @@ describe "Track & Trace App" do
       let(:fulfilment_response) { raise 'Faraday::Error::ConnectionFailed - Connection refused - connect(2)' }
 
       its(:status) { should eq 500 }
-      its(:body) { should have_tag(:span, text: 'There was a problem retrieving your order.') }
+      its(:body) { should have_tag('div.error-msg', value: 'There was a problem retrieving your order.') }
     end
   end
 

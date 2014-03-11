@@ -121,40 +121,18 @@ ul.info {
   }
 }
 
-.alert {
-  background-color: $alert-background-color;
-  border-radius: $global-border-radius;
-  padding: 10px 10px;
-  position: relative;
-
-  .icon {
-    float: left;
-
-    img {
-      height: 20px;
-      width: 20px;
-    }
-  }
-
-  .msg {
-    display: block;
-    overflow: hidden;
-    padding-left: 0.5em;
-  }
-}
-
 .glyph {
   width: $glyph-height;
   height: $glyph-width;
   float: left;
+  margin: $text-spacing-vt $text-spacing-hz 0 $text-spacing-hz;
   @include clearfix;
 }
 
 .glyph-heading {
   @extend .glyph;
-  border-right: $global-border;
-  margin: $text-spacing-vt $text-spacing-hz;
   padding-right: $text-spacing-hz;
+  border-right: $global-border;
 }
 
 .tick {
