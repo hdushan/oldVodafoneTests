@@ -43,26 +43,40 @@
     border-top: $global-border;
   }
 
+  table {
+    table-layout: fixed;
+    width: 100%;
+    margin: 0 0 $text-spacing-vt 0;
+  }
+
   th {
     @include grey-text-box;
     text-transform: none;
   }
 
   td {
-    padding: $text-spacing-vt $text-spacing-hz;
-    color: $text-grey;
-    border: none;
+    line-height: $global-line-height;
     font-size: 1em;
+    border: none;
+    padding: $text-spacing-vt 0 0 $text-spacing-hz;
+  }
+
+  td:last-child {
+    padding-right: $text-spacing-hz;
   }
 
   .item-quantity {
-    padding-right: 0.6em;
-    width: 1%;
+    width: 10%;
     white-space: nowrap;
   }
 
   .item {
-    padding-left: 0;
+    width: 65%;
+    overflow-wrap: break-word;
+  }
+
+  .item-status {
+    width: 25%;
   }
 
 }
