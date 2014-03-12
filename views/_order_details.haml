@@ -1,6 +1,6 @@
 .order_line_item_details
 
-  %img.glyph-heading.info{src: '../images/empty.png'}
+  %img.glyph-heading{class: locals[:status_glyph], src: '../images/empty.png'}
   %h2#vodafone-status.status-heading= locals[:details].status_heading
   -if locals[:details].status_message
     %p.status-message= locals[:details].status_message

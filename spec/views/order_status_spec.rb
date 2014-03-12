@@ -5,7 +5,7 @@ describe 'order_status.haml' do
     before do
       @order = double(FulfilmentResponse,
         order_number: 'VF123MULTILINES',
-        orders: [{tracking_status: 'SHIPPED'}]
+        orders: [double(FulfilmentOrder, tracking_status: 'SHIPPED')]
       )
       render("/views/order_status.haml", :order => @order)
       puts response

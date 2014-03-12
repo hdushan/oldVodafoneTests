@@ -5,6 +5,6 @@
 
 - if !locals[:order].orders.empty?
   - locals[:order].orders.each do |order|
-    = haml :_order_details, locals: {details: order}
+    = haml :_order_details, locals: {details: order, status_glyph: lookup_status_glyph(order.tracking_status)}
 
 =haml :_terms_link

@@ -6,6 +6,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         status_heading: 'In Progress', status_message: 'Your order is in progress.',
+        tracking_status: 'PROGRESS',
         estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
         items: [
           {item_quantity: "1", description: 'Samsung Galaxy'},
@@ -14,7 +15,7 @@ describe '_order_details.haml' do
         ],
         show_tracking_info?: nil
       )
-      render("/views/_order_details.haml", :details => @details)
+      render("/views/_order_details.haml", :details => @details, :status_glyph => 'warning')
       #puts response
     end
 
@@ -37,6 +38,10 @@ describe '_order_details.haml' do
 
     it 'should HTML escape the special characters' do
       response.should include(%q{Hooray for special characters! ./?/&lt;h1&gt;!@#$%^&amp;*(;:)_+''=-,\&quot;`})
+    end
+
+    it 'should include the glyph class' do
+      page.should have_selector('.glyph-heading.warning')
     end
 
   end

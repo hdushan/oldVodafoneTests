@@ -20,7 +20,7 @@
 
   .status-heading {
     color: $text-grey;
-    padding: 18px 0 0 $glyph-width + $text-spacing-hz;
+    padding: 18px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
     margin: 0 $text-spacing-hz;
     @include clearfix;
   }
