@@ -14,7 +14,7 @@ html {
 body{
   margin: 0;
   font-family: $arial;
-  background-color: $palest-grey;
+  background-color: $white;
 }
 
 a {
@@ -29,7 +29,10 @@ a {
 
 .container {
   margin: 0 auto;
-  background-color: white;
+}
+
+.tnt-container {
+  background-color: $white;
 }
 
 .strong {
@@ -136,22 +139,22 @@ ul.info {
 }
 
 .tick {
-  background:url(../images/tnt-icons-sprite.png) 0 -1px no-repeat;
+  background:url(/images/tnt-icons-sprite.png) 0 -1px no-repeat;
 }
 
 .info {
-  background:url(../images/tnt-icons-sprite.png) 0 -28px no-repeat;
+  background:url(/images/tnt-icons-sprite.png) 0 -28px no-repeat;
 }
 
 .cross {
-  background:url(../images/tnt-icons-sprite.png) 0 -55px no-repeat;
+  background:url(/images/tnt-icons-sprite.png) 0 -55px no-repeat;
 }
 
 .truck {
-  background:url(../images/tnt-icons-sprite.png) 0 -82px no-repeat;
+  background:url(/images/tnt-icons-sprite.png) 0 -82px no-repeat;
 }
 
 .orange-tick {
-  background:url(../images/tnt-icons-sprite.png) 0 -136px no-repeat;
+  background:url(/images/tnt-icons-sprite.png) 0 -136px no-repeat;
 }
 
