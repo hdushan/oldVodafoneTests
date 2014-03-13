@@ -12,12 +12,12 @@
   margin: $text-spacing-vt 0;
   height: 30px;
   display: table;
-  width: 96%;
 
   .order-number-block {
-    width: 50%;
     display: table-cell;
     vertical-align: middle;
+    padding-right: $text-spacing-hz;
+    width: 100%;
   }
 
   button {
