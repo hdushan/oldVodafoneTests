@@ -2,7 +2,10 @@
 %html
   %head
     %title Track and trace
-    %meta{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"}/
+    - if params[:channel] == 'desktop'
+      %meta(name="viewport" content="width=1440")
+    - else
+      %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
     <!--[if lt IE 9]>
     %script{ src: '/js/vendor/html5shiv.js' }
     <![endif]-->
@@ -10,9 +13,9 @@
     <!--[if gte IE 9]>
     <!-- This code is visible to IE9 and above and all non-IE browsers. -->
     -if @mega_menu
-      -@mega_menu['desktop']['css'].each do |css_url|
+      - @mega_menu['desktop']['css'].each do |css_url|
         %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (min-width: 760px)')
-      -@mega_menu['mobile']['css'].each do |css_url|
+      - @mega_menu['mobile']['css'].each do |css_url|
         %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (max-width: 759px)')
     <![endif]-->
 
@@ -20,7 +23,7 @@
 
     <!--[if lt IE 9]>
     -if @mega_menu
-      -@mega_menu['desktop']['css'].each do |css_url|
+      - @mega_menu['desktop']['css'].each do |css_url|
         %link(rel='stylesheet' type="text/css" href="#{css_url}")
     %link{ :rel => :stylesheet, :type => :"text/css", :href => "/css/ie.css"}/
     %script{ src: '/js/vendor/jquery-1.10.2.min.js' }
@@ -39,8 +42,8 @@
 
 
   -if @mega_menu
-    -@mega_menu['desktop']['js'].each do |js_url|
+    - @mega_menu['desktop']['js'].each do |js_url|
       %script(src=js_url)
-    -@mega_menu['mobile']['js'].each do |js_url|
+    - @mega_menu['mobile']['js'].each do |js_url|
       %script(src=js_url)
   != js :application
