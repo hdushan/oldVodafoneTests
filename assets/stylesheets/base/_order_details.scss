@@ -86,7 +86,8 @@
 
   .item {
     width: 65%;
-    overflow-wrap: break-word;
+    overflow-wrap: break-word; /* Chrome */
+    word-wrap: break-word; /* Internet Explorer, Firefox, Safari  */
   }
 
   .item-status {
