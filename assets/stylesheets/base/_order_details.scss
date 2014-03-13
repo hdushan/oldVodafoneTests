@@ -10,6 +10,20 @@
 .order-number-reminder {
   @include grey-text-box;
   margin: $text-spacing-vt 0;
+  height: 30px;
+  display: table;
+  width: 96%;
+
+  .order-number-block {
+    width: 50%;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  button {
+    float:right;
+    width: 120px;
+  }
 }
 
 .order_line_item_details {

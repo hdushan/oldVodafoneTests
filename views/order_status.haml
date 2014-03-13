@@ -1,7 +1,11 @@
 %h1 Trace your order.
-%p.order-number-reminder
-  %span.order-number-label Order number:
-  %span.order-number= locals[:order].order_number
+.div(style='position: relative')
+  %form.order-number-reminder(action='/tnt' method='GET')
+    %span.order-number-block
+      %span.order-number-label Order number:
+      %span.order-number= locals[:order].order_number
+    %button.trace.tnt-button
+      Change
 
 - if !locals[:order].orders.empty?
   - locals[:order].orders.each do |order|
