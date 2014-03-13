@@ -15,7 +15,7 @@ describe '_order_details.haml' do
         ],
         show_tracking_info?: nil
       )
-      render("/views/_order_details.haml", :details => @details, :status_glyph => 'warning')
+      render("/views/_order_details.haml", :details => @details, :status_glyph => 'progress')
       #puts response
     end
 
@@ -41,7 +41,7 @@ describe '_order_details.haml' do
     end
 
     it 'should include the glyph class' do
-      page.should have_selector('.glyph-heading.warning')
+      page.should have_selector('.glyph-heading.progress')
     end
 
   end

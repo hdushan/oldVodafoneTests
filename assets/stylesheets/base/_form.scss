@@ -41,7 +41,7 @@ form.form {
   }
 
   .error-msg {
-    padding: $text-spacing-vt $text-spacing-hz $text-spacing-vt $glyph-width + $text-spacing-hz;
+    padding: $text-spacing-vt $text-spacing-hz $text-spacing-vt $glyph-width + $text-spacing-hz * 2;
     @include clearfix;
   }
 
@@ -54,23 +54,6 @@ form.form {
   button.trace {
     background-color: $vodafone-red;
     box-shadow: 0px 1px 3px black;
-  }
-
-  table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: separate;
-    tr {
-      td {
-        font-size: $em-base;
-        border-top: 0;
-        .glyph {
-          margin-top: 6px;
-          margin-bottom: 6px
-        }
-      }
-    }
-
   }
 
 }

@@ -27,9 +27,9 @@ def lookup_status_glyph(status)
     'PARTIALLY SHIPPED' => 'orange-tick',
     'CANCELLED'         => 'cross',
     'BACKORDERED'       => 'info',
-    'IN PROGRESS'       => 'tick'
+    'IN PROGRESS'       => 'progress'
   }
-  status_glyph.default = 'warning'
+  status_glyph.default = 'error'
   status_glyph[status]
 end
 

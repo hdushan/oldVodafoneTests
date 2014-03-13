@@ -8,6 +8,11 @@
 @import "tablet-upwards/tablet-upwards";
 @import "desktop-upwards/desktop-upwards";
 
+.tnt-bg-holder {
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='/images/background.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='/images/background.jpg', sizingMethod='scale')";
+}
+
 #loading {
 
   .loader.loader-sml {
