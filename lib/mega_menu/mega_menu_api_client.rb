@@ -40,7 +40,9 @@ class MegaMenuAPIClient
     end
 
     def merge_menu_sections(menu_sections)
-      menu_sections.values.inject({}) { |result, element| result.merge!(element) { |key, old_val, new_val| old_val + new_val } }
+      menu_sections.values.inject({}) do |result, element|
+        result.merge!(element) { |key, old_val, new_val| old_val == new_val ? old_val : old_val + new_val  }
+      end
     end
 
     def get_menu_section(menu_section_name, params)
