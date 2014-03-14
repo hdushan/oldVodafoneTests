@@ -60,6 +60,7 @@ class App < Sinatra::Base
 
   get '/tnt' do
     mega_menu
+    @analytics_page_name = 'home'
 
     haml :track_form
   end
@@ -79,6 +80,7 @@ class App < Sinatra::Base
 
   get '/tnt/:id' do
     mega_menu
+    @analytics_page_name = 'result'
     fulfilment_response = fulfilment.get_order_details params[:id], client_ip
 
     if fulfilment_response.has_error?
