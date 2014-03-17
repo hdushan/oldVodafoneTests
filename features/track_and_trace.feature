@@ -1,8 +1,8 @@
 Feature: View Order Status
-	
+
   @javascript
   Scenario Outline: View appropriate status of orders in various valid statuses
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id '<order_id>'
     Then I should see the tracking status '<heading>' for the order
     And I should see the message '<message>'
@@ -28,7 +28,7 @@ Feature: View Order Status
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'VF123BOMULTI'
     Then I should see the tracking status 'On Backorder' for the order
     And I should see the message 'on backorder'
@@ -37,7 +37,7 @@ Feature: View Order Status
 
   @javascript
   Scenario: View individual status of items in a partially shipped order that has multiple items
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'VFMANYSTATUS'
     Then I should see the tracking status 'Shipped' for the order
     Then I should see the AusPost status 'Transferring' for the order
@@ -45,7 +45,7 @@ Feature: View Order Status
 
   @javascript
   Scenario Outline: View correct status of orders that have items in different statuses
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id '<order_id>'
     Then I should see the tracking status '<heading>' for the order
     And I should see the message '<message>'
@@ -62,7 +62,7 @@ Feature: View Order Status
 
   @javascript
   Scenario Outline: View correct status of orders that have multiple order line item details in different statuses
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id '<order_id>'
     Then I should see tracking statuses '<status1>' and '<status2> for the order
 
@@ -73,7 +73,7 @@ Feature: View Order Status
 
   @javascript
   Scenario Outline: View correct quantities of orders that have multiple order line item details with the same description
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id '<order_id>'
     Then I should see an item with '<num>' and '<item_status>' for the order
     And I should see an item with '<num2>' and '<item_status2>' for the order
@@ -87,7 +87,7 @@ Feature: View Order Status
 
   @javascript
   Scenario Outline: View appropriate error messages of orders in various errors states
-    Given I am on the Track and Trace Home page '/tnt'
+    Given I am on the Track and Trace Home page '/tracking'
 	When I search for the status of an order with id '<order_id>' that '<order_state_description>'
 	Then I should see a '<error_message_description>' error message
 
@@ -102,5 +102,5 @@ Feature: View Order Status
   # being from a mobile device.
   @javascript @mobile
   Scenario: View mobile-specific header and footer when visiting the page via a mobile device
-    Given I use a mobile device to visit the Track and Trace Home page '/tnt'
+    Given I use a mobile device to visit the Track and Trace Home page '/tracking'
 	Then I should see the mobile version of header and footer

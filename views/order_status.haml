@@ -1,6 +1,6 @@
 %h1 Trace your order.
 .div(style='position: relative')
-  %form.order-number-reminder(action='/tnt' method='GET')
+  %form.order-number-reminder(action='/tracking' method='GET')
     %span.order-number-block
       %span.order-number-label Order number:
       %span.order-number= locals[:order].order_number

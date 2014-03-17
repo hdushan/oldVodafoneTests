@@ -97,11 +97,11 @@ ul.info {
 
       &.details{
         // icon here
-        background-image: url("/images/details.png");
+        background-image: url("../images/details.png");
       }
       &.phone {
         // icon here
-        background-image: url("/images/phone.png");
+        background-image: url("../images/phone.png");
         a {
           color: #000;
           text-decoration: none;
@@ -138,30 +138,29 @@ ul.info {
 }
 
 .tick {
-  background:url(/images/tnt-icons-sprite.png) 0 -1px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -1px no-repeat;
 }
 
 .info {
-  background:url(/images/tnt-icons-sprite.png) 0 -28px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -28px no-repeat;
 }
 
 .cross {
-  background:url(/images/tnt-icons-sprite.png) 0 -55px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -55px no-repeat;
 }
 
 .truck {
-  background:url(/images/tnt-icons-sprite.png) 0 -82px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -82px no-repeat;
 }
 
 .orange-tick {
-  background:url(/images/tnt-icons-sprite.png) 0 -136px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -136px no-repeat;
 }
 
 .error {
-  background:url(/images/tnt-icons-sprite.png) 0 -164px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -164px no-repeat;
 }
 
 .progress {
-  background:url(/images/tnt-icons-sprite.png) 0 -192px no-repeat;
+  background:url(../images/tnt-icons-sprite.png) 0 -192px no-repeat;
 }
-
