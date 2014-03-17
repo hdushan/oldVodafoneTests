@@ -1,7 +1,9 @@
 - if @analytics_page_name
-  :javascript
+  %script(type='text/javascript')
     var VHA_A = VHA_A || {};
     VHA_A.site = VHA_A.site || 'service';
     VHA_A.page = VHA_A.page || 'service:tnt:#{@analytics_page_name}';
     VHA_A.record = VHA_A.record || [];
+    - if @analytics_data
+      VHA_A.record.push(#{@analytics_data.to_json});
     (function(){var a=new Date();document.write(unescape('%3Cscript type="text/javascript" src="//www.vodafone.com.au/analytics/js/analytics.js?cb='+a.getUTCFullYear()+(a.getUTCMonth()+1)+a.getUTCDate()+a.getUTCHours()+15*Math.ceil(a.getUTCMinutes()/15)+'"%3E%3C/script%3E'))}());

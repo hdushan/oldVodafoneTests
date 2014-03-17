@@ -11,6 +11,7 @@ require 'user_agent'
 require 'fulfilment_response'
 require 'fulfilment_order'
 require 'message_mapper'
+require 'web_analytics'
 require 'logger'
 
 LOGGING_BLACKLIST = %w(/health_check)
@@ -80,8 +81,8 @@ class App < Sinatra::Base
 
   get '/tnt/:id' do
     mega_menu
-    @analytics_page_name = 'result'
     fulfilment_response = fulfilment.get_order_details params[:id], client_ip
+    web_analytics(params[:id], fulfilment_response)
 
     if fulfilment_response.has_error?
       logger.error("Fulfilment Response: #{fulfilment_response}")
@@ -98,10 +99,17 @@ class App < Sinatra::Base
     logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
     @error = MessageMapper::DEFAULT_ERROR_MESSAGE
+    @analytics_page_name = 'result'
+    @analytics_data = WebAnalytics.new(params[:id], nil).error_json
     haml(:track_form)
   end
 
   private
+
+  def web_analytics(tracking_id, fulfilment_response)
+    @analytics_page_name = 'result'
+    @analytics_data = WebAnalytics.new(tracking_id, fulfilment_response).to_json
+  end
 
   def fulfilment
     @fulfilment_client ||= FulfilmentClient.new(logger)
