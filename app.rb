@@ -86,6 +86,7 @@ class App < Sinatra::Base
     if fulfilment_response.has_error?
       logger.error("Fulfilment Response: #{fulfilment_response}")
       @error = fulfilment_response.error_message
+      @order_id = params[:id]
       halt fulfilment_response.code, haml(:track_form)
     else
       haml :order_status, :locals => {:order => fulfilment_response}
