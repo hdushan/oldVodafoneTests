@@ -10,7 +10,9 @@ describe "Track & Trace App" do
   let(:mega_menu_client) { double(MegaMenuAPIClient, :get_menu => { 'desktop' => MegaMenuAPIClient.empty_response,
                                                                     'mobile' => MegaMenuAPIClient.empty_response}) }
 
-  let(:app) { App.new(mega_menu_client, fulfilment_client) }
+  let(:app) do
+    App.new('fancy.hostname.com', mega_menu_client, fulfilment_client)
+  end
 
   subject { last_response }
 
@@ -22,10 +24,23 @@ describe "Track & Trace App" do
   end
 
   describe 'POST /tracking' do
-    before { post '/tracking', tracking_id: 'abc' }
+    context 'when no referrer provided' do
+      before do
+        post '/tracking', tracking_id: 'abc'
+      end
 
-    its(:status) { should eq 302 }
-    its(:location) { should end_with '/tracking/abc' }
+      its(:status) { should eq 400 }
+    end
+
+    context 'when referrer is specified'  do
+      before do
+        header 'Referer', 'https://fancy.hostname.com/tnt'
+        post '/tracking', tracking_id: 'abc'
+      end
+
+      its(:status) { should eq 302 }
+      its(:location) { should end_with '/tracking/abc' }
+    end
   end
 
   describe 'fix broken mega menu mobile footer' do

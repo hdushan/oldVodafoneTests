@@ -35,7 +35,7 @@ if ENV['RAILS_ENV'] == 'paas-qa'
   Capybara.run_server = false
 else
   puts 'In LOCAL'
-  Capybara.app = App.new(MegaMenuAPIClient.new, FulfilmentClient.new(PutsLogger.new, FULFILMENT_ROOT))
+  Capybara.app = App.new('127.0.0.1', MegaMenuAPIClient.new, FulfilmentClient.new(PutsLogger.new, FULFILMENT_ROOT))
 end
 
 Capybara.javascript_driver = :poltergeist
