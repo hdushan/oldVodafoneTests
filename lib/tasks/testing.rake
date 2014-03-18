@@ -42,7 +42,7 @@ safe_load('jmeter') do
       server_protocol = "http"
       server_address = "trackandtrace.qa.np.syd.services.vodafone.com.au"
       server_port = "80"
-      server_url = "tnt"
+      server_url = "tracking"
       warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
       testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tnt.jmx", "tnt_new.jtl", "xml", warmup_url)
       testRunner.start()
@@ -51,7 +51,7 @@ safe_load('jmeter') do
       server_protocol = "http"
       server_address = "localhost"
       server_port = "9394"
-      server_url = "tnt"
+      server_url = "tracking"
       warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
       testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tnt.jmx", "tnt_new.jtl", "xml", warmup_url,
       true, 'bundle exec rackup', "server_log", "server_error", )
