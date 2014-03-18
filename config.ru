@@ -12,4 +12,4 @@ Rack::Timeout.logger.level = ::Logger.const_get(ENV['RACK_TIMEOUT_LOG_LEVEL']||'
 require 'sinatra'
 require File.expand_path '../app.rb', __FILE__
 require 'newrelic_rpm'
-run App.new ENV['APP_HOSTNAME']
+run App.new ENV['APP_HOSTNAMES'].split(',')

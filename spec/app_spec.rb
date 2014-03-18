@@ -11,7 +11,7 @@ describe "Track & Trace App" do
                                                                     'mobile' => MegaMenuAPIClient.empty_response}) }
 
   let(:app) do
-    App.new('fancy.hostname.com', mega_menu_client, fulfilment_client)
+    App.new(%w{fancy.hostname.com}, mega_menu_client, fulfilment_client)
   end
 
   subject { last_response }
