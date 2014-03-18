@@ -54,7 +54,7 @@
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Normal Load" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Peak Load" enabled="false">
         <collectionProp name="Arguments.arguments">
           <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
@@ -84,6 +84,36 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Test Load" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
+            <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="THROUGHPUT_FAILED_SEARCH" elementType="Argument">
+            <stringProp name="Argument.name">THROUGHPUT_FAILED_SEARCH</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MAXLOAD_SUCCESSFUL" elementType="Argument">
+            <stringProp name="Argument.name">MAXLOAD_SUCCESSFUL</stringProp>
+            <stringProp name="Argument.value">20</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MAXLOAD_ORDER_NOT_FOUND" elementType="Argument">
+            <stringProp name="Argument.name">MAXLOAD_ORDER_NOT_FOUND</stringProp>
+            <stringProp name="Argument.value">20</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DURATION" elementType="Argument">
+            <stringProp name="Argument.name">DURATION</stringProp>
+            <stringProp name="Argument.value">60</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
       <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
         <collectionProp name="CookieManager.cookies"/>
         <boolProp name="CookieManager.clearEachIteration">false</boolProp>
@@ -106,6 +136,17 @@
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Test Data" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">ordernums.csv</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">ORDERNUM</stringProp>
+        </CSVDataSet>
+        <hashTree/>
         <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
@@ -163,7 +204,7 @@
               <stringProp name="RandomTimer.range">300.0</stringProp>
             </GaussianRandomTimer>
             <hashTree/>
-            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters - Create tracking id" enabled="true">
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters - Create tracking id" enabled="false">
               <collectionProp name="UserParameters.names">
                 <stringProp name="-263073885">TRACKING_ID</stringProp>
               </collectionProp>
@@ -187,7 +228,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="tracking_id" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${TRACKING_ID}</stringProp>
+                  <stringProp name="Argument.value">${ORDERNUM}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">tracking_id</stringProp>
@@ -240,7 +281,7 @@
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-            <stringProp name="HTTPSampler.path">/tracking/${TRACKING_ID}</stringProp>
+            <stringProp name="HTTPSampler.path">/tracking/${ORDERNUM}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -460,7 +501,7 @@
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
-        <boolProp name="ResultCollector.error_logging">true</boolProp>
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
           <value class="SampleSaveConfiguration">
