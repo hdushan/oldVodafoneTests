@@ -32,6 +32,15 @@ task :qabenchmark do
   puts '\nDone.'
 end
 
+# qa
+task :stresstest do
+  puts '\nRunning Stress test against the Load Test Environment.'
+  ENV['RAILS_ENV'] = 'paas-qa'
+  Rake::Task['stress'].invoke
+  ENV['RAILS_ENV'] = nil
+  puts '\nDone.'
+end
+
 task :jshint do
   # jshint
   require 'jshintrb/jshinttask'

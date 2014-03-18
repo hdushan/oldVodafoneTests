@@ -54,7 +54,7 @@
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Peak Load" enabled="false">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Peak Load" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
@@ -84,7 +84,7 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Test Load" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Test Load" enabled="false">
         <collectionProp name="Arguments.arguments">
           <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
@@ -529,7 +529,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt_new_stress.jtl</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
@@ -561,39 +561,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt_new_stress.jtl</stringProp>
-      </ResultCollector>
-      <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>false</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-          </value>
-        </objProp>
-        <stringProp name="filename">tnt_load_stressl.jtl</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
