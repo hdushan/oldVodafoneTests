@@ -95,7 +95,7 @@
         <stringProp name="Threads initial delay">0</stringProp>
         <stringProp name="Start users count">5</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">10</stringProp>
+        <stringProp name="Start users period">5</stringProp>
         <stringProp name="Stop users count">10</stringProp>
         <stringProp name="Stop users period">5</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
@@ -283,7 +283,7 @@
         <stringProp name="Threads initial delay">3</stringProp>
         <stringProp name="Start users count">5</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">10</stringProp>
+        <stringProp name="Start users period">5</stringProp>
         <stringProp name="Stop users count">5</stringProp>
         <stringProp name="Stop users period">5</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
@@ -459,7 +459,7 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">true</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -488,7 +488,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/user/Vodafone/trackandtrace/build/apache-jmeter-2.11/bin/results.jtl</stringProp>
+        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt_new_stress.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
@@ -520,7 +520,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/user/Vodafone/trackandtrace/build/apache-jmeter-2.11/bin/results_25_Feb_normal_no_delays.jtl</stringProp>
+        <stringProp name="filename">/Users/hansdushanthakumar/Vodafone/trackandtrace/tnt_new_stress.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
