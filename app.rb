@@ -24,10 +24,11 @@ class App < Sinatra::Base
   set :cache, ENV['REDIS_URL'] ? Sinatra::Cache::RedisStore.new(ENV['REDIS_URL']) : nil
   disable :show_exceptions
 
-  def initialize(mega_menu_client=nil, fulfilment_client=nil)
+  def initialize(app_hostname, mega_menu_client=nil, fulfilment_client=nil)
     super()
     @fulfilment_client = fulfilment_client
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
+    @app_hostname = app_hostname || (raise 'App domain must be specified')
   end
 
   before do
@@ -71,6 +72,7 @@ class App < Sinatra::Base
   end
 
   post '/tracking' do
+    halt 400, 'Invalid request' if request.referrer.nil? || URI.parse(request.referrer).host != @app_hostname
     redirect "/tracking/#{params[:tracking_id].strip}"
   end
 
