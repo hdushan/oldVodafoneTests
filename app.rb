@@ -47,19 +47,19 @@ class App < Sinatra::Base
     @env['HTTP_X_FORWARDED_FOR'] || request.ip
   end
 
-  get '/tnt/' do
-    redirect '/tnt'
+  get '/tracking/' do
+    redirect '/tracking'
   end
 
-  get '/tnt/:id/' do
-    redirect "/tnt/#{params[:id]}"
+  get '/tracking/:id/' do
+    redirect "/tracking/#{params[:id]}"
   end
 
   get '/health_check' do
     'OK'
   end
 
-  get '/tnt' do
+  get '/tracking' do
     mega_menu
     @analytics_page_name = 'home'
 
@@ -70,16 +70,16 @@ class App < Sinatra::Base
     redirect "http://www.vodafone.com.au/cs/static/img/mobile/#{params[:img_file]}"
   end
 
-  post '/tnt' do
-    redirect "/tnt/#{params[:tracking_id].strip}"
+  post '/tracking' do
+    redirect "/tracking/#{params[:tracking_id].strip}"
   end
 
-  get '/tnt/trackingtermsconditions' do
+  get '/tracking/trackingtermsconditions' do
     mega_menu
     haml :trackingtermsconditions
   end
 
-  get '/tnt/:id' do
+  get '/tracking/:id' do
     mega_menu
     fulfilment_response = fulfilment.get_order_details params[:id], client_ip
     web_analytics(params[:id], fulfilment_response)

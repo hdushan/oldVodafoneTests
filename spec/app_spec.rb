@@ -14,18 +14,18 @@ describe "Track & Trace App" do
 
   subject { last_response }
 
-  describe 'GET /tnt' do
-    before { get '/tnt' }
+  describe 'GET /tracking' do
+    before { get '/tracking' }
 
     it { should be_ok }
     it { should match /tracking number/i }
   end
 
-  describe 'POST /tnt' do
-    before { post '/tnt', tracking_id: 'abc' }
+  describe 'POST /tracking' do
+    before { post '/tracking', tracking_id: 'abc' }
 
     its(:status) { should eq 302 }
-    its(:location) { should end_with '/tnt/abc' }
+    its(:location) { should end_with '/tracking/abc' }
   end
 
   describe 'fix broken mega menu mobile footer' do
@@ -35,20 +35,20 @@ describe "Track & Trace App" do
     its(:location) { should eq('http://www.vodafone.com.au/cs/static/img/mobile/image.png') }
   end
 
-  describe 'GET /tnt/trackingtermsconditions' do
-    before { get '/tnt/trackingtermsconditions'}
+  describe 'GET /tracking/trackingtermsconditions' do
+    before { get '/tracking/trackingtermsconditions'}
 
     its(:status) { should be 200 }
     its(:body) { should match /terms and conditions/i}
   end
 
-  describe 'GET /tnt/:id' do
+  describe 'GET /tracking/:id' do
     before do
       fulfilment_client.stub(:get_order_details).with('abc', '127.0.0.1') do |arg|
         fulfilment_response
       end
 
-      get '/tnt/abc'
+      get '/tracking/abc'
     end
 
     context 'when Fulfilment Service is available' do
