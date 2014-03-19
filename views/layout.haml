@@ -17,9 +17,9 @@
     <!--[if (gte IE 9) | (!IE)]><!-->
     -if @mega_menu
       - @mega_menu['desktop']['css'].each do |css_url|
-        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (min-width: 760px)')
+        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (min-width: 960px)')
       - @mega_menu['mobile']['css'].each do |css_url|
-        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (max-width: 759px)')
+        %link(rel='stylesheet' type="text/css" href="#{css_url}" media='only screen and (max-width: 959px)')
     <!--<![endif]-->
 
     <!--[if IE 9]>
@@ -40,7 +40,7 @@
         .tnt-frame
           .tnt-content
             =yield
-      =haml :_footer
+    =haml :_footer
 
 
   -if @mega_menu

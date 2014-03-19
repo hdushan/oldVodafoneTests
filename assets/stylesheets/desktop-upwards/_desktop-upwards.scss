@@ -12,3 +12,15 @@ $container-height: 600px;
 .vca-responsive-desktop {
   display: block;
 }
+
+.tnt-frame {
+  width: $container-width;
+}
+
+.tnt-body {
+  position: static;
+}
+
+.container {
+  padding-bottom: 0;
+}
