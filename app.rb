@@ -63,7 +63,7 @@ class App < Sinatra::Base
   get '/tracking' do
     mega_menu
     @analytics_page_name = 'home'
-
+    @validation_error_msg = MessageMapper.new.validation_error_message
     haml :track_form
   end
 
