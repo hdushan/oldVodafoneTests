@@ -16,8 +16,7 @@
       #input-validation-msg.error-msg-block.hidden
         %img.glyph.error{src: '/tracking/images/empty.png'}
         .error-msg
-          The Order Number you have entered is not in a valid format.
-          Please check the number on your confirmation email and enter it as it appears on the email.
+          =@validation_error_msg
 
     .input-wrapper
       %button.trace.tnt-button#trace(type='submit')

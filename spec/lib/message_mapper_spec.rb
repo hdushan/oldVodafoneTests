@@ -8,6 +8,7 @@ describe MessageMapper do
     it 'should map known error messages' do
       mapper = MessageMapper.new
       mapper.error_message(503).should == 'Service Unavailable. Please, try again later.'
+      mapper.error_message(400).should == 'The Order Number you have entered is not in a valid format. Please check the number on your confirmation email and enter it as it appears on the email.'
       mapper.error_message(404).should == 'That order ID was not found. Please, check that you typed it correctly.'
     end
 

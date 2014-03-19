@@ -92,10 +92,12 @@ Feature: View Order Status
 	Then I should see a '<error_message_description>' error message
 
     Examples:
-      |  order_state_description   |  order_id          |  error_message_description      |
-      |  doesnt exist              |  VF1NON1EXISTING   |  order ID was not found         |
-      |  timed out from fusion     |  VF1TIMEOUT123     |  Service Unavailable            |
-      |  has an unexpected status  |  1-1BADSTATUS      |  problem retrieving your order  |
+      |  order_state_description                 |  order_id          |  error_message_description                                  |
+      |  doesnt exist                            |  VF1NON1EXISTING   |  order ID was not found                                     |
+      |  timed out from fusion                   |  VF1TIMEOUT123     |  Service Unavailable                                        |
+      |  has an unexpected status                |  1-1BADSTATUS      |  problem retrieving your order                              |
+      |  fusion thinks is invalid                |  VF123VALFAULT     |  The Order Number you have entered is not in a valid format.|
+      |  causes a generic system fault in fusion |  VF123SYSFAULT     |  Service Unavailable.                                       |
 
   # This scanario tests the mobile megamenu. This test needs to be the last test in the suite, as
   # in spite of resetting http request headers after the test, subsequent requests are still identified as

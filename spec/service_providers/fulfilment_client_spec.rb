@@ -152,14 +152,14 @@ describe FulfilmentClient, :pact => true do
         .given('invalid order id')
         .upon_receiving('a request for order status')
         .with(method: :get, path: '/v1/order/invalid')
-        .will_respond_with(status: 403)
+        .will_respond_with(status: 400)
     end
 
     it 'should return an order status' do
       response = fulfilment_client.get_order_details('invalid', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to match /invalid order id/i
+      expect(response.error_message).to match /The Order Number you have entered is not in a valid format./i
     end
   end
 

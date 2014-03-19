@@ -19,7 +19,7 @@ class MessageMapper
 
   ERROR_MESSAGE_MAP = {
     503 => 'Service Unavailable. Please, try again later.',
-    403 => 'Invalid order ID, check that you typed it correctly.',
+    400 => 'The Order Number you have entered is not in a valid format. Please check the number on your confirmation email and enter it as it appears on the email.',
     404 => 'That order ID was not found. Please, check that you typed it correctly.',
   }
 
@@ -28,6 +28,10 @@ class MessageMapper
 
   def error_message(error_code)
     ERROR_MESSAGE_MAP[error_code] || DEFAULT_ERROR_MESSAGE
+  end
+
+  def validation_error_message
+    error_message(400)
   end
 
   def status_message(status)

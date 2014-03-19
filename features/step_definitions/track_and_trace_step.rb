@@ -21,8 +21,12 @@ end
 
 When(/^I search for the status of an order with id '(.*)' that '(.*)'$/) do |order_id, error_state_description|
   case error_state_description
+    when "fusion thinks is invalid"
+      setup_fulfilment_service_stub_error(order_id, 400)
     when "doesnt exist"
       setup_fulfilment_service_stub_error(order_id, 404)
+    when "causes a generic system fault in fusion"
+      setup_fulfilment_service_stub_error(order_id, 503)
     when "timed out from fusion"
       setup_fulfilment_service_stub_error(order_id, 503)
     when "has an unexpected status"
