@@ -24,11 +24,11 @@ class App < Sinatra::Base
   set :cache, ENV['REDIS_URL'] ? Sinatra::Cache::RedisStore.new(ENV['REDIS_URL']) : nil
   disable :show_exceptions
 
-  def initialize(app_hostname_list, mega_menu_client=nil, fulfilment_client=nil)
+  def initialize(app_hostname_list=[], mega_menu_client=nil, fulfilment_client=nil)
     super()
     @fulfilment_client = fulfilment_client
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
-    @app_hostname_list = app_hostname_list || (raise 'App hostnames must be specified')
+    @app_hostname_list = app_hostname_list
   end
 
   before do
