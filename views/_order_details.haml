@@ -8,6 +8,13 @@
   -if locals[:details].auspost_status_heading
     %img.glyph-heading.truck{src: '/tracking/images/empty.png'}
     %h2#auspost-status.status-heading= locals[:details].auspost_status_heading
+    %p.auspost-status-message
+      Tracking No.
+      %span#auspost-number= locals[:details].auspost_number
+      with
+      %a.auspost-link{href: "http://auspost.com.au/track/track.html?id=#{locals[:details].auspost_number}"}
+        AusPost
+
 
   -if locals[:details].is_on_backorder?
     %h3.ship-date-heading Expected Shipping Date

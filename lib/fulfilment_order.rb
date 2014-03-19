@@ -23,6 +23,10 @@ class FulfilmentOrder
     tracking ? tracking['status'] : nil
   end
 
+  def auspost_number
+    @body['consignment_number']
+  end
+
   def tracking
     @body['tracking']
   end

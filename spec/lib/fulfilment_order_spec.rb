@@ -98,8 +98,9 @@ describe FulfilmentOrder do
         order.tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
       end
 
-      it 'should show the AusPost tracking status if present' do
+      it 'should show the AusPost tracking status and consignment number' do
         order.auspost_status_heading.should eq('Delivered')
+        order.auspost_number.should eq('AP123FOUND')
       end
 
       it 'should flag no AusPost issues' do

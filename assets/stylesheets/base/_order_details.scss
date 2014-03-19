@@ -47,14 +47,18 @@
     @include grey-text-box;
   }
 
-  .status-message, .auspost-status-message, .ship-message, .ship-date {
+  .status-message, .ship-message, .ship-date {
     padding: $text-spacing-vt 0;
     margin: 0 $text-spacing-hz;
     line-height: $global-line-height;
   }
 
-  .status-message, .auspost-status-message {
+  .status-message {
     border-top: $global-border;
+  }
+
+  .auspost-status-message {
+    padding: 0 0 $text-spacing-vt $glyph-width + $text-spacing-hz*3;
   }
 
   table {

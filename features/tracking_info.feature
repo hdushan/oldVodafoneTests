@@ -5,6 +5,8 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPFOUND' that has tracking events
     Then I should see the AusPost status 'Delivered' for the order
+    And I should see the AusPost tracking number 'AP123FOUND'
+    And I should see a link to 'http://auspost.com.au/track/track.html?id=AP123FOUND' with text 'AusPost'
     And I should see the shipping events from AusPost
 
   @javascript
