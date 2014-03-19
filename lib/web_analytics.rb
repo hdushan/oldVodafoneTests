@@ -9,7 +9,7 @@ class WebAnalytics
 
   def to_json
     status_details = {
-        'trackingId' => @tracking_id,
+        'trackingID' => @tracking_id,
         'orderStatus' => order_status_string
     }
     status_details['auspostStatus'] = tracking_status_string unless trackable_orders.empty?
@@ -17,7 +17,7 @@ class WebAnalytics
   end
 
   def error_json
-    [ 'tnt', { 'trackingId' => @tracking_id, 'orderStatus' => 'error' } ]
+    [ 'tnt', { 'trackingID' => @tracking_id, 'orderStatus' => 'error' } ]
   end
 private
   def tracking_status_string

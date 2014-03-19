@@ -6,7 +6,7 @@ describe WebAnalytics do
 
   it 'should always return error on error_json' do
 
-    expect(WebAnalytics.new('VF123', nil).error_json).to eq(['tnt', { 'trackingId' => 'VF123', 'orderStatus' => 'error'}])
+    expect(WebAnalytics.new('VF123', nil).error_json).to eq(['tnt', { 'trackingID' => 'VF123', 'orderStatus' => 'error'}])
   end
 
   context 'when fulfilment_response has error' do
@@ -16,7 +16,7 @@ describe WebAnalytics do
 
       result = WebAnalytics.new('VF123', fulfilment_response).to_json
 
-      expect(result).to eq(['tnt', { 'trackingId' => 'VF123', 'orderStatus' => 'error'}])
+      expect(result).to eq(['tnt', { 'trackingID' => 'VF123', 'orderStatus' => 'error'}])
     end
   end
 
@@ -32,7 +32,7 @@ describe WebAnalytics do
       it 'should return statuses separated by semicolon' do
         result = WebAnalytics.new('VF123', fulfilment_response).to_json
 
-        expect(result).to eq(['tnt', { 'trackingId' => 'VF123', 'orderStatus' => 'shipped'}])
+        expect(result).to eq(['tnt', { 'trackingID' => 'VF123', 'orderStatus' => 'shipped'}])
       end
     end
     context 'when fulfilment response does not have shipping information' do
@@ -45,7 +45,7 @@ describe WebAnalytics do
       it 'should return statuses separated by semicolon' do
         result = WebAnalytics.new('VF123', fulfilment_response).to_json
 
-        expect(result).to eq(['tnt', { 'trackingId' => 'VF123', 'orderStatus' => 'shipped,backordered'}])
+        expect(result).to eq(['tnt', { 'trackingID' => 'VF123', 'orderStatus' => 'shipped,backordered'}])
       end
     end
 
@@ -60,7 +60,7 @@ describe WebAnalytics do
       it 'should return tracking statuses separated from response statuses with colon' do
         result = WebAnalytics.new('VF123', fulfilment_response).to_json
 
-          expect(result).to eq(['tnt', { 'trackingId' => 'VF123',
+          expect(result).to eq(['tnt', { 'trackingID' => 'VF123',
                                          'orderStatus' => 'shipped,shipped',
                                          'auspostStatus' => 'delivered,in_transit'}])
       end
