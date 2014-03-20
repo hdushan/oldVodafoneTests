@@ -73,6 +73,11 @@ class App < Sinatra::Base
     haml :track_form
   end
 
+  get '/shared_content/flush_cache' do
+    settings.cache.delete cache_key('mega-menu') if settings.cache
+    'Shared Content Flushed OK'
+  end
+
   get '/cs/static/img/mobile/:img_file' do
     redirect "http://www.vodafone.com.au/cs/static/img/mobile/#{params[:img_file]}"
   end
