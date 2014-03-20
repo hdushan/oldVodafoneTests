@@ -13,6 +13,8 @@ require 'fulfilment_order'
 require 'message_mapper'
 require 'web_analytics'
 require 'logger'
+require 'git'
+require 'app-version'
 
 LOGGING_BLACKLIST = %w(/health_check)
 
@@ -69,6 +71,11 @@ class App < Sinatra::Base
     @validation_error_msg = @messages.error_message(400)
     @error_heading = @messages.error_heading(400)
     haml :track_form
+  end
+
+  get '/shared_content/flush_cache' do
+    settings.cache.delete cache_key('mega-menu') if settings.cache
+    'Shared Content Flushed OK'
   end
 
   get '/cs/static/img/mobile/:img_file' do

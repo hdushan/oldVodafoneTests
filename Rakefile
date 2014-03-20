@@ -1,7 +1,9 @@
+require 'app-version'
+
 Dir.glob('lib/tasks/*.rake').each { |file| load file }
 $: << './lib'
 
-task :default => :tests
+task :default => [:tests, 'version:create']
 
 desc 'Run all tests'
 task :tests => [:spec, 'assetpack:build', 'jasmine:ci', :cucumber]

@@ -147,7 +147,7 @@
           <stringProp name="variableNames">ORDERNUM</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
@@ -165,7 +165,7 @@
           <intProp name="Assertion.test_type">6</intProp>
         </ResponseAssertion>
         <hashTree/>
-        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="true">
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="false">
           <stringProp name="BeanShellAssertion.query">
 if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) == true) ||  (ResponseCode.equals (&quot;500&quot;) == true)))
 {
@@ -211,7 +211,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
                 <stringProp name="-424579833">Track and trace</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -269,10 +269,10 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
           <hashTree>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect or Service Unavailable" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="603383936">(302|503)</stringProp>
+                <stringProp name="50549">302</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -321,7 +321,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
                 <stringProp name="-188109835">not found</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">6</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -360,7 +360,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
@@ -378,7 +378,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
           <intProp name="Assertion.test_type">6</intProp>
         </ResponseAssertion>
         <hashTree/>
-        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="true">
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="false">
           <stringProp name="BeanShellAssertion.query">
 if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) == true) ||  (ResponseCode.equals (&quot;500&quot;) == true)))
 {
@@ -424,7 +424,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
                 <stringProp name="-424579833">Track and trace</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -482,10 +482,10 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
           <hashTree>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect or Service Unavailable" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="603383936">(302|503)</stringProp>
+                <stringProp name="50549">302</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -529,7 +529,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Expect 404" enabled="false">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Expect 404" enabled="true">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="51512">404</stringProp>
               </collectionProp>
@@ -538,22 +538,13 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
               <intProp name="Assertion.test_type">8</intProp>
             </ResponseAssertion>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="false">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="true">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-188109835">not found</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
-            </ResponseAssertion>
-            <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion for body" enabled="true">
-              <collectionProp name="Asserion.test_strings">
-                <stringProp name="-1785704875">tnt-body</stringProp>
-              </collectionProp>
-              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">true</boolProp>
-              <intProp name="Assertion.test_type">16</intProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>

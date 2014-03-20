@@ -93,4 +93,13 @@ describe "Track & Trace App" do
       its(:body) { should match(/technical mishap/) }
     end
   end
+
+  describe 'GET /shared_content/flush_cache' do
+
+    before { get '/shared_content/flush_cache' }
+
+    it { should be_ok }
+    its(:body) { should eq 'Shared Content Flushed OK' }
+
+  end
 end
