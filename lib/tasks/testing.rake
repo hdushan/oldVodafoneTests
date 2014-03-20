@@ -59,7 +59,7 @@ safe_load('jmeter') do
     end
   end
   task :stress do
-    puts "Running on PAAS-QA"
+    puts "Running Stress Test (Peak Load)"
     server_protocol = "http"
     server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
     server_port = "80"
@@ -67,6 +67,17 @@ safe_load('jmeter') do
     warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
     time_now=Time.now
     testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_stress.jmx", "tnt_stress_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
+    testRunner.start()
+  end
+  task :normalload do
+    puts "Running Load Test (Normal Load)"
+    server_protocol = "http"
+    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
+    server_port = "80"
+    server_url = "tracking"
+    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
+    time_now=Time.now
+    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_normal.jmx", "tnt_normal_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
     testRunner.start()
   end
   task :prodstress do

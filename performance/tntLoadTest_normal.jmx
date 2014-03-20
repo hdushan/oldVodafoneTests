@@ -84,6 +84,36 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Test Load" enabled="false">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
+            <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="THROUGHPUT_FAILED_SEARCH" elementType="Argument">
+            <stringProp name="Argument.name">THROUGHPUT_FAILED_SEARCH</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MAXLOAD_SUCCESSFUL" elementType="Argument">
+            <stringProp name="Argument.name">MAXLOAD_SUCCESSFUL</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="MAXLOAD_ORDER_NOT_FOUND" elementType="Argument">
+            <stringProp name="Argument.name">MAXLOAD_ORDER_NOT_FOUND</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DURATION" elementType="Argument">
+            <stringProp name="Argument.name">DURATION</stringProp>
+            <stringProp name="Argument.value">60</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
       <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
         <collectionProp name="CookieManager.cookies"/>
         <boolProp name="CookieManager.clearEachIteration">false</boolProp>
@@ -95,7 +125,7 @@
         <stringProp name="Threads initial delay">0</stringProp>
         <stringProp name="Start users count">5</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">10</stringProp>
+        <stringProp name="Start users period">5</stringProp>
         <stringProp name="Stop users count">10</stringProp>
         <stringProp name="Stop users period">5</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
@@ -106,7 +136,18 @@
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Test Data" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename">ordernums.csv</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">ORDERNUM</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
@@ -123,6 +164,22 @@
           <boolProp name="Assertion.assume_success">false</boolProp>
           <intProp name="Assertion.test_type">6</intProp>
         </ResponseAssertion>
+        <hashTree/>
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="true">
+          <stringProp name="BeanShellAssertion.query">
+if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) == true) ||  (ResponseCode.equals (&quot;500&quot;) == true)))
+{
+    if (new String(ResponseData).contains (&quot;tnt-body&quot;)){
+    	   Failure=false ;
+    } else {
+	   Failure=true ;
+        FailureMessage =&quot;Error Response code: &quot; + ResponseCode;
+    }
+}</stringProp>
+          <stringProp name="BeanShellAssertion.filename"></stringProp>
+          <stringProp name="BeanShellAssertion.parameters"></stringProp>
+          <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+        </BeanShellAssertion>
         <hashTree/>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction - View Home Page (Order Found)" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
@@ -154,7 +211,7 @@
                 <stringProp name="-424579833">Track and trace</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -163,7 +220,7 @@
               <stringProp name="RandomTimer.range">300.0</stringProp>
             </GaussianRandomTimer>
             <hashTree/>
-            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters - Create tracking id" enabled="true">
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters - Create tracking id" enabled="false">
               <collectionProp name="UserParameters.names">
                 <stringProp name="-263073885">TRACKING_ID</stringProp>
               </collectionProp>
@@ -187,7 +244,7 @@
               <collectionProp name="Arguments.arguments">
                 <elementProp name="tracking_id" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${TRACKING_ID}</stringProp>
+                  <stringProp name="Argument.value">${ORDERNUM}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                   <stringProp name="Argument.name">tracking_id</stringProp>
@@ -210,12 +267,12 @@
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect or Service Unavailable" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="50549">302</stringProp>
+                <stringProp name="603383936">(302|503)</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -229,6 +286,15 @@
               <stringProp name="throughput">${THROUGHPUT_VIEW_ORDER_STATUS}</stringProp>
             </ConstantThroughputTimer>
             <hashTree/>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${PROTOCOL}://${SERVER}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /tracking/tracking_id (Order Found)" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -240,7 +306,7 @@
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
             <stringProp name="HTTPSampler.protocol"></stringProp>
             <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
-            <stringProp name="HTTPSampler.path">/tracking/${TRACKING_ID}</stringProp>
+            <stringProp name="HTTPSampler.path">/tracking/${ORDERNUM}</stringProp>
             <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -255,7 +321,7 @@
                 <stringProp name="-188109835">not found</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
               <intProp name="Assertion.test_type">6</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -283,7 +349,7 @@
         <stringProp name="Threads initial delay">3</stringProp>
         <stringProp name="Start users count">5</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">10</stringProp>
+        <stringProp name="Start users period">5</stringProp>
         <stringProp name="Stop users count">5</stringProp>
         <stringProp name="Stop users period">5</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
@@ -294,7 +360,7 @@
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
@@ -311,6 +377,22 @@
           <boolProp name="Assertion.assume_success">false</boolProp>
           <intProp name="Assertion.test_type">6</intProp>
         </ResponseAssertion>
+        <hashTree/>
+        <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Global BeanShell Assertion for proper error on 503 or 500" enabled="true">
+          <stringProp name="BeanShellAssertion.query">
+if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) == true) ||  (ResponseCode.equals (&quot;500&quot;) == true)))
+{
+    if (new String(ResponseData).contains (&quot;tnt-body&quot;)){
+    	   Failure=false ;
+    } else {
+	   Failure=true ;
+        FailureMessage =&quot;Error Response code: &quot; + ResponseCode;
+    }
+}</stringProp>
+          <stringProp name="BeanShellAssertion.filename"></stringProp>
+          <stringProp name="BeanShellAssertion.parameters"></stringProp>
+          <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+        </BeanShellAssertion>
         <hashTree/>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction - View Home Page (Order Not Found)" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
@@ -342,7 +424,7 @@
                 <stringProp name="-424579833">Track and trace</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -398,12 +480,12 @@
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Redirect or Service Unavailable" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="50549">302</stringProp>
+                <stringProp name="603383936">(302|503)</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-              <boolProp name="Assertion.assume_success">false</boolProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
             </ResponseAssertion>
             <hashTree/>
@@ -416,6 +498,15 @@
               <intProp name="calcMode">2</intProp>
               <stringProp name="throughput">${THROUGHPUT_FAILED_SEARCH}</stringProp>
             </ConstantThroughputTimer>
+            <hashTree/>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value">${PROTOCOL}://${SERVER}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
             <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /tracking/tracking_id (Order Not Found)" enabled="true">
@@ -438,7 +529,7 @@
             <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
           </HTTPSamplerProxy>
           <hashTree>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Expect 404" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Expect 404" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="51512">404</stringProp>
               </collectionProp>
@@ -447,13 +538,22 @@
               <intProp name="Assertion.test_type">8</intProp>
             </ResponseAssertion>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="false">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="-188109835">not found</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
               <intProp name="Assertion.test_type">2</intProp>
+            </ResponseAssertion>
+            <hashTree/>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion for body" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-1785704875">tnt-body</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">true</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
@@ -488,7 +588,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/user/Vodafone/trackandtrace/build/apache-jmeter-2.11/bin/results.jtl</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
@@ -520,39 +620,7 @@
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename">/Users/user/Vodafone/trackandtrace/build/apache-jmeter-2.11/bin/results.jtl</stringProp>
-      </ResultCollector>
-      <hashTree/>
-      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Simple Data Writer" enabled="true">
-        <boolProp name="ResultCollector.error_logging">false</boolProp>
-        <objProp>
-          <name>saveConfig</name>
-          <value class="SampleSaveConfiguration">
-            <time>true</time>
-            <latency>true</latency>
-            <timestamp>true</timestamp>
-            <success>true</success>
-            <label>true</label>
-            <code>true</code>
-            <message>true</message>
-            <threadName>true</threadName>
-            <dataType>true</dataType>
-            <encoding>false</encoding>
-            <assertions>true</assertions>
-            <subresults>true</subresults>
-            <responseData>false</responseData>
-            <samplerData>false</samplerData>
-            <xml>false</xml>
-            <fieldNames>false</fieldNames>
-            <responseHeaders>false</responseHeaders>
-            <requestHeaders>false</requestHeaders>
-            <responseDataOnError>false</responseDataOnError>
-            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
-            <assertionsResultsToSave>0</assertionsResultsToSave>
-            <bytes>true</bytes>
-          </value>
-        </objProp>
-        <stringProp name="filename">tnt_load_normal.jtl</stringProp>
+        <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
