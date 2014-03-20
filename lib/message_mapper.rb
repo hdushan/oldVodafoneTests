@@ -11,7 +11,7 @@ class MessageMapper
   }
 
   ITEM_STATUS_MESSAGE_MAP = {
-    IS_BACKORDERED => 'Item(s) on backorder.',
+    IS_BACKORDERED => 'On backorder.',
     IS_CANCELLED => 'Cancelled.',
     IS_SHIPPED => 'Shipped.',
     IS_PROGRESS => 'Pending.',

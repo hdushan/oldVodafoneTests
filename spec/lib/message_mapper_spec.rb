@@ -7,14 +7,14 @@ describe MessageMapper do
   describe '#error_message' do
     it 'should map known error messages' do
       mapper = MessageMapper.new
-      mapper.error_message(503).should match /check back soon/
+      mapper.error_message(503).should match /technical mishap/
       mapper.error_message(400).should match /entered your tracking number exactly/
       mapper.error_message(404).should match /entered your tracking number exactly/
     end
 
     it 'should map unknown error messages' do
       mapper = MessageMapper.new
-      mapper.error_message(678).should match /check back soon/
+      mapper.error_message(678).should match /technical mishap/
     end
   end
 
@@ -38,7 +38,7 @@ describe MessageMapper do
     it 'should map known statuses' do
       mapper = MessageMapper.new
       mapper.status_heading(TS_CANCELLED).should =~ /cancelled/i
-      mapper.status_heading(TS_PROGRESS).should =~ /pending/i
+      mapper.status_heading(TS_PROGRESS).should =~ /working on your order/i
       mapper.status_heading(TS_BACKORDERED).should =~ /backorder/i
       mapper.status_heading(TS_SHIPPED).should  =~ /shipped/i
       mapper.status_heading(TS_PARTIALLY_SHIPPED).should =~ /partially shipped/i

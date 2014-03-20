@@ -90,7 +90,7 @@ describe "Track & Trace App" do
       its(:status) { should eq 500 }
       its(:body) { should have_tag('div.error-msg') }
       its(:body) { should match(/Something didn.t go as planned/) }
-      its(:body) { should match(/Please check back soon/) }
+      its(:body) { should match(/technical mishap/) }
     end
   end
 end
