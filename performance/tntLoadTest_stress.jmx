@@ -171,13 +171,9 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
 {
     if (new String(ResponseData).contains (&quot;tnt-body&quot;)){
     	   Failure=false ;
-    	   print (&quot;Beanshell assertion passed&quot;);   // this goes to stdout
-        log.warn(&quot;Beanshell assertion passed&quot;); // this goes to the JMeter log file
     } else {
 	   Failure=true ;
         FailureMessage =&quot;Error Response code: &quot; + ResponseCode;
-        print (&quot;Error Response code: &quot; + ResponseCode);   // this goes to stdout
-        log.warn(&quot;Error Response code: &quot; + ResponseCode); // this goes to the JMeter log file
     }
 }</stringProp>
           <stringProp name="BeanShellAssertion.filename"></stringProp>
@@ -388,13 +384,9 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
 {
     if (new String(ResponseData).contains (&quot;tnt-body&quot;)){
     	   Failure=false ;
-    	   print (&quot;Beanshell assertion passed&quot;);   // this goes to stdout
-        log.warn(&quot;Beanshell assertion passed&quot;); // this goes to the JMeter log file
     } else {
 	   Failure=true ;
         FailureMessage =&quot;Error Response code: &quot; + ResponseCode;
-        print (&quot;Error Response code: &quot; + ResponseCode);   // this goes to stdout
-        log.warn(&quot;Error Response code: &quot; + ResponseCode); // this goes to the JMeter log file
     }
 }</stringProp>
           <stringProp name="BeanShellAssertion.filename"></stringProp>
