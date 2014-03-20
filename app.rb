@@ -43,6 +43,8 @@ class App < Sinatra::Base
         @mega_menu_client.get_menu
       }
     end
+  rescue
+    logger.error('Failed to fetch MegaMenu while handling an error')
   end
 
   def client_ip
@@ -100,6 +102,7 @@ class App < Sinatra::Base
   end
 
   error do
+    mega_menu
     exception = env['sinatra.error']
     logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
