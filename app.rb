@@ -13,6 +13,8 @@ require 'fulfilment_order'
 require 'message_mapper'
 require 'web_analytics'
 require 'logger'
+require 'git'
+require 'app-version'
 
 LOGGING_BLACKLIST = %w(/health_check)
 
