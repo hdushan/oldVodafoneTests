@@ -80,6 +80,17 @@ safe_load('jmeter') do
     testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_normal.jmx", "tnt_normal_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
     testRunner.start()
   end
+  task :normalloadloose do
+    puts "Running Load Test (Normal Load) in Loose validation mode"
+    server_protocol = "http"
+    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
+    server_port = "80"
+    server_url = "tracking"
+    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
+    time_now=Time.now
+    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_normal_loose.jmx", "tnt_normal_loose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
+    testRunner.start()
+  end
   task :prodstress do
     puts "Running on PROD"
     server_protocol = "http"
