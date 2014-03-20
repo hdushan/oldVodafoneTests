@@ -51,6 +51,9 @@ Then(/^I should see the tracking status '(.*)' for the order$/) do |status_heade
 end
 
 Then(/^I should see tracking statuses '(.*)' and '(.*) for the order$/) do |status1, status2|
+  patiently_wait_until do
+    page.has_css?('#vodafone-status')
+  end
   status_headings = page.all('#vodafone-status')
   expect(status_headings.count).to be(2)
   expect(status_headings.first.text).to eq(status1)
@@ -90,6 +93,9 @@ end
 
 
 Then(/^I should see an item with '(.*)' and '(.*)' for the order$/) do |num, item_status|
+  patiently_wait_until do
+    page.has_css?('.item-row')
+  end
   unless num == 'na' && item_status == 'na'
     all_items = page.all('.item-row')
     found = all_items.inject(false) do |item_found, item_row|

@@ -25,7 +25,10 @@ function setupValidateTrackFormFunction() {
 
         if (isValidOrderId(order_id)) {
             showLoadingImage();
-            this.submit();
+            var form = this;
+            setTimeout( function () {
+                form.submit();
+            }, 300);
         } else {
             $("#input-validation-msg").fadeIn();
             return false;
