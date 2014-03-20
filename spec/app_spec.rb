@@ -102,4 +102,15 @@ describe "Track & Trace App" do
     its(:body) { should eq 'Shared Content Flushed OK' }
 
   end
+
+  describe 'creating an App without any constructor arguments' do
+    it 'should work' do
+      expect { App.new }.to_not raise_error, <<-DOC
+sinatra-assetpack expects to create an App without any constructor arguments
+if it can't do that, then it'll fail to precompile assets ONLY in production
+mode. I've put this test in place so we can have an early warning. Make sure
+App can be constructed without any arguments. It's crap, but necessary.
+DOC
+    end
+  end
 end
