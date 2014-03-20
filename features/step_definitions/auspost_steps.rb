@@ -15,6 +15,7 @@ And(/^I should see a link to '(.*)' with text '(.*)'$/) do |href, text|
 end
 
 And(/^I should see the AusPost status message '(.*)'$/) do |message|
+  patiently_wait_until(15) { page.has_css?('#auspost-msg') }
   expect(page.find('#auspost-msg')).to have_content(message)
 end
 
