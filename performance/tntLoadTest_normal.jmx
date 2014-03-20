@@ -147,7 +147,7 @@
           <stringProp name="variableNames">ORDERNUM</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
@@ -360,7 +360,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="false">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
           <collectionProp name="Asserion.test_strings">
             <stringProp name="-1949977881">problem retrieving your order</stringProp>
           </collectionProp>
