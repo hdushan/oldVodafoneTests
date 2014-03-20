@@ -15,7 +15,7 @@ describe FulfilmentOrder do
   describe '#status_heading' do
     it 'should map the status to a user friendly header' do
       order = FulfilmentOrder.new({'tracking_status' => TS_PROGRESS})
-      order.status_heading.should == 'Order pending.'
+      order.status_heading.should == 'We’re working on your order.'
     end
   end
 

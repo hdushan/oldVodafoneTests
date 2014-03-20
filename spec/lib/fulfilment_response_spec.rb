@@ -45,7 +45,7 @@ describe FulfilmentResponse do
   describe '#error_message' do
     it 'should return generic error message if 503 error occurred' do
       response = FulfilmentResponse.new(503, 'this could be anything')
-      response.error_message.should == 'Please check back soon.'
+      response.error_message.should == 'Sorry, we’ve just had a technical mishap. Please try again in a few minutes.'
     end
 
     it 'should return nil if no error occurred' do

@@ -178,7 +178,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to match /Please check back soon./
+      expect(response.error_message).to match /Sorry, we’ve just had a technical mishap. Please try again in a few minutes./
     end
   end
 
@@ -197,7 +197,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to match /Please check back soon./
+      expect(response.error_message).to match /Sorry, we’ve just had a technical mishap. Please try again in a few minutes./
     end
   end
 end

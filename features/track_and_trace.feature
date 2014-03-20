@@ -9,10 +9,10 @@ Feature: View Order Status
 
     Examples:
       |  status_mix                                        |  order_id          |  heading          | message                                 |
-	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  Order pending.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  Order pending.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  Order pending.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  Order pending.   | Check back soon for an update           |
+	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  We’re working on your order.   | Check back soon for an update           |
+      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  We’re working on your order.   | Check back soon for an update           |
+      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  We’re working on your order.   | Check back soon for an update           |
+      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  We’re working on your order.   | Check back soon for an update           |
       |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On backorder.    | currently waiting for more stock        |
 	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order shipped.   |                                         |
 	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order shipped.   |                                         |
@@ -24,7 +24,7 @@ Feature: View Order Status
 	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order cancelled. | You haven’t been charged for this order |
 	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order cancelled. | You haven’t been charged for this order |
       |  TERMINATED                                        |  VF123TERMINATED   |  Order cancelled. | You haven’t been charged for this order |
-      |  IN PROGRESS                                       |  1-123INPROGRESS   |  Order pending.   | Check back soon for an update           |
+      |  IN PROGRESS                                       |  1-123INPROGRESS   |  We’re working on your order.   | Check back soon for an update           |
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered
@@ -94,10 +94,10 @@ Feature: View Order Status
     Examples:
       |  order_state_description                 |  order_id          |  error_message_description                |
       |  doesnt exist                            |  VF1NON1EXISTING   |  entered your tracking number exactly     |
-      |  timed out from fusion                   |  VF1TIMEOUT123     |  Please check back soon.                  |
-      |  has an unexpected status                |  1-1BADSTATUS      |  Please check back soon.                  |
+      |  timed out from fusion                   |  VF1TIMEOUT123     |  Sorry, we’ve just had a technical mishap. Please try again in a few minutes.                  |
+      |  has an unexpected status                |  1-1BADSTATUS      |  Sorry, we’ve just had a technical mishap. Please try again in a few minutes.                  |
       |  fusion thinks is invalid                |  VF123VALFAULT     |  entered your tracking number exactly     |
-      |  causes a generic system fault in fusion |  VF123SYSFAULT     |  Please check back soon.                  |
+      |  causes a generic system fault in fusion |  VF123SYSFAULT     |  Sorry, we’ve just had a technical mishap. Please try again in a few minutes.                  |
 
   # This scanario tests the mobile megamenu. This test needs to be the last test in the suite, as
   # in spite of resetting http request headers after the test, subsequent requests are still identified as

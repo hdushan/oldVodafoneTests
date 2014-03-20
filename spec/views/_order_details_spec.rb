@@ -134,8 +134,8 @@ describe '_order_details.haml' do
 
     it 'should display the estimated shipping date' do
       expect(page.find('.status-heading')).to have_content('On Backorder')
-      expect(page.find('.ship-date-heading')).to have_content('Expected Shipping Date')
-      page.should have_no_selector('.ship-date')
+      expect(page).to have_no_selector('.ship-date-heading')
+      expect(page).to have_no_selector('.ship-date')
       expect(page).to have_link('Expected delivery time')
     end
   end

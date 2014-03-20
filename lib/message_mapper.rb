@@ -3,15 +3,15 @@ class MessageMapper
   include StatusStrings
 
   STATUS_MESSAGE_MAP = {
-    TS_BACKORDERED => ['On backorder.', 'We’re currently waiting for more stock of your item to come in. We’ll get in touch the moment it arrives.'],
+    TS_BACKORDERED => ['On backorder.', 'We’re currently waiting for more stock to come in. We’ll get in touch the moment they arrive.'],
     TS_CANCELLED => ['Order cancelled.', 'You haven’t been charged for this order. If you need more info, call us on 1555 from your Vodafone mobile or 1300 650 410 from any other phone.'],
     TS_SHIPPED => ['Order shipped.', nil],
-    TS_PROGRESS => ['Order pending.', 'Check back soon for an update on your order status.'],
-    TS_PARTIALLY_SHIPPED => ['Partially shipped.', 'Part of your order is on its way. Check the status for each other item in your order below.'],
+    TS_PROGRESS => ['We’re working on your order.', 'Check back soon for an update on your order status.'],
+    TS_PARTIALLY_SHIPPED => ['Partially shipped.', 'Part of your order is on its way. Details for each item is listed below.'],
   }
 
   ITEM_STATUS_MESSAGE_MAP = {
-    IS_BACKORDERED => 'On backorder.',
+    IS_BACKORDERED => 'Item(s) on backorder.',
     IS_CANCELLED => 'Cancelled.',
     IS_SHIPPED => 'Shipped.',
     IS_PROGRESS => 'Pending.',
@@ -24,13 +24,13 @@ class MessageMapper
   }
 
   ERROR_MESSAGE_MAP = {
-    503 => 'Please check back soon.',
+    503 => 'Sorry, we’ve just had a technical mishap. Please try again in a few minutes.',
     400 => 'Please check that you’ve entered your tracking number exactly as it appears on your order receipt.',
     404 => 'Please check that you’ve entered your tracking number exactly as it appears on your order receipt.',
   }
 
   DEFAULT_ERROR_HEADING = 'Something didn’t go as planned.'
-  DEFAULT_ERROR_MESSAGE = 'Please check back soon.'
+  DEFAULT_ERROR_MESSAGE = 'Sorry, we’ve just had a technical mishap. Please try again in a few minutes.'
   SHIPPING_ESTIMATE_MESSAGE = 'Expected delivery time.'
 
   def error_message(error_code)
