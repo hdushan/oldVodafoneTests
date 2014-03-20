@@ -20,7 +20,9 @@ class FulfilmentOrder
   end
 
   def auspost_status_heading
-    tracking ? tracking['status'] : nil
+    return nil unless auspost_number
+    return @message_mapper.default_auspost_heading unless tracking && tracking['status']
+    tracking['status']
   end
 
   def auspost_number

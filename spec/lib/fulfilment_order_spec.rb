@@ -119,6 +119,7 @@ describe FulfilmentOrder do
       ) }
 
       it 'should flag an AusPost error' do
+        order.auspost_status_heading.should eq('It’s on the truck.')
         order.auspost_error?.should be_true
         order.auspost_business_exception?.should be_false
       end
@@ -134,6 +135,7 @@ describe FulfilmentOrder do
       ) }
 
       it 'should flag an AusPost business exception' do
+        order.auspost_status_heading.should eq('It’s on the truck.')
         order.auspost_error?.should be_false
         order.auspost_business_exception?.should be_true
       end
@@ -160,6 +162,7 @@ describe FulfilmentOrder do
     it 'should return false if no tracking events' do
       order = FulfilmentOrder.new( {'tracking' => {} })
       order.show_tracking_info?.should be_false
+      order.auspost_status_heading.should be_nil
     end
 
     it 'should return false if tracking events are empty' do

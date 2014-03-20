@@ -15,7 +15,7 @@ And(/^I should see a link to '(.*)' with text '(.*)'$/) do |href, text|
 end
 
 And(/^I should see the AusPost status message '(.*)'$/) do |message|
-  expect(page.find('.auspost-status-message')).to have_content(message)
+  expect(page.find('#auspost-msg')).to have_content(message)
 end
 
 Then(/^I should not see any shipping events$/) do

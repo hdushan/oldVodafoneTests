@@ -13,27 +13,27 @@ Feature: View Tracking Info
   Scenario: Show generic message when tracking info has business exception
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPERROR'
-    Then I should see no AusPost status for the order
+    Then I should see the AusPost status 'on the truck' for the order
     And I should see the AusPost status message 'Your order should arrive within 5 days'
 
   @javascript
   Scenario: Show generic message when tracking info has error
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPTIME'
-    Then I should see no AusPost status for the order
+    Then I should see the AusPost status 'on the truck' for the order
     And I should see the AusPost status message 'currently working with Australia Post'
 
   @javascript
   Scenario: Show generic message when tracking info has error
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPTIME' that has tracking info error
-    Then I should see no AusPost status for the order
+    Then I should see the AusPost status 'on the truck' for the order
     And I should not see any shipping events
 
   @javascript
-  Scenario: Show Vodafone status when tracking info has no status
+  Scenario: Show generic AusPost status when tracking info has no status
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPINTER' that has no AusPost status
     Then I should see the tracking status 'Order shipped.' for the order
-    And I should see no AusPost status for the order
+    And I should see the AusPost status 'on the truck' for the order
     And I should not see any shipping events

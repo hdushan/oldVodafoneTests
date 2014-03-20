@@ -31,6 +31,8 @@ class MessageMapper
 
   DEFAULT_ERROR_HEADING = 'Something didn’t go as planned.'
   DEFAULT_ERROR_MESSAGE = 'Sorry, we’ve just had a technical mishap. Please try again in a few minutes.'
+  DEFAULT_AUSPOST_HEADING = 'It’s on the truck.'
+
   SHIPPING_ESTIMATE_MESSAGE = 'Expected delivery time.'
 
   def error_message(error_code)
@@ -47,6 +49,10 @@ class MessageMapper
 
   def default_error_heading
     DEFAULT_ERROR_HEADING
+  end
+
+  def default_auspost_heading
+    DEFAULT_AUSPOST_HEADING
   end
 
   def status_message(status)

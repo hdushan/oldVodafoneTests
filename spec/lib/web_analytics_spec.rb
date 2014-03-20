@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 
+include StatusStrings
+
 describe WebAnalytics do
   let(:fulfilment_response) { double(FulfilmentResponse.class) }
 
@@ -52,8 +54,8 @@ describe WebAnalytics do
     context 'when fulfilment response has tracking information' do
       let(:response_body) do
         {'order_number' => 'VF123',
-         'orders' => [{'tracking_status' => TS_SHIPPED, 'tracking' => {'status' => 'Delivered'}},
-                      {'tracking_status' => TS_SHIPPED, 'tracking' => {'status' => 'In Transit'}}]}
+         'orders' => [{'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123', 'tracking' => {'status' => 'Delivered'}},
+                      {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP345', 'tracking' => {'status' => 'In Transit'}}]}
       end
 
 
