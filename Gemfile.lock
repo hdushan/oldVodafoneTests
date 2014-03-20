@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:VodafoneAustralia/app-version-gem.git
-  revision: 3bb669d28473b2dfd4beaa9b6206c6b48edf41c9
+  revision: 699cb685e24eafc6f1de0fbfedace70bc519852e
   specs:
-    app-version (0.1.3)
+    app-version (0.1.4)
 
 GIT
   remote: git@github.com:VodafoneAustralia/jmeter-runner-gem.git
