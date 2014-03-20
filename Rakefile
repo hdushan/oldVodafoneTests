@@ -13,6 +13,7 @@ task :ci do
   puts '\nRunning CI task.'
   ENV['RAILS_ENV'] = nil
   Rake::Task['tests'].invoke
+  Rake::Task['version:create'].invoke
   puts '\nDone.'
 end
 
