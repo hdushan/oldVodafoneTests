@@ -83,7 +83,7 @@ Then(/^I should see the right count, description and status for each item$/) do
   expected_statuses = ['Cancelled.',
     'Shipped.',
     'Cancelled.',
-    'Shipped.']
+    'On backorder.']
   actual_statuses = page.all('.item-status').map { |elem| elem.text }
   expect(actual_statuses).to match_array expected_statuses
 end

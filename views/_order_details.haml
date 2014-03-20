@@ -19,7 +19,7 @@
     -if locals[:details].estimated_shipping_date
       %p.ship-date= locals[:details].estimated_shipping_date
     -else
-      %p.ship-message= locals[:details].shipping_estimate_message
+      %a.ship-message{href: 'http://www.vodafone.com.au/tools/order-tracking'}= locals[:details].shipping_estimate_message
 
   = haml :_tracking_info, locals: { |
     tracking: locals[:details].tracking, auspost_error: locals[:details].auspost_error?, auspost_business_exception: locals[:details].auspost_business_exception? |

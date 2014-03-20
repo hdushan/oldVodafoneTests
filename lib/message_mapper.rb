@@ -31,7 +31,7 @@ class MessageMapper
 
   DEFAULT_ERROR_HEADING = 'Something didn’t go as planned.'
   DEFAULT_ERROR_MESSAGE = 'Please check back soon.'
-  SHIPPING_ESTIMATE_MESSAGE = 'We’re currently waiting for more stock of your item to come in.'
+  SHIPPING_ESTIMATE_MESSAGE = 'Expected delivery time.'
 
   def error_message(error_code)
     ERROR_MESSAGE_MAP[error_code] || DEFAULT_ERROR_MESSAGE

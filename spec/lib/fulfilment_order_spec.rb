@@ -70,7 +70,7 @@ describe FulfilmentOrder do
       end
 
       it 'should show a shipping estimate message' do
-        order.shipping_estimate_message.should match(/We.re currently waiting/)
+        order.shipping_estimate_message.should match(/Expected delivery time./)
       end
     end
 

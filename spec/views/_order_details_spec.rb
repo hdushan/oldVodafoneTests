@@ -124,19 +124,19 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
-        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Your order should arrive soon', auspost_status_heading: nil,
+        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
         items: [{item_quantity: '1', description: 'phone'}],
         show_tracking_info?: nil
       )
       render("/views/_order_details.haml", :details => @details)
-      #puts response
+      puts response
     end
 
     it 'should display the estimated shipping date' do
       expect(page.find('.status-heading')).to have_content('On Backorder')
       expect(page.find('.ship-date-heading')).to have_content('Expected Shipping Date')
       page.should have_no_selector('.ship-date')
-      expect(page.find('.ship-message')).to have_content('Your order should arrive soon')
+      expect(page).to have_link('Expected delivery time')
     end
   end
 

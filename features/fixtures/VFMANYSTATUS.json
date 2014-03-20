@@ -21,11 +21,11 @@
             {
                 "description": "iPhone 5C 16GB Grey",
                 "item_quantity": "4",
-                "status": "SHIPPED"
+                "status": "BACKORDERED"
             }
         ],
         "ordered_date": "2013-11-20",
-        "estimated_shipping_date": "2014-12-12",
+        "estimated_shipping_date": "2014-11-11",
         "tracking": {
             "international": false,
             "status": "Transferring",
@@ -51,8 +51,8 @@
             ]
         }
     }
-], "_links": {
+], "order_number": "VFMANYSTATUS", "_links": {
     "self": {
-        "href": "http://fulfilment.qa.np.syd.services.vodafone.com.au/v1/order/VFMANYSTATUS"
+        "href": "http://localhost:9394/v1/order/VFMANYSTATUS"
     }
 }}
