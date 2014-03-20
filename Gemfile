@@ -15,6 +15,7 @@ gem 'unicorn'
 gem 'useragent'
 gem 'rack-timeout', '=0.1.0beta3'
 gem 'redis-sinatra'
+gem 'git'
 gem 'app-version', git: 'git@github.com:VodafoneAustralia/app-version-gem.git'
 
 group :development, :test do

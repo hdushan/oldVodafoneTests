@@ -66,6 +66,7 @@ GEM
     find_a_port (1.0.1)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    git (1.2.6)
     haml (4.0.5)
       tilt
     httparty (0.12.0)
@@ -202,6 +203,7 @@ DEPENDENCIES
   capybara
   cucumber
   dotenv-rails
+  git
   haml
   httparty
   hyperclient
