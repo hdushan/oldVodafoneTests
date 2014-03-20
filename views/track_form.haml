@@ -1,27 +1,31 @@
 %article
-  %h1 Trace your order.
+  %h1 Vodafone order tracking.
 
   %form#track-form.form{ action: '/tracking', method: 'post' }
     %fieldset
-      %label.tracking_label{:for => 'tracking_id'} Tracking number
+      %label.tracking_label{:for => 'tracking_id'} Enter the tracking number from your order receipt to see its status.
       .input-wrapper
         %input#tracking_id{:type => 'text', :name => 'tracking_id', :autofocus => true, :value => @order_id}
 
       - if @error
         #server-error-msg.error-msg-block
-          %img.glyph.error{src: '/tracking/images/empty.png'}
+          %img.glyph-heading.error{src: '/tracking/images/empty.png'}
+          %h2.error-heading
+            =@error_heading
           .error-msg
             =@error
 
       #input-validation-msg.error-msg-block.hidden
-        %img.glyph.error{src: '/tracking/images/empty.png'}
+        %img.glyph-heading.error{src: '/tracking/images/empty.png'}
+        %h2.error-heading
+          =@error_heading
         .error-msg
           =@validation_error_msg
 
     .input-wrapper
       %button.trace.tnt-button#trace(type='submit')
         %span.strong
-          Trace
+          Track
         your order
 
   = haml :_loading_spinner

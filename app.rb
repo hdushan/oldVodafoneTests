@@ -29,6 +29,7 @@ class App < Sinatra::Base
     @fulfilment_client = fulfilment_client
     @mega_menu_client = mega_menu_client || MegaMenuAPIClient.new
     @app_hostname_list = app_hostname_list
+    @messages = MessageMapper.new
   end
 
   before do
@@ -63,7 +64,8 @@ class App < Sinatra::Base
   get '/tracking' do
     mega_menu
     @analytics_page_name = 'home'
-    @validation_error_msg = MessageMapper.new.validation_error_message
+    @validation_error_msg = @messages.error_message(400)
+    @error_heading = @messages.error_heading(400)
     haml :track_form
   end
 
@@ -89,6 +91,7 @@ class App < Sinatra::Base
     if fulfilment_response.has_error?
       logger.error("Fulfilment Response: #{fulfilment_response}")
       @error = fulfilment_response.error_message
+      @error_heading = fulfilment_response.error_heading
       @order_id = params[:id]
       halt fulfilment_response.code, haml(:track_form)
     else
@@ -100,7 +103,8 @@ class App < Sinatra::Base
     exception = env['sinatra.error']
     logger.error("error=#{exception.message}")
     logger.error(exception.backtrace.join("\n"))
-    @error = MessageMapper::DEFAULT_ERROR_MESSAGE
+    @error = @messages.default_error_message
+    @error_heading = @messages.default_error_heading
     @analytics_page_name = 'result'
     @analytics_data = WebAnalytics.new(params[:id], nil).error_json
     haml(:track_form)

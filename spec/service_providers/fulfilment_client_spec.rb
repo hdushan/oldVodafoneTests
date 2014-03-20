@@ -45,7 +45,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('VF123NOTFOUND', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
+      expect(response.error_message).to match(/check that you’ve entered your tracking number exactly/)
     end
   end
 
@@ -159,7 +159,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('invalid', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to match /The Order Number you have entered is not in a valid format./i
+      expect(response.error_message).to match /check that you’ve entered your tracking number exactly/i
     end
   end
 
@@ -178,7 +178,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to match /Service Unavailable/
+      expect(response.error_message).to match /Please check back soon./
     end
   end
 
@@ -197,7 +197,7 @@ describe FulfilmentClient, :pact => true do
       response = fulfilment_client.get_order_details('VF503', '1.2.3.4')
 
       expect(response).to have_error
-      expect(response.error_message).to eq 'There was a problem retrieving your order.'
+      expect(response.error_message).to match /Please check back soon./
     end
   end
 end

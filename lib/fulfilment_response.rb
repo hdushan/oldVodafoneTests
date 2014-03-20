@@ -32,6 +32,10 @@ class FulfilmentResponse
     @message_mapper.error_message(@code) if has_error?
   end
 
+  def error_heading
+    @message_mapper.error_heading(@code) if has_error?
+  end
+
   def to_s
      "HTTP response code: #{@code}\n
       Body: '#{@body}\n

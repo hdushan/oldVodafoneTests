@@ -45,7 +45,7 @@ describe FulfilmentClient do
         response = fulfilment_client.get_order_details('1234', '1.2.3.4')
 
         expect(response.has_error?).to eq(true)
-        expect(response.error_message).to eq('That order ID was not found. Please, check that you typed it correctly.')
+        expect(response.error_message).to match(/check that you.ve entered your tracking number exactly/)
       end
     end
 
@@ -57,7 +57,7 @@ describe FulfilmentClient do
         response = fulfilment_client.get_order_details('1234', '1.2.3.4')
 
         expect(response.has_error?).to eq(false)
-        expect(response.orders.first.status_message).to match(/cancelled/)
+        expect(response.orders.first.status_message).to match(/You haven.t been charged for this order/)
       end
     end
 

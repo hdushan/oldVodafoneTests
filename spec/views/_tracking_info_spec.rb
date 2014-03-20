@@ -25,7 +25,7 @@ describe '_tracking_info.haml' do
 
     it 'should display AusPost status message' do
       page.should have_selector('.auspost-status-message')
-      page.find('.auspost-status-message').should have_content('There is an issue with the Australia Post server')
+      page.find('.auspost-status-message').should have_content('We’re currently working with Australia Post')
     end
   end
 
@@ -38,7 +38,7 @@ describe '_tracking_info.haml' do
     it 'should display AusPost status message' do
       page.should have_selector('.auspost-status-message')
       #puts response
-      page.find('.auspost-status-message').should have_content("Your delivery details can't be retrieved")
+      page.find('.auspost-status-message').should have_content("Your order should arrive within")
     end
   end
 

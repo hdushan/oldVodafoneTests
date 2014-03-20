@@ -7,7 +7,7 @@ describe FulfilmentOrder do
   describe '#status_message' do
     it 'should map the status to a user friendly message' do
       order = FulfilmentOrder.new({'tracking_status' => TS_CANCELLED})
-      order.status_message.should match /Your order has been cancelled/
+      order.status_message.should match /You haven.t been charged for this order/
     end
   end
 
@@ -15,7 +15,7 @@ describe FulfilmentOrder do
   describe '#status_heading' do
     it 'should map the status to a user friendly header' do
       order = FulfilmentOrder.new({'tracking_status' => TS_PROGRESS})
-      order.status_heading.should == 'In Progress'
+      order.status_heading.should == 'Order pending.'
     end
   end
 
@@ -25,8 +25,8 @@ describe FulfilmentOrder do
         {'description' => 'iPhone', 'item_quantity' => '1', 'status' => IS_SHIPPED},
         {'description' => 'sim', 'item_quantity' => '2', 'status' => IS_CANCELLED}
       ]})
-      order.items.first.should == {item_quantity: '1', description: 'iPhone', status: 'Shipped'}
-      order.items.last.should == {item_quantity: '2', description: 'sim', status: 'Cancelled'}
+      order.items.first.should == {item_quantity: '1', description: 'iPhone', status: 'Shipped.'}
+      order.items.last.should == {item_quantity: '2', description: 'sim', status: 'Cancelled.'}
     end
 
     it 'should return empty array if there are no shipping line items' do
@@ -70,7 +70,7 @@ describe FulfilmentOrder do
       end
 
       it 'should show a shipping estimate message' do
-        order.shipping_estimate_message.should eq('Your order will arrive soon')
+        order.shipping_estimate_message.should match(/We.re currently waiting/)
       end
     end
 

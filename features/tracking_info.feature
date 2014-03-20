@@ -14,14 +14,14 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPERROR'
     Then I should see no AusPost status for the order
-    And I should see the AusPost status message 'Your delivery details can't be retrieved.'
+    And I should see the AusPost status message 'Your order should arrive within 5 days'
 
   @javascript
   Scenario: Show generic message when tracking info has error
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPTIME'
     Then I should see no AusPost status for the order
-    And I should see the AusPost status message 'There is an issue with the Australia Post server'
+    And I should see the AusPost status message 'currently working with Australia Post'
 
   @javascript
   Scenario: Show generic message when tracking info has error
@@ -34,6 +34,6 @@ Feature: View Tracking Info
   Scenario: Show Vodafone status when tracking info has no status
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPINTER' that has no AusPost status
-    Then I should see the tracking status 'Order Shipped' for the order
+    Then I should see the tracking status 'Order shipped.' for the order
     And I should see no AusPost status for the order
     And I should not see any shipping events

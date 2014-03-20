@@ -45,12 +45,24 @@ describe FulfilmentResponse do
   describe '#error_message' do
     it 'should return generic error message if 503 error occurred' do
       response = FulfilmentResponse.new(503, 'this could be anything')
-      response.error_message.should == 'Service Unavailable. Please, try again later.'
+      response.error_message.should == 'Please check back soon.'
     end
 
     it 'should return nil if no error occurred' do
       response = FulfilmentResponse.new(200, {'tracking_status' => TS_PROGRESS})
       response.error_message.should be_nil
+    end
+  end
+
+  describe '#error_heading' do
+    it 'should return generic error message if 503 error occurred' do
+      response = FulfilmentResponse.new(503, 'this could be anything')
+      response.error_heading.should == 'Something didn’t go as planned.'
+    end
+
+    it 'should return nil if no error occurred' do
+      response = FulfilmentResponse.new(200, {'tracking_status' => TS_PROGRESS})
+      response.error_heading.should be_nil
     end
   end
 

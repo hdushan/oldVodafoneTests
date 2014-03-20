@@ -72,7 +72,7 @@ describe "Track & Trace App" do
 
         its(:status) { should eq 404 }
         its(:body) { should have_tag('div.error-msg') }
-        its(:body) { should match(/That order ID was not found. Please, check that you typed it correctly./) }
+        its(:body) { should match(/entered your tracking number exactly/) }
         its(:body) { should have_tag("#tracking_id[value='abc']") }
       end
 
@@ -89,7 +89,8 @@ describe "Track & Trace App" do
 
       its(:status) { should eq 500 }
       its(:body) { should have_tag('div.error-msg') }
-      its(:body) { should match(/There was a problem retrieving your order./) }
+      its(:body) { should match(/Something didn.t go as planned/) }
+      its(:body) { should match(/Please check back soon/) }
     end
   end
 end

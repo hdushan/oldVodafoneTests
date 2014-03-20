@@ -80,10 +80,10 @@ Then(/^I should see the right count, description and status for each item$/) do
   expected_counts = ['1 x', '2 x', '3 x', "4 x"]
   actual_counts = page.all('.item-quantity').map { |elem| elem.text }
   expect(actual_counts).to match_array expected_counts
-  expected_statuses = ['Cancelled',
-    'Shipped',
-    'Cancelled',
-    "Shipped"]
+  expected_statuses = ['Cancelled.',
+    'Shipped.',
+    'Cancelled.',
+    'Shipped.']
   actual_statuses = page.all('.item-status').map { |elem| elem.text }
   expect(actual_statuses).to match_array expected_statuses
 end
@@ -140,5 +140,5 @@ def submit_track_form_with order_id
   within("#track-form") do
     fill_in 'tracking_id', :with => order_id
   end
-  click_button 'Trace your order'
+  click_button 'Track your order'
 end
