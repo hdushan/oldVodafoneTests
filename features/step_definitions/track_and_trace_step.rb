@@ -119,6 +119,7 @@ And(/^I should see the message '(.*)'$/) do |message|
 end
 
 Then(/^I should see a '(.*)' error message$/) do |error_message|
+  patiently_wait_until(60) { page.has_content?(error_message) }
   expect(page).to have_content(error_message)
   steps %Q{
     Then I should see the Megamenu header

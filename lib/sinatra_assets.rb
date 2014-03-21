@@ -38,7 +38,7 @@ module Assets
           '/tracking/css/ie8.css', '/tracking/css/ieloader.css'
         ]
 
-        js_compression :closure # :jsmin | :closure | :uglify
+        js_compression :jsmin # :jsmin | :closure | :uglify
         css_compression :sass # :simple | :sass | :yui | :sqwish
       }
     end
