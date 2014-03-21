@@ -147,18 +147,9 @@
           <stringProp name="variableNames">ORDERNUM</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Timeout/Internal Error" enabled="true">
           <collectionProp name="Asserion.test_strings">
-            <stringProp name="-1949977881">problem retrieving your order</stringProp>
-          </collectionProp>
-          <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-          <boolProp name="Assertion.assume_success">false</boolProp>
-          <intProp name="Assertion.test_type">6</intProp>
-        </ResponseAssertion>
-        <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Timeout" enabled="true">
-          <collectionProp name="Asserion.test_strings">
-            <stringProp name="-1609149659">Service Unavailable</stringProp>
+            <stringProp name="501501699">technical mishap</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
           <boolProp name="Assertion.assume_success">false</boolProp>
@@ -318,7 +309,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
           <hashTree>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Found" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="-188109835">not found</stringProp>
+                <stringProp name="-1810157431">Invalid tracking number</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
@@ -360,18 +351,9 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
         </elementProp>
       </kg.apc.jmeter.threads.SteppingThreadGroup>
       <hashTree>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Internal error" enabled="true">
+        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Timeout/Internal Error" enabled="true">
           <collectionProp name="Asserion.test_strings">
-            <stringProp name="-1949977881">problem retrieving your order</stringProp>
-          </collectionProp>
-          <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-          <boolProp name="Assertion.assume_success">false</boolProp>
-          <intProp name="Assertion.test_type">6</intProp>
-        </ResponseAssertion>
-        <hashTree/>
-        <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Global Response Assertion - Timeout" enabled="true">
-          <collectionProp name="Asserion.test_strings">
-            <stringProp name="-1609149659">Service Unavailable</stringProp>
+            <stringProp name="501501699">technical mishap</stringProp>
           </collectionProp>
           <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
           <boolProp name="Assertion.assume_success">false</boolProp>
@@ -540,7 +522,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
             <hashTree/>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion - Order Not Found" enabled="true">
               <collectionProp name="Asserion.test_strings">
-                <stringProp name="-188109835">not found</stringProp>
+                <stringProp name="-1810157431">Invalid tracking number</stringProp>
               </collectionProp>
               <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
               <boolProp name="Assertion.assume_success">false</boolProp>
