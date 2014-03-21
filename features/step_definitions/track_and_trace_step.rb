@@ -43,6 +43,7 @@ When(/^I search for the status of a valid order with id '(.*)'/) do |order_id|
 end
 
 Then(/^I should see the tracking status '(.*)' for the order$/) do |status_header|
+  patiently_wait_until{page.has_css?('#vodafone-status')}
   expect(page.find('#vodafone-status')).to have_content(status_header)
   steps %Q{
     Then I should see the Megamenu header

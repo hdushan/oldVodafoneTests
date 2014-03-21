@@ -1,4 +1,5 @@
 Then(/^I should see the AusPost status '(.*)' for the order$/) do |status_header|
+  patiently_wait_until(15) { page.has_css?('#auspost-status') }
   expect(page.find('#auspost-status')).to have_content(status_header)
 end
 
