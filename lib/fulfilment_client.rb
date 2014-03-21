@@ -10,8 +10,9 @@ class FulfilmentClient
 
   def get_order_details(order_id, ip_address)
     raise ArgumentError, 'order_id empty' if order_id.empty?
-
+    @logger.info "[trackandtrace] trackShippingStatus=#{order_id}"
     http_response = request_order_status(order_id, ip_address)
+    @logger.info "[trackandtrace] trackShippingStatus=#{order_id} complete"
     FulfilmentResponse.new(http_response.status, http_response.body)
   end
 
