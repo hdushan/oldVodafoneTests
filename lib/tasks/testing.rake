@@ -9,6 +9,12 @@ def safe_load(name)
   end
 end
 
+def run_load_test(server_protocol, server_address, server_port, server_url, loadtest_path, loadtest_result_path, loadtest_result_format)
+  warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
+  testRunner = JmeterRunnerGem::Test.new(server_address, server_port, loadtest_path, loadtest_result_path, loadtest_result_format, warmup_url)
+  testRunner.start()
+end
+
 safe_load('spec') do
   # rspec
   require 'rspec/core/rake_task'
@@ -35,83 +41,47 @@ end
 safe_load('jmeter') do
   require 'jmeter-runner-gem'
 
-  desc "Start a server (if in local mode) and run the JMeter driver against it."
-  task :benchmark do
-    if ENV['RAILS_ENV'] == 'paas-qa'
-      puts "Running on PAAS-QA"
-      server_protocol = "http"
-      server_address = "trackandtrace.qa.np.syd.services.vodafone.com.au"
-      server_port = "80"
-      server_url = "tracking"
-      warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
-      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tnt.jmx", "tnt_new.jtl", "xml", warmup_url)
-      testRunner.start()
-    else
-      puts "Running on LOCAL"
-      server_protocol = "http"
-      server_address = "localhost"
-      server_port = "9394"
-      server_url = "tracking"
-      warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
-      testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tnt.jmx", "tnt_new.jtl", "xml", warmup_url,
-      true, 'bundle exec rackup', "server_log", "server_error", )
-      testRunner.start()
-    end
-  end
   task :stress do
     puts "Running Stress Test (Peak Load)"
-    server_protocol = "http"
-    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
-    server_port = "80"
-    server_url = "tracking"
-    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
     time_now=Time.now
-    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_stress.jmx", "tnt_stress_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
-    testRunner.start()
+    loadtest_script = "performance/tntLoadTest_stress.jmx"
+    result_file = "tnt_stress_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "trackandtrace.load-test.np.syd.services.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
   end
   task :stressloose do
     puts "Running Stress Test (Peak Load) in Loose validation mode"
-    server_protocol = "http"
-    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
-    server_port = "80"
-    server_url = "tracking"
-    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
     time_now=Time.now
-    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_stress_loose.jmx", "tnt_stress_loose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
-    testRunner.start()
+    loadtest_script = "performance/tntLoadTest_stress_loose.jmx"
+    result_file = "tnt_stress_loose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "trackandtrace.load-test.np.syd.services.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")   
   end
   task :normalload do
     puts "Running Load Test (Normal Load)"
-    server_protocol = "http"
-    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
-    server_port = "80"
-    server_url = "tracking"
-    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
     time_now=Time.now
-    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_normal.jmx", "tnt_normal_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
-    testRunner.start()
+    loadtest_script = "performance/tntLoadTest_normal.jmx"
+    result_file = "tnt_normal_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "trackandtrace.load-test.np.syd.services.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
   end
   task :normalloadloose do
     puts "Running Load Test (Normal Load) in Loose validation mode"
-    server_protocol = "http"
-    server_address = "trackandtrace.load-test.np.syd.services.vodafone.com.au"
-    server_port = "80"
-    server_url = "tracking"
-    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
     time_now=Time.now
-    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_normal_loose.jmx", "tnt_normal_loose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
-    testRunner.start()
+    loadtest_script = "performance/tntLoadTest_normal_loose.jmx"
+    result_file = "tnt_normal_loose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "trackandtrace.load-test.np.syd.services.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
   end
   task :prodstress do
-    puts "Running on PROD"
-    server_protocol = "http"
-    server_address = "trackandtrace.prod.paas.services.vodafone.com.au"
-    server_port = "80"
-    server_url = "tracking"
-    warmup_url = server_protocol + "://" + server_address + ":" + server_port + "/" + server_url
+    puts "Running on PROD (Peak Load)"
     time_now=Time.now
-    testRunner = JmeterRunnerGem::Test.new(server_address, server_port, "performance/tntLoadTest_prodstress.jmx", "tnt_prodstress_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl", "xml", warmup_url)
-    testRunner.start()
+    loadtest_script = "performance/tntLoadTest_prodstress.jmx"
+    result_file = "tnt_prodstress_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "www.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
+  end
+  task :prodstressloose do
+    puts "Running on PROD (Peak Load) in Loose validation mode"
+    time_now=Time.now
+    loadtest_script = "performance/tntLoadTest_prodstress_loose.jmx"
+    result_file = "tnt_prodstressloose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "www.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
   end
 
 end
