@@ -19,18 +19,16 @@ class FulfilmentOrder
     @message_mapper.status_heading(tracking_status)
   end
 
-  def auspost_status_heading
-    return nil unless auspost_number
-    return @message_mapper.default_auspost_heading unless tracking && tracking['status']
-    tracking['status']
+  def shipments
+    @shipments ||= (tracking['articles'] || []).map { |article| Shipment.new(article) }
   end
 
   def auspost_number
     @body['consignment_number']
   end
 
-  def tracking
-    @body['tracking']
+  def international?
+    shipments.any? { |shipment| shipment.international? }
   end
 
   def items
@@ -65,13 +63,15 @@ class FulfilmentOrder
   end
 
   def has_tracking_events?
-    tracking['events'] && tracking['events'].any?
+    shipments.map { |shipment| shipment.tracking['events'] }.any?
   end
 
   def has_auspost_issue?
     auspost_business_exception? || auspost_error?
   end
 
-
-
+private
+  def tracking
+    @body['tracking'] || {}
+  end
 end

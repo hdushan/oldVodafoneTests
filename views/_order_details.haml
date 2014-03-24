@@ -5,15 +5,6 @@
   -if locals[:details].status_message
     %p.status-message= locals[:details].status_message
 
-  -if locals[:details].auspost_status_heading
-    %img.glyph-heading.truck{src: '/tracking/images/empty.png'}
-    %h2#auspost-status.status-heading= locals[:details].auspost_status_heading
-    %p.auspost-status-message
-      %a.auspost-link{href: "http://auspost.com.au/track/track.html?id=#{locals[:details].auspost_number}"}
-        AusPost tracking no.
-        %span#auspost-number= locals[:details].auspost_number
-
-
   -if locals[:details].is_on_backorder?
     -if locals[:details].estimated_shipping_date
       %h3.ship-date-heading Expected Shipping Date
@@ -22,9 +13,18 @@
       .ship-message
         %a{href: 'http://www.vodafone.com.au/tools/order-tracking'}= locals[:details].shipping_estimate_message
 
-  = haml :_tracking_info, locals: { |
-    tracking: locals[:details].tracking, auspost_error: locals[:details].auspost_error?, auspost_business_exception: locals[:details].auspost_business_exception? |
-    }  if locals[:details].show_tracking_info?  |
+  -if locals[:details].has_auspost_issue? || locals[:details].international?
+    = haml :_tracking_status, locals: { status_message: "It's on the truck", auspost_number: locals[:details].auspost_number }
+    %p#auspost-msg.auspost-status-message
+      -if locals[:details].auspost_error?
+        We’re currently working with Australia Post to update the location of your order. Please check back soon.
+      -elsif locals[:details].auspost_business_exception? || locals[:details].international?
+        Your order should arrive within 5 days.  If you need assistance, call us on 1555 from your Vodafone mobile or 1300 650 410 from any other phone.
+
+  -else
+    - locals[:details].shipments.each do |shipment|
+      = haml :_tracking_status, locals: { status_message: shipment.auspost_status_heading, auspost_number: locals[:details].auspost_number }
+      = haml :_tracking_info, locals: { tracking: shipment.tracking }  if locals[:details].show_tracking_info?
 
   -unless locals[:details].items.empty?
     %h3.order-details-heading Order Details

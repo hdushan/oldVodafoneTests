@@ -17,31 +17,6 @@ describe '_tracking_info.haml' do
     end
   end
 
-  context 'has AusPost error in tracking information' do
-    let(:auspost_status_message) { 'The AusPost server is currently unavailable' }
-    before do
-      render("/views/_tracking_info.haml", :tracking => nil, :auspost_error => true, :auspost_business_exception => false)
-    end
-
-    it 'should display AusPost status message' do
-      page.should have_selector('.auspost-status-message')
-      page.find('.auspost-status-message').should have_content('We’re currently working with Australia Post')
-    end
-  end
-
-  context 'has AusPost business exception in tracking information' do
-    let(:auspost_status_message) { 'The AusPost server is currently unavailable' }
-    before do
-      render("/views/_tracking_info.haml", :tracking => nil, :auspost_error => false, :auspost_business_exception => true)
-    end
-
-    it 'should display AusPost status message' do
-      page.should have_selector('.auspost-status-message')
-      #puts response
-      page.find('.auspost-status-message').should have_content("Your order should arrive within")
-    end
-  end
-
   context 'has three events in tracking information' do
     let(:tracking_info) { {'international' => false, 'status' => 'Delivered', 'events' => [
         {'date_time' => '21/06/2010 12=>21PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},

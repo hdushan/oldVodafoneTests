@@ -54,10 +54,10 @@ describe WebAnalytics do
     context 'when fulfilment response has tracking information' do
       let(:response_body) do
         {'order_number' => 'VF123',
-         'orders' => [{'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123', 'tracking' => {'status' => 'Delivered'}},
-                      {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP345', 'tracking' => {'status' => 'In Transit'}}]}
+         'orders' => [{'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123', 'tracking' => {'articles' => [ {'status' => 'Delivered'}]}},
+                      {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP345', 'tracking' => {'articles' => [ {'status' => 'In Transit'}]}}
+                     ]}
       end
-
 
       it 'should return tracking statuses separated from response statuses with colon' do
         result = WebAnalytics.new('VF123', fulfilment_response).to_json
@@ -65,6 +65,25 @@ describe WebAnalytics do
           expect(result).to eq(['tnt', { 'trackingID' => 'VF123',
                                          'orderStatus' => 'shipped,shipped',
                                          'auspostStatus' => 'delivered,in_transit'}])
+      end
+    end
+
+    context 'when fulfilment response has tracking information and its multiple articles' do
+      let(:response_body) do
+        {'order_number' => 'VF123',
+         'orders' => [{'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123', 'tracking' => {'articles' => [
+             {'status' => 'Delivered'}, {'status' => 'Picked up by driver'}]}},
+                      {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP345', 'tracking' => {'articles' => [
+                          {'status' => 'In Transit'}]}}
+         ]}
+      end
+
+      it 'should return tracking statuses separated from response statuses with colon' do
+        result = WebAnalytics.new('VF123', fulfilment_response).to_json
+
+        expect(result).to eq(['tnt', { 'trackingID' => 'VF123',
+                                       'orderStatus' => 'shipped,shipped',
+                                       'auspostStatus' => 'delivered,picked_up_by_driver,in_transit'}])
       end
     end
   end

@@ -10,9 +10,11 @@
             }
         ],
         "tracking": {
-            "international": true,
-            "status": null,
-            "events": []
+            "articles": [ {
+                "international": true,
+                "status": null,
+                "events": []
+            }]
         }
     }
 ],

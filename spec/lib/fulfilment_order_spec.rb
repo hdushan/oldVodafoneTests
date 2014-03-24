@@ -37,10 +37,11 @@ describe FulfilmentOrder do
 
   describe 'backorders' do
     context 'when the estimated shipping date is present' do
-      let(:order) { FulfilmentOrder.new({'tracking_status' => TS_BACKORDERED,
+      let(:order) do
+        FulfilmentOrder.new({'tracking_status' => TS_BACKORDERED,
         'estimated_shipping_date' => '2014-07-13',
         'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
-      }
+      end
 
       it 'should be on backorder' do
         order.is_on_backorder?.should be_true
@@ -53,13 +54,13 @@ describe FulfilmentOrder do
       it 'should not show a shipping estimate message' do
         order.shipping_estimate_message.should be_nil
       end
-
     end
 
     context 'when the estimated shipping date is missing' do
-      let(:order) { FulfilmentOrder.new({'tracking_status' => TS_BACKORDERED,
-        'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
-      }
+      let(:order) do
+        FulfilmentOrder.new({'tracking_status' => TS_BACKORDERED,
+                              'items' => [{'description' => 'iPhone', 'item_quantity' => '1'}]})
+      end
 
       it 'should be on backorder' do
         order.is_on_backorder?.should be_true
@@ -79,27 +80,29 @@ describe FulfilmentOrder do
   describe '#tracking' do
 
     context 'when tracking data is complete and valid' do
-      let(:order) { FulfilmentOrder.new(
-        {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
-          'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
-          'ordered_date' => '2013-11-20',
-          'tracking' => {'international' => false, 'status' => 'Delivered',
-            'events' => [
-              {'date_time' => '21/06/2010 12=>21PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
-              {'date_time' => '21/06/2010 12=>12PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
-              {'date_time' => '10/12/2008 12=>12PM', 'location' => 'PROP - PROPERTY DEVELOPMENTS', 'description' => 'Delivered', 'signer' => 'A POST'}
-            ]}, '_links' => {'self' => {'href' => 'http=>//192.168.1.102=>9393/v1/order/VF123FOUND'}}}
-      ) }
+      let(:order) do
+        FulfilmentOrder.new(
+          {'tracking_status' => TS_SHIPPED, 'consignment_number' => 'AP123FOUND',
+            'items' => [{'description' => 'iPhone 5C 16GB White', 'item_quantity' => '1'}],
+            'ordered_date' => '2013-11-20',
+            'tracking' => { 'articles' => [{'international' => false, 'status' => 'Delivered',
+              'events' => [
+                {'date_time' => '21/06/2010 12=>21PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
+                {'date_time' => '21/06/2010 12=>12PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
+                {'date_time' => '10/12/2008 12=>12PM', 'location' => 'PROP - PROPERTY DEVELOPMENTS', 'description' => 'Delivered', 'signer' => 'A POST'}
+              ]}]}, '_links' => {'self' => {'href' => 'http=>//192.168.1.102:9393/v1/order/VF123FOUND'}}}
+          )
+      end
 
       it 'should return the tracking details' do
-        order.tracking['international'].should be_false
-        order.tracking['status'].should eq('Delivered')
-        order.tracking['events'].size.should be(3)
-        order.tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
+        order.shipments[0].tracking['international'].should be_false
+        order.shipments[0].tracking['status'].should eq('Delivered')
+        order.shipments[0].tracking['events'].should have(3).items
+        order.shipments[0].tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
       end
 
       it 'should show the AusPost tracking status and consignment number' do
-        order.auspost_status_heading.should eq('Delivered')
+        order.shipments[0].auspost_status_heading.should eq('Delivered')
         order.auspost_number.should eq('AP123FOUND')
       end
 
@@ -119,7 +122,6 @@ describe FulfilmentOrder do
       ) }
 
       it 'should flag an AusPost error' do
-        order.auspost_status_heading.should eq('It’s on the truck.')
         order.auspost_error?.should be_true
         order.auspost_business_exception?.should be_false
       end
@@ -135,7 +137,6 @@ describe FulfilmentOrder do
       ) }
 
       it 'should flag an AusPost business exception' do
-        order.auspost_status_heading.should eq('It’s on the truck.')
         order.auspost_error?.should be_false
         order.auspost_business_exception?.should be_true
       end
@@ -145,7 +146,7 @@ describe FulfilmentOrder do
   describe '#show_tracking_info?' do
 
     it 'should return true if has tracking events' do
-      order = FulfilmentOrder.new( {'tracking' => {'events' => ['kittens']} })
+      order = FulfilmentOrder.new( {'tracking' => {'articles' => [ {'events' => ['kittens']}]}})
       order.show_tracking_info?.should be_true
     end
 
@@ -162,7 +163,6 @@ describe FulfilmentOrder do
     it 'should return false if no tracking events' do
       order = FulfilmentOrder.new( {'tracking' => {} })
       order.show_tracking_info?.should be_false
-      order.auspost_status_heading.should be_nil
     end
 
     it 'should return false if tracking events are empty' do
@@ -170,11 +170,14 @@ describe FulfilmentOrder do
       order.show_tracking_info?.should be_false
     end
 
+    it 'should return false if articles are empty' do
+      order = FulfilmentOrder.new( {'tracking' => {'articles' => []} })
+      order.show_tracking_info?.should be_false
+    end
+
     it 'should return false if tracking is nil' do
       order = FulfilmentOrder.new( {})
       order.show_tracking_info?.should be_false
     end
-
   end
-
 end

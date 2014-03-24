@@ -7,6 +7,7 @@ describe '_order_details.haml' do
       @details = double(FulfilmentOrder,
         status_heading: 'In Progress', status_message: 'Your order is in progress.',
         estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        has_auspost_issue?: false, shipments: [],  international?: false,
         items: [
           {item_quantity: "1", description: 'Samsung Galaxy'},
           {item_quantity: "2", description: 'iPhone 5C'},
@@ -25,11 +26,11 @@ describe '_order_details.haml' do
 
     it 'should have order details and order detail heading' do
       items = page.all('.item')
-      expect(items.size).to be(3)
+      expect(items).to have(3).items
       expect(items.first).to have_content('Samsung Galaxy')
       expect(items[1]).to have_content('iPhone 5C')
       quantities = page.all('.item-quantity')
-      expect(quantities.size).to be(3)
+      expect(quantities).to have(3).items
       expect(quantities.first).to have_content('1 x')
       expect(quantities[1]).to have_content('2 x')
       expect(page.find('.order-details-heading')).to have_content('Order Details')
@@ -51,6 +52,7 @@ describe '_order_details.haml' do
       @details = double(FulfilmentOrder,
         order_number: 'VF123MULTILINES', status_heading: 'In Progress', status_message: 'Your order is in progress.',
         estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        has_auspost_issue?: false, shipments: [], international?: false,
         items: [
           {item_quantity: "1", description: 'Samsung Galaxy', status: 'Cancelled'},
           {item_quantity: "2", description: 'iPhone 5C', status: 'Shipped'},
@@ -73,7 +75,6 @@ describe '_order_details.haml' do
     it 'should not show the auspost status' do
       page.should have_no_selector('#auspost-status')
     end
-
   end
 
   context 'an In Progress order with no items' do
@@ -82,6 +83,7 @@ describe '_order_details.haml' do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'In Progress', status_message: 'Your order is in progress.',
         estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        has_auspost_issue?: false, shipments: [], international?: false,
         items: [],
         show_tracking_info?: nil
       )
@@ -105,8 +107,8 @@ describe '_order_details.haml' do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
         estimated_shipping_date: '19 March 2014', is_on_backorder?: true, shipping_estimate_message: nil, auspost_status_heading: nil,
-        items: [{item_quantity: '1', description: 'phone'}],
-        show_tracking_info?: nil
+        items: [{item_quantity: '1', description: 'phone'}], international?: false,
+        show_tracking_info?: nil, has_auspost_issue?: false, shipments: []
       )
       render("/views/_order_details.haml", :details => @details)
       #puts response
@@ -125,11 +127,11 @@ describe '_order_details.haml' do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
         estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
-        items: [{item_quantity: '1', description: 'phone'}],
-        show_tracking_info?: nil
+        items: [{item_quantity: '1', description: 'phone'}], international?: false,
+        show_tracking_info?: nil, has_auspost_issue?: false, shipments: []
       )
       render("/views/_order_details.haml", :details => @details)
-      puts response
+      #puts response
     end
 
     it 'should display the estimated shipping date' do
@@ -140,24 +142,40 @@ describe '_order_details.haml' do
     end
   end
 
-  context 'a shipped order with auspost tracking information' do
+  context 'has AusPost error in tracking information' do
+    let(:auspost_status_message) { 'The AusPost server is currently unavailable' }
     before do
       @details = double(FulfilmentOrder,
-        order_number: '1-123SHIPPED', status_heading: 'Order Shipped', status_message: '',
-        auspost_status_heading: 'Delivered', auspost_number: 'AP456123',
-        estimated_shipping_date: nil, is_on_backorder?: false,
-        items: [{item_quantity: '1', description: 'phone'}],
-        show_tracking_info?: nil
+                        order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
+                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
+                        items: [{item_quantity: '1', description: 'phone'}], auspost_number: 'UPAPWTF',
+                        show_tracking_info?: nil, has_auspost_issue?: true, auspost_error?: true, shipments: []
       )
-      render("/views/_order_details.haml", :details => @details)
-      #puts response
+      render("/views/_order_details.haml", details: @details)
     end
 
-    it 'should show the auspost status' do
-      expect(page.find '#auspost-status').to have_content('Delivered')
-      expect(page.find '#auspost-number').to have_content('AP456123')
-      expect(page.find "a.auspost-link[href='http://auspost.com.au/track/track.html?id=AP456123']").to have_content('AusPost')
+    it 'should display AusPost status message' do
+      page.should have_selector('.auspost-status-message')
+      page.find('.auspost-status-message').should have_content('We’re currently working with Australia Post')
     end
   end
 
+  context 'has AusPost business exception in tracking information' do
+    let(:auspost_status_message) { 'The AusPost server is currently unavailable' }
+    before do
+      @details = double(FulfilmentOrder,
+                        order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
+                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
+                        items: [{item_quantity: '1', description: 'phone'}], auspost_number: 'UPAPWTF',
+                        show_tracking_info?: nil, has_auspost_issue?: true, auspost_error?: false,
+                        auspost_business_exception?: true, shipments: []
+      )
+      render("/views/_order_details.haml", details: @details)
+    end
+
+    it 'should display AusPost status message' do
+      page.should have_selector('.auspost-status-message')
+      page.find('.auspost-status-message').should have_content("Your order should arrive within")
+    end
+  end
 end

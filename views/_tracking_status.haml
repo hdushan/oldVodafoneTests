@@ -1,0 +1,6 @@
+%img.glyph-heading.truck(src='/tracking/images/empty.png')
+  %h2#auspost-status.status-heading= locals[:status_message]
+  %p.auspost-status-message
+    %a.auspost-link{href: "http://auspost.com.au/track/track.html?id=#{locals[:auspost_number]}"}
+      AusPost tracking no.
+      %span#auspost-number= locals[:auspost_number]

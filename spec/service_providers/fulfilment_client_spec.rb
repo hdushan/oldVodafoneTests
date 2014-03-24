@@ -112,8 +112,8 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.orders.first.auspost_business_exception?).to be_true
-        expect(response.orders.first.tracking).to eql(tracking_info)
+        order = response.orders.first
+        expect(order.auspost_business_exception?).to be_true
       end
     end
 
@@ -138,8 +138,8 @@ describe FulfilmentClient, :pact => true do
         response = fulfilment_client.get_order_details('VF789', '1.2.3.4')
 
         expect(response).to_not have_error
-        expect(response.orders.first.auspost_error?).to be_true
-        expect(response.orders.first.tracking).to eql(tracking_info)
+        order = response.orders.first
+        expect(order.auspost_error?).to be_true
       end
     end
   end

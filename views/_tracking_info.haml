@@ -1,11 +1,5 @@
 .tracking-info
-  -if locals[:auspost_error]
-    %p#auspost-msg.auspost-status-message
-      We’re currently working with Australia Post to update the location of your order. Please check back soon.
-  -elsif locals[:auspost_business_exception]
-    %p#auspost-msg.auspost-status-message
-      Your order should arrive within 5 days.  If you need assistance, call us on 1555 from your Vodafone mobile or 1300 650 410 from any other phone.
-  -elsif locals[:tracking] && locals[:tracking]['events']
+  -if locals[:tracking] && locals[:tracking]['events']
     %table.events
       %tr.heading
         %th Date/Time

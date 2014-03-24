@@ -24,13 +24,13 @@ private
     return 'error' if @fulfilment_response.has_error?
 
     status_string = trackable_orders.map do |order|
-      order.auspost_status_heading
-    end
+      order.shipments.map { |shipment| shipment.auspost_status_heading }
+    end.flatten
     status_string.join(',').downcase.gsub(' ', '_')
   end
 
   def trackable_orders
-    @fulfilment_response.orders.select { |order| order.tracking }
+    @fulfilment_response.orders.select { |order| order.shipments.any? }
   end
 
   def order_status_string
