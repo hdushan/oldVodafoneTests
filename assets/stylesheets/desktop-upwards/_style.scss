@@ -5,8 +5,11 @@ $white: #ffffff;
 .tnt-container {
   margin: 0 auto;
   position: relative;
-  background-color: $white;
   min-height: 100%;
+
+  background-image: url(../images/gradient.jpg);
+  background-position: center bottom;
+  background-size: 100% 100%;
 }
 
 .tnt-frame {
@@ -22,8 +25,7 @@ $white: #ffffff;
 
 .tnt-bg-holder {
   background-image: url(../images/background.jpg);
-  background-color: $white;
-  background-repeat: repeat-x;
+  background-repeat: no-repeat;
   background-position: center bottom;
   background-size: auto 100%;
 
