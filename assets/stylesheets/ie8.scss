@@ -7,6 +7,10 @@
 // Import "un-mediaqueried" stylesheets relevant to achieve desktop appearance
 @import "assets/stylesheets/desktop-upwards/_desktop-upwards";
 
-.tnt-bg-holder {
+.tnt-container {
   background-position: center top;
+}
+
+.tnt-frame {
+  background-position: right top;
 }
