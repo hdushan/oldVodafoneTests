@@ -22,12 +22,14 @@ Feature: View Tracking Info
     When I search for the status of a valid order with id 'UPAPTIME'
     Then I should see the AusPost status 'on the truck' for the order
     And I should see the AusPost status message 'currently working with Australia Post'
+    And I should not see any shipping events
 
   @javascript
-  Scenario: Show generic message when tracking info has error
+  Scenario: Show generic message when tracking info has unexpected structure
     Given I am on the Track and Trace Home page '/tracking'
-    When I search for the status of a valid order with id 'UPAPTIME' that has tracking info error
+    When I search for the status of a valid order with id 'UPAPWTF'
     Then I should see the AusPost status 'on the truck' for the order
+    And I should see the AusPost status message 'currently working with Australia Post'
     And I should not see any shipping events
 
   @javascript
