@@ -8,23 +8,25 @@ Feature: View Order Status
     And I should see the message '<message>'
 
     Examples:
-      |  status_mix                                        |  order_id          |  heading          | message                                 |
-	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  We’re working on your order.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  We’re working on your order.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  We’re working on your order.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  We’re working on your order.   | Check back soon for an update           |
-      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On backorder.    | currently waiting for more stock        |
-	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order shipped.   |                                         |
-	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order shipped.   |                                         |
-	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order shipped.   |                                         |
-	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order shipped.   |                                         |
-	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order cancelled. | You haven’t been charged for this order |
-	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order cancelled. | You haven’t been charged for this order |
-      |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order cancelled. | You haven’t been charged for this order |
-	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order cancelled. | You haven’t been charged for this order |
-	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order cancelled. | You haven’t been charged for this order |
-      |  TERMINATED                                        |  VF123TERMINATED   |  Order cancelled. | You haven’t been charged for this order |
-      |  IN PROGRESS                                       |  1-123INPROGRESS   |  We’re working on your order.   | Check back soon for an update           |
+      |  status_mix                                        |  order_id          |  heading                        | message                                 |
+#	  |  BOOKED, BOOKED, NULL                              |  SR1-BOOKEDNULL    |  We’re working on your order.   | Check back soon for an update           |
+#      |  BOOKED, AWAITING_SHIPPING, READY TO RELEASE       |  1-READYRELEASE    |  We’re working on your order.   | Check back soon for an update           |
+#      |  BOOKED, AWAITING_SHIPPING, RELEASED TO WAREHOUSE  |  1-RELEASEWARE     |  We’re working on your order.   | Check back soon for an update           |
+#      |  BOOKED, AWAITING_SHIPPING, STAGED/PICK CONFIRMED  |  VF123STAGEPICK    |  We’re working on your order.   | Check back soon for an update           |
+#      |  BOOKED, AWAITING_SHIPPING, BACKORDERED            |  UP123BACKORDER    |  On backorder.                  | currently waiting for more stock        |
+#	  |  BOOKED, AWAITING_SHIPPING, SHIPPED                |  UPBOOKAWSHIPPED   |  Order shipped.                 |                                         |
+#	  |  BOOKED, SHIPPED, SHIPPED                          |  UPBOOKSHIP        |  Order shipped.                 |                                         |
+#	  |  BOOKED, CLOSED, SHIPPED                           |  UPBOOKCLOSE       |  Order shipped.                 |                                         |
+	  |  BOOKED, AWAITING_RETURN, NOT APPLICABLE           |  1-BOOKRETURN      |  Return in progress.            |                                        |
+	  |  BOOKED, CLOSED, NOT APPLICABLE                    |  1-BOOKCLOSEDNA    |  Order returned.                |                                        |
+#	  |  CLOSED, CLOSED, SHIPPED                           |  1-CLOSESHIP       |  Order shipped.                 |                                         |
+#	  |  CLOSED, CANCELLED, CANCELLED                      |  1-CLOSECANCEL     |  Order cancelled.               | You haven’t been charged for this order |
+#	  |  BOOKED, CANCELLED, CANCELLED                      |  1-BOOKCANCEL      |  Order cancelled.               | You haven’t been charged for this order |
+#      |  CANCELLED, CANCELLED, CANCELLED                   |  1-123CANCELLED    |  Order cancelled.               | You haven’t been charged for this order |
+#	  |  BOOKED, CANCELLED, NULL                           |  1-BOOKCANCELNUL   |  Order cancelled.               | You haven’t been charged for this order |
+#	  |  CANCELLED, CANCELLED, NULL                        |  1-CANCELCANCEL    |  Order cancelled.               | You haven’t been charged for this order |
+#      |  TERMINATED                                        |  VF123TERMINATED   |  Order cancelled.               | You haven’t been charged for this order |
+#      |  IN PROGRESS                                       |  1-123INPROGRESS   |  We’re working on your order.   | Check back soon for an update           |
 
   @javascript
   Scenario: View correct details of the order that has multiple items, some of which are backordered

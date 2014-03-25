@@ -26,6 +26,8 @@ describe MessageMapper do
       mapper.status_message(TS_BACKORDERED).should match /currently waiting/i
       mapper.status_message(TS_SHIPPED).should  be_nil
       mapper.status_message(TS_PARTIALLY_SHIPPED).should match /on its way/i
+      mapper.status_message(TS_RETURN).should be_nil
+      mapper.status_message(TS_RETURNED).should be_nil
     end
 
     it 'should raise error if status is not known' do
@@ -42,6 +44,8 @@ describe MessageMapper do
       mapper.status_heading(TS_BACKORDERED).should =~ /backorder/i
       mapper.status_heading(TS_SHIPPED).should  =~ /shipped/i
       mapper.status_heading(TS_PARTIALLY_SHIPPED).should =~ /partially shipped/i
+      mapper.status_heading(TS_RETURN).should match /return /i
+      mapper.status_heading(TS_RETURNED).should match /returned/i
     end
 
     it 'should raise error if status is not known' do
@@ -57,6 +61,8 @@ describe MessageMapper do
       mapper.item_status(IS_SHIPPED).should =~ /shipped/i
       mapper.item_status(IS_BACKORDERED).should =~ /backorder/i
       mapper.item_status(IS_PROGRESS).should =~ /pending/i
+      mapper.item_status(IS_RETURN).should =~ /return /i
+      mapper.item_status(IS_RETURNED).should =~ /returned/i
     end
 
     it 'should return blank if status is not known' do

@@ -8,6 +8,8 @@ class MessageMapper
     TS_SHIPPED => ['Order shipped.', nil],
     TS_PROGRESS => ['We’re working on your order.', 'Check back soon for an update on your order status.'],
     TS_PARTIALLY_SHIPPED => ['Partially shipped.', 'Part of your order is on its way. Details for each item is listed below.'],
+    TS_RETURN => ['Return in progress.', nil],
+    TS_RETURNED => ['Order returned.', nil]
   }
 
   ITEM_STATUS_MESSAGE_MAP = {
@@ -15,6 +17,8 @@ class MessageMapper
     IS_CANCELLED => 'Cancelled.',
     IS_SHIPPED => 'Shipped.',
     IS_PROGRESS => 'Pending.',
+    IS_RETURN => 'Return in progress.',
+    IS_RETURNED => 'Returned.'
   }
 
   ERROR_HEADING_MAP = {
