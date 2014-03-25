@@ -54,7 +54,7 @@
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Peak Load" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Low Load" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
             <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
@@ -68,37 +68,7 @@
           </elementProp>
           <elementProp name="MAXLOAD_SUCCESSFUL" elementType="Argument">
             <stringProp name="Argument.name">MAXLOAD_SUCCESSFUL</stringProp>
-            <stringProp name="Argument.value">10</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="MAXLOAD_ORDER_NOT_FOUND" elementType="Argument">
-            <stringProp name="Argument.name">MAXLOAD_ORDER_NOT_FOUND</stringProp>
             <stringProp name="Argument.value">5</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="DURATION" elementType="Argument">
-            <stringProp name="Argument.name">DURATION</stringProp>
-            <stringProp name="Argument.value">60</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-        </collectionProp>
-      </Arguments>
-      <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables - Test Load" enabled="false">
-        <collectionProp name="Arguments.arguments">
-          <elementProp name="THROUGHPUT_VIEW_ORDER_STATUS" elementType="Argument">
-            <stringProp name="Argument.name">THROUGHPUT_VIEW_ORDER_STATUS</stringProp>
-            <stringProp name="Argument.value">300</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="THROUGHPUT_FAILED_SEARCH" elementType="Argument">
-            <stringProp name="Argument.name">THROUGHPUT_FAILED_SEARCH</stringProp>
-            <stringProp name="Argument.value">300</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="MAXLOAD_SUCCESSFUL" elementType="Argument">
-            <stringProp name="Argument.name">MAXLOAD_SUCCESSFUL</stringProp>
-            <stringProp name="Argument.value">2</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="MAXLOAD_ORDER_NOT_FOUND" elementType="Argument">
@@ -123,13 +93,13 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <stringProp name="ThreadGroup.num_threads">${MAXLOAD_SUCCESSFUL}</stringProp>
         <stringProp name="Threads initial delay">0</stringProp>
-        <stringProp name="Start users count">5</stringProp>
+        <stringProp name="Start users count">2</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">5</stringProp>
+        <stringProp name="Start users period">2</stringProp>
         <stringProp name="Stop users count">10</stringProp>
-        <stringProp name="Stop users period">5</stringProp>
+        <stringProp name="Stop users period">2</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
-        <stringProp name="rampUp">5</stringProp>
+        <stringProp name="rampUp">2</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
@@ -338,13 +308,13 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <stringProp name="ThreadGroup.num_threads">${MAXLOAD_ORDER_NOT_FOUND}</stringProp>
         <stringProp name="Threads initial delay">3</stringProp>
-        <stringProp name="Start users count">5</stringProp>
+        <stringProp name="Start users count">2</stringProp>
         <stringProp name="Start users count burst">2</stringProp>
-        <stringProp name="Start users period">5</stringProp>
-        <stringProp name="Stop users count">5</stringProp>
-        <stringProp name="Stop users period">5</stringProp>
+        <stringProp name="Start users period">2</stringProp>
+        <stringProp name="Stop users count">10</stringProp>
+        <stringProp name="Stop users period">2</stringProp>
         <stringProp name="flighttime">${DURATION}</stringProp>
-        <stringProp name="rampUp">5</stringProp>
+        <stringProp name="rampUp">2</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <intProp name="LoopController.loops">-1</intProp>
@@ -593,7 +563,7 @@ if ((ResponseCode != null) &amp;&amp; ((ResponseCode.equals (&quot;503&quot;) ==
             <bytes>true</bytes>
           </value>
         </objProp>
-        <stringProp name="filename"></stringProp>
+        <stringProp name="filename">/Users/hansdushanthakumar/tnt_prod_low_load_250314_233412.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
