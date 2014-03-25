@@ -95,10 +95,10 @@ describe FulfilmentOrder do
       end
 
       it 'should return the tracking details' do
-        order.shipments[0].tracking['international'].should be_false
-        order.shipments[0].tracking['status'].should eq('Delivered')
-        order.shipments[0].tracking['events'].should have(3).items
-        order.shipments[0].tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
+        order.shipments[0].international?.should be_false
+        order.shipments[0].auspost_status_heading.should eq('Delivered')
+        order.shipments[0].events.should have(3).items
+        order.shipments[0].events.first['date_time'].should eq('21/06/2010 12=>21PM')
       end
 
       it 'should show the AusPost tracking status and consignment number' do

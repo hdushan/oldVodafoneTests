@@ -24,7 +24,7 @@
   -else
     - locals[:details].shipments.each do |shipment|
       = haml :_tracking_status, locals: { status_message: shipment.auspost_status_heading, auspost_number: locals[:details].auspost_number }
-      = haml :_tracking_info, locals: { tracking: shipment.tracking }  if locals[:details].show_tracking_info?
+      = haml :_tracking_info, locals: { tracking: shipment }  if locals[:details].show_tracking_info?
 
   -unless locals[:details].items.empty?
     %h3.order-details-heading Order Details

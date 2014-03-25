@@ -1,10 +1,10 @@
 .tracking-info
-  -if locals[:tracking] && locals[:tracking]['events']
+  -if locals[:tracking].has_tracking?
     %table.events
       %tr.heading
         %th Date/Time
         %th Status
-      - locals[:tracking]['events'].each do |event|
+      - locals[:tracking].events.each do |event|
         %tr
           %td.event-date= "#{event['date_time']}"
           %td.event-status= "#{event['description']}"

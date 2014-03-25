@@ -6,15 +6,19 @@ class Shipment
     @body = tracking_details
   end
 
-  def tracking
-    @body
-  end
-
   def auspost_status_heading
-    tracking['status']
+    @body['status']
   end
 
   def international?
-    tracking['international']
+    @body['international']
+  end
+
+  def events
+    @body['events']
+  end
+
+  def has_tracking?
+    not (events.nil? || events.empty?)
   end
 end

@@ -63,7 +63,7 @@ class FulfilmentOrder
   end
 
   def has_tracking_events?
-    shipments.map { |shipment| shipment.tracking['events'] }.any?
+    shipments.map { |shipment| shipment.has_tracking? }.any?
   end
 
   def has_auspost_issue?

@@ -12,10 +12,10 @@ describe Shipment do
   end
 
   it 'should return the tracking details' do
-    shipment.tracking['international'].should be_false
-    shipment.tracking['status'].should eq('Delivered')
-    shipment.tracking['events'].size.should be(3)
-    shipment.tracking['events'].first['date_time'].should eq('21/06/2010 12=>21PM')
+    shipment.international?.should be_false
+    shipment.events.should have(3).items
+    shipment.events.first['date_time'].should eq('21/06/2010 12=>21PM')
+    shipment.has_tracking?.should be_true
   end
 
   it 'should show the AusPost tracking status' do

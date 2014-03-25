@@ -3,9 +3,9 @@ require 'spec_helper'
 describe '_tracking_info.haml' do
 
   context 'has no events and no AusPost issues in tracking information' do
-    let(:tracking_info) { {'foo' => 'bar'} }
+    let(:tracking_info) { double(Shipment, has_tracking?: false) }
     before do
-      render("/views/_tracking_info.haml", :tracking => tracking_info, :auspost_error => false, :auspost_business_exception => false)
+      render("/views/_tracking_info.haml", :tracking => tracking_info)
     end
 
     it 'should not display events' do
@@ -18,11 +18,11 @@ describe '_tracking_info.haml' do
   end
 
   context 'has three events in tracking information' do
-    let(:tracking_info) { {'international' => false, 'status' => 'Delivered', 'events' => [
+    let(:tracking_info) { Shipment.new({'international' => false, 'status' => 'Delivered', 'events' => [
         {'date_time' => '21/06/2010 12=>21PM', 'location' => '224952 work centre', 'description' => 'Delivered', 'signer' => nil},
         {'date_time' => '21/06/2010 12=>12PM', 'location' => '224952 work centre', 'description' => 'Redirected', 'signer' => nil},
         {'date_time' => '10/12/2008 12=>12PM', 'location' => 'PROP - PROPERTY DEVELOPMENTS', 'description' => 'Signed', 'signer' => 'A POST'}
-    ]} }
+      ]}) }
     before do
       render("/views/_tracking_info.haml", :tracking => tracking_info, :auspost_error => false, :auspost_business_exception => false)
       #puts response
