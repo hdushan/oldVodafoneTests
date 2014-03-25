@@ -33,6 +33,14 @@ Feature: View Tracking Info
     And I should not see any shipping events
 
   @javascript
+  Scenario: Show generic message when tracking info has unexpected structure
+    Given I am on the Track and Trace Home page '/tracking'
+    When I search for the status of a valid order with id 'UPAPMULTI'
+    Then I should see multiple AusPost statuses
+    And I should see the message 'shipped in multiple packages'
+    And I should see exactly 10 shipping events from AusPost
+
+  @javascript
   Scenario: Show generic AusPost status when tracking info has no status
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPINTER' that has no AusPost status
