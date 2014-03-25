@@ -31,3 +31,13 @@ And(/^I should see the shipping events from AusPost$/) do
   expect(page.all('.event-status').map { |elem| elem.text }).to eq(['Delivered', 'Redirected', 'Signed'])
 end
 
+And(/^I should see exactly (.*) shipping events from AusPost$/) do |number_of_events|
+  expect(page).to have_selector('.tracking-info')
+  expect(page.all('.event-date')).to have(number_of_events).items
+end
+
+Then(/^I should see multiple AusPost statuses$/) do
+  patiently_wait_until(15) { page.has_css?('#auspost-status') }
+  expect(page.all('#auspost-status').map { |elem| elem.text }).to eq(['Delivered', 'Accepted by Driver'])
+end
+
