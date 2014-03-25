@@ -4,6 +4,9 @@
   %h2#vodafone-status.status-heading= locals[:details].status_heading
   -if locals[:details].status_message
     %p.status-message= locals[:details].status_message
+  -if locals[:details].shipments.size > 1
+    %p.status-message
+      Just a heads up that your order has been shipped in multiple packages by Australia Post.
 
   -if locals[:details].is_on_backorder?
     -if locals[:details].estimated_shipping_date

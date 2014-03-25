@@ -6,7 +6,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         status_heading: 'In Progress', status_message: 'Your order is in progress.',
-        estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        estimated_shipping_date: nil, is_on_backorder?: false,
         has_auspost_issue?: false, shipments: [],  international?: false,
         items: [
           {item_quantity: "1", description: 'Samsung Galaxy'},
@@ -51,7 +51,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         order_number: 'VF123MULTILINES', status_heading: 'In Progress', status_message: 'Your order is in progress.',
-        estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        estimated_shipping_date: nil, is_on_backorder?: false,
         has_auspost_issue?: false, shipments: [], international?: false,
         items: [
           {item_quantity: "1", description: 'Samsung Galaxy', status: 'Cancelled'},
@@ -82,7 +82,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'In Progress', status_message: 'Your order is in progress.',
-        estimated_shipping_date: nil, is_on_backorder?: false, auspost_status_heading: nil,
+        estimated_shipping_date: nil, is_on_backorder?: false,
         has_auspost_issue?: false, shipments: [], international?: false,
         items: [],
         show_tracking_info?: nil
@@ -106,7 +106,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
-        estimated_shipping_date: '19 March 2014', is_on_backorder?: true, shipping_estimate_message: nil, auspost_status_heading: nil,
+        estimated_shipping_date: '19 March 2014', is_on_backorder?: true, shipping_estimate_message: nil,
         items: [{item_quantity: '1', description: 'phone'}], international?: false,
         show_tracking_info?: nil, has_auspost_issue?: false, shipments: []
       )
@@ -126,7 +126,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
-        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
+        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time',
         items: [{item_quantity: '1', description: 'phone'}], international?: false,
         show_tracking_info?: nil, has_auspost_issue?: false, shipments: []
       )
@@ -142,12 +142,31 @@ describe '_order_details.haml' do
     end
   end
 
+  context 'a shipped order with multiple packages' do
+    before do
+      @details = double(FulfilmentOrder,
+                        order_number: '1-123INPROGRESS', status_heading: 'Shipped', status_message: nil,
+                        estimated_shipping_date: nil, is_on_backorder?: false, shipping_estimate_message: nil,
+                        items: [{item_quantity: '2', description: 'phone'}], international?: false,
+                        auspost_number: 'AP213',
+                        show_tracking_info?: nil, has_auspost_issue?: false, shipments: [ Shipment.new({}), Shipment.new({})]
+      )
+      render("/views/_order_details.haml", :details => @details)
+      #puts response
+    end
+
+    it 'should display the status message' do
+      expect(page.find('.status-heading')).to have_content('Shipped')
+      expect(page.find('.status-message')).to have_content('multiple packages')
+    end
+  end
+
   context 'has AusPost error in tracking information' do
     let(:auspost_status_message) { 'The AusPost server is currently unavailable' }
     before do
       @details = double(FulfilmentOrder,
                         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
-                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
+                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time',
                         items: [{item_quantity: '1', description: 'phone'}], auspost_number: 'UPAPWTF',
                         show_tracking_info?: nil, has_auspost_issue?: true, auspost_error?: true, shipments: []
       )
@@ -165,7 +184,7 @@ describe '_order_details.haml' do
     before do
       @details = double(FulfilmentOrder,
                         order_number: '1-123INPROGRESS', status_heading: 'On Backorder', status_message: 'Your order is on backorder.',
-                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time', auspost_status_heading: nil,
+                        estimated_shipping_date: nil, is_on_backorder?: true, shipping_estimate_message: 'Expected delivery time',
                         items: [{item_quantity: '1', description: 'phone'}], auspost_number: 'UPAPWTF',
                         show_tracking_info?: nil, has_auspost_issue?: true, auspost_error?: false,
                         auspost_business_exception?: true, shipments: []
