@@ -6,7 +6,7 @@
     %p.status-message= locals[:details].status_message
   -if locals[:details].shipments.size > 1
     %p.status-message
-      Just a heads up that your order has been shipped in multiple packages by Australia Post.
+      Just a heads up that your order has been shipped in multiple packages by AusPost.
 
   -if locals[:details].is_on_backorder?
     -if locals[:details].estimated_shipping_date
@@ -20,7 +20,7 @@
     = haml :_tracking_status, locals: { status_message: "It's on the truck", auspost_number: locals[:details].auspost_number }
     %p#auspost-msg.auspost-status-message
       -if locals[:details].auspost_error?
-        We’re currently working with Australia Post to update the location of your order. Please check back soon.
+        We’re currently working with AusPost to update the location of your order. Please check back soon.
       -elsif locals[:details].auspost_business_exception? || locals[:details].international?
         Your order should arrive within 5 days.  If you need assistance, call us on 1555 from your Vodafone mobile or 1300 650 410 from any other phone.
 

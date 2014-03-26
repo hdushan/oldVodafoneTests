@@ -21,7 +21,7 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPTIME'
     Then I should see the AusPost status 'on the truck' for the order
-    And I should see the AusPost status message 'currently working with Australia Post'
+    And I should see the AusPost status message 'currently working with AusPost'
     And I should not see any shipping events
 
   @javascript
@@ -29,7 +29,7 @@ Feature: View Tracking Info
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'UPAPWTF'
     Then I should see the AusPost status 'on the truck' for the order
-    And I should see the AusPost status message 'currently working with Australia Post'
+    And I should see the AusPost status message 'currently working with AusPost'
     And I should not see any shipping events
 
   @javascript

@@ -175,7 +175,7 @@ describe '_order_details.haml' do
 
     it 'should display AusPost status message' do
       page.should have_selector('.auspost-status-message')
-      page.find('.auspost-status-message').should have_content('We’re currently working with Australia Post')
+      page.find('.auspost-status-message').should have_content('We’re currently working with AusPost')
     end
   end
 
