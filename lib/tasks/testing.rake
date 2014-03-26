@@ -83,6 +83,13 @@ safe_load('jmeter') do
     result_file = "tnt_prodstressloose_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
     run_load_test("http", "www.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
   end
+  task :prodlowload do
+    puts "Running on PROD (Low Load)"
+    time_now=Time.now
+    loadtest_script = "performance/tntLoadTest_prod_low_load.jmx"
+    result_file = "tnt_prod_low_load_" + time_now.strftime("%d%m%y_%H%M%S") + ".jtl"
+    run_load_test("http", "www.vodafone.com.au", "80", "tracking", loadtest_script, result_file, "xml")
+  end
 
 end
 
