@@ -23,6 +23,7 @@
   button {
     float:right;
     width: 120px;
+    margin-top: 3px;
   }
 }
 
@@ -48,7 +49,7 @@
   }
 
   .status-message, .ship-date {
-    padding: $text-spacing-vt 0;
+    padding: 0 0 $text-spacing-vt 0;
     margin: 0 $text-spacing-hz;
     line-height: $global-line-height;
   }
@@ -57,10 +58,6 @@
     padding: 0 0 $text-spacing-vt 0;
     margin: 0 $text-spacing-hz;
     line-height: $global-line-height;
-  }
-
-  .status-message {
-    border-top: $global-border;
   }
 
   .auspost-status-message {

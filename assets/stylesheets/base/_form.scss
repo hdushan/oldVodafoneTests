@@ -13,10 +13,13 @@ form.form {
 
     &.tracking_label {
       margin: 25px 0 10px 0;
+      line-height: 1.3em;
     }
   }
 
   input {
+    font-size: 1em;
+    font-family: $arial;
     width: 100%;
     box-sizing: border-box;
     @include input-box-shadow;
@@ -26,7 +29,7 @@ form.form {
     border: $global-border;
     border-radius: $global-border-radius;
     background-color: $white;
-    &:focus { border-color: $input-box-focus-border; }
+    &:focus { border: 2px solid $input-box-focus-border; }
     &:disabled { border: none; }
   }
 
@@ -41,16 +44,17 @@ form.form {
   }
 
   .error-msg {
-    padding: $text-spacing-vt 0;
-    margin: 0 $text-spacing-hz;
+    margin: 0 $text-spacing-hz $text-spacing-vt $glyph-width + $text-spacing-hz * 2;
     line-height: $global-line-height;
-    border-top: $global-border;
     @include clearfix;
   }
 
   .error-heading {
     color: $text-grey;
-    padding: 18px 0 $text-spacing-vt $glyph-width + $text-spacing-hz;
+    font-family: $arial;
+    font-size: 1.14em;
+    font-weight: bold;
+    padding: 18px 0 0 $glyph-width + $text-spacing-hz;
     margin: 0 $text-spacing-hz;
     @include clearfix;
   }
@@ -59,10 +63,6 @@ form.form {
     float: right;
     width: 25px;
     margin-top: 5px;
-  }
-
-  button.trace {
-    margin-top: 2em;
   }
 
 }
