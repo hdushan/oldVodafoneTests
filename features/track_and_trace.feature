@@ -38,10 +38,10 @@ Feature: View Order Status
 	And I should see the estimated shipping date for the order
 
   @javascript
-  Scenario: View individual status of items in a partially shipped order that has multiple items
+  Scenario: View individual status of items in an order that has multiple items
     Given I am on the Track and Trace Home page '/tracking'
     When I search for the status of a valid order with id 'VFMANYSTATUS'
-    Then I should see the tracking status 'Partially shipped.' for the order
+    Then I should see the tracking status 'On backorder.' for the order
     Then I should see the AusPost status 'Transferring' for the order
 	And I should see the right count, description and status for each item
 
@@ -56,11 +56,11 @@ Feature: View Order Status
     | order_state_description               |  order_id          |  heading            | message                             |
     | 1 shipped, 1 cancelled                |  1-MULTICANS       |  Order shipped.     |                                     |
     | 1 shipped with AP, 1 cancelled        |  1-MULTICANSAP     |  Order shipped.     |                                     |
-    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  Partially shipped. | Part of your order is on its way.   |
-    | 1 shipped, 1 cancelled, 1 BO          |  1-MULTICANBS      |  Partially shipped  | Part of your order is on its way.   |
+    | 1 shipped with AP, 1 cancelled, 1 BO  |  1-MULTICANBSAP    |  On backorder.      | currently waiting for more stock    |
+    | 1 shipped, 1 cancelled, 1 BO          |  1-MULTICANBS      |  On backorder.      | currently waiting for more stock    |
     | 1 cancelled, 1 BO                     |  SR1-CANBO         |  On backorder.      | currently waiting for more stock    |
-    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  Partially shipped. | Part of your order is on its way.   |
-    | 1 shipped, 1 BO                       |  SR1-BS            |  Partially shipped. | Part of your order is on its way.   |
+    | 1 shipped with AP, 1 BO               |  SR1-BSAP          |  On backorder.      | currently waiting for more stock    |
+    | 1 shipped, 1 BO                       |  SR1-BS            |  On backorder.      | currently waiting for more stock    |
 
   @javascript
   Scenario Outline: View correct status of orders that have multiple order line item details in different statuses
