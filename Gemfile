@@ -19,20 +19,20 @@ gem 'git'
 gem 'app-version', git: 'git@github.com:VodafoneAustralia/app-version-gem.git'
 
 group :development, :test do
-  gem 'capybara'
+  gem 'capybara', '>= 2.3.0'
   gem 'cucumber'
   gem 'jasmine', '2.0.0.rc4'
   gem 'jmeter-runner-gem', git: 'git@github.com:VodafoneAustralia/jmeter-runner-gem.git'
   gem 'jshintrb'
   gem 'pact', git: 'git@github.com:realestate-com-au/pact.git'
-  gem 'poltergeist'
+  gem 'poltergeist', '>= 1.5.1'
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-rescue'
   gem 'rack-test'
   gem 'rb-fsevent'
   gem 'rspec'
-  gem 'rspec-html-matchers'
+  gem 'rspec-html-matchers', '>= 0.5.0'
   gem 'shotgun'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
